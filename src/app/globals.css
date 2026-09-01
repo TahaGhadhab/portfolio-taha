@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Design system — Portfolio "Salle de contrôle"
+   Réf. files/design-system-portfolio-taha.md
+   ============================================================ */
+
+@theme {
+  /* --- Fonds : anthracite / graphite, jamais noir pur --- */
+  --color-base: #14161a;
+  --color-base-2: #1b1e24;
+  --color-panel: #20232b;
+  --color-panel-2: #262a34;
+
+  /* --- Accents : deux maximum visibles à l'écran --- */
+  --color-amber: #f2a93c; /* alerte, CTA, à remarquer en priorité */
+  --color-amber-dim: #d9822b;
+  --color-cyan: #4fd8e8; /* data, readouts, liens actifs */
+  --color-cyan-dim: #2fb8c9;
+
+  /* --- Neutres fonctionnels --- */
+  --color-ink: #edede8; /* texte principal, jamais blanc pur */
+  --color-muted: #8a8d94; /* texte secondaire — 5.4:1 sur base, AA */
+  --color-line: #313640; /* bordures de panneaux, 1px */
+
+  /* --- Signal fonctionnel : RÉSERVÉ à la chaîne de montage --- */
+  --color-fault: #e2564b; /* entrée : problème identifié */
+  --color-ok: #57c98a; /* sortie : outil livré */
+
+  /* --- Typographie : 3 familles maximum --- */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* --- Palier supplémentaire pour la barre fixe sur très petits écrans --- */
+  --breakpoint-xs: 26rem;
+
+  /* --- Coins peu arrondis : esprit boîtier industriel --- */
+  --radius-panel: 3px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-base);
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-base);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus visible garanti sur fond sombre — WCAG */
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-amber);
+    color: var(--color-base);
+  }
+}
+
+@layer components {
+  /* Grille blueprint de fond — opacité très faible, jamais dominante */
+  .grid-blueprint {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.35;
+  }
+
+  /* Label d'instrument : capitales, mono, interlettrage large */
+  .label-instrument {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* Panneau : fond plus clair que le fond général, bordure fine 1px */
+  .panel {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-panel);
+  }
+
+  /* Bouton-poussoir de panneau de contrôle */
+  .push-button {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-panel);
+    background-color: var(--color-panel);
+    color: var(--color-ink);
+    transition:
+      border-color 120ms ease,
+      background-color 120ms ease,
+      transform 60ms ease,
+      box-shadow 120ms ease;
+  }
+  .push-button:hover {
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-cyan) 30%, transparent);
+  }
+  /* Effet d'enfoncement au clic, pas d'ombre portée décorative */
+  .push-button:active {
+    transform: translateY(1px);
+  }
+  .push-button--primary {
+    border-color: color-mix(in srgb, var(--color-amber) 55%, transparent);
+    color: var(--color-amber);
+  }
+  .push-button--primary:hover {
+    border-color: var(--color-amber);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-amber) 35%, transparent);
+  }
+}
+
+/* ============================================================
+   Animations — courtes, fonctionnelles, jouées une seule fois
+   ============================================================ */
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes trace-line {
+  from {
+    stroke-dashoffset: var(--dash, 1000);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse-lamp {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Révélé une seule fois à l'apparition — ne rejoue pas au re-scroll */
+.reveal {
+  opacity: 0;
+}
+.reveal[data-revealed="true"] {
+  animation: fade-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Respect strict de la préférence système */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Impression — le CV doit sortir propre en PDF
+   ============================================================ */
+@media print {
+  @page {
+    margin: 14mm 12mm;
+    size: A4;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-plain {
+    background: transparent !important;
+    border-color: #c9c9c9 !important;
+    color: #000 !important;
+  }
+  a {
+    text-decoration: none;
+    color: #000 !important;
+  }
+}
