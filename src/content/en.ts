@@ -154,6 +154,7 @@ export const en: Content = {
     items: [
       {
         id: "safran",
+        short: "Safran",
         company: "Safran",
         fullName: "Safran",
         role: "Methods engineer",
@@ -173,6 +174,7 @@ export const en: Content = {
       },
       {
         id: "smip",
+        short: "SMIP",
         company: "SMIP",
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant engineer",
@@ -192,6 +194,7 @@ export const en: Content = {
       },
       {
         id: "afc",
+        short: "AFC",
         company: "AFC",
         fullName: "Arab Financial Consultants",
         role: "Trainee consultant",
@@ -221,8 +224,11 @@ export const en: Content = {
     stackLabel: "Stack",
     items: [
       {
-        id: "pharmaworkspace",
-        name: "PharmaWorkSpace",
+        id: "pharmacowork",
+        name: "PharmacoWork",
+        short: "PharmacoWork",
+        url: "https://pharmacowork.fr",
+        visual: "roster",
         tagline: "HR management tool for pharmacies",
         period: "2025 — Present",
         status: "Active",
@@ -239,6 +245,8 @@ export const en: Content = {
       {
         id: "machine-layout",
         name: "Machine Layout Optimization App",
+        short: "Machine Layout",
+        visual: "layout",
         tagline: "Decision support for plant layout",
         period: "2025 — 2026",
         status: "In progress",
@@ -255,6 +263,8 @@ export const en: Content = {
       {
         id: "dashboard-enib",
         name: "Academic Performance Dashboard",
+        short: "ENIB Dashboard",
+        visual: "dashboard",
         tagline: "Full-stack web platform — ENIB",
         period: "2025 — 2026",
         status: "In progress",
@@ -273,18 +283,43 @@ export const en: Content = {
 
   skills: {
     title: "Skills",
-    intro: "Grouped by domain — industrial method first, tooling second.",
-    disclaimer: "Self-assessed levels, indicative only.",
+    intro:
+      "Rather than a percentage I would award myself, here is where each skill has actually been put to work. It reads as an incidence matrix — the very tool King's method uses in my plant layout project.",
+    matrix: {
+      deploymentsLabel: "Deployments",
+      legend: "Lit cell = skill applied on that ground",
+      countLabel: "grounds",
+      cellLabel: "{skill} applied on {deployment}",
+      emptyHint: "Hover a row or a column to isolate one crossing.",
+    },
     groups: [
       {
         id: "industriel",
         domain: "Industrial",
         accent: "amber",
         skills: [
-          { name: "Lean & continuous improvement", level: 85, note: "DMAIC, PDCA, VSM, Ishikawa" },
-          { name: "Planning & scheduling", level: 80, note: "PIC, PDP, MRP, MS Project, ERP" },
-          { name: "Plant layout", level: 82 },
-          { name: "Process control", level: 78 },
+          {
+            name: "Lean & continuous improvement",
+            note: "DMAIC, PDCA, VSM, Ishikawa",
+            usedIn: ["safran", "dashboard-enib"],
+          },
+          {
+            name: "Planning & scheduling",
+            note: "PIC, PDP, MRP, MS Project, ERP",
+            usedIn: ["smip", "pharmacowork"],
+          },
+          {
+            name: "Plant layout",
+            usedIn: ["machine-layout"],
+          },
+          {
+            name: "Process control",
+            usedIn: ["safran", "pharmacowork", "machine-layout"],
+          },
+          {
+            name: "Techno-economic studies",
+            usedIn: ["smip", "afc"],
+          },
         ],
       },
       {
@@ -292,12 +327,34 @@ export const en: Content = {
         domain: "Technical",
         accent: "cyan",
         skills: [
-          { name: "SQL / Supabase", level: 80 },
-          { name: "Python", level: 75 },
-          { name: "Power BI", level: 78 },
-          { name: "React", level: 70 },
-          { name: "MATLAB", level: 72 },
-          { name: "CATIA V5", level: 68 },
+          {
+            name: "Python",
+            usedIn: ["safran", "machine-layout"],
+          },
+          {
+            name: "SQL / Supabase",
+            usedIn: ["pharmacowork", "dashboard-enib"],
+          },
+          {
+            name: "React",
+            usedIn: ["pharmacowork", "dashboard-enib"],
+          },
+          {
+            name: "Power BI",
+            usedIn: ["dashboard-enib"],
+          },
+          {
+            name: "MATLAB",
+            usedIn: ["machine-layout"],
+          },
+          {
+            name: "OCR / Vision",
+            usedIn: ["safran"],
+          },
+          {
+            name: "CATIA V5",
+            usedIn: [],
+          },
         ],
       },
     ],

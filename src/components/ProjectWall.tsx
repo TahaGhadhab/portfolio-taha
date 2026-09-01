@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Content, Project } from "@/content";
+import { ProjectVisual } from "./ProjectVisual";
 import { Reveal } from "./Reveal";
 
 /**
@@ -66,11 +67,31 @@ export function ProjectWall({ projects }: { projects: Content["projects"] }) {
                   </span>
                 </div>
 
+                <ProjectVisual kind={project.visual} />
+
                 <div className="flex flex-1 flex-col p-5">
                   <h3 className="font-[family-name:var(--font-space-grotesk)] text-lg font-bold leading-tight text-ink">
                     {project.name}
                   </h3>
                   <p className="mt-1.5 text-sm text-cyan">{project.tagline}</p>
+
+                  {/* Un projet en ligne est un argument fort : visible sans ouvrir la fiche */}
+                  {project.url ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex w-fit items-center gap-1.5 font-mono text-[11px] text-amber underline-offset-4 hover:underline"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="size-1.5 rounded-full bg-amber"
+                        style={{ animation: "pulse-lamp 2.4s ease-in-out infinite" }}
+                      />
+                      {new URL(project.url).host}
+                    </a>
+                  ) : null}
+
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
                     {project.summary}
                   </p>
@@ -147,6 +168,8 @@ function ProjectDialog({
           </button>
         </div>
 
+        <ProjectVisual kind={project.visual} />
+
         <div className="p-5 sm:p-7">
           <p className="font-mono text-xs text-muted">{project.period}</p>
           <h3
@@ -156,6 +179,26 @@ function ProjectDialog({
             {project.name}
           </h3>
           <p className="mt-2 text-cyan">{project.tagline}</p>
+
+          {project.url ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="push-button push-button--primary mt-5 inline-flex items-center gap-2 px-4 py-2.5"
+            >
+              {new URL(project.url).host}
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M6 3h7v7M13 3 4 12"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          ) : null}
 
           <p className="mt-6 leading-relaxed text-muted">{project.summary}</p>
 

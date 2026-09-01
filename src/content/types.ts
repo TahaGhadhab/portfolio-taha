@@ -16,6 +16,8 @@ export type Sector = "aero" | "oil" | "finance";
 export interface Experience {
   id: string;
   company: string;
+  /** Libellé court, utilisé en en-tête de colonne dans la matrice. */
+  short: string;
   fullName: string;
   role: string;
   sector: Sector;
@@ -38,6 +40,8 @@ export interface Experience {
 export interface Project {
   id: string;
   name: string;
+  /** Libellé court, utilisé en en-tête de colonne dans la matrice. */
+  short: string;
   tagline: string;
   period: string;
   status: string;
@@ -46,6 +50,10 @@ export interface Project {
   stack: string[];
   /** Chiffre mis en avant sur le moniteur, en mono. */
   metric?: { value: string; label: string };
+  /** Site en ligne, quand le projet est public. */
+  url?: string;
+  /** Illustration procédurale affichée sur le moniteur. */
+  visual: "roster" | "layout" | "dashboard";
 }
 
 export interface Education {
@@ -59,13 +67,17 @@ export interface Education {
 }
 
 /**
- * Niveau de jauge sur 100.
- * ⚠️ Auto-évaluation : valeurs à ajuster par Taha, elles ne sortent d'aucun test.
+ * Une compétence, décrite par ses usages réels plutôt que par une note.
+ *
+ * Un pourcentage auto-attribué n'apporte aucune information vérifiable : « 75 »
+ * ne dit rien que « 70 » ne dirait. La preuve, elle, est vérifiable — d'où
+ * `usedIn`, qui référence les expériences et projets où la compétence a servi.
  */
 export interface Skill {
   name: string;
-  level: number;
   note?: string;
+  /** Ids d'`Experience` ou de `Project`. Une entrée inconnue casse le build. */
+  usedIn: string[];
 }
 
 export interface SkillGroup {
@@ -144,7 +156,15 @@ export interface Content {
   skills: {
     title: string;
     intro: string;
-    disclaimer: string;
+    /** Libellés de la matrice d'incidence compétences × déploiements. */
+    matrix: {
+      deploymentsLabel: string;
+      legend: string;
+      countLabel: string;
+      /** Gabarit accessible d'une cellule active, `{skill}` et `{deployment}`. */
+      cellLabel: string;
+      emptyHint: string;
+    };
     groups: SkillGroup[];
     soft: { title: string; items: string[] };
     languages: { title: string; items: { name: string; level: string }[] };

@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
-import { getContent, isLocale, otherLocale } from "@/content";
+import { getContent, getDeployments, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
 import { AboutSection } from "@/components/AboutSection";
 import { AssemblyLine } from "@/components/AssemblyLine";
 import { AssociativeSection, InterestsRow } from "@/components/AssociativeSection";
+import { Atmosphere } from "@/components/Atmosphere";
 import { BootSequence } from "@/components/BootSequence";
 import { ContactSection } from "@/components/ContactSection";
 import { EasterEggLamp } from "@/components/EasterEggLamp";
@@ -29,6 +30,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
 
   const c = getContent(lang);
   const cv = resolveCv(lang);
+  const deployments = getDeployments(c);
 
   return (
     <>
@@ -83,7 +85,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
           intro={c.skills.intro}
           className="bg-base-2"
         >
-          <SkillsSection skills={c.skills} />
+          <SkillsSection skills={c.skills} deployments={deployments} />
         </Section>
 
         <Section
@@ -110,6 +112,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
 
       <Footer footer={c.footer} />
       <EasterEggLamp egg={c.easterEgg} />
+      <Atmosphere />
     </>
   );
 }

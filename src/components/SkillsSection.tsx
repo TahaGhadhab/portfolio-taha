@@ -1,43 +1,25 @@
-import type { Content } from "@/content";
-import { Gauge } from "./Gauge";
+import type { Content, Deployment } from "@/content";
 import { Reveal } from "./Reveal";
+import { SkillsMatrix } from "./SkillsMatrix";
 
 /**
- * Compétences en instruments de cockpit, regroupées par domaine.
+ * Compétences.
  *
- * Les soft skills et les langues restent volontairement hors métaphore :
- * les enfermer dans une jauge chiffrée serait de la sur-thématisation.
+ * La matrice porte les compétences dures, adossées à leurs terrains. Les soft
+ * skills et les langues restent volontairement hors métaphore : les enfermer
+ * dans une grille chiffrée serait de la sur-thématisation.
  */
-export function SkillsSection({ skills }: { skills: Content["skills"] }) {
+export function SkillsSection({
+  skills,
+  deployments,
+}: {
+  skills: Content["skills"];
+  deployments: Deployment[];
+}) {
   return (
-    <div className="space-y-14">
-      {skills.groups.map((group) => (
-        <div key={group.id}>
-          <Reveal>
-            <div className="flex items-center gap-3">
-              <h3 className="label-instrument !text-ink">{group.domain}</h3>
-              <span aria-hidden="true" className="h-px flex-1 bg-line" />
-            </div>
-          </Reveal>
-
-          <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
-            {group.skills.map((skill, i) => (
-              <li key={skill.name}>
-                <Gauge
-                  label={skill.name}
-                  value={skill.level}
-                  accent={group.accent}
-                  note={skill.note}
-                  delay={i * 110}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-
+    <div className="space-y-12">
       <Reveal>
-        <p className="font-mono text-[11px] text-muted">{skills.disclaimer}</p>
+        <SkillsMatrix skills={skills} deployments={deployments} />
       </Reveal>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">

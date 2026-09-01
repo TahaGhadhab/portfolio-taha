@@ -71,6 +71,27 @@
 }
 
 @layer components {
+  /* Lignes de balayage d'écran cathodique — presque invisibles, elles
+     donnent la matière d'un moniteur sans gêner la lecture */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-ink) 3.5%, transparent) 0px,
+      color-mix(in srgb, var(--color-ink) 3.5%, transparent) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* Assombrissement des bords, comme un tube incurvé */
+  .vignette {
+    background: radial-gradient(
+      ellipse at center,
+      transparent 42%,
+      color-mix(in srgb, #000 32%, transparent) 100%
+    );
+  }
+
   /* Grille blueprint de fond — opacité très faible, jamais dominante */
   .grid-blueprint {
     background-image:
@@ -151,6 +172,16 @@
   }
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+/* Balayage de scope — lent, faible contraste, jamais scintillant */
+@keyframes instrument-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

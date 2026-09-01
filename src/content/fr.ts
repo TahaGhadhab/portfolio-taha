@@ -2,7 +2,9 @@ import type { Content } from "./types";
 
 /**
  * Contenu français — source de vérité : files/CV_Taha.md
- * Les niveaux de jauges (`level`) sont une auto-évaluation à ajuster.
+ *
+ * Les compétences sont décrites par leurs usages (`usedIn`) et non par une
+ * note : chaque croisement de la matrice est une affirmation vérifiable.
  */
 export const fr: Content = {
   meta: {
@@ -154,6 +156,7 @@ export const fr: Content = {
     items: [
       {
         id: "safran",
+        short: "Safran",
         company: "Safran",
         fullName: "Safran",
         role: "Ingénieur méthode",
@@ -173,6 +176,7 @@ export const fr: Content = {
       },
       {
         id: "smip",
+        short: "SMIP",
         company: "SMIP",
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant ingénieur",
@@ -192,6 +196,7 @@ export const fr: Content = {
       },
       {
         id: "afc",
+        short: "AFC",
         company: "AFC",
         fullName: "Arab Financial Consultants",
         role: "Apprenti consultant",
@@ -221,8 +226,11 @@ export const fr: Content = {
     stackLabel: "Stack",
     items: [
       {
-        id: "pharmaworkspace",
-        name: "PharmaWorkSpace",
+        id: "pharmacowork",
+        name: "PharmacoWork",
+        short: "PharmacoWork",
+        url: "https://pharmacowork.fr",
+        visual: "roster",
         tagline: "Outil de gestion RH pour pharmacies",
         period: "2025 — Présent",
         status: "Actif",
@@ -239,6 +247,8 @@ export const fr: Content = {
       {
         id: "machine-layout",
         name: "Machine Layout Optimization App",
+        short: "Machine Layout",
+        visual: "layout",
         tagline: "Aide à la décision en implantation d'atelier",
         period: "2025 — 2026",
         status: "En cours",
@@ -255,6 +265,8 @@ export const fr: Content = {
       {
         id: "dashboard-enib",
         name: "Dashboard de Performance Académique",
+        short: "Dashboard ENIB",
+        visual: "dashboard",
         tagline: "Application web fullstack de pilotage — ENIB",
         period: "2025 — 2026",
         status: "En cours",
@@ -273,18 +285,43 @@ export const fr: Content = {
 
   skills: {
     title: "Compétences",
-    intro: "Regroupées par domaine — méthode industrielle d'abord, outils ensuite.",
-    disclaimer: "Niveaux auto-évalués, indicatifs.",
+    intro:
+      "Plutôt qu'un pourcentage que je m'attribuerais moi-même, voici où chaque compétence a réellement servi. La lecture se fait comme une matrice d'incidence — l'outil même qu'utilise la méthode de King dans mon projet d'implantation.",
+    matrix: {
+      deploymentsLabel: "Déploiements",
+      legend: "Cellule active = compétence mise en œuvre sur ce terrain",
+      countLabel: "terrains",
+      cellLabel: "{skill} mise en œuvre sur {deployment}",
+      emptyHint: "Survolez une ligne ou une colonne pour isoler un croisement.",
+    },
     groups: [
       {
         id: "industriel",
         domain: "Industrielles",
         accent: "amber",
         skills: [
-          { name: "Lean & amélioration continue", level: 85, note: "DMAIC, PDCA, VSM, Ishikawa" },
-          { name: "Gestion & planification", level: 80, note: "PIC, PDP, MRP, MS Project, ERP" },
-          { name: "Layout / Implantation", level: 82 },
-          { name: "Maîtrise des processus", level: 78 },
+          {
+            name: "Lean & amélioration continue",
+            note: "DMAIC, PDCA, VSM, Ishikawa",
+            usedIn: ["safran", "dashboard-enib"],
+          },
+          {
+            name: "Gestion & planification",
+            note: "PIC, PDP, MRP, MS Project, ERP",
+            usedIn: ["smip", "pharmacowork"],
+          },
+          {
+            name: "Layout / Implantation",
+            usedIn: ["machine-layout"],
+          },
+          {
+            name: "Maîtrise des processus",
+            usedIn: ["safran", "pharmacowork", "machine-layout"],
+          },
+          {
+            name: "Étude technico-économique",
+            usedIn: ["smip", "afc"],
+          },
         ],
       },
       {
@@ -292,12 +329,34 @@ export const fr: Content = {
         domain: "Techniques",
         accent: "cyan",
         skills: [
-          { name: "SQL / Supabase", level: 80 },
-          { name: "Python", level: 75 },
-          { name: "Power BI", level: 78 },
-          { name: "React", level: 70 },
-          { name: "MATLAB", level: 72 },
-          { name: "CATIA V5", level: 68 },
+          {
+            name: "Python",
+            usedIn: ["safran", "machine-layout"],
+          },
+          {
+            name: "SQL / Supabase",
+            usedIn: ["pharmacowork", "dashboard-enib"],
+          },
+          {
+            name: "React",
+            usedIn: ["pharmacowork", "dashboard-enib"],
+          },
+          {
+            name: "Power BI",
+            usedIn: ["dashboard-enib"],
+          },
+          {
+            name: "MATLAB",
+            usedIn: ["machine-layout"],
+          },
+          {
+            name: "OCR / Vision",
+            usedIn: ["safran"],
+          },
+          {
+            name: "CATIA V5",
+            usedIn: [],
+          },
         ],
       },
     ],
