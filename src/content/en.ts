@@ -26,6 +26,7 @@ export const en: Content = {
     downloadCv: "Resume PDF",
     skipToContent: "Skip to main content",
     langLabel: "Language",
+    statusLabel: "Status",
   },
 
   boot: {
@@ -222,9 +223,11 @@ export const en: Content = {
     openLabel: "Open",
     closeLabel: "Close",
     stackLabel: "Stack",
+    stepsLabel: "Inspection sequence",
     items: [
       {
         id: "pharmacowork",
+        accentTint: "#4FD8B0",
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
@@ -244,9 +247,33 @@ export const en: Content = {
       },
       {
         id: "machine-layout",
+        accentTint: "#F2913C",
         name: "Machine Layout Optimization App",
         short: "Machine Layout",
         visual: "layout",
+        steps: [
+          {
+            step: "01",
+            title: "Survey",
+            body: "Record the machines, the routings and the real flows between stations. Without that starting matrix, any grouping is arbitrary.",
+          },
+          {
+            step: "02",
+            title: "Cluster",
+            body: "Apply King's method — an iterative sort of the incidence matrix rows and columns — until the production cells emerge.",
+          },
+          {
+            step: "03",
+            title: "Lay out",
+            body: "Chain the stations inside each cell with an optimisation algorithm, then place the cells relative to one another.",
+          },
+          {
+            step: "04",
+            title: "Score",
+            body: "Rate every candidate layout on traffic, connectivity and optimality ratio. The number decides, not the hunch.",
+          },
+        ],
+
         tagline: "Decision support for plant layout",
         period: "2025 — 2026",
         status: "In progress",
@@ -262,6 +289,7 @@ export const en: Content = {
       },
       {
         id: "dashboard-enib",
+        accentTint: "#4FD8E8",
         name: "Academic Performance Dashboard",
         short: "ENIB Dashboard",
         visual: "dashboard",

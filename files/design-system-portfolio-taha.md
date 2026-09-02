@@ -29,6 +29,21 @@ Mots-clés : précision, sobriété, technique, confiance, maîtrise.
 - Deux couleurs d'accent maximum visibles à l'écran en même temps (ambre + cyan), jamais plus
 - Le vert et le rouge sont réservés exclusivement au système "entrée cassée / sortie propre" de la chaîne de montage (signal fonctionnel, pas décoratif)
 
+
+### Variation chromatique par projet (limitee)
+Chaque projet du mur d'ecrans porte une **teinte d'accent propre**, prise dans le voisinage immediat de l'ambre et du cyan :
+
+| Projet | Teinte | Justification |
+|---|---|---|
+| PharmacoWork | `#4FD8B0` | Cyan incline vers le vert - registre sante/officine |
+| Machine Layout | `#F2913C` | Ambre incline vers l'orange industriel |
+| Dashboard ENIB | `#4FD8E8` | Cyan de reference |
+
+Contraintes strictes :
+- La teinte ne s'applique **qu'au survol**, et **uniquement aux traits** : bordure du moniteur, voyant d'etat, chiffre cle, puces de la fiche detaillee
+- **Jamais** de changement de couleur de fond
+- Un seul projet etant survole a la fois, la regle "deux accents maximum" reste tenue
+
 ---
 
 ## 3. Typographie
@@ -57,10 +72,24 @@ Mots-clés : précision, sobriété, technique, confiance, maîtrise.
 - Style "bouton-poussoir" de panneau de contrôle : bordure fine, léger effet d'enfoncement au clic, pas d'ombre portée décorative
 - Feedback au hover : légère lueur ambre ou cyan, jamais de dégradé complexe
 
-### Cadrans / jauges (section compétences)
-- Cadran circulaire avec aiguille animée
-- Graduations fines en gris, aiguille en ambre ou cyan selon la catégorie
-- Valeur numérique affichée en mono en dessous ou au centre
+### Matrice de competences (remplace les cadrans)
+Les cadrans a aiguille ont ete abandonnes : ils affichaient des niveaux auto-attribues sur 100, une precision fausse que rien ne verifie. "75" ne dit rien que "70" ne dirait.
+
+A leur place, une **matrice d'incidence competences x terrains** :
+- Lignes = competences, groupees par sous-systeme (Industrielles en ambre, Techniques en cyan)
+- Colonnes = terrains d'application, dans l'ordre du recit (experiences puis projets)
+- Cellule allumee = competence effectivement mise en oeuvre sur ce terrain
+- Compteur de terrains en fin de ligne, en mono
+- Reticule croise au survol (ligne + colonne) et afficheur du croisement pointe, facon instrument
+
+Cette forme est empruntee a la **matrice d'incidence de la methode de King** - l'outil meme du projet Machine Layout de Taha. La section se presente donc avec sa propre methode.
+
+Regles :
+- Rendu comme un vrai `<table>` avec `scope="row"` / `scope="col"` : le survol n'est qu'une aide visuelle, un lecteur d'ecran parcourt les croisements sans lui
+- Une ligne peut rester vide (ex. CATIA V5) - tout n'est pas allume, c'est ce qui rend le reste credible
+- Defilement horizontal dans son propre conteneur sur petit ecran
+- Une reference vers un terrain inexistant **casse le build**, jamais une ligne silencieusement vide
+
 
 ### Cartes / panneaux
 - Fond légèrement plus clair que le fond général, bordure fine 1px
@@ -87,6 +116,18 @@ Mots-clés : précision, sobriété, technique, confiance, maîtrise.
 - Skippable au clic ou à la touche Entrée
 - Lignes de diagnostic qui s'affichent rapidement, pas de ralenti artificiel
 
+### Decodage systeme (liens de navigation)
+Au survol d'un lien de navigation, le libelle se recompose de gauche a droite comme un terminal qui charge, puis se fige.
+- Duree : **260 ms**, jamais rejoue en boucle
+- Jeu de glyphes : capitales, chiffres et symboles - registre terminal, pas decoratif
+- Le texte reel est rendu cote serveur et **n'est jamais remplace dans l'arbre d'accessibilite** : le brouillage passe par une couche `aria-hidden`, un lecteur d'ecran n'entend que le mot final
+- Entierement inerte sous `prefers-reduced-motion`
+
+### Profondeur au survol (mur d'ecrans)
+Trois couches se deplacent a des vitesses differentes selon la position du curseur : grille de fond (lente), illustration du projet (moyenne), reflet de dalle (rapide, a contresens).
+- Amplitude faible, transition de 220 ms
+- Coupe sur ecran tactile (`pointer: coarse`) et sous `prefers-reduced-motion` - la carte reste alors parfaitement plate
+
 ### Hover et clics
 - Effet "clic d'interrupteur" bref sur les boutons de navigation
 - Jauges qui s'animent une seule fois à l'apparition (pas en boucle continue, pour ne pas fatiguer l'œil)
@@ -96,6 +137,7 @@ Mots-clés : précision, sobriété, technique, confiance, maîtrise.
 - Pas de glitch effect appuyé, pas de néon clignotant
 - Pas d'animations qui rejouent à chaque scroll si l'utilisateur revient en arrière
 - Pas d'autoplay sonore
+- **Son desactive par defaut** : aucun design sonore n'est implemente. Si l'idee est reprise un jour, elle devra etre opt-in explicite - un recruteur consulte souvent le site au bureau ou en public
 
 ---
 
@@ -124,3 +166,19 @@ Mots-clés : précision, sobriété, technique, confiance, maîtrise.
 - Contraste texte/fond vérifié (WCAG AA minimum) malgré le fond sombre
 - Aucune information critique (contact, CV, expériences clés) ne doit être uniquement accessible via une interaction complexe (drag, hover uniquement, etc.)
 - Alternative texte pour tout élément graphique porteur d'information (icônes de secteur, jauges)
+
+
+---
+
+## 9. Instruments persistants
+
+### Mini-HUD de statut
+Panneau fixe en bas a gauche, visible en permanence des qu'on quitte le hero.
+- Anneau de progression du scroll (cyan) + point central ambre
+- Libelle de la section active, en mono capitales
+- `aria-hidden` : la navigation reelle reste la barre du haut, le HUD ne doit pas doubler l'annonce des sections
+
+### Bus de circuit
+Piste verticale de 1px qui traverse toutes les sections et les relie bout a bout, avec une via cerclee au niveau de chaque en-tete et une derivation vers le titre.
+- Masquee sous `xl`, ou la marge disponible est trop mince
+- C'est la meme idee que le convoyeur de la chaine de montage, etendue a la page entiere - un renforcement du concept, pas un ajout

@@ -8,23 +8,56 @@ import type { Project } from "@/content";
  * image d'illustration interchangeable. Purement décoratif au sens des
  * lecteurs d'écran : le résumé textuel dit déjà tout, d'où `aria-hidden`.
  */
-export function ProjectVisual({ kind }: { kind: Project["visual"] }) {
+export function ProjectVisual({
+  kind,
+  parallax = false,
+}: {
+  kind: Project["visual"];
+  /**
+   * Active la profondeur : les trois couches suivent `--px` / `--py`, posées
+   * par le moniteur parent au survol. Sans ces variables — dans la fiche
+   * détaillée, sur tactile, ou sous mouvement réduit — tout vaut zéro et
+   * l'ensemble reste parfaitement plat.
+   */
+  parallax?: boolean;
+}) {
+  const layer = (depth: number): React.CSSProperties =>
+    parallax
+      ? {
+          transform: `translate3d(calc(var(--px, 0) * ${depth}px), calc(var(--py, 0) * ${
+            depth * 0.7
+          }px), 0)`,
+          transition: "transform 220ms cubic-bezier(0.22, 1, 0.36, 1)",
+        }
+      : {};
+
   return (
     <div
       aria-hidden="true"
       className="relative overflow-hidden border-b border-line bg-base"
       style={{ aspectRatio: "16 / 8" }}
     >
-      <div className="grid-blueprint absolute inset-0 opacity-50" />
-      {kind === "roster" ? <RosterVisual /> : null}
-      {kind === "layout" ? <LayoutVisual /> : null}
-      {kind === "dashboard" ? <DashboardVisual /> : null}
-      {/* Reflet d'écran, très léger */}
+      {/* Arrière-plan : la grille, presque immobile */}
+      <div className="grid-blueprint absolute inset-0 opacity-50" style={layer(5)} />
+
+      {/* Plan moyen : l'illustration, légèrement surdimensionnée pour que le
+          déplacement ne découvre jamais de bord vide */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="absolute inset-0"
+        style={{ ...layer(13), ...(parallax ? { scale: "1.06" } : {}) }}
+      >
+        {kind === "roster" ? <RosterVisual /> : null}
+        {kind === "layout" ? <LayoutVisual /> : null}
+        {kind === "dashboard" ? <DashboardVisual /> : null}
+      </div>
+
+      {/* Premier plan : le reflet de dalle, qui glisse à contresens */}
+      <div
+        className="pointer-events-none absolute inset-[-15%]"
         style={{
+          ...layer(-26),
           background:
-            "linear-gradient(160deg, color-mix(in srgb, var(--color-ink) 5%, transparent) 0%, transparent 42%)",
+            "linear-gradient(160deg, color-mix(in srgb, var(--color-ink) 6%, transparent) 0%, transparent 44%)",
         }}
       />
     </div>

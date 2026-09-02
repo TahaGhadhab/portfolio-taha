@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Content, Locale } from "@/content";
 import type { CvTarget } from "@/lib/cv";
+import { DecodeText } from "./DecodeText";
 
 interface TopBarProps {
   lang: Locale;
@@ -69,7 +70,7 @@ export function TopBar({
                   href={`#${section.id}`}
                   className="rounded-[3px] px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted transition-colors hover:text-ink"
                 >
-                  {section.label}
+                  <DecodeText text={section.label} />
                 </a>
               </li>
             ))}

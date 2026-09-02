@@ -37,6 +37,13 @@ export interface Experience {
   hasDeliverable: boolean;
 }
 
+/** Une étape de la séquence d'inspection d'un projet phare. */
+export interface ProjectStep {
+  step: string;
+  title: string;
+  body: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -54,6 +61,14 @@ export interface Project {
   url?: string;
   /** Illustration procédurale affichée sur le moniteur. */
   visual: "roster" | "layout" | "dashboard";
+  /**
+   * Teinte d'accent propre au projet, appliquée au survol uniquement et
+   * seulement aux traits (bordure, voyant, chiffre) — jamais au fond. Reste
+   * volontairement dans le voisinage de l'ambre et du cyan du design system.
+   */
+  accentTint: string;
+  /** Séquence d'inspection, réservée aux projets phares. */
+  steps?: ProjectStep[];
 }
 
 export interface Education {
@@ -104,6 +119,8 @@ export interface Content {
     downloadCv: string;
     skipToContent: string;
     langLabel: string;
+    /** Libellé du mini-HUD de section active. */
+    statusLabel: string;
   };
   boot: {
     lines: string[];
@@ -151,6 +168,7 @@ export interface Content {
     openLabel: string;
     closeLabel: string;
     stackLabel: string;
+    stepsLabel: string;
     items: Project[];
   };
   skills: {

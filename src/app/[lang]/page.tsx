@@ -14,6 +14,7 @@ import { Hero } from "@/components/Hero";
 import { MethodSteps } from "@/components/MethodSection";
 import { ProjectWall } from "@/components/ProjectWall";
 import { Section } from "@/components/Section";
+import { StatusHud } from "@/components/StatusHud";
 import { SkillsSection } from "@/components/SkillsSection";
 import { TopBar } from "@/components/TopBar";
 
@@ -31,6 +32,19 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
   const c = getContent(lang);
   const cv = resolveCv(lang);
   const deployments = getDeployments(c);
+
+  // Sections suivies par le mini-HUD, dans l'ordre du document. Deux d'entre
+  // elles ne figurent pas dans la navigation mais restent des postes observés.
+  const hudSections = [
+    { id: "methode", label: c.method.title },
+    { id: "a-propos", label: c.about.title },
+    { id: "parcours", label: c.education.title },
+    { id: "experiences", label: c.experience.title },
+    { id: "projets", label: c.projects.title },
+    { id: "competences", label: c.skills.title },
+    { id: "associatif", label: c.associative.title },
+    { id: "contact", label: c.contact.title },
+  ];
 
   return (
     <>
@@ -111,6 +125,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
       </main>
 
       <Footer footer={c.footer} />
+      <StatusHud sections={hudSections} statusLabel={c.nav.statusLabel} />
       <EasterEggLamp egg={c.easterEgg} />
       <Atmosphere />
     </>

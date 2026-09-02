@@ -28,6 +28,7 @@ export const fr: Content = {
     downloadCv: "CV PDF",
     skipToContent: "Aller au contenu principal",
     langLabel: "Langue",
+    statusLabel: "Statut",
   },
 
   boot: {
@@ -224,9 +225,11 @@ export const fr: Content = {
     openLabel: "Ouvrir",
     closeLabel: "Fermer",
     stackLabel: "Stack",
+    stepsLabel: "Séquence d'inspection",
     items: [
       {
         id: "pharmacowork",
+        accentTint: "#4FD8B0",
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
@@ -246,9 +249,33 @@ export const fr: Content = {
       },
       {
         id: "machine-layout",
+        accentTint: "#F2913C",
         name: "Machine Layout Optimization App",
         short: "Machine Layout",
         visual: "layout",
+        steps: [
+          {
+            step: "01",
+            title: "Relever",
+            body: "Recenser les machines, les gammes de fabrication et les flux réels entre postes. Sans cette matrice de départ, tout regroupement est arbitraire.",
+          },
+          {
+            step: "02",
+            title: "Regrouper",
+            body: "Appliquer la méthode de King — un tri itératif des lignes et des colonnes de la matrice d'incidence — jusqu'à faire émerger les îlots de production.",
+          },
+          {
+            step: "03",
+            title: "Implanter",
+            body: "Chaîner les postes à l'intérieur de chaque îlot par un algorithme d'optimisation, et positionner les îlots entre eux.",
+          },
+          {
+            step: "04",
+            title: "Mesurer",
+            body: "Noter chaque implantation candidate sur le trafic, la connexité et le ratio d'optimalité. C'est le chiffre qui tranche, pas l'intuition.",
+          },
+        ],
+
         tagline: "Aide à la décision en implantation d'atelier",
         period: "2025 — 2026",
         status: "En cours",
@@ -264,6 +291,7 @@ export const fr: Content = {
       },
       {
         id: "dashboard-enib",
+        accentTint: "#4FD8E8",
         name: "Dashboard de Performance Académique",
         short: "Dashboard ENIB",
         visual: "dashboard",
