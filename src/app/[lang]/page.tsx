@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import { getContent, getDeployments, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
+import { resolveCockpitPhoto } from "@/lib/cockpit";
 import { AboutSection } from "@/components/AboutSection";
 import { AssemblyLine } from "@/components/AssemblyLine";
 import { AssociativeSection, InterestsRow } from "@/components/AssociativeSection";
 import { Atmosphere } from "@/components/Atmosphere";
 import { BootSequence } from "@/components/BootSequence";
+import { CockpitEnvironment } from "@/components/CockpitEnvironment";
 import { ContactSection } from "@/components/ContactSection";
 import { EasterEggLamp } from "@/components/EasterEggLamp";
 import { EducationTimeline } from "@/components/EducationTimeline";
@@ -32,6 +34,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
   const c = getContent(lang);
   const cv = resolveCv(lang);
   const deployments = getDeployments(c);
+  const cockpitPhoto = resolveCockpitPhoto();
 
   // Sections suivies par le mini-HUD, dans l'ordre du document. Deux d'entre
   // elles ne figurent pas dans la navigation mais restent des postes observés.
@@ -49,6 +52,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <BootSequence boot={c.boot} />
+      <CockpitEnvironment photo={cockpitPhoto} />
 
       <TopBar
         lang={lang}
@@ -58,7 +62,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
         classicLabel={c.nav.classicView}
       />
 
-      <main id="contenu" className="flex-1">
+      <main id="contenu" className="relative z-10 flex-1">
         <Hero hero={c.hero} cv={cv} cvLabel={c.contact.cvHint} />
 
         <Section id="methode" index="01" title={c.method.title} intro={c.method.intro}>
@@ -83,7 +87,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
           index="04"
           title={c.experience.title}
           intro={c.experience.intro}
-          className="bg-base-2"
+          className="bg-base-2/70"
         >
           <AssemblyLine experience={c.experience} />
         </Section>
@@ -97,7 +101,7 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
           index="06"
           title={c.skills.title}
           intro={c.skills.intro}
-          className="bg-base-2"
+          className="bg-base-2/70"
         >
           <SkillsSection skills={c.skills} deployments={deployments} />
         </Section>
@@ -118,13 +122,15 @@ export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
           id="contact"
           index="08"
           title={c.contact.title}
-          className="bg-base-2"
+          className="bg-base-2/70"
         >
           <ContactSection contact={c.contact} cv={cv} />
         </Section>
       </main>
 
-      <Footer footer={c.footer} />
+      <div className="relative z-10">
+        <Footer footer={c.footer} />
+      </div>
       <StatusHud sections={hudSections} statusLabel={c.nav.statusLabel} />
       <EasterEggLamp egg={c.easterEgg} />
       <Atmosphere />

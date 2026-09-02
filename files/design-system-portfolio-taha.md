@@ -182,3 +182,49 @@ Panneau fixe en bas a gauche, visible en permanence des qu'on quitte le hero.
 Piste verticale de 1px qui traverse toutes les sections et les relie bout a bout, avec une via cerclee au niveau de chaque en-tete et une derivation vers le titre.
 - Masquee sous `xl`, ou la marge disponible est trop mince
 - C'est la meme idee que le convoyeur de la chaine de montage, etendue a la page entiere - un renforcement du concept, pas un ajout
+
+---
+
+## 10. Decor de poste de pilotage
+
+Fond fixe traverse par le scroll, qui donne la sensation de se deplacer a
+l'interieur de la cabine plutot que de faire glisser une image.
+
+### Les quatre plans
+Du plus lointain au plus proche, avec leur course vers le haut sur toute la
+hauteur de page :
+
+| Plan | Contenu | Course | Opacite |
+|---|---|---|---|
+| 1 | Pare-brise : horizon, sol en fuite, reperes lointains | 3vh | 0.55 |
+| 2 | Panneau superieur : disjoncteurs, un sur sept arme en ambre | 9vh | 0.50 |
+| 3 | Planche de bord : cadrans, ecrans multifonctions, interrupteurs | 18vh | 0.32 |
+| 4 | Structure de cabine : montants, casquette, console, manettes | 32vh | 0.60 |
+
+L'effet de profondeur vient de **l'ecart** entre les courses, pas de leur
+amplitude. Des courses plus faibles suffisent et evitent que les plans se
+vident par le bas.
+
+### Regles de composition
+- La structure occupe **les bords** — montants lateraux, casquette en haut,
+  console en bas — et laisse la colonne centrale degagee. On est assis dans le
+  poste, le contenu flotte dans le champ de vision
+- Chaque boite de plan mesure `100vh + course` : sans ca, le bord inferieur
+  remonterait dans le viewport en fin de defilement
+- Les sections opaques passent en `bg-base-2/70` pour laisser voir le decor
+- Attenuation par palier : `opacity-45` sur mobile, `0.75` a partir de `md`,
+  pleine opacite a partir de `xl` — sous une certaine largeur, le decor
+  encombre plus qu'il n'immerge
+
+### Performance et accessibilite
+- Une seule ecriture JS par frame (la variable `--cam`), calee sur
+  `requestAnimationFrame` ; tout le reste est du CSS compose sur GPU
+- `prefers-reduced-motion` fige la camera a zero : le decor reste, le
+  mouvement disparait
+- `aria-hidden` et `pointer-events-none` sur toute la couche
+
+### Photo reelle (optionnelle)
+Un fichier depose dans `public/cockpit/` est place au plan le plus profond,
+desature et assombri a 42 % pour 28 % d'opacite. Voir le README de ce dossier.
+Sans fichier, le decor vectoriel fonctionne seul — c'est l'etat par defaut.
+

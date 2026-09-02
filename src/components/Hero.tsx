@@ -20,7 +20,6 @@ interface HeroProps {
 export function Hero({ hero, cv, cvLabel }: HeroProps) {
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pb-16 pt-24 sm:px-6">
-      <div className="grid-blueprint pointer-events-none absolute inset-0" aria-hidden="true" />
       {/* Halo ambre très diffus, ancré en haut à gauche comme un éclairage de poste */}
       <div
         aria-hidden="true"
