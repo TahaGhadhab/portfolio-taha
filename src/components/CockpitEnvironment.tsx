@@ -5,10 +5,15 @@ import { useEffect, useRef } from "react";
 /**
  * Poste de pilotage complet en arrière-plan, traversé par le scroll.
  *
- * Quatre plans de profondeur défilent à des vitesses différentes : le pare-brise
- * au loin bouge à peine, la structure de cabine au premier plan bouge beaucoup.
- * L'écart entre les deux est ce qui produit la sensation de se déplacer à
- * l'intérieur d'un volume plutôt que de faire glisser une image.
+ * La caméra fait un travelling avant, pas un panoramique : les quatre plans
+ * s'agrandissent depuis un point de fuite commun, à des vitesses très
+ * différentes. La structure de cabine grossit vite, sort du cadre et s'efface
+ * — on passe au travers. Le pare-brise, lui, bouge à peine et s'ouvre. En bas
+ * de page il ne reste que l'horizon.
+ *
+ * C'est l'agrandissement depuis un point de fuite, et non la translation, qui
+ * donne la sensation d'être dans la scène : c'est ce que fait l'œil quand le
+ * corps avance.
  *
  * Composition : la structure occupe les bords — montants latéraux, casquette
  * en haut, console en bas — et laisse la colonne centrale dégagée. On est
@@ -64,7 +69,7 @@ export function CockpitEnvironment({ photo }: { photo?: string }) {
     >
       {/* ---------- Plan 0 : photo réelle, si elle a été déposée ---------- */}
       {photo ? (
-        <Layer travel={2} className="opacity-[0.28]">
+        <Layer travel={2} growth={0.12} opacity={0.28}>
           <div
             className="h-full w-full bg-cover bg-center"
             style={{
@@ -76,22 +81,22 @@ export function CockpitEnvironment({ photo }: { photo?: string }) {
       ) : null}
 
       {/* ---------- Plan 1 : le dehors, vu à travers le pare-brise ---------- */}
-      <Layer travel={3} className="opacity-[0.55]">
+      <Layer travel={3} growth={0.1} opacity={0.42} fade={-0.26}>
         <WindscreenView />
       </Layer>
 
       {/* ---------- Plan 2 : panneau supérieur, au-dessus de la tête ---------- */}
-      <Layer travel={9} className="opacity-[0.5]">
+      <Layer travel={9} growth={0.55} opacity={0.5} fade={0.24}>
         <OverheadPanel />
       </Layer>
 
       {/* ---------- Plan 3 : planche de bord, de part et d'autre ---------- */}
-      <Layer travel={18} className="opacity-[0.32]">
+      <Layer travel={18} growth={1.3} opacity={0.32} fade={0.22}>
         <MainPanel />
       </Layer>
 
       {/* ---------- Plan 4 : structure de cabine, au plus près ---------- */}
-      <Layer travel={32} className="opacity-[0.6]">
+      <Layer travel={26} growth={2.6} opacity={0.6} fade={0.55}>
         <CabinFrame />
       </Layer>
     </div>
@@ -99,30 +104,61 @@ export function CockpitEnvironment({ photo }: { photo?: string }) {
 }
 
 /**
- * Un plan de profondeur.
+ * Un plan de profondeur, vu par une camera qui avance.
  *
- * `travel` est la course vers le haut, en vh, sur toute la hauteur de page :
- * plus elle est grande, plus le plan est proche de l'observateur. La boîte est
- * dimensionnée à `100vh + travel` précisément pour que son bord inférieur
- * arrive à ras du viewport en fin de course — sans ça, le plan se viderait par
- * le bas au fur et à mesure du défilement.
+ * Deux mouvements se combinent :
+ *
+ * - `travel` : une legere translation verticale, le mouvement de tete.
+ * - `growth` : l'agrandissement depuis le point de fuite. C'est LUI qui produit
+ *   la sensation d'etre dans la scene. Une translation seule se lit comme un
+ *   panoramique — la camera balaie mais ne se deplace pas. Un agrandissement
+ *   depuis un point de fuite commun se lit comme un travelling avant : les
+ *   objets proches grossissent vite et sortent du cadre, les lointains bougent
+ *   a peine. C'est exactement ce que fait l'oeil quand le corps avance.
+ *
+ * `fade` accompagne le passage : un plan qu'on depasse quitte le champ, il ne
+ * reste pas colle devant les yeux. En fin de page la structure de cabine s'est
+ * effacee et il ne reste que l'horizon — on est passe au travers.
+ *
+ * La boite mesure `100vh + travel` pour que son bord inferieur ne remonte
+ * jamais dans le viewport, l'agrandissement ne faisant que renforcer la
+ * couverture.
  */
 function Layer({
   travel,
-  className = "",
+  growth,
+  opacity,
+  fade = 0,
   children,
 }: {
   travel: number;
-  className?: string;
+  growth: number;
+  opacity: number;
+  /** Opacite perdue sur toute la course. Negative = gagnee : le
+   *  pare-brise s'eclaircit a mesure que la cabine s'efface devant lui. */
+  fade?: number;
   children: React.ReactNode;
 }) {
+  // L'operateur est choisi ici plutot que d'emettre un « * -0.26 » dans le
+  // calc() : une opacite invalide retomberait a 1 et ferait ressortir le plan
+  // au lieu de l'effacer.
+  const opacityExpr =
+    fade >= 0
+      ? `calc(${opacity} - var(--cam) * ${fade})`
+      : `calc(${opacity} + var(--cam) * ${-fade})`;
+
   return (
     <div
-      className={`absolute left-[-8%] right-[-8%] top-0 ${className}`}
+      className="absolute left-[-8%] right-[-8%] top-0"
       style={{
         height: `calc(100vh + ${travel}vh)`,
-        transform: `translate3d(0, calc(var(--cam) * ${-travel}vh), 0)`,
-        willChange: "transform",
+        // Point de fuite commun a tous les plans : sans origine partagee,
+        // les plans glisseraient les uns sur les autres au lieu de fuir
+        // ensemble vers le meme point.
+        transformOrigin: "50% 40%",
+        transform: `translate3d(0, calc(var(--cam) * ${-travel}vh), 0) scale(calc(1 + var(--cam) * ${growth}))`,
+        opacity: opacityExpr,
+        willChange: "transform, opacity",
       }}
     >
       {children}

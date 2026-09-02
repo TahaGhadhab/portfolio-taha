@@ -190,20 +190,32 @@ Piste verticale de 1px qui traverse toutes les sections et les relie bout a bout
 Fond fixe traverse par le scroll, qui donne la sensation de se deplacer a
 l'interieur de la cabine plutot que de faire glisser une image.
 
+### Camera : travelling avant, pas panoramique
+Le point cle. Une translation verticale seule se lit comme un **panoramique** —
+la camera balaie mais ne se deplace pas. Ce qui donne la sensation d'etre
+**dans** la scene, c'est l'**agrandissement depuis un point de fuite commun**
+(`transform-origin: 50% 40%`, cale sur l'horizon du pare-brise) : les objets
+proches grossissent vite et sortent du cadre, les lointains bougent a peine.
+C'est ce que fait l'oeil quand le corps avance.
+
 ### Les quatre plans
-Du plus lointain au plus proche, avec leur course vers le haut sur toute la
-hauteur de page :
+Du plus lointain au plus proche :
 
-| Plan | Contenu | Course | Opacite |
-|---|---|---|---|
-| 1 | Pare-brise : horizon, sol en fuite, reperes lointains | 3vh | 0.55 |
-| 2 | Panneau superieur : disjoncteurs, un sur sept arme en ambre | 9vh | 0.50 |
-| 3 | Planche de bord : cadrans, ecrans multifonctions, interrupteurs | 18vh | 0.32 |
-| 4 | Structure de cabine : montants, casquette, console, manettes | 32vh | 0.60 |
+| Plan | Contenu | Course | Agrandissement | Opacite |
+|---|---|---|---|---|
+| 1 | Pare-brise : horizon, sol en fuite | 3vh | x1.10 | 0.42 -> 0.68 |
+| 2 | Panneau superieur : disjoncteurs | 9vh | x1.55 | 0.50 -> 0.26 |
+| 3 | Planche de bord : cadrans, ecrans | 18vh | x2.30 | 0.32 -> 0.10 |
+| 4 | Structure de cabine : montants, console | 26vh | x3.60 | 0.60 -> 0.05 |
 
-L'effet de profondeur vient de **l'ecart** entre les courses, pas de leur
-amplitude. Des courses plus faibles suffisent et evitent que les plans se
-vident par le bas.
+Le plan proche grossit **26 fois plus** que le lointain : c'est cet ecart, et
+non l'amplitude absolue, qui fabrique la profondeur.
+
+Un plan qu'on depasse **s'efface** — il ne reste pas colle devant les yeux. Le
+pare-brise, lui, s'eclaircit a mesure que la cabine s'efface devant lui : en
+bas de page on est passe au travers du poste et il ne reste que l'horizon.
+Cela epouse l'arc narratif du concept — terrain, puis chaine, puis vision
+d'ensemble.
 
 ### Regles de composition
 - La structure occupe **les bords** — montants lateraux, casquette en haut,
