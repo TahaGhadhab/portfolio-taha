@@ -1,23 +1,34 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Archivo, Literata, IBM_Plex_Mono } from "next/font/google";
+import { BrandMark } from "@/components/BrandMark";
+import { Optics } from "@/components/Optics";
 import "./globals.css";
 
 /**
- * 404 global. Le root layout vit sous un segment dynamique (`[lang]`), donc
+ * 404 global. Le layout racine vit sous un segment dynamique (`[lang]`), donc
  * aucune langue ne peut être déduite ici : la page est bilingue par défaut et
- * renvoie vers les deux entrées. Elle contourne le rendu normal, d'où
- * l'import explicite des styles et des polices.
+ * renvoie vers les deux entrées. Elle contourne le rendu normal, d'où l'import
+ * explicite des styles et des polices.
  */
-const display = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const display = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const body = Literata({
+  variable: "--font-literata",
   subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -29,35 +40,44 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
   return (
-    <html lang="fr" className={`${display.variable} ${mono.variable} h-full`}>
-      <body className="flex min-h-full flex-col items-center justify-center px-6 text-center">
-        <div className="grid-blueprint pointer-events-none fixed inset-0" aria-hidden="true" />
-
-        <div className="relative">
-          <p className="flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-fault">
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-fault" />
-            Signal perdu / Signal lost
-          </p>
-
-          <h1 className="mt-6 font-[family-name:var(--font-space-grotesk)] text-7xl font-bold tracking-tight text-ink sm:text-8xl">
-            404
-          </h1>
-
-          <p className="mt-4 text-muted">
-            Cette page n&apos;existe pas.
-            <span className="mx-2 text-line" aria-hidden="true">
-              /
-            </span>
-            This page does not exist.
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/fr" className="push-button push-button--primary px-5 py-3">
-              Retour à l&apos;accueil
-            </Link>
-            <Link href="/en" className="push-button px-5 py-3">
-              Back to home
-            </Link>
+    <html lang="fr" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <body>
+        <Optics />
+        <div
+          className="wrap shell"
+          style={{
+            minHeight: "100dvh",
+            display: "grid",
+            placeItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <div>
+            <BrandMark className="brand-mark" />
+            <p className="mono" style={{ marginTop: "var(--s-5)" }}>
+              SIGNAL PERDU / SIGNAL LOST
+            </p>
+            <h1
+              style={{
+                fontSize: "var(--t-5)",
+                fontWeight: 700,
+                marginTop: "var(--s-4)",
+                letterSpacing: "-0.038em",
+              }}
+            >
+              404
+            </h1>
+            <p className="lede" style={{ margin: "var(--s-5) auto 0", maxWidth: "38ch" }}>
+              Cette page n&apos;existe pas. / This page does not exist.
+            </p>
+            <div className="hero-actions">
+              <Link className="btn btn-primary" href="/fr">
+                Retour à l&apos;accueil
+              </Link>
+              <Link className="btn" href="/en">
+                Back to home
+              </Link>
+            </div>
           </div>
         </div>
       </body>

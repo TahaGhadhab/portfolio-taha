@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — design system mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Literata:opsz,wght@7..72,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · macrostructure: Technical Sheet (scroll-travelled) · tone: technical
+ * theme: custom · vibe: "machine-shop green, oxidised brass, drafting vellum"
+ * paper: oklch(94.5% 0.014 128) · accent: oklch(66% 0.115 76)
+ * display: Archivo · body: Literata · data: IBM Plex Mono
+ * enrichment: generative canvas lattice + scroll-driven exploded axonometric
+ * pre-emit critique: P5 H5 E5 S5 R4 V5
+ */
+
+:root {
+  --color-ink:          oklch(20.5% 0.012 155);
+  --color-ink-raised:   oklch(24.5% 0.013 155);
+  --color-ink-line:     oklch(32%   0.014 155);
+  --color-paper:        oklch(94.5% 0.014 128);
+  --color-paper-line:   oklch(83%   0.014 140);
+  --color-machine:      oklch(43%   0.045 155);
+  --color-machine-lift: oklch(52%   0.048 155);
+  --color-brass:        oklch(66%   0.115 76);
+  --color-steel:        oklch(62%   0.008 155);
+  --color-text-dark:    oklch(92%   0.010 140);
+  --color-text-dark-mu: oklch(70%   0.012 150);
+  --color-text-light:   oklch(24%   0.014 155);
+  --color-text-light-mu:oklch(46%   0.014 150);
+
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Literata", Georgia, "Times New Roman", serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --text-xs: 0.75rem;   --text-sm: 0.8125rem;  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem; --text-xl: 1.4375rem;  --text-2xl: 1.875rem;
+  --text-display-s: clamp(2rem, 5vw, 3.25rem);
+  --text-display:   clamp(2.5rem, 7.2vw, 5.25rem);
+
+  --leading-tight: 1.04; --leading-snug: 1.24; --leading-body: 1.62;
+  --measure: 63ch;
+
+  --space-2xs: 0.25rem; --space-xs: 0.5rem;  --space-sm: 0.75rem;
+  --space-md: 1.25rem;  --space-lg: 2rem;    --space-xl: 3.25rem;
+  --space-2xl: 5rem;    --space-3xl: 8rem;
+
+  --rule-hair: 1px; --rule-datum: 2px; --radius-sm: 2px;
+
+  --ease-out: cubic-bezier(0.16,0.84,0.44,1);
+  --ease-in-out: cubic-bezier(0.65,0,0.35,1);
+  --dur-fast: 140ms; --dur-mid: 300ms; --dur-slow: 700ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { overflow-x: clip; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text-dark);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── The ecosystem: one fixed generative canvas behind everything ── */
+#world {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.page { position: relative; z-index: 1; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  letter-spacing: -0.018em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  margin: 0;
+}
+p { margin: 0; }
+a { color: inherit; }
+
+:focus-visible {
+  outline: var(--rule-datum) solid var(--color-brass);
+  outline-offset: 3px;
+  transition: none;
+}
+.band-light :focus-visible { outline-color: var(--color-machine); }
+
+.shell {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+
+.band { padding-block: var(--space-2xl); position: relative; }
+
+/* Bands veil the canvas just enough to keep text legible.
+   The hero stays fully open — that's where the ecosystem breathes. */
+.band-open  { background: transparent; }
+.band-light {
+  background: color-mix(in srgb, var(--color-paper) 91%, transparent);
+  color: var(--color-text-light);
+}
+.band-deep  {
+  background: color-mix(in srgb, var(--color-ink) 84%, transparent);
+  color: var(--color-text-dark);
+}
+
+.datum {
+  height: var(--rule-hair);
+  background: var(--color-ink-line);
+  position: relative;
+  margin-bottom: var(--space-xl);
+}
+.band-light .datum { background: var(--color-paper-line); }
+.datum::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 56px; height: var(--rule-hair);
+  background: var(--color-brass);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-dark-mu);
+}
+.band-light .meta { color: var(--color-text-light-mu); }
+
+.lede { font-size: var(--text-lg); max-width: var(--measure); color: var(--color-text-dark-mu); }
+.band-light .lede { color: var(--color-text-light-mu); }
+
+/* ── Nav ────────────────────────────────────────────────────── */
+.nav {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--space-md); flex-wrap: wrap;
+  padding-block: var(--space-md) var(--space-xl);
+}
+.wordmark { text-decoration: none; display: block; }
+.wordmark strong {
+  display: block; font-family: var(--font-display); font-weight: 600;
+  font-size: var(--text-lg); font-variation-settings: "wdth" 108;
+}
+.wordmark span {
+  display: block; margin-top: var(--space-2xs);
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  color: var(--color-text-dark-mu);
+}
+.nav-links {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: clamp(0.875rem, 3vw, 2.25rem); padding-top: var(--space-2xs);
+}
+.nav-links a {
+  font-family: var(--font-display); font-size: var(--text-sm); font-weight: 500;
+  text-decoration: none; color: var(--color-text-dark-mu);
+  white-space: nowrap; padding-block: var(--space-2xs);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav-links a:hover { color: var(--color-text-dark); }
+.nav-cta {
+  color: var(--color-ink) !important; background: var(--color-brass);
+  padding: var(--space-xs) var(--space-md) !important; border-radius: var(--radius-sm);
+  transition: filter var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.nav-cta:hover { filter: brightness(1.08); }
+.nav-cta:active { transform: translateY(1px); }
+
+/* ── Hero: a tall scroll stage you travel through ───────────── */
+.stage { min-height: 190vh; position: relative; }
+
+.stage-pin {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-xl);
+}
+
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl); align-items: center; width: 100%;
+}
+
+.hero h1 {
+  font-size: var(--text-display); font-weight: 700;
+  line-height: var(--leading-tight);
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.032em; max-width: 14ch;
+}
+.hero .lede { margin-top: var(--space-lg); }
+
+.hero-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; margin-top: var(--space-xl); }
+
+.btn {
+  font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-sm);
+  border: var(--rule-hair) solid transparent; cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out);
+}
+.btn-primary { background: var(--color-brass); color: var(--color-ink); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-quiet { background: transparent; color: var(--color-text-dark); border-color: var(--color-ink-line); }
+.btn-quiet:hover { border-color: var(--color-steel); }
+.btn-quiet:active { transform: translateY(1px); }
+
+/* Hero copy recedes as you descend into the stack */
+.hero-copy { transition: none; will-change: transform, opacity; }
+
+/* ── Exploded axonometric ───────────────────────────────────── */
+.axo-wrap { min-width: 0; }
+.axo { width: 100%; height: auto; display: block; overflow: visible; will-change: transform; }
+
+.plate { cursor: pointer; transform-box: view-box; will-change: transform, opacity; }
+.plate-top  { fill: var(--color-machine); stroke: var(--color-machine-lift); stroke-width: 1;
+              transition: fill var(--dur-mid) var(--ease-out), stroke var(--dur-mid) var(--ease-out); }
+.plate-side { fill: var(--color-ink-raised); }
+.plate-edge { fill: none; stroke: var(--color-steel); stroke-width: 1; opacity: 0.5;
+              transition: stroke var(--dur-mid) var(--ease-out), opacity var(--dur-mid) var(--ease-out); }
+.plate.is-active .plate-top  { fill: var(--color-machine-lift); stroke: var(--color-brass); stroke-width: 1.5; }
+.plate.is-active .plate-edge { stroke: var(--color-brass); opacity: 0.9; }
+
+.hatch { stroke: var(--color-steel); stroke-width: 1; opacity: 0.32; }
+
+.callout { opacity: 0; transition: opacity var(--dur-mid) var(--ease-out); }
+.callout.is-active { opacity: 1; }
+.leader { stroke: var(--color-brass); stroke-width: 1; fill: none; }
+.leader-dot { fill: var(--color-brass); }
+.callout-title { font-family: var(--font-display); font-size: 19px; font-weight: 600; fill: var(--color-text-dark); }
+.callout-sub   { font-family: var(--font-mono); font-size: 11px; fill: var(--color-brass); letter-spacing: 0.06em; }
+
+.dim { stroke: var(--color-steel); stroke-width: 1; opacity: 0.6; }
+.dim-label { font-family: var(--font-mono); font-size: 11px; fill: var(--color-text-dark-mu); letter-spacing: 0.05em; }
+
+.axo-label { display: none; text-align: center; margin-top: var(--space-md); }
+.axo-label strong {
+  display: block; font-family: var(--font-display);
+  font-size: var(--text-xl); font-weight: 600; color: var(--color-text-dark);
+}
+.axo-hint { margin-top: var(--space-md); text-align: center; }
+
+/* ── Depth gauge: shows where you are in the descent ─────────── */
+.gauge {
+  position: fixed;
+  inset-inline-end: clamp(0.75rem, 2vw, 1.75rem);
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-xs);
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out);
+  pointer-events: none;
+}
+.gauge.is-visible { opacity: 1; }
+.gauge-tick {
+  width: 22px; height: var(--rule-datum);
+  background: var(--color-steel); opacity: 0.35;
+  transition: width var(--dur-mid) var(--ease-out),
+              opacity var(--dur-mid) var(--ease-out),
+              background var(--dur-mid) var(--ease-out);
+}
+.gauge-tick.is-on { width: 40px; opacity: 1; background: var(--color-brass); }
+
+/* ── Section heads ──────────────────────────────────────────── */
+.section-head { display: grid; gap: var(--space-md); margin-bottom: var(--space-xl); }
+.section-head h2 { font-size: var(--text-display-s); font-variation-settings: "wdth" 106; max-width: 18ch; }
+
+/* ── Method rail with a travelling progress line ─────────────── */
+.rail { position: relative; list-style: none; margin: 0; padding: 0;
+        border-top: var(--rule-hair) solid var(--color-paper-line); }
+.rail::before {
+  content: ""; position: absolute;
+  inset-block-start: 0; inset-inline-start: 0;
+  width: var(--rule-datum); height: 100%;
+  background: var(--color-paper-line);
+}
+.rail::after {
+  content: ""; position: absolute;
+  inset-block-start: 0; inset-inline-start: 0;
+  width: var(--rule-datum); height: var(--rail-fill, 0%);
+  background: var(--color-brass);
+  transition: height 120ms linear;
+}
+
+.step {
+  border-bottom: var(--rule-hair) solid var(--color-paper-line);
+  padding: var(--space-md) 0 var(--space-md) var(--space-lg);
+  display: grid; grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--space-md); align-items: start;
+  opacity: 0.5;
+  transition: opacity var(--dur-mid) var(--ease-out);
+}
+.step.is-on { opacity: 1; }
+.step-no { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-brass); padding-top: 0.35em; }
+.step h3 { font-size: var(--text-xl); margin-bottom: var(--space-2xs); }
+.step p { color: var(--color-text-light-mu); max-width: var(--measure); }
+
+/* ── Work sheets ────────────────────────────────────────────── */
+.sheet {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg); padding-block: var(--space-xl);
+  border-top: var(--rule-hair) solid var(--color-paper-line);
+}
+.sheet:last-of-type { border-bottom: var(--rule-hair) solid var(--color-paper-line); }
+.sheet h3 { font-size: var(--text-2xl); font-variation-settings: "wdth" 104; margin-block: var(--space-xs) var(--space-sm); }
+.sheet p { color: var(--color-text-light-mu); max-width: var(--measure); }
+
+.tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.tag {
+  font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-machine);
+  border: var(--rule-hair) solid var(--color-paper-line); border-radius: var(--radius-sm);
+  padding: 2px var(--space-xs); white-space: nowrap;
+}
+
+.specs { margin-top: var(--space-md); border-collapse: collapse; width: 100%; max-width: 26rem; }
+.specs th, .specs td {
+  text-align: start; padding: var(--space-xs) 0;
+  border-bottom: var(--rule-hair) dashed var(--color-paper-line);
+  font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 400;
+}
+.specs th { color: var(--color-text-light-mu); width: 45%; }
+.tbc { display: inline-block; min-width: 5.5rem; border-bottom: var(--rule-datum) dotted var(--color-brass); }
+
+/* ── Capability groups ──────────────────────────────────────── */
+.groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+.group h3 {
+  font-size: var(--text-lg); padding-bottom: var(--space-xs);
+  border-bottom: var(--rule-datum) solid var(--color-machine); margin-bottom: var(--space-sm);
+}
+.group ul { list-style: none; margin: 0; padding: 0; }
+.group li { padding-block: var(--space-2xs); font-size: var(--text-sm); color: var(--color-text-light-mu); }
+
+/* ── About + close ──────────────────────────────────────────── */
+.about-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+.about-grid h2 { font-size: var(--text-display-s); font-variation-settings: "wdth" 106; }
+.about-grid p + p { margin-top: var(--space-md); }
+.about-grid p { color: var(--color-text-dark-mu); max-width: var(--measure); }
+
+.close h2 { font-size: var(--text-display-s); font-variation-settings: "wdth" 110; max-width: 16ch; margin-bottom: var(--space-lg); }
+.mailto {
+  font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-brass);
+  text-decoration: none; border-bottom: var(--rule-datum) solid transparent;
+  transition: border-color var(--dur-fast) var(--ease-out); overflow-wrap: anywhere;
+}
+.mailto:hover { border-bottom-color: var(--color-brass); }
+
+.foot {
+  display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: space-between;
+  padding-block: var(--space-lg) var(--space-xl);
+  border-top: var(--rule-hair) solid var(--color-ink-line); margin-top: var(--space-2xl);
+}
+
+/* ── One orchestrated reveal per section ────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); }
+.reveal.is-in {
+  opacity: 1; transform: none;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 759px) {
+  .axo .callout, .axo .dim, .axo .dim-label { display: none; }
+  .axo-label { display: block; }
+  .axo-hint { display: none; }
+  .stage { min-height: 165vh; }
+  .stage-pin { min-height: auto; position: relative; padding-block: var(--space-lg); }
+  .gauge { display: none; }
+}
+
+@media (min-width: 760px) {
+  .groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet  { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: var(--space-2xl); }
+  .about-grid { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); }
+  .band { padding-block: var(--space-3xl); }
+}
+
+@media (min-width: 1000px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+  .groups { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .step { grid-template-columns: 4rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 120ms !important;
+  }
+  .stage { min-height: 0; }
+  .stage-pin { position: relative; min-height: 0; }
+  .reveal { opacity: 1; transform: none; }
+  .step { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="world" aria-hidden="true"></canvas>
+
+<div class="gauge" aria-hidden="true">
+  <span class="gauge-tick" data-g="0"></span>
+  <span class="gauge-tick" data-g="1"></span>
+  <span class="gauge-tick" data-g="2"></span>
+  <span class="gauge-tick" data-g="3"></span>
+</div>
+
+<div class="page">
+
+<!-- ══ Hero stage ═══════════════════════════════════════════ -->
+<header class="band band-open stage" data-band="dark" id="top">
+  <div class="shell">
+    <nav class="nav" aria-label="Primary">
+      <a class="wordmark" href="#top">
+        <strong>Your Name</strong>
+        <span>Industrial engineer</span>
+      </a>
+      <div class="nav-links">
+        <a href="#method">Method</a>
+        <a href="#work">Work</a>
+        <a href="#skills">Capabilities</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#contact">Start a project</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="stage-pin">
+    <div class="shell">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>I build things that don't fall apart.</h1>
+          <p class="lede">
+            I take problems apart, find where they actually break, and rebuild
+            them to keep running after I hand them over — on a factory floor
+            or inside a codebase.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">See the work</a>
+            <a class="btn btn-quiet" href="#method">How I work</a>
+          </div>
+        </div>
+
+        <div class="axo-wrap">
+          <svg class="axo" viewBox="0 0 640 560" role="group"
+               aria-label="Four stacked layers of practice. Scroll to descend, or select a layer.">
+
+            <g class="plate" data-i="0" tabindex="0" role="button" aria-label="Layer four: business">
+              <polygon class="plate-side" points="80,140 250,238 250,254 80,156"/>
+              <polygon class="plate-side" points="420,140 250,238 250,254 420,156"/>
+              <polygon class="plate-top"  points="250,42 420,140 250,238 80,140"/>
+              <polygon class="plate-edge" points="250,42 420,140 250,238 80,140"/>
+            </g>
+            <g class="callout" data-c="0">
+              <path class="leader" d="M420 140 L474 112 L618 112"/>
+              <circle class="leader-dot" cx="420" cy="140" r="3"/>
+              <text class="callout-sub"   x="474" y="90">LAYER 04</text>
+              <text class="callout-title" x="474" y="108">Business</text>
+            </g>
+
+            <g class="plate" data-i="1" tabindex="0" role="button" aria-label="Layer three: applied AI">
+              <polygon class="plate-side" points="80,240 250,338 250,354 80,256"/>
+              <polygon class="plate-side" points="420,240 250,338 250,354 420,256"/>
+              <polygon class="plate-top"  points="250,142 420,240 250,338 80,240"/>
+              <polygon class="plate-edge" points="250,142 420,240 250,338 80,240"/>
+            </g>
+            <g class="callout" data-c="1">
+              <path class="leader" d="M420 240 L474 212 L618 212"/>
+              <circle class="leader-dot" cx="420" cy="240" r="3"/>
+              <text class="callout-sub"   x="474" y="190">LAYER 03</text>
+              <text class="callout-title" x="474" y="208">Applied AI</text>
+            </g>
+
+            <g class="plate" data-i="2" tabindex="0" role="button" aria-label="Layer two: software">
+              <polygon class="plate-side" points="80,340 250,438 250,454 80,356"/>
+              <polygon class="plate-side" points="420,340 250,438 250,454 420,356"/>
+              <polygon class="plate-top"  points="250,242 420,340 250,438 80,340"/>
+              <polygon class="plate-edge" points="250,242 420,340 250,438 80,340"/>
+            </g>
+            <g class="callout" data-c="2">
+              <path class="leader" d="M420 340 L474 312 L618 312"/>
+              <circle class="leader-dot" cx="420" cy="340" r="3"/>
+              <text class="callout-sub"   x="474" y="290">LAYER 02</text>
+              <text class="callout-title" x="474" y="308">Software</text>
+            </g>
+
+            <g class="plate" data-i="3" tabindex="0" role="button" aria-label="Layer one: industrial systems">
+              <polygon class="plate-side" points="80,440 250,538 250,554 80,456"/>
+              <polygon class="plate-side" points="420,440 250,538 250,554 420,456"/>
+              <polygon class="plate-top"  points="250,342 420,440 250,538 80,440"/>
+              <line class="hatch" x1="122.5" y1="464.5" x2="292.5" y2="366.5"/>
+              <line class="hatch" x1="165"   y1="489"   x2="335"   y2="391"/>
+              <line class="hatch" x1="207.5" y1="513.5" x2="377.5" y2="415.5"/>
+              <polygon class="plate-edge" points="250,342 420,440 250,538 80,440"/>
+            </g>
+            <g class="callout" data-c="3">
+              <path class="leader" d="M420 440 L474 412 L618 412"/>
+              <circle class="leader-dot" cx="420" cy="440" r="3"/>
+              <text class="callout-sub"   x="474" y="390">LAYER 01</text>
+              <text class="callout-title" x="474" y="408">Industrial systems</text>
+            </g>
+
+            <line class="dim" x1="46" y1="42"  x2="46" y2="538"/>
+            <line class="dim" x1="38" y1="42"  x2="54" y2="42"/>
+            <line class="dim" x1="38" y1="538" x2="54" y2="538"/>
+            <text class="dim-label" x="30" y="300" transform="rotate(-90 30 300)" text-anchor="middle">FULL STACK</text>
+          </svg>
+
+          <p class="meta axo-hint">Scroll to descend — or select a layer</p>
+          <div class="axo-label" aria-live="polite">
+            <span class="meta" data-label-sub>Layer 04</span>
+            <strong data-label-title>Business</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ Method ══════════════════════════════════════════════ -->
+<section class="band band-light" data-band="light" id="method">
+  <div class="shell">
+    <div class="datum"></div>
+    <div class="section-head reveal">
+      <h2>How a problem gets solved</h2>
+      <p class="lede">Five phases, in order. The order is the point — skipping
+        straight to a fix is how solutions come undone three months later.</p>
+    </div>
+
+    <ol class="rail">
+      <li class="step">
+        <div class="step-no">01</div>
+        <div><h3>Listen</h3>
+          <p>Talk to the people inside the problem before touching anything.
+             They already know where it hurts.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-no">02</div>
+        <div><h3>Stabilize</h3>
+          <p>Put a temporary fix in, sized to how critical the failure is.
+             Buy the time to do the real work properly.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-no">03</div>
+        <div><h3>Decompose</h3>
+          <p>Break the system into parts. Solve the independent ones first,
+             then the ones tangled together.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-no">04</div>
+        <div><h3>Optimize</h3>
+          <p>Compare the candidate solutions on quality against cost.
+             Pick with math, not with taste.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-no">05</div>
+        <div><h3>Sustain</h3>
+          <p>Manage the rollout so it holds together during setup — and keeps
+             holding after handover.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══ Work ════════════════════════════════════════════════ -->
+<section class="band band-light" data-band="light" id="work">
+  <div class="shell">
+    <div class="datum"></div>
+    <div class="section-head reveal">
+      <h2>Selected work</h2>
+      <p class="lede">Three sheets from the set. Each one starts with what was
+        broken and ends with what held.</p>
+    </div>
+
+    <article class="sheet reveal">
+      <div>
+        <p class="meta">Sheet 01</p>
+        <h3>Production line rebalance</h3>
+        <div class="tags"><span class="tag">Industrial</span><span class="tag">Optimization</span></div>
+      </div>
+      <div>
+        <p>One paragraph on the problem as the floor described it, then the
+          constraint you found underneath it, then what changed. Replace this
+          with the real story — the specificity is what convinces.</p>
+        <table class="specs">
+          <tr><th scope="row">Throughput change</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Cycle time</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Duration</th><td><span class="tbc">&nbsp;</span></td></tr>
+        </table>
+      </div>
+    </article>
+
+    <article class="sheet reveal">
+      <div>
+        <p class="meta">Sheet 02</p>
+        <h3>Internal operations tool</h3>
+        <div class="tags"><span class="tag">Software</span><span class="tag">Web</span><span class="tag">Process</span></div>
+      </div>
+      <div>
+        <p>What people were doing by hand, what you built instead, and the one
+          design decision that made it stick. Say what it runs on and who uses
+          it now.</p>
+        <table class="specs">
+          <tr><th scope="row">Hours recovered</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Active users</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Stack</th><td><span class="tbc">&nbsp;</span></td></tr>
+        </table>
+      </div>
+    </article>
+
+    <article class="sheet reveal">
+      <div>
+        <p class="meta">Sheet 03</p>
+        <h3>Applied AI prototype</h3>
+        <div class="tags"><span class="tag">AI</span><span class="tag">Prototype</span></div>
+      </div>
+      <div>
+        <p>The decision the model was meant to support, why the naive approach
+          failed, and what you did instead. End with what you would change if
+          you built it again.</p>
+        <table class="specs">
+          <tr><th scope="row">Task</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Result</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Status</th><td><span class="tbc">&nbsp;</span></td></tr>
+        </table>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ══ Capabilities ════════════════════════════════════════ -->
+<section class="band band-light" data-band="light" id="skills">
+  <div class="shell">
+    <div class="datum"></div>
+    <div class="section-head reveal">
+      <h2>Capabilities</h2>
+      <p class="lede">The résumé, laid out as a bill of materials rather than a
+        wall of bullet points.</p>
+    </div>
+
+    <div class="groups reveal">
+      <div class="group">
+        <h3>Industrial</h3>
+        <ul>
+          <li>Process analysis and redesign</li>
+          <li>Line balancing and layout</li>
+          <li>Quality systems</li>
+          <li>Cost and capacity modelling</li>
+          <li>Lean and continuous improvement</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Software</h3>
+        <ul>
+          <li>Web applications</li>
+          <li>Internal tools and dashboards</li>
+          <li>Databases and data pipelines</li>
+          <li>Interface and interaction design</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Artificial intelligence</h3>
+        <ul>
+          <li>Applied machine learning</li>
+          <li>Language-model applications</li>
+          <li>Automation of manual decisions</li>
+          <li>Judging what is worth automating</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Business</h3>
+        <ul>
+          <li>Unit economics</li>
+          <li>Operations and scheduling</li>
+          <li>Vendor and cost negotiation</li>
+          <li>Building products end to end</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ About + contact ═════════════════════════════════════ -->
+<section class="band band-deep" data-band="dark" id="about">
+  <div class="shell">
+    <div class="datum"></div>
+    <div class="about-grid reveal">
+      <h2>Where the method came from</h2>
+      <div>
+        <p>I grew up somewhere small, where a thing that broke got fixed rather
+          than replaced, and whoever fixed it had to live with the result. That
+          is still how I work.</p>
+        <p>Industrial engineering gave me the formal tools — decomposition,
+          constraint analysis, optimization under cost. Software and AI gave me
+          somewhere else to point them. The two are the same job: find the part
+          of the system that is actually limiting everything else, and change
+          that part.</p>
+        <p>I care most about durability. A clever solution that needs me in the
+          room to survive is not a solution.</p>
+      </div>
+    </div>
+
+    <div class="close reveal" id="contact" style="margin-top: var(--space-3xl);">
+      <div class="datum"></div>
+      <h2>Have something that keeps breaking?</h2>
+      <a class="mailto" href="mailto:you@example.com">you@example.com</a>
+      <p class="meta" style="margin-top: var(--space-md);">Open to engineering and product work</p>
+    </div>
+
+    <div class="foot">
+      <p class="meta">Your Name — Industrial engineer</p>
+      <p class="meta">Dotted values are placeholders. Replace before publishing.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.page -->
+
+<script>
+(function () {
+  "use strict";
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ────────────────────────────────────────────────────────────
+     1. The world — a generative isometric lattice that travels
+        with the scroll and shifts palette between bands.
+     ──────────────────────────────────────────────────────────── */
+  var cv  = document.getElementById('world');
+  var ctx = cv.getContext('2d', { alpha: false });
+
+  var PAL = {
+    dark:  { base: [23, 28, 25],  grid: [140, 148, 142], node: [83, 108, 92],  link: [140, 148, 142] },
+    light: { base: [237, 240, 231], grid: [67, 89, 76],  node: [67, 89, 76],   link: [67, 89, 76] }
+  };
+  var BRASS = [192, 138, 51];
+
+  var W = 0, H = 0, dpr = 1;
+  var nodes = [];
+  var scrollY = 0, tone = 0, toneTarget = 0, t = 0;
+
+  function lerp(a, b, k) { return a + (b - a) * k; }
+  function mix(c1, c2, k) {
+    return 'rgb(' + Math.round(lerp(c1[0], c2[0], k)) + ',' +
+                    Math.round(lerp(c1[1], c2[1], k)) + ',' +
+                    Math.round(lerp(c1[2], c2[2], k)) + ')';
+  }
+  function mixA(c1, c2, k, a) {
+    return 'rgba(' + Math.round(lerp(c1[0], c2[0], k)) + ',' +
+                     Math.round(lerp(c1[1], c2[1], k)) + ',' +
+                     Math.round(lerp(c1[2], c2[2], k)) + ',' + a + ')';
+  }
+
+  function seedNodes() {
+    var count = Math.max(24, Math.min(78, Math.round((W * H) / 20000)));
+    nodes = [];
+    for (var i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * W,
+        y: Math.random() * (H + 240) - 120,
+        d: 0.34 + Math.random() * 0.66,          // depth
+        vx: (Math.random() - 0.5) * 0.13,
+        vy: (Math.random() - 0.5) * 0.09,
+        hot: Math.random() < 0.12                 // brass accent members
+      });
+    }
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seedNodes();
+  }
+
+  /* Which band owns the middle of the viewport right now? */
+  var bands = Array.prototype.slice.call(document.querySelectorAll('[data-band]'));
+  function readTone() {
+    var mid = scrollY + window.innerHeight / 2;
+    for (var i = 0; i < bands.length; i++) {
+      var el = bands[i];
+      var top = el.offsetTop, bot = top + el.offsetHeight;
+      if (mid >= top && mid < bot) {
+        toneTarget = el.getAttribute('data-band') === 'light' ? 1 : 0;
+        return;
+      }
+    }
+  }
+
+  function drawLattice() {
+    var sp = 84;
+    var travel = scrollY * 0.34;
+    var reach = H * 1.732 + sp;
+    ctx.lineWidth = 1;
+
+    /* two families of 30° lines, sliding opposite ways = vertical travel */
+    ctx.strokeStyle = mixA(PAL.dark.grid, PAL.light.grid, tone, 0.10);
+    ctx.beginPath();
+    var o1 = ((travel % sp) + sp) % sp;
+    for (var x = -reach + o1; x < W + reach; x += sp) {
+      ctx.moveTo(x, 0); ctx.lineTo(x + H * 1.732, H);
+    }
+    var o2 = ((-travel % sp) + sp) % sp;
+    for (var x2 = -reach + o2; x2 < W + reach; x2 += sp) {
+      ctx.moveTo(x2, 0); ctx.lineTo(x2 - H * 1.732, H);
+    }
+    ctx.stroke();
+  }
+
+  function drawNodes() {
+    var i, j, a, b, n, sx, sy, dx, dy, dist, span = H + 240;
+    var pts = [];
+
+    for (i = 0; i < nodes.length; i++) {
+      n = nodes[i];
+      if (!reduced) { n.x += n.vx; n.y += n.vy; }
+      if (n.x < -60) n.x = W + 60; else if (n.x > W + 60) n.x = -60;
+
+      sx = n.x;
+      sy = n.y - scrollY * (0.05 + n.d * 0.26);
+      sy = ((sy + 120) % span + span) % span - 120;
+      pts.push({ x: sx, y: sy, d: n.d, hot: n.hot });
+    }
+
+    /* links first, so nodes sit on top */
+    ctx.lineWidth = 1;
+    for (i = 0; i < pts.length; i++) {
+      a = pts[i];
+      for (j = i + 1; j < pts.length; j++) {
+        b = pts[j];
+        dx = a.x - b.x; dy = a.y - b.y;
+        dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 138) {
+          ctx.strokeStyle = mixA(PAL.dark.link, PAL.light.link, tone,
+                                 (1 - dist / 138) * 0.26 * ((a.d + b.d) / 2));
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* isometric diamonds, not dots — same geometry as the stack */
+    for (i = 0; i < pts.length; i++) {
+      a = pts[i];
+      var r = 1.6 + a.d * 3.2;
+      ctx.fillStyle = a.hot
+        ? 'rgba(192,138,51,' + (0.30 + a.d * 0.45).toFixed(2) + ')'
+        : mixA(PAL.dark.node, PAL.light.node, tone, 0.34 + a.d * 0.42);
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y - r);
+      ctx.lineTo(a.x + r * 1.732, a.y);
+      ctx.lineTo(a.x, a.y + r);
+      ctx.lineTo(a.x - r * 1.732, a.y);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function paint() {
+    ctx.fillStyle = mix(PAL.dark.base, PAL.light.base, tone);
+    ctx.fillRect(0, 0, W, H);
+    drawLattice();
+    drawNodes();
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     2. Scroll-driven descent through the stack
+     ──────────────────────────────────────────────────────────── */
+  var axo      = document.querySelector('.axo');
+  var heroCopy = document.querySelector('.hero-copy');
+  var stage    = document.querySelector('.stage');
+  var plates   = Array.prototype.slice.call(document.querySelectorAll('.plate'));
+  var callouts = Array.prototype.slice.call(document.querySelectorAll('.callout'));
+  var ticks    = Array.prototype.slice.call(document.querySelectorAll('.gauge-tick'));
+  var gauge    = document.querySelector('.gauge');
+  var subEl    = document.querySelector('[data-label-sub]');
+  var titleEl  = document.querySelector('[data-label-title]');
+
+  var NAMES = ['Business', 'Applied AI', 'Software', 'Industrial systems'];
+  var SUBS  = ['Layer 04', 'Layer 03', 'Layer 02', 'Layer 01'];
+
+  var pinned = -1;   // hover/focus override; -1 = follow the scroll
+
+  function highlight(i) {
+    plates.forEach(function (p, n) { p.classList.toggle('is-active', n === i); });
+    callouts.forEach(function (c, n) { c.classList.toggle('is-active', n === i); });
+    ticks.forEach(function (g, n) { g.classList.toggle('is-on', n === i); });
+    if (subEl)   subEl.textContent   = SUBS[i];
+    if (titleEl) titleEl.textContent = NAMES[i];
+  }
+
+  function descend() {
+    if (!stage || !axo) return;
+    var top    = stage.offsetTop;
+    var travel = Math.max(1, stage.offsetHeight - window.innerHeight);
+    var p = (scrollY - top) / travel;
+    p = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+    if (gauge) gauge.classList.toggle('is-visible', p > 0.02 && p < 0.99);
+
+    if (!reduced) {
+      /* the stack opens out and the camera sinks into it */
+      plates.forEach(function (plate, i) {
+        var spread = (i - 1.5) * p * 62;
+        var lift   = plate.classList.contains('is-active') ? -20 : 0;
+        plate.style.transform = 'translate(0,' + (spread + lift) + 'px)';
+      });
+      axo.style.transform = 'translateY(' + (-p * 40) + 'px) scale(' + (1 + p * 0.06) + ')';
+      if (heroCopy) {
+        heroCopy.style.transform = 'translateY(' + (-p * 60) + 'px)';
+        heroCopy.style.opacity   = String(Math.max(0, 1 - p * 1.35));
+      }
+    }
+
+    if (pinned < 0) {
+      var idx = Math.min(3, Math.floor(p * 4.0));
+      highlight(idx);
+    }
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     3. Method rail — the progress line travels with you
+     ──────────────────────────────────────────────────────────── */
+  var rail  = document.querySelector('.rail');
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+
+  function railProgress() {
+    if (!rail) return;
+    var r = rail.getBoundingClientRect();
+    var line = window.innerHeight * 0.55;
+    var pct = ((line - r.top) / r.height) * 100;
+    pct = pct < 0 ? 0 : (pct > 100 ? 100 : pct);
+    rail.style.setProperty('--rail-fill', pct.toFixed(1) + '%');
+    steps.forEach(function (s) {
+      var b = s.getBoundingClientRect();
+      s.classList.toggle('is-on', b.top < line && b.bottom > 0);
+    });
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     4. Loop
+     ──────────────────────────────────────────────────────────── */
+  function onScroll() { scrollY = window.pageYOffset || document.documentElement.scrollTop; }
+
+  var running = true;
+  function frame() {
+    if (!running) return;
+    t++;
+    readTone();
+    tone += (toneTarget - tone) * 0.055;
+    paint();
+    if (t % 2 === 0) { descend(); railProgress(); }
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { resize(); descend(); railProgress(); }, { passive: true });
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(frame);
+  });
+
+  resize(); onScroll(); readTone(); tone = toneTarget;
+
+  if (reduced) {
+    paint(); descend(); railProgress(); highlight(3);
+  } else {
+    requestAnimationFrame(frame);
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     5. Direct control over a layer still wins over the scroll
+     ──────────────────────────────────────────────────────────── */
+  plates.forEach(function (plate, i) {
+    function grab() { pinned = i; highlight(i); }
+    plate.addEventListener('mouseenter', grab);
+    plate.addEventListener('focus', grab);
+    plate.addEventListener('click', grab);
+    plate.addEventListener('mouseleave', function () { pinned = -1; });
+    plate.addEventListener('blur', function () { pinned = -1; });
+    plate.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); grab(); }
+      if (e.key === 'ArrowDown' && plates[i + 1]) { e.preventDefault(); plates[i + 1].focus(); }
+      if (e.key === 'ArrowUp'   && plates[i - 1]) { e.preventDefault(); plates[i - 1].focus(); }
+    });
+  });
+
+  /* ────────────────────────────────────────────────────────────
+     6. One reveal per section, then it stays put
+     ──────────────────────────────────────────────────────────── */
+  var revealables = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(revealables, function (el) { el.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+    Array.prototype.forEach.call(revealables, function (el) { io.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>

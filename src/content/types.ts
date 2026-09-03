@@ -9,9 +9,6 @@ export const LOCALES = ["fr", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "fr";
 
-/** Secteur d'une station de la chaîne de montage — pilote l'icône affichée. */
-export type Sector = "aero" | "oil" | "finance";
-
 /** Une station : entrée « problème » → sortie « livré ». */
 export interface Experience {
   id: string;
@@ -20,7 +17,6 @@ export interface Experience {
   short: string;
   fullName: string;
   role: string;
-  sector: Sector;
   period: string;
   location: string;
   /** Entrée du poste : ce qui n'allait pas. Rendu en signal `fault`. */
@@ -54,19 +50,18 @@ export interface Project {
   status: string;
   summary: string;
   highlights: string[];
+  /** Signature courte, reprise telle quelle sur le CV imprimable. */
   stack: string[];
+  /**
+   * Le stack réel, par couche. Quand il est renseigné, c'est lui qui est
+   * affiché dans le dépliage : une liste à plat de quarante briques ne dit
+   * rien, la même liste rangée par couche se lit.
+   */
+  stackDetail?: { label: string; items: string[] }[];
   /** Chiffre mis en avant sur le moniteur, en mono. */
   metric?: { value: string; label: string };
   /** Site en ligne, quand le projet est public. */
   url?: string;
-  /** Illustration procédurale affichée sur le moniteur. */
-  visual: "roster" | "layout" | "dashboard";
-  /**
-   * Teinte d'accent propre au projet, appliquée au survol uniquement et
-   * seulement aux traits (bordure, voyant, chiffre) — jamais au fond. Reste
-   * volontairement dans le voisinage de l'ambre et du cyan du design system.
-   */
-  accentTint: string;
   /** Séquence d'inspection, réservée aux projets phares. */
   steps?: ProjectStep[];
 }
@@ -98,8 +93,6 @@ export interface Skill {
 export interface SkillGroup {
   id: string;
   domain: string;
-  /** `amber` ou `cyan` — l'aiguille du cadran prend cette couleur. */
-  accent: "amber" | "cyan";
   skills: Skill[];
 }
 
@@ -113,32 +106,58 @@ export interface Role {
 export interface Content {
   meta: { title: string; description: string; ogAlt: string };
   nav: {
-    sections: { id: string; label: string }[];
+    /**
+     * Toutes les stations du document, dans l'ordre. Le rail latéral les
+     * affiche toutes ; la barre du haut ne garde que celles marquées
+     * `primary` — une navigation de dix liens n'est plus une navigation.
+     */
+    sections: { id: string; label: string; primary?: boolean }[];
     classicView: string;
-    cockpitView: string;
+    siteView: string;
     downloadCv: string;
     skipToContent: string;
     langLabel: string;
-    /** Libellé du mini-HUD de section active. */
-    statusLabel: string;
-  };
-  boot: {
-    lines: string[];
-    ready: string;
-    skip: string;
-    /** Annonce lecteur d'écran pendant la séquence. */
-    srAnnounce: string;
+    /** Étiquettes accessibles des deux navigations. */
+    primaryNavLabel: string;
+    sectionsNavLabel: string;
+    /** Sous-titre du bloc de marque, en mono. */
+    brandRole: string;
+    /** Ouverture et fermeture du panneau de navigation sur petit écran. */
+    menuLabel: string;
+    menuCloseLabel: string;
   };
   hero: {
     eyebrow: string;
     name: string;
     role: string;
+    /** Le titre du vol : court, tenu sur deux lignes au plus. */
+    headline: string;
+    /** Chapeau du hero — la promesse en une phrase. */
+    lede: string;
     tagline: string;
     signature: string;
     stats: { value: string; unit: string; label: string }[];
     ctaPrimary: string;
     ctaSecondary: string;
-    scrollHint: string;
+    /** Signature typographique sous le hero, en mono. */
+    wordmark: string;
+  };
+  /**
+   * Le principe fondateur, illustré par une vraie figure d'ingénierie :
+   * le bord dentelé de l'aile de la chouette, qui divise un gros
+   * tourbillon en petits tourbillons inaudibles.
+   */
+  principle: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    figCaption: string;
+    figAlt: string;
+    plainLabel: string;
+    plainWake: string;
+    serratedLabel: string;
+    serratedWake: string;
+    notes: string[];
   };
   method: {
     title: string;
@@ -160,11 +179,19 @@ export interface Content {
     missionsLabel: string;
     toolsLabel: string;
     immersionLabel: string;
+    /** Libellés du dépliage : le détail est replié par défaut. */
+    detailsLabel: string;
+    hideLabel: string;
     items: Experience[];
   };
   projects: {
     title: string;
     intro: string;
+    /** Libellés du dépliage : le détail est replié par défaut. */
+    detailsLabel: string;
+    hideLabel: string;
+    /** Lien sortant vers le projet en ligne. */
+    siteLabel: string;
     openLabel: string;
     closeLabel: string;
     stackLabel: string;
@@ -202,12 +229,6 @@ export interface Content {
     locationLabel: string;
     cvLabel: string;
     cvHint: string;
-  };
-  easterEgg: {
-    lampLabel: string;
-    title: string;
-    body: string;
-    close: string;
   };
   classic: {
     title: string;

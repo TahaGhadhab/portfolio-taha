@@ -1,139 +1,140 @@
 import { notFound } from "next/navigation";
 import { getContent, getDeployments, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
-import { resolveCockpitPhoto } from "@/lib/cockpit";
-import { AboutSection } from "@/components/AboutSection";
-import { AssemblyLine } from "@/components/AssemblyLine";
-import { AssociativeSection, InterestsRow } from "@/components/AssociativeSection";
-import { Atmosphere } from "@/components/Atmosphere";
-import { BootSequence } from "@/components/BootSequence";
-import { CockpitEnvironment } from "@/components/CockpitEnvironment";
-import { ContactSection } from "@/components/ContactSection";
-import { EasterEggLamp } from "@/components/EasterEggLamp";
-import { EducationTimeline } from "@/components/EducationTimeline";
-import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
-import { MethodSteps } from "@/components/MethodSection";
-import { ProjectWall } from "@/components/ProjectWall";
-import { Section } from "@/components/Section";
-import { StatusHud } from "@/components/StatusHud";
-import { SkillsSection } from "@/components/SkillsSection";
-import { TopBar } from "@/components/TopBar";
+import { Flight } from "@/components/Flight";
+import { Optics } from "@/components/Optics";
+import { PageMotion } from "@/components/PageMotion";
+import { PrincipleSection } from "@/components/PrincipleSection";
+import { SectionIndex } from "@/components/SectionIndex";
+import { TopNav } from "@/components/TopNav";
+import {
+  Band,
+  CapabilityGroups,
+  ContactClose,
+  EducationRail,
+  EngagementSection,
+  Head,
+  MethodRail,
+  OriginSection,
+  ProjectSheets,
+  SiteFooter,
+  WorkSheets,
+} from "@/components/Sections";
 
 /**
- * Vue cockpit.
+ * Le vol.
  *
- * L'arc suit la trajectoire réelle : méthode → parcours → terrain (chaîne de
- * montage) → projets → instruments → vision. Tout est rendu côté serveur ;
- * seules les briques réellement interactives sont des composants client.
+ * L'arc suit le comportement plutôt que le calendrier : d'abord l'immobilité
+ * (le vol, le principe), puis la manière (la méthode), puis les preuves (les
+ * terrains, les projets, la nomenclature), et seulement ensuite d'où cela
+ * vient. Tout est rendu côté serveur ; seules l'aile, le rail de sections et
+ * l'observateur de bandes sont des composants client.
  */
-export default async function CockpitPage({ params }: PageProps<"/[lang]">) {
+export default async function FlightPage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
 
   const c = getContent(lang);
   const cv = resolveCv(lang);
   const deployments = getDeployments(c);
-  const cockpitPhoto = resolveCockpitPhoto();
-
-  // Sections suivies par le mini-HUD, dans l'ordre du document. Deux d'entre
-  // elles ne figurent pas dans la navigation mais restent des postes observés.
-  const hudSections = [
-    { id: "methode", label: c.method.title },
-    { id: "a-propos", label: c.about.title },
-    { id: "parcours", label: c.education.title },
-    { id: "experiences", label: c.experience.title },
-    { id: "projets", label: c.projects.title },
-    { id: "competences", label: c.skills.title },
-    { id: "associatif", label: c.associative.title },
-    { id: "contact", label: c.contact.title },
-  ];
+  const label = (id: string) => c.nav.sections.find((s) => s.id === id)?.label ?? id;
 
   return (
     <>
-      <BootSequence boot={c.boot} />
-      <CockpitEnvironment photo={cockpitPhoto} />
+      <Optics />
+      <SectionIndex sections={c.nav.sections} label={c.nav.sectionsNavLabel} />
 
-      <TopBar
-        lang={lang}
-        other={otherLocale(lang)}
-        nav={c.nav}
-        cv={cv}
-        classicLabel={c.nav.classicView}
-      />
+      <div className="wrap">
+        <TopNav
+          lang={lang}
+          other={otherLocale(lang)}
+          nav={c.nav}
+          name={c.hero.name}
+          cv={cv}
+          classicLabel={c.nav.classicView}
+          siteLabel={c.nav.siteView}
+        />
 
-      <main id="contenu" className="relative z-10 flex-1">
-        <Hero hero={c.hero} cv={cv} cvLabel={c.contact.cvHint} />
+        <Flight
+          hero={c.hero}
+          cv={cv}
+          cvLabel={c.nav.downloadCv}
+          primaryHref="#projets"
+          secondaryHref="#methode"
+        />
 
-        <Section id="methode" index="01" title={c.method.title} intro={c.method.intro}>
-          <MethodSteps steps={c.method.steps} />
-        </Section>
+        <main id="contenu">
+          <Band id="principe" quiet>
+            <PrincipleSection principle={c.principle} />
+          </Band>
 
-        <Section id="a-propos" index="02" title={c.about.title}>
-          <AboutSection about={c.about} />
-        </Section>
+          <Band id="methode">
+            <Head eyebrow={label("methode")} title={c.method.title} intro={c.method.intro} />
+            <MethodRail steps={c.method.steps} />
+          </Band>
 
-        <Section
-          id="parcours"
-          index="03"
-          title={c.education.title}
-          intro={c.education.intro}
-        >
-          <EducationTimeline items={c.education.items} />
-        </Section>
+          <Band id="experiences" quiet>
+            <Head
+              eyebrow={label("experiences")}
+              title={c.experience.title}
+              intro={c.experience.intro}
+            />
+            <WorkSheets experience={c.experience} />
+          </Band>
 
-        <Section
-          id="experiences"
-          index="04"
-          title={c.experience.title}
-          intro={c.experience.intro}
-          className="bg-base-2/70"
-        >
-          <AssemblyLine experience={c.experience} />
-        </Section>
+          <Band id="projets">
+            <Head
+              eyebrow={label("projets")}
+              title={c.projects.title}
+              intro={c.projects.intro}
+            />
+            <ProjectSheets projects={c.projects} />
+          </Band>
 
-        <Section id="projets" index="05" title={c.projects.title} intro={c.projects.intro}>
-          <ProjectWall projects={c.projects} />
-        </Section>
+          <Band id="competences" quiet>
+            <Head
+              eyebrow={label("competences")}
+              title={c.skills.title}
+              intro={c.skills.intro}
+            />
+            <CapabilityGroups skills={c.skills} deployments={deployments} />
+          </Band>
 
-        <Section
-          id="competences"
-          index="06"
-          title={c.skills.title}
-          intro={c.skills.intro}
-          className="bg-base-2/70"
-        >
-          <SkillsSection skills={c.skills} deployments={deployments} />
-        </Section>
+          <Band id="parcours">
+            <Head
+              eyebrow={label("parcours")}
+              title={c.education.title}
+              intro={c.education.intro}
+            />
+            <EducationRail items={c.education.items} />
+          </Band>
 
-        <Section
-          id="associatif"
-          index="07"
-          title={c.associative.title}
-          intro={c.associative.intro}
-        >
-          <AssociativeSection items={c.associative.items} />
-          <div className="mt-12">
-            <InterestsRow interests={c.interests} />
-          </div>
-        </Section>
+          <Band id="a-propos" quiet>
+            <OriginSection
+              about={c.about}
+              pull={c.hero.signature}
+              eyebrow={label("a-propos")}
+            />
+          </Band>
 
-        <Section
-          id="contact"
-          index="08"
-          title={c.contact.title}
-          className="bg-base-2/70"
-        >
-          <ContactSection contact={c.contact} cv={cv} />
-        </Section>
-      </main>
+          <Band id="associatif">
+            <Head
+              eyebrow={label("associatif")}
+              title={c.associative.title}
+              intro={c.associative.intro}
+            />
+            <EngagementSection associative={c.associative} interests={c.interests} />
+          </Band>
 
-      <div className="relative z-10">
-        <Footer footer={c.footer} />
+          <Band id="contact" quiet>
+            <ContactClose contact={c.contact} cv={cv} cvLabel={c.contact.cvLabel} />
+          </Band>
+        </main>
+
+        <SiteFooter footer={c.footer} wordmark={c.hero.wordmark} />
       </div>
-      <StatusHud sections={hudSections} statusLabel={c.nav.statusLabel} />
-      <EasterEggLamp egg={c.easterEgg} />
-      <Atmosphere />
+
+      <PageMotion />
     </>
   );
 }

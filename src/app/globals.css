@@ -1,209 +1,1298 @@
 @import "tailwindcss";
 
-/* ============================================================
-   Design system — Portfolio "Salle de contrôle"
-   Réf. files/design-system-portfolio-taha.md
-   ============================================================ */
+/* ═══════════════════════════════════════════════════════════════
+   SILENT FLIGHT — design system du portfolio
+   Réf. « final design.html »
+
+   L'owl n'est jamais représenté comme un hibou. C'est un
+   comportement : rester parfaitement immobile, observer, puis
+   s'engager en un seul mouvement. Rien sur cette page ne dérive,
+   ne flotte, ne pulse. Le seul mouvement au repos est un
+   clignement.
+   ═══════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* --- Fonds : anthracite / graphite, jamais noir pur --- */
-  --color-base: #14161a;
-  --color-base-2: #1b1e24;
-  --color-panel: #20232b;
-  --color-panel-2: #262a34;
+  /* --- Couleur ------------------------------------------------
+     Les ratios notés sont mesurés sur `--color-void`. --- */
+  --color-void: #0b0e0c; /* le noir dans lequel il vole */
+  --color-void-lift: #12160f; /* surface à peine soulevée */
+  --color-line: #20261f; /* filet décoratif */
+  --color-line-lit: #333b31; /* filet décoratif, premier plan */
+  --color-edge: #5c6559; /* bordures interactives — 3.20:1 ✓ 1.4.11 */
+  --color-snow: #f5f7f1; /* plumage / texte principal — 17.98:1 ✓ */
+  --color-snow-2: #c5ccc2; /* texte secondaire — 11.82:1 ✓ */
+  --color-snow-3: #8b948a; /* méta en mono — 6.19:1 ✓ */
+  --color-iris: #e8a21c; /* l'œil. la seule chose chaude — 8.88:1 ✓ */
 
-  /* --- Accents : deux maximum visibles à l'écran --- */
-  --color-amber: #f2a93c; /* alerte, CTA, à remarquer en priorité */
-  --color-amber-dim: #d9822b;
-  --color-cyan: #4fd8e8; /* data, readouts, liens actifs */
-  --color-cyan-dim: #2fb8c9;
+  /* --- Signal fonctionnel : réservé aux fiches de terrain ---
+     Une entrée « problème », une sortie « livré ». Les deux
+     tiennent le contraste sur le fond sombre. --- */
+  --color-fault: #d9705f;
+  --color-ok: #6fbf8f;
 
-  /* --- Neutres fonctionnels --- */
-  --color-ink: #edede8; /* texte principal, jamais blanc pur */
-  --color-muted: #8a8d94; /* texte secondaire — 5.4:1 sur base, AA */
-  --color-line: #313640; /* bordures de panneaux, 1px */
+  /* --- Typographie : trois familles, aucun rôle partagé --- */
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-literata), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* --- Signal fonctionnel : RÉSERVÉ à la chaîne de montage --- */
-  --color-fault: #e2564b; /* entrée : problème identifié */
-  --color-ok: #57c98a; /* sortie : outil livré */
+  /* --- Une seule courbe dans tout le document : rapide, arrêt net --- */
+  --ease-commit: cubic-bezier(0.13, 0.9, 0.16, 1);
+}
 
-  /* --- Typographie : 3 familles maximum --- */
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+/* Alias courts du design system. Les composants n'écrivent jamais
+   d'hexadécimal : ils passent par ces jetons ou par les utilitaires
+   Tailwind générés depuis `@theme`. */
+:root {
+  --void: var(--color-void);
+  --void-lift: var(--color-void-lift);
+  --line: var(--color-line);
+  --line-lit: var(--color-line-lit);
+  --edge-ui: var(--color-edge);
+  --snow: var(--color-snow);
+  --snow-2: var(--color-snow-2);
+  --snow-3: var(--color-snow-3);
+  --iris: var(--color-iris);
 
-  /* --- Palier supplémentaire pour la barre fixe sur très petits écrans --- */
-  --breakpoint-xs: 26rem;
+  --f-display: var(--font-display);
+  --f-body: var(--font-body);
+  --f-mono: var(--font-mono);
 
-  /* --- Coins peu arrondis : esprit boîtier industriel --- */
-  --radius-panel: 3px;
+  /* --- Échelle typographique fluide --- */
+  --t--2: clamp(0.75rem, 0.73rem + 0.08vw, 0.8125rem);
+  --t--1: clamp(0.8438rem, 0.82rem + 0.11vw, 0.9063rem);
+  --t-0: clamp(1rem, 0.97rem + 0.16vw, 1.0938rem);
+  --t-1: clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem);
+  --t-2: clamp(1.3125rem, 1.24rem + 0.36vw, 1.5625rem);
+  --t-3: clamp(1.5rem, 1.36rem + 0.68vw, 2.125rem);
+  --t-4: clamp(1.875rem, 1.55rem + 1.6vw, 3rem);
+  --t-5: clamp(2.5rem, 1.62rem + 4.4vw, 5.75rem);
+
+  --lh-tight: 1.03;
+  --lh-head: 1.14;
+  --lh-body: 1.66;
+  --measure: 60ch;
+  --measure-tight: 46ch;
+
+  /* --- Espace --- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+
+  --edge: clamp(1.125rem, 4.5vw, 3.5rem);
+  --frame: clamp(10px, 1.2vw, 18px);
+
+  /* --- Mouvement --- */
+  --commit: var(--ease-commit);
+  --d-blink: 130ms;
+  --d-snap: 220ms;
+  --d-commit: 520ms;
 }
 
 @layer base {
-  * {
-    border-color: var(--color-line);
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+    margin: 0;
+    padding: 0;
+    background: var(--void);
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-base);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     color-scheme: dark;
   }
 
   body {
-    background-color: var(--color-base);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
+    color: var(--snow);
+    font-family: var(--f-body);
+    font-size: var(--t-0);
+    line-height: var(--lh-body);
+    font-variation-settings: "opsz" 14;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* Focus visible garanti sur fond sombre — WCAG */
-  :focus-visible {
-    outline: 2px solid var(--color-cyan);
-    outline-offset: 2px;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--f-display);
+    font-style: normal;
+    font-weight: 600;
+    line-height: var(--lh-head);
+    letter-spacing: -0.026em;
+    overflow-wrap: anywhere;
+    min-width: 0;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
   }
 
   ::selection {
-    background-color: var(--color-amber);
-    color: var(--color-base);
+    background: var(--iris);
+    color: var(--void);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--iris);
+    outline-offset: 4px;
+    border-radius: 1px;
+    transition: none;
+  }
+
+  section[id],
+  header[id] {
+    scroll-margin-top: calc(var(--frame) + var(--s-6));
   }
 }
 
-@layer components {
-  /* Lignes de balayage d'écran cathodique — presque invisibles, elles
-     donnent la matière d'un moniteur sans gêner la lecture */
-  .scanlines {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--color-ink) 3.5%, transparent) 0px,
-      color-mix(in srgb, var(--color-ink) 3.5%, transparent) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-  }
-
-  /* Assombrissement des bords, comme un tube incurvé */
-  .vignette {
-    background: radial-gradient(
-      ellipse at center,
-      transparent 42%,
-      color-mix(in srgb, #000 32%, transparent) 100%
-    );
-  }
-
-  /* Grille blueprint de fond — opacité très faible, jamais dominante */
-  .grid-blueprint {
-    background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: 0.35;
-  }
-
-  /* Label d'instrument : capitales, mono, interlettrage large */
-  .label-instrument {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-  }
-
-  /* Panneau : fond plus clair que le fond général, bordure fine 1px */
-  .panel {
-    background-color: var(--color-panel);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-panel);
-  }
-
-  /* Bouton-poussoir de panneau de contrôle */
-  .push-button {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-panel);
-    background-color: var(--color-panel);
-    color: var(--color-ink);
-    transition:
-      border-color 120ms ease,
-      background-color 120ms ease,
-      transform 60ms ease,
-      box-shadow 120ms ease;
-  }
-  .push-button:hover {
-    border-color: var(--color-cyan);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-cyan) 30%, transparent);
-  }
-  /* Effet d'enfoncement au clic, pas d'ombre portée décorative */
-  .push-button:active {
-    transform: translateY(1px);
-  }
-  .push-button--primary {
-    border-color: color-mix(in srgb, var(--color-amber) 55%, transparent);
-    color: var(--color-amber);
-  }
-  .push-button--primary:hover {
-    border-color: var(--color-amber);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-amber) 35%, transparent);
-  }
+/* ── Lien d'évitement ─────────────────────────────────────── */
+.skip {
+  position: absolute;
+  inset-block-start: -100px;
+  inset-inline-start: var(--s-4);
+  z-index: 60;
+  background: var(--iris);
+  color: var(--void);
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: var(--t--1);
+  padding: 0.75rem 1.25rem;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.skip:focus {
+  inset-block-start: var(--s-4);
 }
 
-/* ============================================================
-   Animations — courtes, fonctionnelles, jouées une seule fois
-   ============================================================ */
-
-@keyframes fade-rise {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+/* ── Couches optiques fixes ───────────────────────────────── */
+.optics {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+.optics .rule {
+  position: absolute;
+  background: var(--line);
+}
+.optics .rule.t {
+  inset-block-start: var(--frame);
+  inset-inline: var(--frame);
+  height: 1px;
+}
+.optics .rule.b {
+  inset-block-end: var(--frame);
+  inset-inline: var(--frame);
+  height: 1px;
+}
+.optics .rule.l {
+  inset-inline-start: var(--frame);
+  inset-block: var(--frame);
+  width: 1px;
+}
+.optics .rule.r {
+  inset-inline-end: var(--frame);
+  inset-block: var(--frame);
+  width: 1px;
+}
+.optics .reg {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 0 solid var(--line-lit);
+}
+.optics .reg.tl {
+  inset-block-start: var(--frame);
+  inset-inline-start: var(--frame);
+  border-width: 1px 0 0 1px;
+}
+.optics .reg.tr {
+  inset-block-start: var(--frame);
+  inset-inline-end: var(--frame);
+  border-width: 1px 1px 0 0;
+}
+.optics .reg.bl {
+  inset-block-end: var(--frame);
+  inset-inline-start: var(--frame);
+  border-width: 0 0 1px 1px;
+}
+.optics .reg.br {
+  inset-block-end: var(--frame);
+  inset-inline-end: var(--frame);
+  border-width: 0 1px 1px 0;
 }
 
-@keyframes trace-line {
-  from {
-    stroke-dashoffset: var(--dash, 1000);
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(125% 85% at 50% 34%, transparent 34%, rgba(0, 0, 0, 0.6) 100%);
+}
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Balayage de scope — lent, faible contraste, jamais scintillant */
-@keyframes instrument-sweep {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.wrap {
+  position: relative;
+  z-index: 3;
+}
+.shell {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--edge);
 }
 
-@keyframes pulse-lamp {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
+.mono {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
+  color: var(--snow-3);
+  font-weight: 400;
+}
+.lede {
+  font-size: var(--t-1);
+  max-width: var(--measure);
+  color: var(--snow-2);
+  font-variation-settings: "opsz" 20;
+  text-wrap: pretty;
 }
 
-/* Révélé une seule fois à l'apparition — ne rejoue pas au re-scroll */
-.reveal {
+/* ── Navigation — statique. Ne colle jamais, ne rétrécit jamais ── */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  padding-block: var(--s-5);
+  position: relative;
+  z-index: 20;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+  min-height: 44px;
+}
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  display: block;
+}
+.brand-name {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: var(--t-0);
+  font-variation-settings: "wdth" 106;
+  letter-spacing: -0.01em;
+  display: block;
+}
+.brand-role {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.1em;
+  color: var(--snow-3);
+  margin-top: 1px;
+}
+.nav-links {
+  display: flex;
+  gap: clamp(0.75rem, 2.2vw, 1.6rem);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  color: var(--snow-3);
+  white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--d-snap) var(--commit);
+}
+.nav-links a:hover {
+  color: var(--iris);
+}
+/* Les deux liens de service — langue et CV — se distinguent des ancres
+   de section par un filet, pas par une couleur de plus. */
+.nav-links a.nav-utility {
+  border: 1px solid var(--line-lit);
+  border-radius: 2px;
+  padding-inline: var(--s-3);
+  min-height: 34px;
+  color: var(--snow-2);
+  transition:
+    color var(--d-snap) var(--commit),
+    border-color var(--d-snap) var(--commit);
+}
+.nav-links a.nav-utility:hover {
+  border-color: var(--iris);
+  color: var(--iris);
+}
+
+/* ═══ LE VOL ══════════════════════════════════════════════════
+   L'aile est DANS LE FLUX au-dessus du texte, pas derrière. L'œil
+   tient seul le centre optique ; le titre reste dessous, dégagé. */
+.flight {
+  display: grid;
+  justify-items: center;
+  padding-block: var(--s-6) var(--s-9);
+  position: relative;
+}
+.wing-holder {
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+.wing {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.feather {
+  transform-box: view-box;
+  transform-origin: 600px 350px;
+  transform: rotate(0deg);
+  transition: transform var(--d-commit) var(--commit);
+}
+.is-open .feather {
+  transform: rotate(var(--a));
+}
+.blade {
+  stroke: var(--snow);
+  fill: var(--snow);
+  stroke-linejoin: round;
+}
+.quill {
+  stroke: var(--snow);
+  fill: none;
+  stroke-linecap: round;
+}
+.core {
+  fill: url(#coreG);
+}
+.horizon {
+  stroke: var(--snow);
+  opacity: 0.09;
+}
+
+/* le bord dentelé — il chevauche l'enveloppe réelle des rémiges et ne
+   se résout qu'une fois l'aile immobile */
+.comb {
+  stroke: var(--snow);
+  stroke-linecap: round;
+  fill: none;
+  opacity: 0;
+  transition: opacity 420ms var(--commit) 600ms;
+}
+.is-open .comb {
+  opacity: 0.75;
+}
+
+/* l'œil */
+.glow {
+  opacity: 0;
+  transition: opacity 700ms var(--commit) 180ms;
+}
+.is-open .glow {
+  opacity: 1;
+}
+.iris-body {
+  fill: url(#irisG);
+}
+.pupil {
+  fill: var(--void);
+}
+.spec {
+  fill: var(--snow);
+  opacity: 0.92;
+}
+.lid {
+  fill: var(--void);
+  transform-box: view-box;
+  transform-origin: 600px 324px;
+  transform: scaleY(0);
+  transition: transform var(--d-blink) linear;
+}
+.is-blinking .lid {
+  transform: scaleY(1);
+}
+
+/* ── Texte du hero ────────────────────────────────────────── */
+.hero {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-top: var(--s-7);
+  opacity: 0;
+  translate: 0 12px;
+  transition:
+    opacity var(--d-commit) var(--commit) 90ms,
+    translate var(--d-commit) var(--commit) 90ms;
+}
+.hero.is-open {
+  opacity: 1;
+  translate: 0 0;
+}
+.hero h1 {
+  font-size: var(--t-5);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  font-variation-settings: "wdth" 104;
+  letter-spacing: -0.038em;
+  max-width: 15ch;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+.hero .hero-name {
+  margin-bottom: var(--s-4);
+}
+.hero .lede {
+  margin: var(--s-6) auto 0;
+  max-width: 52ch;
+}
+.hero-actions {
+  display: flex;
+  gap: var(--s-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--s-7);
+}
+
+/* Trois relevés, en mono, sous les boutons. Des faits, pas des jauges. */
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-4) var(--s-7);
+  margin-top: var(--s-8);
+}
+.hero-stats div {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+}
+.hero-stats .v {
+  font-family: var(--f-mono);
+  font-size: var(--t-2);
+  color: var(--iris);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.hero-stats .k {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.12em;
+  color: var(--snow-3);
+}
+
+.btn {
+  font-family: var(--f-display);
+  font-size: var(--t--1);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--s-6);
+  border: 1px solid var(--edge-ui);
+  border-radius: 2px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    border-color var(--d-snap) var(--commit),
+    background var(--d-snap) var(--commit),
+    color var(--d-snap) var(--commit);
+}
+.btn:hover {
+  border-color: var(--iris);
+  color: var(--iris);
+}
+.btn:active {
+  translate: 0 1px;
+}
+.btn-primary {
+  background: var(--iris);
+  color: var(--void);
+  border-color: var(--iris);
+}
+.btn-primary:hover {
+  background: var(--snow);
+  border-color: var(--snow);
+  color: var(--void);
+}
+
+.wordmark-strip {
+  margin-top: var(--s-8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-4);
+}
+.wordmark-strip .hair {
+  height: 1px;
+  width: clamp(28px, 7vw, 70px);
+  background: var(--line-lit);
+}
+
+/* ═══ Sections ════════════════════════════════════════════ */
+.band {
+  padding-block: var(--s-9);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.band-quiet {
+  background: var(--void-lift);
+}
+
+.head {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: var(--s-8);
+  max-width: var(--measure);
+}
+.head h2 {
+  font-size: var(--t-4);
+  font-variation-settings: "wdth" 102;
+  letter-spacing: -0.03em;
+  max-width: 19ch;
+  text-wrap: balance;
+}
+.head p {
+  color: var(--snow-2);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+/* Les sections s'engagent : elles n'entrent pas en fondu prolongé. */
+.commit {
   opacity: 0;
 }
-.reveal[data-revealed="true"] {
-  animation: fade-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.commit.is-on {
+  opacity: 1;
+  transition: opacity var(--d-snap) linear;
 }
 
-/* Respect strict de la préférence système */
+/* ── Le principe : une vraie figure d'ingénierie ──────────── */
+.why {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: start;
+}
+.why-figure {
+  border: 1px solid var(--line-lit);
+  background: var(--void);
+  padding: var(--s-5);
+  margin: 0;
+}
+.why-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.why-figure figcaption {
+  margin-top: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+.why-note {
+  color: var(--snow-2);
+  max-width: var(--measure-tight);
+}
+.why-note p + p {
+  margin-top: var(--s-4);
+}
+.diag-line {
+  stroke: var(--snow);
+  fill: none;
+}
+.diag-wake {
+  stroke: var(--snow-3);
+  fill: none;
+  stroke-linecap: round;
+}
+.diag-wake-calm {
+  stroke: var(--iris);
+  fill: none;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+.diag-label {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.11em;
+  fill: var(--snow-3);
+}
+.diag-rule {
+  stroke: var(--line-lit);
+}
+
+/* ── Listes sur rail — méthode, formation, engagement ─────── */
+.rail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.step::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -1px;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--iris);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--d-snap) var(--commit);
+}
+.step:hover::after {
+  scale: 1 1;
+}
+.step-no {
+  font-family: var(--f-mono);
+  font-size: var(--t--1);
+  color: var(--iris);
+  padding-top: 0.45em;
+  font-variant-numeric: tabular-nums;
+}
+.step h3 {
+  font-size: var(--t-2);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-2);
+}
+.step p {
+  color: var(--snow-2);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+/* Ligne de méta à droite du titre : période, lieu, statut. */
+.step-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin-bottom: var(--s-2);
+}
+.step-live {
+  color: var(--iris);
+}
+
+/* ── Fiches de terrain — expériences et projets ───────────── */
+.sheet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-7);
+  border-bottom: 1px solid var(--line);
+}
+.sheet:first-of-type {
+  border-top: 1px solid var(--line);
+}
+.sheet h3 {
+  font-size: var(--t-3);
+  letter-spacing: -0.028em;
+  margin-block: var(--s-2) var(--s-3);
+}
+.sheet p {
+  color: var(--snow-2);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+.sheet-aside {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+.tag {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.1em;
+  color: var(--snow-3);
+  border: 1px solid var(--line-lit);
+  border-radius: 2px;
+  padding: 3px 0.55rem;
+  white-space: nowrap;
+}
+.specs {
+  margin-top: var(--s-5);
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 30rem;
+  font-variant-numeric: tabular-nums;
+}
+.specs th,
+.specs td {
+  text-align: start;
+  padding: var(--s-3) 0;
+  border-bottom: 1px dashed var(--line-lit);
+  font-family: var(--f-mono);
+  font-size: var(--t--1);
+  font-weight: 400;
+}
+.specs th {
+  color: var(--snow-3);
+  width: 44%;
+  letter-spacing: 0.04em;
+  vertical-align: top;
+}
+
+/* Entrée / sortie d'un poste : le seul endroit du document où une
+   couleur fonctionnelle autre que l'ambre est autorisée. */
+.io {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+}
+.io-row {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: start;
+}
+.io-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-top: 0.6em;
+  justify-self: center;
+}
+.io-in .io-dot {
+  background: var(--color-fault);
+}
+.io-out .io-dot {
+  background: var(--color-ok);
+}
+.io-label {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
+  display: block;
+  margin-bottom: 2px;
+}
+.io-in .io-label {
+  color: var(--color-fault);
+}
+.io-out .io-label {
+  color: var(--color-ok);
+}
+
+/* Puces sobres, alignées sur le rail typographique.
+   Le tiret est un `::before` : la liste ne porte aucun élément vide côté
+   balisage, sinon la grille reçoit trois enfants pour deux colonnes et le
+   texte retombe dans la gouttière d'un rem. */
+.bullets {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+.bullets li {
+  display: grid;
+  grid-template-columns: 0.75rem minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: start;
+  color: var(--snow-2);
+  font-size: var(--t--1);
+  line-height: 1.6;
+  max-width: var(--measure);
+}
+.bullets li::before {
+  content: "";
+  width: 7px;
+  height: 1px;
+  background: var(--edge-ui);
+  margin-top: 0.8em;
+}
+
+/* ── Dépliage — le détail ne s'impose pas ─────────────────
+   Chaque fiche n'expose que l'essentiel : ce qui est entré, ce qui est
+   sorti. Le reste attend qu'on le demande. Balisage natif `<details>` :
+   il fonctionne sans JavaScript et reste navigable au clavier. */
+.fold {
+  margin-top: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+.fold-toggle {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
+  color: var(--snow-3);
+  transition: color var(--d-snap) var(--commit);
+}
+.fold-toggle::-webkit-details-marker {
+  display: none;
+}
+.fold-toggle:hover {
+  color: var(--iris);
+}
+/* Un plus qui devient un moins : le trait vertical se rétracte, rien ne
+   tourne. Un seul mouvement, comme partout ailleurs. */
+.fold-sign {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  flex: none;
+}
+.fold-sign::before,
+.fold-sign::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.fold-sign::before {
+  inset-block-start: 5px;
+  inset-inline: 0;
+  height: 1px;
+}
+.fold-sign::after {
+  inset-inline-start: 5px;
+  inset-block: 0;
+  width: 1px;
+  transition: scale var(--d-snap) var(--commit);
+}
+details[open] > .fold-toggle .fold-sign::after {
+  scale: 1 0;
+}
+.fold-open,
+details[open] > .fold-toggle .fold-closed {
+  display: none;
+}
+details[open] > .fold-toggle .fold-open {
+  display: inline;
+}
+.fold-body {
+  padding-bottom: var(--s-5);
+  display: grid;
+  gap: var(--s-5);
+}
+/* Le stack, rangé par couche. Une liste à plat de quarante briques ne dit
+   rien ; la même liste avec sa colonne de libellés se parcourt en diagonale. */
+.stack-groups {
+  display: grid;
+  gap: var(--s-4);
+}
+.stack-row {
+  display: grid;
+  gap: var(--s-2);
+}
+.stack-row .tags {
+  margin-top: 0;
+}
+@media (min-width: 680px) {
+  .stack-row {
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: start;
+  }
+  .stack-row > .mono {
+    padding-top: 5px;
+  }
+}
+
+.fold-label {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.16em;
+  color: var(--iris);
+  display: block;
+  margin-bottom: var(--s-2);
+}
+
+.metric {
+  display: grid;
+  gap: 2px;
+  border-left: 2px solid var(--iris);
+  padding-left: var(--s-4);
+}
+.metric .v {
+  font-family: var(--f-mono);
+  font-size: var(--t-3);
+  color: var(--iris);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.metric .k {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.12em;
+  color: var(--snow-3);
+}
+
+.linkout {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.12em;
+  color: var(--iris);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  justify-self: start;
+  transition: border-color var(--d-snap) var(--commit);
+}
+.linkout:hover {
+  border-bottom-color: var(--iris);
+}
+
+/* ── Capacités ───────────────────────────────────────────── */
+.groups {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+}
+.group {
+  border-top: 1px solid var(--edge-ui);
+  padding-top: var(--s-4);
+}
+.group h3 {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.16em;
+  color: var(--iris);
+  font-weight: 500;
+  margin-bottom: var(--s-4);
+}
+.group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.group li {
+  padding-block: var(--s-2);
+  font-size: var(--t--1);
+  color: var(--snow-2);
+  border-bottom: 1px solid var(--line);
+}
+.group li:last-child {
+  border-bottom: 0;
+}
+.group li .note {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.06em;
+  color: var(--snow-3);
+}
+
+/* ── Origine ─────────────────────────────────────────────── */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+}
+.about p {
+  color: var(--snow-2);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+.about p + p {
+  margin-top: var(--s-4);
+}
+.pull {
+  font-family: var(--f-display);
+  font-size: var(--t-2);
+  font-weight: 500;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+  color: var(--snow);
+  border-left: 2px solid var(--iris);
+  padding-left: var(--s-5);
+  margin-block: var(--s-6);
+  max-width: 40ch;
+  text-wrap: balance;
+}
+
+/* ── Clôture ─────────────────────────────────────────────── */
+.close h2 {
+  font-size: var(--t-4);
+  letter-spacing: -0.03em;
+  max-width: 15ch;
+  margin-bottom: var(--s-6);
+  text-wrap: balance;
+}
+.mailto {
+  font-family: var(--f-display);
+  font-size: var(--t-2);
+  font-weight: 600;
+  color: var(--iris);
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  overflow-wrap: anywhere;
+  transition: border-color var(--d-snap) var(--commit);
+}
+.mailto:hover {
+  border-bottom-color: var(--iris);
+}
+.contact-rows {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+  max-width: 34rem;
+}
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  justify-content: space-between;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+.contact-row a:hover {
+  color: var(--iris);
+}
+.contact-row .val {
+  font-family: var(--f-mono);
+  font-size: var(--t--1);
+  color: var(--snow-2);
+  text-decoration: none;
+  transition: color var(--d-snap) var(--commit);
+}
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  justify-content: space-between;
+  padding-block: var(--s-6) var(--s-7);
+  border-top: 1px solid var(--line);
+}
+
+/* ── Le rail de sections sert de navigation ──────────────── */
+.index {
+  position: fixed;
+  inset-inline-end: calc(var(--frame) + 14px);
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  z-index: 30;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+.index a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-3);
+  min-height: 40px;
+  text-decoration: none;
+  padding-inline-end: 2px;
+}
+.index .lab {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.12em;
+  color: var(--snow-3);
+  opacity: 0;
+  transition: opacity var(--d-snap) var(--commit);
+  white-space: nowrap;
+}
+.index .tick {
+  width: 16px;
+  height: 1px;
+  background: var(--edge-ui);
+  transition:
+    width var(--d-snap) var(--commit),
+    background var(--d-snap) var(--commit);
+}
+.index a:hover .lab,
+.index a:focus-visible .lab {
+  opacity: 1;
+}
+.index a:hover .tick {
+  background: var(--snow-3);
+  width: 26px;
+}
+.index a[aria-current="true"] .tick {
+  background: var(--iris);
+  width: 30px;
+}
+.index a[aria-current="true"] .lab {
+  opacity: 1;
+  color: var(--snow-2);
+}
+
+/* ── Vue classique (CV imprimable) ───────────────────────── */
+.cv-page {
+  padding-block: var(--s-8) var(--s-9);
+}
+.cv-article {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+.cv-head {
+  border-bottom: 1px solid var(--line-lit);
+  padding-bottom: var(--s-6);
+}
+.cv-head h1 {
+  font-size: var(--t-4);
+  letter-spacing: -0.03em;
+}
+.cv-head .role {
+  color: var(--iris);
+  font-size: var(--t-1);
+  margin-top: var(--s-2);
+}
+.cv-contact {
+  list-style: none;
+  margin: var(--s-5) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+}
+.cv-contact a {
+  text-decoration: none;
+  transition: color var(--d-snap) var(--commit);
+}
+.cv-contact a:hover {
+  color: var(--iris);
+}
+.cv-section {
+  margin-top: var(--s-7);
+  break-inside: avoid;
+}
+.cv-section > h2 {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.16em;
+  font-weight: 500;
+  color: var(--iris);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--s-2);
+}
+.cv-body {
+  margin-top: var(--s-5);
+  display: grid;
+  gap: var(--s-5);
+}
+.cv-entry h3 {
+  font-size: var(--t-1);
+  letter-spacing: -0.02em;
+}
+.cv-entry .sub {
+  color: var(--snow-3);
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+.cv-entry p {
+  color: var(--snow-2);
+  font-size: var(--t--1);
+}
+.cv-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-5);
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* ── Montée en largeur ───────────────────────────────────── */
+@media (min-width: 680px) {
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-7);
+  }
+  .sheet {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: var(--s-7);
+  }
+  /* L'identité du poste tient pendant qu'on lit le détail. */
+  .sheet-aside {
+    position: sticky;
+    inset-block-start: calc(var(--frame) + var(--s-5));
+  }
+  .why {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--s-8);
+  }
+  .about {
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+    gap: var(--s-8);
+  }
+  .step {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .groups {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .index {
+    display: flex;
+  }
+}
+@media (max-width: 679px) {
+  .flight {
+    padding-block: var(--s-4) var(--s-8);
+  }
+  .hero {
+    margin-top: var(--s-6);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -211,38 +1300,71 @@
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 1ms !important;
+    animation: none !important;
   }
-  .reveal {
+  .feather {
+    transform: rotate(var(--a));
+  }
+  .comb,
+  .glow {
+    opacity: 0.75;
+  }
+  .hero {
     opacity: 1;
+    translate: 0 0;
+  }
+  .commit {
+    opacity: 1;
+  }
+  .lid {
+    transform: scaleY(0) !important;
   }
 }
 
-/* ============================================================
-   Impression — le CV doit sortir propre en PDF
-   ============================================================ */
+/* ── Impression : le vol reste à l'écran ─────────────────── */
 @media print {
-  @page {
-    margin: 14mm 12mm;
-    size: A4;
+  .optics,
+  .vignette,
+  .grain,
+  .index,
+  .no-print {
+    display: none !important;
   }
   html,
   body {
     background: #fff !important;
     color: #000 !important;
   }
-  .no-print {
+  .commit {
+    opacity: 1 !important;
+  }
+  /* À l'impression, rien n'est replié. */
+  .fold-toggle {
     display: none !important;
   }
-  .print-plain {
-    background: transparent !important;
-    border-color: #c9c9c9 !important;
+  .fold-body {
+    display: grid !important;
+  }
+  .cv-page {
+    padding: 0 !important;
+  }
+  .shell {
+    padding-inline: 0 !important;
+    max-width: none !important;
+  }
+  .cv-section > h2 {
     color: #000 !important;
+    border-color: #999 !important;
+  }
+  .cv-head .role,
+  .cv-entry .sub,
+  .cv-entry p,
+  .mono,
+  .bullets li {
+    color: #333 !important;
   }
   a {
-    text-decoration: none;
-    color: #000 !important;
+    text-decoration: none !important;
   }
 }

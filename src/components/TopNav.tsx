@@ -1,0 +1,105 @@
+import Link from "next/link";
+import type { Content, Locale } from "@/content";
+import { LOCALE_NAMES } from "@/content";
+import type { CvTarget } from "@/lib/cv";
+import { BrandMark } from "./BrandMark";
+import { MobileNav } from "./MobileNav";
+
+interface TopNavProps {
+  lang: Locale;
+  other: Locale;
+  nav: Content["nav"];
+  name: string;
+  cv: CvTarget;
+  /** Sur la vue classique, le lien de service ramène au site plutôt qu'il n'en sort. */
+  onClassicPage?: boolean;
+  classicLabel: string;
+  siteLabel: string;
+}
+
+/**
+ * Barre de navigation — statique. Elle ne colle pas, ne rétrécit pas et ne se
+ * transforme pas au défilement : c'est le rail latéral qui suit la lecture.
+ *
+ * Seules les sections marquées `primary` y figurent. Les deux liens de service
+ * — langue et vue classique — sont encadrés d'un filet pour se distinguer des
+ * ancres sans ajouter une couleur de plus.
+ */
+export function TopNav({
+  lang,
+  other,
+  nav,
+  name,
+  cv,
+  onClassicPage = false,
+  classicLabel,
+  siteLabel,
+}: TopNavProps) {
+  const home = `/${lang}`;
+  const anchors = nav.sections.filter((s) => s.primary);
+
+  return (
+    <div className="shell">
+      <nav className="nav" aria-label={nav.primaryNavLabel}>
+        <Link className="brand" href={home}>
+          <BrandMark />
+          <span>
+            <span className="brand-name">{name}</span>
+            <span className="brand-role">{nav.brandRole}</span>
+          </span>
+        </Link>
+
+        <div className="nav-links nav-wide">
+          {!onClassicPage
+            ? anchors.map((s) => (
+                <a key={s.id} href={`#${s.id}`}>
+                  {s.label.toUpperCase()}
+                </a>
+              ))
+            : null}
+
+          <Link
+            className="nav-utility"
+            href={onClassicPage ? home : `${home}/cv`}
+            prefetch={false}
+          >
+            {onClassicPage ? siteLabel : classicLabel}
+          </Link>
+
+          {cv.isPdf ? (
+            <a
+              className="nav-utility"
+              href={cv.href}
+              download={cv.download}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {nav.downloadCv}
+            </a>
+          ) : null}
+
+          <Link
+            className="nav-utility"
+            href={onClassicPage ? `/${other}/cv` : `/${other}`}
+            hrefLang={other}
+            aria-label={`${nav.langLabel} : ${LOCALE_NAMES[other]}`}
+            prefetch={false}
+          >
+            {other.toUpperCase()}
+          </Link>
+        </div>
+
+        {/* Sous 900 px, tout ce qui précède se replie derrière un bouton. */}
+        <MobileNav
+          lang={lang}
+          other={other}
+          nav={nav}
+          cv={cv}
+          onClassicPage={onClassicPage}
+          classicLabel={classicLabel}
+          siteLabel={siteLabel}
+        />
+      </nav>
+    </div>
+  );
+}

@@ -1,30 +1,38 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Archivo, Literata, IBM_Plex_Mono } from "next/font/google";
 import { LOCALES, getContent, isLocale } from "@/content";
 import "../globals.css";
 
-/* --- Trois familles maximum : titres / corps / données --- */
-const display = Space_Grotesk({
-  variable: "--font-space-grotesk",
+/* --- Trois familles, aucun rôle partagé -------------------------------
+   Archivo porte les titres : la variation de chasse (`wdth`) permet de
+   resserrer un grand titre sans changer de fonte. Literata porte le corps
+   du texte, avec l'axe optique (`opsz`) qui adapte le dessin à la taille
+   réelle. IBM Plex Mono porte les données et les libellés — jamais une
+   phrase. --- */
+const display = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin", "latin-ext"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-const sans = Inter({
-  variable: "--font-inter",
+const body = Literata({
+  variable: "--font-literata",
   subsets: ["latin", "latin-ext"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const mono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#14161A",
+  themeColor: "#0B0E0C",
   colorScheme: "dark",
 };
 
@@ -71,20 +79,17 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${display.variable} ${sans.variable} ${mono.variable} h-full`}
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <head>
-        {/* Sans JavaScript, rien n'anime : le contenu doit alors être visible
-            d'emblée, sinon les sections resteraient à opacité zéro. */}
+        {/* Sans JavaScript, aucune section ne s'engage : elles resteraient à
+            opacité zéro. Le contenu doit alors être visible d'emblée. */}
         <noscript>
-          <style>{`.reveal{opacity:1 !important;animation:none !important}`}</style>
+          <style>{`.commit{opacity:1 !important}.hero{opacity:1 !important;translate:none !important}`}</style>
         </noscript>
       </head>
-      <body className="min-h-full flex flex-col">
-        <a
-          href="#contenu"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-panel focus:text-ink focus:border focus:border-cyan focus:rounded-[3px]"
-        >
+      <body>
+        <a className="skip" href="#contenu">
           {c.nav.skipToContent}
         </a>
         {children}

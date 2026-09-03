@@ -4,129 +4,187 @@ import type { Content } from "./types";
  * Contenu français — source de vérité : files/CV_Taha.md
  *
  * Les compétences sont décrites par leurs usages (`usedIn`) et non par une
- * note : chaque croisement de la matrice est une affirmation vérifiable.
+ * note : chaque rattachement est une affirmation vérifiable.
  */
 export const fr: Content = {
   meta: {
     title: "Taha Ghadhab — Ingénieur génie industriel",
-    description:
-      "Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
-    ogAlt: "Salle de contrôle — portfolio de Taha Ghadhab",
+    description: "Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
+    ogAlt: "Vol silencieux — portfolio de Taha Ghadhab"
   },
-
   nav: {
     sections: [
-      { id: "methode", label: "Méthode" },
-      { id: "parcours", label: "Parcours" },
-      { id: "experiences", label: "Expériences" },
-      { id: "projets", label: "Projets" },
-      { id: "competences", label: "Compétences" },
-      { id: "contact", label: "Contact" },
+      {
+        id: "vol",
+        label: "Vol"
+      },
+      {
+        id: "principe",
+        label: "Principe"
+      },
+      {
+        id: "methode",
+        label: "Méthode",
+        primary: true
+      },
+      {
+        id: "experiences",
+        label: "Expériences",
+        primary: true
+      },
+      {
+        id: "projets",
+        label: "Projets",
+        primary: true
+      },
+      {
+        id: "competences",
+        label: "Compétences",
+        primary: true
+      },
+      {
+        id: "parcours",
+        label: "Parcours"
+      },
+      {
+        id: "a-propos",
+        label: "À propos"
+      },
+      {
+        id: "associatif",
+        label: "Engagement"
+      },
+      {
+        id: "contact",
+        label: "Contact",
+        primary: true
+      }
     ],
     classicView: "Vue classique",
-    cockpitView: "Vue cockpit",
+    siteView: "Vue complète",
     downloadCv: "CV PDF",
     skipToContent: "Aller au contenu principal",
     langLabel: "Langue",
-    statusLabel: "Statut",
+    primaryNavLabel: "Navigation principale",
+    sectionsNavLabel: "Sections",
+    brandRole: "GÉNIE INDUSTRIEL",
+    menuLabel: "Menu",
+    menuCloseLabel: "Fermer"
   },
-
-  boot: {
-    lines: [
-      "SYSTEM CHECK ................ OK",
-      "LOADING PROFILE: TAHA GHADHAB",
-      "INDUSTRIAL ENGINEERING ...... OK",
-      "DATA & AI MODULES ........... OK",
-    ],
-    ready: "SYSTÈME PRÊT",
-    skip: "Cliquez ou appuyez sur Entrée pour passer",
-    srAnnounce: "Chargement du portfolio de Taha Ghadhab.",
-  },
-
   hero: {
-    eyebrow: "Poste de pilotage",
+    eyebrow: "Vol silencieux",
     name: "Taha Ghadhab",
     role: "Élève ingénieur en génie industriel",
-    tagline:
-      "Rigueur analytique, appétence pour la donnée et optimisation des systèmes de production.",
-    signature:
-      "Je ne fais pas que corriger des problèmes, je les élimine définitivement avec des outils innovants.",
+    headline: "Observer, puis trancher une seule fois.",
+    lede: "Génie industriel. J'observe un système assez longtemps pour savoir exactement où il casse, je change ce point-là, et je le laisse tourner sans moi.",
+    tagline: "Rigueur analytique, appétence pour la donnée et optimisation des systèmes de production.",
+    signature: "Je ne fais pas que corriger des problèmes, je les élimine définitivement avec des outils innovants.",
     stats: [
-      { value: "3", unit: "", label: "stages en entreprise" },
-      { value: "1", unit: "", label: "startup co-fondée" },
-      { value: "42", unit: "", label: "KPI suivis" },
+      {
+        value: "3",
+        unit: "",
+        label: "stages en entreprise"
+      },
+      {
+        value: "1",
+        unit: "",
+        label: "startup co-fondée"
+      },
+      {
+        value: "42",
+        unit: "",
+        label: "KPI suivis"
+      }
     ],
-    ctaPrimary: "Télécharger le CV",
-    ctaSecondary: "Explorer le parcours",
-    scrollHint: "Défiler",
+    ctaPrimary: "Voir les réalisations",
+    ctaSecondary: "Ma méthode",
+    wordmark: "VOL SILENCIEUX"
   },
-
+  principle: {
+    eyebrow: "LE PRINCIPE",
+    title: "Le bruit est un défaut de conception",
+    body: "La chouette harfang vole en silence parce que le bord d'attaque de son aile est un peigne de fines dentelures. Les dents brisent un gros tourbillon en une multitude de petits, et les petits tourbillons ne portent presque aucun son. Les ingénieurs l'ont copié pour les pales d'éoliennes et les carénages de pantographes.",
+    figCaption: "FIG. 01 — STRUCTURE DE SILLAGE, BORD LISSE vs. BORD DENTELÉ",
+    figAlt: "Comparaison de deux bords d'aile. Le bord lisse laisse un large sillage turbulent ; le bord dentelé divise l'écoulement en fins filets parallèles.",
+    plainLabel: "BORD LISSE",
+    plainWake: "SILLAGE TURBULENT — AUDIBLE",
+    serratedLabel: "BORD DENTELÉ",
+    serratedWake: "FILETS PARALLÈLES — SILENCIEUX",
+    notes: [
+      "J'y reviens toujours parce que c'est tout le métier en une image. Le bord lisse n'est pas paresseux : il fait la chose évidente. Et il fait quand même du bruit.",
+      "Le bord dentelé ne combat pas la turbulence. Il divise le problème jusqu'à ce que chaque morceau soit assez petit pour être inoffensif. C'est de la décomposition, et c'est ce que je fais à une ligne de production, à un flux documentaire ou à une structure de coûts."
+    ]
+  },
   method: {
     title: "Méthode de travail",
-    intro:
-      "Le même protocole sur chaque mission, du terrain jusqu'au pilotage. C'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
+    intro: "Le même protocole sur chaque mission, du terrain jusqu'au pilotage. C'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
     steps: [
       {
         step: "01",
         title: "Identifier",
-        body: "Repérer le problème réel ou le point d'amélioration, en observant le flux plutôt que le symptôme.",
+        body: "Repérer le problème réel ou le point d'amélioration, en observant le flux plutôt que le symptôme."
       },
       {
         step: "02",
         title: "Concevoir",
-        body: "Construire un système intelligent qui traite la cause, pas une rustine qu'il faudra réappliquer.",
+        body: "Construire un système intelligent qui traite la cause, pas une rustine qu'il faudra réappliquer."
       },
       {
         step: "03",
         title: "Implémenter",
-        body: "Livrer le changement de la meilleure façon possible, en tenant compte des contraintes du terrain.",
+        body: "Livrer le changement de la meilleure façon possible, en tenant compte des contraintes du terrain."
       },
       {
         step: "04",
         title: "Mesurer",
-        body: "Quantifier le gain : temps gagné, qualité montée, non-conformités évitées.",
-      },
-    ],
+        body: "Quantifier le gain : temps gagné, qualité montée, non-conformités évitées."
+      }
+    ]
   },
-
   about: {
     title: "À propos",
     lead: "Élève ingénieur en génie industriel à l'ENIB, passionné par les systèmes qui tournent mieux après mon passage qu'avant.",
     body: [
       "Mon terrain de jeu, c'est l'endroit où un processus industriel rencontre un outil logiciel. Chez Safran, la question n'était pas « comment corriger ces documents non conformes ? » mais « comment faire pour qu'ils cessent d'arriver ? ». La réponse a pris la forme d'un OCR local qui détecte et corrige activement.",
-      "Cette approche vient d'une trajectoire volontairement large : la rigueur méthodologique de l'ingénierie industrielle, les outils de la data, et une lecture business acquise en conseil financier. Trois angles sur le même problème valent mieux qu'un seul, appliqué trois fois.",
+      "Cette approche vient d'une trajectoire volontairement large : la rigueur méthodologique de l'ingénierie industrielle, les outils de la data, et une lecture business acquise en conseil financier. Trois angles sur le même problème valent mieux qu'un seul, appliqué trois fois."
     ],
     positioning: {
       title: "Triple casquette",
       pillars: [
         {
           title: "Ingénierie industrielle",
-          body: "Lean, DMAIC, VSM, implantation d'atelier, planification PIC/PDP/MRP. La méthode avant l'outil.",
+          body: "Lean, DMAIC, VSM, implantation d'atelier, planification PIC/PDP/MRP. La méthode avant l'outil."
         },
         {
           title: "Data & IA appliquée",
-          body: "Python, SQL, Power BI, OCR, tableaux de bord décisionnels. L'outil au service de la mesure.",
+          body: "Python, SQL, Power BI, OCR, tableaux de bord décisionnels. L'outil au service de la mesure."
         },
         {
           title: "Business & entrepreneuriat",
-          body: "Étude technico-économique, conseil financier, co-fondation d'une startup. Le gain, exprimé en langage décideur.",
-        },
-      ],
-    },
+          body: "Étude technico-économique, conseil financier, co-fondation d'une startup. Le gain, exprimé en langage décideur."
+        }
+      ]
+    }
   },
-
   education: {
     title: "Parcours académique",
     intro: "Une trajectoire scientifique, orientée vers l'ingénierie des systèmes.",
     items: [
       {
+        degree: "Mastère — Systèmes complexes intelligents",
+        school: "École Polytechnique de Tunisie (EPT)",
+        period: "2026 — Présent",
+        location: "La Marsa",
+        detail: "Modélisation et pilotage des systèmes complexes, apprentissage automatique, aide à la décision.",
+        current: true
+      },
+      {
         degree: "Diplôme National d'Ingénieur — Génie Industriel",
         school: "École Nationale d'Ingénieurs de Bizerte (ENIB)",
         period: "2024 — Présent",
         location: "Bizerte",
-        detail:
-          "Optimisation des systèmes de production, Lean management, planification industrielle, Industrie 4.0.",
-        current: true,
+        detail: "Optimisation des systèmes de production, Lean management, planification industrielle, Industrie 4.0.",
+        current: true
       },
       {
         degree: "Cycle préparatoire Mathématiques-Physique",
@@ -134,26 +192,26 @@ export const fr: Content = {
         period: "2021 — 2024",
         location: "Tunis",
         detail: "Formation scientifique intensive, socle mathématique et physique.",
-        current: false,
+        current: false
       },
       {
         degree: "Baccalauréat Mathématiques",
         school: "Mention Bien",
         period: "2021",
-        current: false,
-      },
-    ],
+        current: false
+      }
+    ]
   },
-
   experience: {
     title: "Expériences",
-    intro:
-      "Trois environnements industriels, une même façon d'entrer : identifier ce qui coince, sortir avec quelque chose qui tient.",
+    intro: "Trois environnements industriels, une même façon d'entrer : identifier ce qui coince, sortir avec quelque chose qui tient.",
     inputLabel: "Entrée — problème identifié",
     outputLabel: "Sortie — livré",
     missionsLabel: "Missions",
     toolsLabel: "Outils",
     immersionLabel: "Sortie — acquis",
+    detailsLabel: "Voir le détail",
+    hideLabel: "Masquer le détail",
     items: [
       {
         id: "safran",
@@ -161,19 +219,22 @@ export const fr: Content = {
         company: "Safran",
         fullName: "Safran",
         role: "Ingénieur méthode",
-        sector: "aero",
         period: "Juin — Juillet 2025",
         location: "Dhari",
-        input:
-          "Documents non conformes aux normes qualité détectés tardivement, et conformité des outils de serrage suivie sans système dédié.",
-        output:
-          "Un logiciel OCR local qui détecte et corrige activement les non-conformités documentaires, et une plateforme de suivi de la conformité des outils de serrage.",
+        input: "Le rachat de Zodiac par Safran laisse l'ancienne entité imprimée dans les en-têtes de milliers de documents de fabrication ; reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
+        output: "Un outil de reprise de marque assistée par OCR, avec validation humaine et journal d'audit, et une plateforme de suivi de la conformité des outils de serrage.",
         missions: [
-          "Création d'un logiciel intelligent (OCR local) pour la détection et la correction active des documents non conformes aux normes de qualité",
-          "Création d'une plateforme de suivi de la conformité des outils de serrage, en réponse aux exigences de la norme de sécurité aéronautique",
+          "Conception d'un outil local de reprise de marque documentaire : détection des mentions Zodiac dans le texte natif comme dans les pages scannées, remplacement sous validation de l'opérateur, fichier source jamais écrasé",
+          "Création d'une plateforme de suivi de la conformité des outils de serrage, en réponse aux exigences de la norme de sécurité aéronautique"
         ],
-        tools: ["OCR", "Python", "Normes qualité aéro"],
-        hasDeliverable: true,
+        tools: [
+          "Python",
+          "PyMuPDF",
+          "OCR",
+          "OpenCV",
+          "Normes qualité aéro"
+        ],
+        hasDeliverable: true
       },
       {
         id: "smip",
@@ -181,19 +242,20 @@ export const fr: Content = {
         company: "SMIP",
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant ingénieur",
-        sector: "oil",
         period: "Juin — Juillet 2025",
         location: "Les Berges du Lac, Tunisie",
-        input:
-          "Une décision d'investissement lourde — l'acquisition d'une unité de coiled-tubing — à instruire sur des bases chiffrées.",
-        output:
-          "Une étude technico-économique complète servant de support à la décision d'acquisition.",
+        input: "Une décision d'investissement lourde — l'acquisition d'une unité de coiled-tubing — à instruire sur des bases chiffrées.",
+        output: "Une étude technico-économique complète servant de support à la décision d'acquisition.",
         missions: [
           "Étude technico-économique pour l'acquisition d'une unité de coiled-tubing",
-          "Immersion dans les enjeux HSE et les normes de sécurité pétrolières",
+          "Immersion dans les enjeux HSE et les normes de sécurité pétrolières"
         ],
-        tools: ["Étude technico-économique", "HSE", "Normes pétrolières"],
-        hasDeliverable: true,
+        tools: [
+          "Étude technico-économique",
+          "HSE",
+          "Normes pétrolières"
+        ],
+        hasDeliverable: true
       },
       {
         id: "afc",
@@ -201,211 +263,397 @@ export const fr: Content = {
         company: "AFC",
         fullName: "Arab Financial Consultants",
         role: "Apprenti consultant",
-        sector: "finance",
         period: "Août — Septembre 2025",
         location: "Les Berges du Lac, Tunisie",
-        input:
-          "Une lecture purement technique des projets industriels, sans le vocabulaire ni les critères du décideur financier.",
-        output:
-          "Une grille de lecture financière des systèmes : savoir traduire un gain d'ingénierie en argument d'investissement.",
+        input: "Une lecture purement technique des projets industriels, sans le vocabulaire ni les critères du décideur financier.",
+        output: "Une grille de lecture financière des systèmes : savoir traduire un gain d'ingénierie en argument d'investissement.",
         missions: [
           "Immersion dans un environnement de conseil en finance",
-          "Développement de compétences en rigueur analytique et compréhension des systèmes financiers",
+          "Développement de compétences en rigueur analytique et compréhension des systèmes financiers"
         ],
-        tools: ["Conseil", "Analyse financière"],
-        hasDeliverable: false,
-      },
-    ],
+        tools: [
+          "Conseil",
+          "Analyse financière"
+        ],
+        hasDeliverable: false
+      }
+    ]
   },
-
   projects: {
     title: "Projets",
-    intro:
-      "Trois systèmes construits pour résoudre un problème précis, du process RH à l'implantation d'atelier.",
+    intro: "Quatre systèmes construits pour résoudre un problème précis, de la documentation aéronautique à l'implantation d'atelier.",
     openLabel: "Ouvrir",
+    detailsLabel: "Voir le détail",
+    hideLabel: "Masquer le détail",
+    siteLabel: "Voir le site",
     closeLabel: "Fermer",
     stackLabel: "Stack",
     stepsLabel: "Séquence d'inspection",
     items: [
       {
+        id: "safran-rebranding",
+        name: "Reprise de marque documentaire Zodiac → Safran",
+        short: "Rebranding Safran",
+        tagline: "Détection et remplacement de marque sur des milliers de documents de fabrication",
+        period: "2025",
+        status: "Livré",
+        summary: "Après le rachat de Zodiac Aerospace par Safran, des milliers de dossiers de fabrication, plans CAO et ordres de fabrication portent encore l'ancienne entité dans leurs en-têtes et leurs pieds de page. L'outil retrouve ces mentions quel que soit leur encodage dans le PDF, les remplace sans abîmer ce qui les entoure, et n'applique rien sans l'accord d'un opérateur.",
+        highlights: [
+          "Cinq encodages à couvrir pour un même en-tête visible : texte natif, Form XObject des exports CAO, texte vectorisé en courbes, scan raster et logo bitmap",
+          "Correspondance hiérarchique à quatre niveaux, tolérante au bruit OCR (Z0DIAC lu pour ZODIAC) — l'ajout d'un test d'inclusion a fait passer la détection de 0 à 18 occurrences sur 18",
+          "Remplacement en boîte minimale : seule la mention fautive est effacée, la référence de dossier voisine dans le même bloc est préservée",
+          "Sur les scans, le fond est échantillonné à la médiane RGB autour de la zone — la reprise reste invisible sur un papier jauni",
+          "Validation humaine occurrence par occurrence et journal d'audit : en documentation aéronautique, une modification non tracée est une modification inacceptable"
+        ],
+        stack: [
+          "Python 3.12",
+          "PyMuPDF",
+          "Tesseract 5",
+          "PaddleOCR",
+          "OpenCV",
+          "PySide6",
+          "SQLite"
+        ],
+        stackDetail: [
+          {
+            label: "Moteur PDF",
+            items: [
+              "PyMuPDF (fitz)",
+              "Spans, polices, couleurs",
+              "Flux Form XObject",
+              "Rendu 300 DPI"
+            ]
+          },
+          {
+            label: "Reconnaissance",
+            items: [
+              "Tesseract 5 — fra+eng",
+              "PaddleOCR 3.6 — DBNet + CRNN",
+              "TrOCR — annotations manuscrites"
+            ]
+          },
+          {
+            label: "Vision",
+            items: [
+              "OpenCV 4.10 headless",
+              "Redressement, contraste, débruitage",
+              "Template matching de logo",
+              "Pillow",
+              "NumPy"
+            ]
+          },
+          {
+            label: "Interface",
+            items: [
+              "PySide6 — MVVM, QThread",
+              "Tkinter — outil de production",
+              "Aperçu et validation par occurrence"
+            ]
+          },
+          {
+            label: "Traçabilité",
+            items: [
+              "SQLite — 5 tables",
+              "Journal d'audit en ajout seul",
+              "Contrôle qualité automatisé"
+            ]
+          },
+          {
+            label: "Qualité",
+            items: [
+              "pytest — 210 tests unitaires",
+              "pytest-qt",
+              "black",
+              "flake8"
+            ]
+          }
+        ],
+        metric: {
+          value: "18/18",
+          label: "Occurrences détectées"
+        }
+      },
+      {
         id: "pharmacowork",
-        accentTint: "#4FD8B0",
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
-        visual: "roster",
         tagline: "Outil de gestion RH pour pharmacies",
         period: "2025 — Présent",
         status: "Actif",
-        summary:
-          "Application mobile de gestion des ressources humaines pour les pharmacies, co-fondée pour répondre à un besoin non couvert : gérer les plannings, les remplacements et le suivi du personnel sans outil dédié.",
+        summary: "Application mobile de gestion des ressources humaines pour les pharmacies, co-fondée pour répondre à un besoin non couvert : gérer les plannings, les remplacements et le suivi du personnel sans outil dédié.",
         highlights: [
           "Modélisation des processus RH du secteur officinal",
           "Conception de la base de données et des interfaces",
-          "Optimisation des flux de gestion du personnel",
+          "Optimisation des flux de gestion du personnel"
         ],
-        stack: ["React", "Supabase", "SQL", "Modélisation BPMN"],
-        metric: { value: "Co-fondateur", label: "Rôle" },
+        stack: [
+          "NestJS 11",
+          "Next.js 16",
+          "React 19",
+          "TypeScript",
+          "Prisma",
+          "PostgreSQL 18",
+          "Tailwind CSS 4",
+          "Railway"
+        ],
+        stackDetail: [
+          {
+            label: "Backend",
+            items: [
+              "NestJS 11",
+              "Express 5",
+              "TypeScript 5.7",
+              "Node 22",
+              "Prisma 6",
+              "PostgreSQL 18",
+              "Multi-tenant par officine"
+            ]
+          },
+          {
+            label: "Frontend",
+            items: [
+              "Next.js 16 — App Router",
+              "React 19",
+              "Tailwind CSS 4",
+              "lucide-react",
+              "zxing-wasm",
+              "Service worker maison"
+            ]
+          },
+          {
+            label: "Sécurité",
+            items: [
+              "JWT + magic-link",
+              "TOTP maison HMAC-SHA256",
+              "AES-256-GCM au repos",
+              "Index patients par HMAC",
+              "Helmet 8",
+              "Throttling",
+              "CSP à nonce"
+            ]
+          },
+          {
+            label: "Services",
+            items: [
+              "S3 — URL pré-signées",
+              "Resend / SMTP",
+              "Web-push VAPID",
+              "OCR Mistral",
+              "Worker ffmpeg",
+              "Crons + advisory locks"
+            ]
+          },
+          {
+            label: "Infrastructure",
+            items: [
+              "Railway",
+              "Docker multi-stage",
+              "node:22-alpine",
+              "GitHub Actions",
+              "Import BDPM"
+            ]
+          },
+          {
+            label: "Qualité",
+            items: [
+              "Jest 30",
+              "Supertest",
+              "Semgrep",
+              "npm audit",
+              "Sentry",
+              "PostHog EU",
+              "autocannon"
+            ]
+          }
+        ],
+        metric: {
+          value: "Co-fondateur",
+          label: "Rôle"
+        }
       },
       {
         id: "machine-layout",
-        accentTint: "#F2913C",
         name: "Machine Layout Optimization App",
         short: "Machine Layout",
-        visual: "layout",
-        steps: [
-          {
-            step: "01",
-            title: "Relever",
-            body: "Recenser les machines, les gammes de fabrication et les flux réels entre postes. Sans cette matrice de départ, tout regroupement est arbitraire.",
-          },
-          {
-            step: "02",
-            title: "Regrouper",
-            body: "Appliquer la méthode de King — un tri itératif des lignes et des colonnes de la matrice d'incidence — jusqu'à faire émerger les îlots de production.",
-          },
-          {
-            step: "03",
-            title: "Implanter",
-            body: "Chaîner les postes à l'intérieur de chaque îlot par un algorithme d'optimisation, et positionner les îlots entre eux.",
-          },
-          {
-            step: "04",
-            title: "Mesurer",
-            body: "Noter chaque implantation candidate sur le trafic, la connexité et le ratio d'optimalité. C'est le chiffre qui tranche, pas l'intuition.",
-          },
-        ],
-
         tagline: "Aide à la décision en implantation d'atelier",
         period: "2025 — 2026",
         status: "En cours",
-        summary:
-          "Application d'aide à la décision pour l'implantation d'ateliers : elle regroupe les machines en îlots de production cohérents et évalue chaque implantation candidate sur des critères industriels mesurables.",
+        summary: "Application d'aide à la décision pour l'implantation d'ateliers : elle regroupe les machines en îlots de production cohérents et évalue chaque implantation candidate sur des critères industriels mesurables.",
         highlights: [
           "Méthode de King (Rank Order Clustering) pour la constitution d'îlots de production",
           "Algorithmes d'optimisation par chaînage",
-          "Indicateurs industriels : trafic, connexité, ratio d'optimalité",
+          "Indicateurs industriels : trafic, connexité, ratio d'optimalité"
         ],
-        stack: ["MATLAB", "Python", "Recherche opérationnelle"],
-        metric: { value: "ROC", label: "Méthode de King" },
+        stack: [
+          "MATLAB",
+          "Python",
+          "Recherche opérationnelle"
+        ],
+        metric: {
+          value: "ROC",
+          label: "Méthode de King"
+        }
       },
       {
         id: "dashboard-enib",
-        accentTint: "#4FD8E8",
         name: "Dashboard de Performance Académique",
         short: "Dashboard ENIB",
-        visual: "dashboard",
         tagline: "Application web fullstack de pilotage — ENIB",
         period: "2025 — 2026",
         status: "En cours",
-        summary:
-          "Plateforme de pilotage de la performance académique de l'ENIB : elle centralise les indicateurs de suivi, déclenche des alertes automatiques sur les dérives et rend la satisfaction étudiante lisible en un coup d'œil.",
+        summary: "Plateforme de pilotage de la performance académique de l'ENIB : elle centralise les indicateurs de suivi, déclenche des alertes automatiques sur les dérives et rend la satisfaction étudiante lisible en un coup d'œil.",
         highlights: [
           "42 KPI de suivi des performances académiques",
           "Système d'alerte automatisé sur les seuils critiques",
-          "Visualisations interactives et suivi de la satisfaction estudiantine",
+          "Visualisations interactives et suivi de la satisfaction estudiantine"
         ],
-        stack: ["React", "Supabase", "SQL", "Power BI"],
-        metric: { value: "42", label: "KPI suivis" },
-      },
-    ],
+        stack: [
+          "React",
+          "Supabase",
+          "SQL",
+          "Power BI"
+        ],
+        metric: {
+          value: "42",
+          label: "KPI suivis"
+        }
+      }
+    ]
   },
-
   skills: {
     title: "Compétences",
-    intro:
-      "Plutôt qu'un pourcentage que je m'attribuerais moi-même, voici où chaque compétence a réellement servi. La lecture se fait comme une matrice d'incidence — l'outil même qu'utilise la méthode de King dans mon projet d'implantation.",
+    intro: "Plutôt qu'un pourcentage que je m'attribuerais moi-même, voici où chaque compétence a réellement servi. Sous chaque ligne, les terrains qui la prouvent.",
     matrix: {
       deploymentsLabel: "Déploiements",
       legend: "Cellule active = compétence mise en œuvre sur ce terrain",
       countLabel: "terrains",
       cellLabel: "{skill} mise en œuvre sur {deployment}",
-      emptyHint: "Survolez une ligne ou une colonne pour isoler un croisement.",
+      emptyHint: "Survolez une ligne ou une colonne pour isoler un croisement."
     },
     groups: [
       {
         id: "industriel",
         domain: "Industrielles",
-        accent: "amber",
         skills: [
           {
             name: "Lean & amélioration continue",
             note: "DMAIC, PDCA, VSM, Ishikawa",
-            usedIn: ["safran", "dashboard-enib"],
+            usedIn: [
+              "safran",
+              "dashboard-enib"
+            ]
           },
           {
             name: "Gestion & planification",
             note: "PIC, PDP, MRP, MS Project, ERP",
-            usedIn: ["smip", "pharmacowork"],
+            usedIn: [
+              "smip",
+              "pharmacowork"
+            ]
           },
           {
             name: "Layout / Implantation",
-            usedIn: ["machine-layout"],
+            usedIn: [
+              "machine-layout"
+            ]
           },
           {
             name: "Maîtrise des processus",
-            usedIn: ["safran", "pharmacowork", "machine-layout"],
+            usedIn: [
+              "safran",
+              "pharmacowork",
+              "machine-layout",
+              "safran-rebranding"
+            ]
           },
           {
             name: "Étude technico-économique",
-            usedIn: ["smip", "afc"],
-          },
-        ],
+            usedIn: [
+              "smip",
+              "afc"
+            ]
+          }
+        ]
       },
       {
         id: "technique",
         domain: "Techniques",
-        accent: "cyan",
         skills: [
           {
             name: "Python",
-            usedIn: ["safran", "machine-layout"],
+            usedIn: [
+              "safran",
+              "machine-layout",
+              "safran-rebranding"
+            ]
           },
           {
-            name: "SQL / Supabase",
-            usedIn: ["pharmacowork", "dashboard-enib"],
+            name: "SQL / PostgreSQL",
+            usedIn: [
+              "pharmacowork",
+              "dashboard-enib"
+            ]
           },
           {
             name: "React",
-            usedIn: ["pharmacowork", "dashboard-enib"],
+            usedIn: [
+              "pharmacowork",
+              "dashboard-enib"
+            ]
           },
           {
             name: "Power BI",
-            usedIn: ["dashboard-enib"],
+            usedIn: [
+              "dashboard-enib"
+            ]
           },
           {
             name: "MATLAB",
-            usedIn: ["machine-layout"],
+            usedIn: [
+              "machine-layout"
+            ]
           },
           {
             name: "OCR / Vision",
-            usedIn: ["safran"],
+            usedIn: [
+              "safran",
+              "safran-rebranding"
+            ]
           },
           {
             name: "CATIA V5",
-            usedIn: [],
-          },
-        ],
-      },
+            usedIn: []
+          }
+        ]
+      }
     ],
     soft: {
       title: "Soft skills",
       items: [
         "Leadership & gestion d'équipe",
         "Travail en équipe multiculturelle",
-        "Communication publique",
-      ],
+        "Communication publique"
+      ]
     },
     languages: {
       title: "Langues",
       items: [
-        { name: "Arabe", level: "Langue maternelle" },
-        { name: "Français", level: "Courant" },
-        { name: "Anglais", level: "Courant" },
-      ],
-    },
+        {
+          name: "Arabe",
+          level: "Langue maternelle"
+        },
+        {
+          name: "Français",
+          level: "Courant"
+        },
+        {
+          name: "Anglais",
+          level: "Courant"
+        }
+      ]
+    }
   },
-
   associative: {
     title: "Vie associative",
     intro: "Club AI Innovators — ENIB.",
@@ -416,18 +664,20 @@ export const fr: Content = {
         period: "2025 — 2026",
         points: [
           "Direction stratégique du club : projets IA & Data pluridisciplinaires",
-          "Organisation d'événements",
-        ],
+          "Organisation d'événements"
+        ]
       },
       {
         title: "Responsable RH",
         org: "Club AI Innovators — ENIB",
         period: "2024 — 2025",
-        points: ["Gestion des recrutements internes", "Intégration des membres"],
-      },
-    ],
+        points: [
+          "Gestion des recrutements internes",
+          "Intégration des membres"
+        ]
+      }
+    ]
   },
-
   interests: {
     title: "Centres d'intérêt",
     items: [
@@ -436,14 +686,12 @@ export const fr: Content = {
       "Entrepreneuriat",
       "Musculation et sport",
       "Leadership associatif",
-      "Business & stratégie",
-    ],
+      "Business & stratégie"
+    ]
   },
-
   contact: {
     title: "Contact",
-    intro:
-      "Ouvert aux opportunités de stage et d'alternance en ingénierie industrielle, data et Industrie 4.0.",
+    intro: "Ouvert aux opportunités de stage et d'alternance en ingénierie industrielle, data et Industrie 4.0.",
     email: "taha.ghadhab@enib.ucar.tn",
     phone: "+216 54 347 150",
     linkedin: "https://www.linkedin.com/in/taha-ghadhab",
@@ -453,21 +701,13 @@ export const fr: Content = {
     phoneLabel: "Téléphone",
     locationLabel: "Localisation",
     cvLabel: "Télécharger le CV en PDF",
-    cvHint: "Version imprimable, un clic.",
+    cvHint: "Version imprimable, un clic."
   },
-
-  easterEgg: {
-    lampLabel: "Voyant auxiliaire",
-    title: "Hors protocole",
-    body: "Quand je ne pilote pas de process, je soulève de la fonte. La musculation, c'est le même métier que l'ingénierie industrielle : une charge, un protocole, une mesure, et la patience d'attendre que la courbe monte. Le reste n'est que du bruit.",
-    close: "Refermer",
-  },
-
   classic: {
     title: "CV — Taha Ghadhab",
     intro: "Version texte, scannable, sans habillage.",
     printLabel: "Imprimer / PDF",
-    backLabel: "Retour au cockpit",
+    backLabel: "Retour au site",
     sections: {
       profile: "Profil",
       education: "Formation",
@@ -477,12 +717,11 @@ export const fr: Content = {
       associative: "Vie associative",
       languages: "Langues",
       interests: "Centres d'intérêt",
-      contact: "Contact",
-    },
+      contact: "Contact"
+    }
   },
-
   footer: {
     builtWith: "Conçu et développé par Taha Ghadhab",
-    rights: "Tous droits réservés.",
-  },
+    rights: "Tous droits réservés."
+  }
 };

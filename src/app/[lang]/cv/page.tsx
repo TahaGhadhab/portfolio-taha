@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getContent, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
-import { Footer } from "@/components/Footer";
+import { Optics } from "@/components/Optics";
 import { PrintButton } from "@/components/PrintButton";
-import { TopBar } from "@/components/TopBar";
+import { SiteFooter } from "@/components/Sections";
+import { TopNav } from "@/components/TopNav";
 
 export async function generateMetadata({
   params,
@@ -22,9 +23,9 @@ export async function generateMetadata({
 /**
  * Vue classique — le mode que choisira un recruteur pressé sur téléphone.
  *
- * Même palette et même police de corps que le cockpit, mais aucun habillage :
- * pas de convoyeur, pas de cadran, pas d'animation. Sert aussi de source à
- * l'export PDF via l'impression navigateur (feuille `@media print`).
+ * Même palette et même typographie que le vol, mais aucun habillage : ni aile,
+ * ni rail, ni bande. Sert aussi de source à l'export PDF via l'impression
+ * navigateur, qui bascule la feuille en noir sur blanc.
  */
 export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">) {
   const { lang } = await params;
@@ -36,231 +37,186 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
 
   return (
     <>
-      <TopBar
-        lang={lang}
-        other={otherLocale(lang)}
-        nav={c.nav}
-        cv={cv}
-        onClassicPage
-        classicLabel={c.nav.classicView}
-      />
+      <Optics />
 
-      <main id="contenu" className="flex-1 px-4 pb-16 pt-24 sm:px-6">
-        <article className="mx-auto w-full max-w-3xl">
-          {/* --- En-tête --- */}
-          <header className="border-b border-line pb-7">
-            <h1 className="font-[family-name:var(--font-space-grotesk)] text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-              {c.hero.name}
-            </h1>
-            <p className="mt-2 text-lg text-cyan">{c.hero.role}</p>
+      <div className="wrap">
+        <TopNav
+          lang={lang}
+          other={otherLocale(lang)}
+          nav={c.nav}
+          name={c.hero.name}
+          cv={cv}
+          onClassicPage
+          classicLabel={c.nav.classicView}
+          siteLabel={c.nav.siteView}
+        />
 
-            <ul className="mt-5 flex flex-col gap-1.5 font-mono text-sm text-muted sm:flex-row sm:flex-wrap sm:gap-x-5">
-              <li>
-                <a href={`mailto:${c.contact.email}`} className="hover:text-cyan">
-                  {c.contact.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${c.contact.phone.replace(/\s/g, "")}`}
-                  className="hover:text-cyan"
-                >
-                  {c.contact.phone}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={c.contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-cyan"
-                >
-                  {c.contact.linkedinLabel}
-                </a>
-              </li>
-            </ul>
+        <main id="contenu" className="shell cv-page">
+          <article className="cv-article">
+            <header className="cv-head">
+              <h1>{c.hero.name}</h1>
+              <p className="role">{c.hero.role}</p>
 
-            <div className="no-print mt-7 flex flex-wrap items-center gap-3">
-              <PrintButton label={c.classic.printLabel} />
-              {cv.isPdf ? (
-                <a
-                  href={cv.href}
-                  download={cv.download}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="push-button px-5 py-3"
-                >
-                  {c.nav.downloadCv}
-                </a>
-              ) : null}
-            </div>
-          </header>
+              <ul className="cv-contact mono">
+                <li>
+                  <a href={`mailto:${c.contact.email}`}>{c.contact.email}</a>
+                </li>
+                <li>
+                  <a href={`tel:${c.contact.phone.replace(/\s/g, "")}`}>{c.contact.phone}</a>
+                </li>
+                <li>
+                  <a href={c.contact.linkedin} target="_blank" rel="noopener noreferrer">
+                    {c.contact.linkedinLabel}
+                  </a>
+                </li>
+              </ul>
 
-          {/* --- Profil --- */}
-          <CvSection title={s.profile}>
-            <p className="text-base leading-relaxed text-ink">{c.hero.signature}</p>
-            <p className="mt-3 leading-relaxed text-muted">{c.hero.tagline}</p>
-          </CvSection>
+              <div className="hero-actions no-print" style={{ justifyContent: "flex-start" }}>
+                <PrintButton label={c.classic.printLabel} />
+                {cv.isPdf ? (
+                  <a
+                    className="btn btn-primary"
+                    href={cv.href}
+                    download={cv.download}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {c.nav.downloadCv}
+                  </a>
+                ) : null}
+              </div>
+            </header>
 
-          {/* --- Formation --- */}
-          <CvSection title={s.education}>
-            <ul className="space-y-6">
+            <CvSection title={s.profile}>
+              <div className="cv-entry">
+                <p style={{ color: "var(--snow)" }}>{c.hero.signature}</p>
+                <p style={{ marginTop: "var(--s-3)" }}>{c.hero.tagline}</p>
+              </div>
+            </CvSection>
+
+            <CvSection title={s.education}>
               {c.education.items.map((item) => (
-                <li key={`${item.school}-${item.period}`}>
-                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <h3 className="font-semibold text-ink">{item.degree}</h3>
-                    <p className="shrink-0 font-mono text-xs text-muted">{item.period}</p>
+                <div className="cv-entry" key={`${item.school}-${item.period}`}>
+                  <div className="cv-row">
+                    <h3>{item.degree}</h3>
+                    <span className="mono">{item.period}</span>
                   </div>
-                  <p className="mt-1 text-sm text-cyan">
+                  <p className="sub">
                     {item.school}
-                    {item.location ? (
-                      <span className="text-muted"> — {item.location}</span>
-                    ) : null}
+                    {item.location ? ` — ${item.location}` : ""}
                   </p>
                   {item.detail ? (
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{item.detail}</p>
+                    <p style={{ marginTop: "var(--s-2)" }}>{item.detail}</p>
                   ) : null}
-                </li>
+                </div>
               ))}
-            </ul>
-          </CvSection>
+            </CvSection>
 
-          {/* --- Expérience --- */}
-          <CvSection title={s.experience}>
-            <ul className="space-y-7">
+            <CvSection title={s.experience}>
               {c.experience.items.map((item) => (
-                <li key={item.id}>
-                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <h3 className="font-semibold text-ink">
+                <div className="cv-entry" key={item.id}>
+                  <div className="cv-row">
+                    <h3>
                       {item.role} — {item.company}
                     </h3>
-                    <p className="shrink-0 font-mono text-xs text-muted">{item.period}</p>
+                    <span className="mono">{item.period}</span>
                   </div>
-                  <p className="mt-1 text-sm text-muted">
-                    {item.fullName}
-                    <span> — {item.location}</span>
+                  <p className="sub">
+                    {item.fullName} — {item.location}
                   </p>
-                  <ul className="mt-3 space-y-1.5">
+                  <ul className="bullets">
                     {item.missions.map((mission) => (
-                      <li
-                        key={mission}
-                        className="flex gap-3 text-sm leading-relaxed text-muted"
-                      >
-                        <span aria-hidden="true" className="mt-2 size-1 shrink-0 bg-muted" />
-                        <span>{mission}</span>
-                      </li>
+                      <li key={mission}>{mission}</li>
                     ))}
                   </ul>
-                </li>
+                </div>
               ))}
-            </ul>
-          </CvSection>
+            </CvSection>
 
-          {/* --- Projets --- */}
-          <CvSection title={s.projects}>
-            <ul className="space-y-7">
+            <CvSection title={s.projects}>
               {c.projects.items.map((project) => (
-                <li key={project.id}>
-                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <h3 className="font-semibold text-ink">
-                      {project.name} — <span className="font-normal">{project.tagline}</span>
-                    </h3>
-                    <p className="shrink-0 font-mono text-xs text-muted">{project.period}</p>
+                <div className="cv-entry" key={project.id}>
+                  <div className="cv-row">
+                    <h3>{project.name}</h3>
+                    <span className="mono">{project.period}</span>
                   </div>
-                  <ul className="mt-3 space-y-1.5">
+                  <p className="sub">{project.tagline}</p>
+                  <ul className="bullets">
                     {project.highlights.map((highlight) => (
-                      <li
-                        key={highlight}
-                        className="flex gap-3 text-sm leading-relaxed text-muted"
-                      >
-                        <span aria-hidden="true" className="mt-2 size-1 shrink-0 bg-muted" />
-                        <span>{highlight}</span>
-                      </li>
+                      <li key={highlight}>{highlight}</li>
                     ))}
                   </ul>
-                  <p className="mt-2 font-mono text-xs text-muted">
+                  <p className="sub" style={{ marginTop: "var(--s-3)" }}>
                     {project.stack.join(" · ")}
                   </p>
-                </li>
+                </div>
               ))}
-            </ul>
-          </CvSection>
+            </CvSection>
 
-          {/* --- Compétences --- */}
-          <CvSection title={s.skills}>
-            <div className="space-y-5">
+            <CvSection title={s.skills}>
               {c.skills.groups.map((group) => (
-                <div key={group.id}>
-                  <h3 className="font-semibold text-ink">{group.domain}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                <div className="cv-entry" key={group.id}>
+                  <h3>{group.domain}</h3>
+                  <p style={{ marginTop: "var(--s-2)" }}>
                     {group.skills
                       .map((skill) => (skill.note ? `${skill.name} (${skill.note})` : skill.name))
                       .join(" · ")}
                   </p>
                 </div>
               ))}
-              <div>
-                <h3 className="font-semibold text-ink">{c.skills.soft.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                  {c.skills.soft.items.join(" · ")}
-                </p>
+              <div className="cv-entry">
+                <h3>{c.skills.soft.title}</h3>
+                <p style={{ marginTop: "var(--s-2)" }}>{c.skills.soft.items.join(" · ")}</p>
               </div>
-            </div>
-          </CvSection>
+            </CvSection>
 
-          {/* --- Vie associative --- */}
-          <CvSection title={s.associative}>
-            <ul className="space-y-5">
+            <CvSection title={s.associative}>
               {c.associative.items.map((role) => (
-                <li key={`${role.title}-${role.period}`}>
-                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <h3 className="font-semibold text-ink">
+                <div className="cv-entry" key={`${role.title}-${role.period}`}>
+                  <div className="cv-row">
+                    <h3>
                       {role.title} — {role.org}
                     </h3>
-                    <p className="shrink-0 font-mono text-xs text-muted">{role.period}</p>
+                    <span className="mono">{role.period}</span>
                   </div>
-                  <ul className="mt-2 space-y-1.5">
+                  <ul className="bullets">
                     {role.points.map((point) => (
-                      <li
-                        key={point}
-                        className="flex gap-3 text-sm leading-relaxed text-muted"
-                      >
-                        <span aria-hidden="true" className="mt-2 size-1 shrink-0 bg-muted" />
-                        <span>{point}</span>
-                      </li>
+                      <li key={point}>{point}</li>
                     ))}
                   </ul>
-                </li>
+                </div>
               ))}
-            </ul>
-          </CvSection>
+            </CvSection>
 
-          {/* --- Langues --- */}
-          <CvSection title={s.languages}>
-            <p className="text-sm leading-relaxed text-muted">
-              {c.skills.languages.items
-                .map((item) => `${item.name} : ${item.level.toLowerCase()}`)
-                .join(" · ")}
-            </p>
-          </CvSection>
+            <CvSection title={s.languages}>
+              <div className="cv-entry">
+                <p>
+                  {c.skills.languages.items
+                    .map((item) => `${item.name} : ${item.level.toLowerCase()}`)
+                    .join(" · ")}
+                </p>
+              </div>
+            </CvSection>
 
-          {/* --- Centres d'intérêt --- */}
-          <CvSection title={s.interests}>
-            <p className="text-sm leading-relaxed text-muted">{c.interests.items.join(" · ")}</p>
-          </CvSection>
-        </article>
-      </main>
+            <CvSection title={s.interests}>
+              <div className="cv-entry">
+                <p>{c.interests.items.join(" · ")}</p>
+              </div>
+            </CvSection>
+          </article>
+        </main>
 
-      <Footer footer={c.footer} />
+        <SiteFooter footer={c.footer} wordmark={c.hero.wordmark} />
+      </div>
     </>
   );
 }
 
 function CvSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-10 break-inside-avoid">
-      <h2 className="label-instrument !text-amber border-b border-line pb-2">{title}</h2>
-      <div className="mt-5">{children}</div>
+    <section className="cv-section">
+      <h2>{title}</h2>
+      <div className="cv-body">{children}</div>
     </section>
   );
 }

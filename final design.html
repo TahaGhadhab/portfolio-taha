@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Silent Flight — portfolio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Literata:opsz,wght@7..72,400..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SILENT FLIGHT — rev. B
+   The owl is never depicted as an owl. It is a behaviour: hold
+   perfectly still, watch, then commit in one move. Nothing on this
+   page drifts, floats, pulses or bobs. The only idle motion in the
+   whole document is a blink.
+
+   rev. B fixes — feather clipping · dead canvas space · comb moved
+   onto the true wing edge · eye/headline collision · 3:1 UI borders
+   · mobile close-crop · tonal depth across the fan.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── Colour ───────────────────────────────────────────────── */
+  --void:#0B0E0C;          /* the dark it flies through             */
+  --void-lift:#12160F;     /* barely-raised surface                 */
+  --line:#20261F;          /* decorative hairline                   */
+  --line-lit:#333B31;      /* decorative hairline, foreground       */
+  --edge-ui:#5C6559;       /* interactive borders — 3.20:1 ✓ 1.4.11 */
+  --snow:#F5F7F1;          /* plumage / primary text    17.98:1 ✓   */
+  --snow-2:#C5CCC2;        /* secondary text            11.82:1 ✓   */
+  --snow-3:#8B948A;        /* mono meta                  6.19:1 ✓   */
+  --iris:#E8A21C;          /* the eye. one warm thing.   8.88:1 ✓   */
+
+  /* ── Type ─────────────────────────────────────────────────── */
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Literata",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+
+  --t--2:clamp(.75rem,.73rem + .08vw,.8125rem);
+  --t--1:clamp(.8438rem,.82rem + .11vw,.9063rem);
+  --t-0 :clamp(1rem,.97rem + .16vw,1.0938rem);
+  --t-1 :clamp(1.125rem,1.08rem + .22vw,1.25rem);
+  --t-2 :clamp(1.3125rem,1.24rem + .36vw,1.5625rem);
+  --t-3 :clamp(1.5rem,1.36rem + .68vw,2.125rem);
+  --t-4 :clamp(1.875rem,1.55rem + 1.6vw,3rem);
+  --t-5 :clamp(2.5rem,1.62rem + 4.4vw,5.75rem);
+
+  --lh-tight:1.03; --lh-head:1.14; --lh-body:1.66;
+  --measure:60ch; --measure-tight:46ch;
+
+  /* ── Space ────────────────────────────────────────────────── */
+  --s-1:.25rem; --s-2:.5rem;  --s-3:.75rem; --s-4:1rem;
+  --s-5:1.5rem; --s-6:2rem;   --s-7:3rem;   --s-8:4.5rem;
+  --s-9:7rem;
+
+  --edge:clamp(1.125rem,4.5vw,3.5rem);
+  --frame:clamp(10px,1.2vw,18px);
+
+  /* ── Motion: exactly one curve. Fast out, dead stop. ──────── */
+  --commit:cubic-bezier(.13,.9,.16,1);
+  --d-blink:130ms; --d-snap:220ms; --d-commit:520ms;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:clip;margin:0;padding:0;background:var(--void)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  color:var(--snow); font-family:var(--f-body); font-size:var(--t-0);
+  line-height:var(--lh-body); font-variation-settings:"opsz" 14;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{
+  font-family:var(--f-display); font-style:normal; font-weight:600;
+  line-height:var(--lh-head); letter-spacing:-.026em;
+  overflow-wrap:anywhere; min-width:0; margin:0;
+}
+p{margin:0}
+a{color:inherit}
+::selection{background:var(--iris);color:var(--void)}
+:focus-visible{outline:2px solid var(--iris);outline-offset:4px;border-radius:1px;transition:none}
+section[id],header[id]{scroll-margin-top:calc(var(--frame) + var(--s-6))}
+
+.skip{position:absolute;inset-block-start:-100px;inset-inline-start:var(--s-4);z-index:60;
+  background:var(--iris);color:var(--void);font-family:var(--f-display);font-weight:600;
+  font-size:var(--t--1);padding:.75rem 1.25rem;border-radius:2px;text-decoration:none}
+.skip:focus{inset-block-start:var(--s-4)}
+
+/* ── Fixed optical layers ─────────────────────────────────── */
+.optics{position:fixed;inset:0;z-index:40;pointer-events:none}
+.optics .rule{position:absolute;background:var(--line)}
+.optics .rule.t{inset-block-start:var(--frame);inset-inline:var(--frame);height:1px}
+.optics .rule.b{inset-block-end:var(--frame);inset-inline:var(--frame);height:1px}
+.optics .rule.l{inset-inline-start:var(--frame);inset-block:var(--frame);width:1px}
+.optics .rule.r{inset-inline-end:var(--frame);inset-block:var(--frame);width:1px}
+.optics .reg{position:absolute;width:9px;height:9px;border:0 solid var(--line-lit)}
+.optics .reg.tl{inset-block-start:var(--frame);inset-inline-start:var(--frame);border-width:1px 0 0 1px}
+.optics .reg.tr{inset-block-start:var(--frame);inset-inline-end:var(--frame);border-width:1px 1px 0 0}
+.optics .reg.bl{inset-block-end:var(--frame);inset-inline-start:var(--frame);border-width:0 0 1px 1px}
+.optics .reg.br{inset-block-end:var(--frame);inset-inline-end:var(--frame);border-width:0 1px 1px 0}
+
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(125% 85% at 50% 34%,transparent 34%,rgba(0,0,0,.6) 100%)}
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.wrap{position:relative;z-index:3}
+.shell{width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--edge)}
+
+.mono{font-family:var(--f-mono);font-size:var(--t--2);letter-spacing:.14em;
+  color:var(--snow-3);font-weight:400}
+.lede{font-size:var(--t-1);max-width:var(--measure);color:var(--snow-2);
+  font-variation-settings:"opsz" 20;text-wrap:pretty}
+
+/* ── Nav — static. Never sticks, morphs or shrinks. ───────── */
+.nav{display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);
+  flex-wrap:wrap;padding-block:var(--s-5);position:relative;z-index:20}
+.brand{display:flex;align-items:center;gap:var(--s-3);text-decoration:none;min-height:44px}
+.brand-mark{width:28px;height:28px;flex:none;display:block}
+.brand-name{font-family:var(--f-display);font-weight:600;font-size:var(--t-0);
+  font-variation-settings:"wdth" 106;letter-spacing:-.01em;display:block}
+.brand-role{display:block;font-family:var(--f-mono);font-size:var(--t--2);
+  letter-spacing:.1em;color:var(--snow-3);margin-top:1px}
+.nav-links{display:flex;gap:clamp(.75rem,2.6vw,1.75rem);flex-wrap:wrap;align-items:center}
+.nav-links a{font-family:var(--f-mono);font-size:var(--t--2);letter-spacing:.14em;
+  text-decoration:none;color:var(--snow-3);white-space:nowrap;
+  min-height:44px;display:inline-flex;align-items:center;
+  transition:color var(--d-snap) var(--commit)}
+.nav-links a:hover{color:var(--iris)}
+
+/* ═══ THE FLIGHT ══════════════════════════════════════════════
+   rev. B — the wing sits IN FLOW above the copy, not behind it.
+   The eye holds the optical centre alone; the headline sits clear
+   beneath it. Nothing competes for the same point. */
+.flight{display:grid;justify-items:center;padding-block:var(--s-6) var(--s-9);position:relative}
+.wing-holder{width:100%;position:relative;z-index:0}
+.wing{width:100%;height:auto;display:block;overflow:visible}
+
+.feather{
+  transform-box:view-box; transform-origin:600px 350px;
+  transform:rotate(0deg);
+  transition:transform var(--d-commit) var(--commit);
+}
+.is-open .feather{transform:rotate(var(--a))}
+.blade{stroke:var(--snow);fill:var(--snow);stroke-linejoin:round}
+.quill{stroke:var(--snow);fill:none;stroke-linecap:round}
+.core{fill:url(#coreG)}
+.horizon{stroke:var(--snow);opacity:.09}
+
+/* the serrated edge — now riding the true outer envelope of the
+   primaries, and resolving only AFTER the wing comes to rest */
+.comb{stroke:var(--snow);stroke-linecap:round;fill:none;
+  opacity:0;transition:opacity 420ms var(--commit) 600ms}
+.is-open .comb{opacity:.75}
+
+/* the eye */
+.glow{opacity:0;transition:opacity 700ms var(--commit) 180ms}
+.is-open .glow{opacity:1}
+.iris-body{fill:url(#irisG)}
+.pupil{fill:var(--void)}
+.spec{fill:var(--snow);opacity:.92}
+.lid{fill:var(--void);transform-box:view-box;transform-origin:600px 324px;
+  transform:scaleY(0);transition:transform var(--d-blink) linear}
+.is-blinking .lid{transform:scaleY(1)}
+
+/* ── Hero copy ────────────────────────────────────────────── */
+.hero{position:relative;z-index:10;text-align:center;margin-top:var(--s-7);
+  opacity:0;translate:0 12px;
+  transition:opacity var(--d-commit) var(--commit) 90ms,
+             translate var(--d-commit) var(--commit) 90ms}
+.hero.is-open{opacity:1;translate:0 0}
+.hero h1{font-size:var(--t-5);font-weight:700;line-height:var(--lh-tight);
+  font-variation-settings:"wdth" 104;letter-spacing:-.038em;
+  max-width:13ch;margin-inline:auto;text-wrap:balance}
+.hero .lede{margin:var(--s-6) auto 0;max-width:50ch}
+.hero-actions{display:flex;gap:var(--s-4);justify-content:center;flex-wrap:wrap;margin-top:var(--s-7)}
+
+.btn{font-family:var(--f-display);font-size:var(--t--1);font-weight:600;
+  letter-spacing:.01em;text-decoration:none;white-space:nowrap;
+  min-height:48px;display:inline-flex;align-items:center;padding-inline:var(--s-6);
+  border:1px solid var(--edge-ui);border-radius:2px;
+  transition:border-color var(--d-snap) var(--commit),
+             background var(--d-snap) var(--commit),
+             color var(--d-snap) var(--commit)}
+.btn:hover{border-color:var(--iris);color:var(--iris)}
+.btn:active{translate:0 1px}
+.btn-primary{background:var(--iris);color:var(--void);border-color:var(--iris)}
+.btn-primary:hover{background:var(--snow);border-color:var(--snow);color:var(--void)}
+
+.wordmark-strip{margin-top:var(--s-8);display:flex;justify-content:center;
+  align-items:center;gap:var(--s-4)}
+.wordmark-strip .hair{height:1px;width:clamp(28px,7vw,70px);background:var(--line-lit)}
+
+/* ═══ Sections ════════════════════════════════════════════ */
+.band{padding-block:var(--s-9);border-top:1px solid var(--line);position:relative}
+.band-quiet{background:var(--void-lift)}
+
+.head{display:grid;gap:var(--s-4);margin-bottom:var(--s-8);max-width:var(--measure)}
+.head h2{font-size:var(--t-4);font-variation-settings:"wdth" 102;
+  letter-spacing:-.03em;max-width:19ch;text-wrap:balance}
+.head p{color:var(--snow-2);max-width:var(--measure);text-wrap:pretty}
+
+.commit{opacity:0}
+.commit.is-on{opacity:1;transition:opacity var(--d-snap) linear}
+
+/* ── The principle: a real engineering figure ─────────────── */
+.why{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s-7);align-items:start}
+.why-figure{border:1px solid var(--line-lit);background:var(--void);padding:var(--s-5);margin:0}
+.why-figure svg{width:100%;height:auto;display:block}
+.why-figure figcaption{margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px solid var(--line)}
+.why-note{color:var(--snow-2);max-width:var(--measure-tight)}
+.why-note p + p{margin-top:var(--s-4)}
+.diag-line{stroke:var(--snow);fill:none}
+.diag-wake{stroke:var(--snow-3);fill:none;stroke-linecap:round}
+.diag-wake-calm{stroke:var(--iris);fill:none;stroke-linecap:round;opacity:.85}
+.diag-label{font-family:var(--f-mono);font-size:13px;letter-spacing:.11em;fill:var(--snow-3)}
+.diag-rule{stroke:var(--line-lit)}
+
+/* ── Method ──────────────────────────────────────────────── */
+.rail-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.step{position:relative;display:grid;grid-template-columns:3rem minmax(0,1fr);
+  gap:var(--s-4);padding-block:var(--s-5);border-bottom:1px solid var(--line);align-items:start}
+.step::after{content:"";position:absolute;inset-block-end:-1px;inset-inline-start:0;
+  width:100%;height:1px;background:var(--iris);
+  scale:0 1;transform-origin:left;transition:scale var(--d-snap) var(--commit)}
+.step:hover::after{scale:1 1}
+.step-no{font-family:var(--f-mono);font-size:var(--t--1);color:var(--iris);
+  padding-top:.45em;font-variant-numeric:tabular-nums}
+.step h3{font-size:var(--t-2);letter-spacing:-.02em;margin-bottom:var(--s-2)}
+.step p{color:var(--snow-2);max-width:var(--measure);text-wrap:pretty}
+
+/* ── Work ────────────────────────────────────────────────── */
+.sheet{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s-5);
+  padding-block:var(--s-7);border-bottom:1px solid var(--line)}
+.sheet:first-of-type{border-top:1px solid var(--line)}
+.sheet h3{font-size:var(--t-3);letter-spacing:-.028em;margin-block:var(--s-2) var(--s-3)}
+.sheet p{color:var(--snow-2);max-width:var(--measure);text-wrap:pretty}
+.tags{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-3)}
+.tag{font-family:var(--f-mono);font-size:var(--t--2);letter-spacing:.1em;
+  color:var(--snow-3);border:1px solid var(--line-lit);border-radius:2px;
+  padding:3px .55rem;white-space:nowrap}
+.specs{margin-top:var(--s-5);border-collapse:collapse;width:100%;max-width:27rem;
+  font-variant-numeric:tabular-nums}
+.specs th,.specs td{text-align:start;padding:var(--s-3) 0;
+  border-bottom:1px dashed var(--line-lit);
+  font-family:var(--f-mono);font-size:var(--t--1);font-weight:400}
+.specs th{color:var(--snow-3);width:52%;letter-spacing:.04em}
+.tbc{display:inline-block;min-width:5.5rem;border-bottom:2px dotted var(--iris)}
+
+/* ── Capabilities ────────────────────────────────────────── */
+.groups{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s-6)}
+.group{border-top:1px solid var(--edge-ui);padding-top:var(--s-4)}
+.group h3{font-family:var(--f-mono);font-size:var(--t--2);letter-spacing:.16em;
+  color:var(--iris);font-weight:500;margin-bottom:var(--s-4)}
+.group ul{list-style:none;margin:0;padding:0}
+.group li{padding-block:var(--s-2);font-size:var(--t--1);color:var(--snow-2);
+  border-bottom:1px solid var(--line)}
+.group li:last-child{border-bottom:0}
+
+/* ── Origin ──────────────────────────────────────────────── */
+.about{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s-6)}
+.about p{color:var(--snow-2);max-width:var(--measure);text-wrap:pretty}
+.about p + p{margin-top:var(--s-4)}
+.pull{font-family:var(--f-display);font-size:var(--t-2);font-weight:500;
+  line-height:1.32;letter-spacing:-.02em;color:var(--snow);
+  border-left:2px solid var(--iris);padding-left:var(--s-5);
+  margin-block:var(--s-6);max-width:36ch;text-wrap:balance}
+
+/* ── Close ───────────────────────────────────────────────── */
+.close h2{font-size:var(--t-4);letter-spacing:-.03em;max-width:15ch;
+  margin-bottom:var(--s-6);text-wrap:balance}
+.mailto{font-family:var(--f-display);font-size:var(--t-2);font-weight:600;
+  color:var(--iris);text-decoration:none;min-height:44px;
+  display:inline-flex;align-items:center;border-bottom:2px solid transparent;
+  overflow-wrap:anywhere;transition:border-color var(--d-snap) var(--commit)}
+.mailto:hover{border-bottom-color:var(--iris)}
+.foot{display:flex;flex-wrap:wrap;gap:var(--s-4);justify-content:space-between;
+  padding-block:var(--s-6) var(--s-7);border-top:1px solid var(--line)}
+
+/* ── Section rail doubles as navigation ──────────────────── */
+.index{position:fixed;inset-inline-end:calc(var(--frame) + 14px);inset-block-start:50%;
+  translate:0 -50%;z-index:30;display:none;flex-direction:column;gap:2px}
+.index a{display:flex;align-items:center;justify-content:flex-end;gap:var(--s-3);
+  min-height:44px;text-decoration:none;padding-inline-end:2px}
+.index .lab{font-family:var(--f-mono);font-size:var(--t--2);letter-spacing:.12em;
+  color:var(--snow-3);opacity:0;transition:opacity var(--d-snap) var(--commit)}
+.index .tick{width:16px;height:1px;background:var(--edge-ui);
+  transition:width var(--d-snap) var(--commit),background var(--d-snap) var(--commit)}
+.index a:hover .lab,.index a:focus-visible .lab{opacity:1}
+.index a:hover .tick{background:var(--snow-3);width:26px}
+.index a[aria-current="true"] .tick{background:var(--iris);width:30px}
+.index a[aria-current="true"] .lab{opacity:1;color:var(--snow-2)}
+
+/* ── Layout up ───────────────────────────────────────────── */
+@media (min-width:680px){
+  .groups{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6) var(--s-7)}
+  .sheet{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:var(--s-7)}
+  .why{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--s-8)}
+  .about{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:var(--s-8)}
+  .step{grid-template-columns:4.5rem minmax(0,1fr)}
+}
+@media (min-width:1024px){
+  .groups{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .index{display:flex}
+}
+@media (max-width:679px){
+  .flight{padding-block:var(--s-4) var(--s-8)}
+  .hero{margin-top:var(--s-6)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:1ms!important;animation:none!important}
+  .feather{transform:rotate(var(--a))}
+  .comb,.glow{opacity:.75}
+  .hero{opacity:1;translate:0 0}
+  .commit{opacity:1}
+  .lid{transform:scaleY(0)!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="optics" aria-hidden="true">
+  <span class="rule t"></span><span class="rule b"></span>
+  <span class="rule l"></span><span class="rule r"></span>
+  <span class="reg tl"></span><span class="reg tr"></span>
+  <span class="reg bl"></span><span class="reg br"></span>
+</div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="index" aria-label="Sections">
+  <a href="#top"     data-idx="top"><span class="lab">FLIGHT</span><span class="tick"></span></a>
+  <a href="#why"     data-idx="why"><span class="lab">EDGE</span><span class="tick"></span></a>
+  <a href="#method"  data-idx="method"><span class="lab">METHOD</span><span class="tick"></span></a>
+  <a href="#work"    data-idx="work"><span class="lab">WORK</span><span class="tick"></span></a>
+  <a href="#skills"  data-idx="skills"><span class="lab">CAPABILITY</span><span class="tick"></span></a>
+  <a href="#about"   data-idx="about"><span class="lab">ORIGIN</span><span class="tick"></span></a>
+  <a href="#contact" data-idx="contact"><span class="lab">CONTACT</span><span class="tick"></span></a>
+</nav>
+
+<div class="wrap">
+
+<div class="shell">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" data-brandmark></svg>
+      <span>
+        <span class="brand-name">Your Name</span>
+        <span class="brand-role">INDUSTRIAL ENGINEER</span>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#method">METHOD</a>
+      <a href="#work">WORK</a>
+      <a href="#skills">CAPABILITY</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+</div>
+
+<header class="flight" id="top">
+  <div class="wing-holder">
+    <svg class="wing" viewBox="0 0 1200 420" aria-hidden="true" data-wing></svg>
+  </div>
+  <div class="shell">
+    <div class="hero" data-hero>
+      <h1>Still, then decisive.</h1>
+      <p class="lede">Industrial engineer. I watch a system long enough to know
+        exactly where it breaks, change that one thing, and leave it running
+        quietly without me.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#work">See the work</a>
+        <a class="btn" href="#method">How I work</a>
+      </div>
+      <div class="wordmark-strip">
+        <span class="hair"></span><span class="mono">SILENT FLIGHT</span><span class="hair"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═══ The principle ══════════════════════════════════════ -->
+<section class="band band-quiet" id="why">
+  <div class="shell">
+    <div class="head commit">
+      <p class="mono">THE PRINCIPLE</p>
+      <h2>Noise is a design failure</h2>
+      <p>A snowy owl flies in near silence because the leading edge of its wing
+        is a comb of fine serrations. The teeth break one large vortex into many
+        small ones, and small vortices carry almost no sound. Engineers copied
+        it for wind-turbine blades and pantograph fairings.</p>
+    </div>
+
+    <div class="why commit">
+      <figure class="why-figure">
+        <svg viewBox="0 0 620 300" role="img"
+             aria-label="Two airfoil edges compared. A plain edge sheds a large turbulent wake; a serrated edge splits the flow into fine parallel streams.">
+          <g data-diagram></g>
+        </svg>
+        <figcaption class="mono">FIG. 01 — WAKE STRUCTURE, PLAIN vs. SERRATED EDGE</figcaption>
+      </figure>
+
+      <div class="why-note">
+        <p>I keep coming back to this because it is the whole job in one
+          picture. The plain edge is not lazy — it is doing the obvious thing.
+          It still makes noise.</p>
+        <p>The serrated edge does not fight the turbulence. It divides the
+          problem until every piece is small enough to be harmless. That is
+          decomposition, and it is what I do to a production line, a backlog,
+          or a cost structure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Method ═════════════════════════════════════════════ -->
+<section class="band" id="method">
+  <div class="shell">
+    <div class="head commit">
+      <p class="mono">THE METHOD</p>
+      <h2>Listen first. Move once.</h2>
+      <p>An owl's ears sit at different heights on its skull so it can place a
+        sound in three dimensions before it commits. It does not hunt by trying
+        repeatedly. Neither do I.</p>
+    </div>
+
+    <ol class="rail-list commit">
+      <li class="step"><div class="step-no">01</div><div>
+        <h3>Listen</h3>
+        <p>Talk to the people inside the problem before touching anything. They
+          already know where it hurts; they are rarely asked.</p></div></li>
+      <li class="step"><div class="step-no">02</div><div>
+        <h3>Stabilize</h3>
+        <p>A temporary fix, sized to how critical the failure is. It buys the
+          time to do the real work properly instead of under pressure.</p></div></li>
+      <li class="step"><div class="step-no">03</div><div>
+        <h3>Decompose</h3>
+        <p>Break the system apart. Solve the independent pieces first, then the
+          ones tangled together — never the reverse.</p></div></li>
+      <li class="step"><div class="step-no">04</div><div>
+        <h3>Optimize</h3>
+        <p>Compare the candidates on quality against cost. Pick with math, not
+          with taste, and be able to show the working.</p></div></li>
+      <li class="step"><div class="step-no">05</div><div>
+        <h3>Sustain</h3>
+        <p>Manage the rollout so it holds during setup and keeps holding after
+          handover. If it needs me in the room, it is not finished.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ Work ═══════════════════════════════════════════════ -->
+<section class="band band-quiet" id="work">
+  <div class="shell">
+    <div class="head commit">
+      <p class="mono">SELECTED WORK</p>
+      <h2>What was broken, and what held</h2>
+    </div>
+
+    <article class="sheet commit">
+      <div><p class="mono">01</p><h3>Production line rebalance</h3>
+        <div class="tags"><span class="tag">INDUSTRIAL</span><span class="tag">OPTIMIZATION</span></div></div>
+      <div><p>The problem as the floor described it, the constraint you found
+        underneath it, and what actually changed. Replace this with the real
+        story — specificity is the whole argument.</p>
+        <table class="specs">
+          <tr><th scope="row">Throughput change</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Cycle time</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Duration</th><td><span class="tbc">&nbsp;</span></td></tr>
+        </table></div>
+    </article>
+
+    <article class="sheet commit">
+      <div><p class="mono">02</p><h3>Internal operations tool</h3>
+        <div class="tags"><span class="tag">SOFTWARE</span><span class="tag">PROCESS</span></div></div>
+      <div><p>What people were doing by hand, what you built instead, and the
+        one design decision that made it stick after you stopped maintaining
+        it.</p>
+        <table class="specs">
+          <tr><th scope="row">Hours recovered</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Active users</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Stack</th><td><span class="tbc">&nbsp;</span></td></tr>
+        </table></div>
+    </article>
+
+    <article class="sheet commit">
+      <div><p class="mono">03</p><h3>Applied AI prototype</h3>
+        <div class="tags"><span class="tag">AI</span><span class="tag">PROTOTYPE</span></div></div>
+      <div><p>The decision the model was meant to support, why the obvious
+        approach failed, and what you did instead. Close with what you would
+        change on a second build.</p>
+        <table class="specs">
+          <tr><th scope="row">Task</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Result</th><td><span class="tbc">&nbsp;</span></td></tr>
+          <tr><th scope="row">Status</th><td><span class="tbc">&nbsp;</span></td></tr>
+        </table></div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ Capabilities ═══════════════════════════════════════ -->
+<section class="band" id="skills">
+  <div class="shell">
+    <div class="head commit">
+      <p class="mono">CAPABILITY</p>
+      <h2>The résumé as a bill of materials</h2>
+    </div>
+    <div class="groups commit">
+      <div class="group"><h3>INDUSTRIAL</h3><ul>
+        <li>Process analysis and redesign</li>
+        <li>Line balancing and layout</li>
+        <li>Quality systems</li>
+        <li>Cost and capacity modelling</li>
+        <li>Lean and continuous improvement</li></ul></div>
+      <div class="group"><h3>SOFTWARE</h3><ul>
+        <li>Web applications</li>
+        <li>Internal tools and dashboards</li>
+        <li>Databases and data pipelines</li>
+        <li>Interface and interaction design</li></ul></div>
+      <div class="group"><h3>ARTIFICIAL INTELLIGENCE</h3><ul>
+        <li>Applied machine learning</li>
+        <li>Language-model applications</li>
+        <li>Automation of manual decisions</li>
+        <li>Judging what is worth automating</li></ul></div>
+      <div class="group"><h3>BUSINESS</h3><ul>
+        <li>Unit economics</li>
+        <li>Operations and scheduling</li>
+        <li>Vendor and cost negotiation</li>
+        <li>Building products end to end</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Origin ═════════════════════════════════════════════ -->
+<section class="band band-quiet" id="about">
+  <div class="shell">
+    <div class="about commit">
+      <div class="head" style="margin-bottom:0">
+        <p class="mono">ORIGIN</p>
+        <h2>Where the method came from</h2>
+      </div>
+      <div>
+        <p>I grew up somewhere small, where a thing that broke got fixed rather
+          than replaced, and whoever fixed it had to live with the result. That
+          is still how I work.</p>
+        <blockquote class="pull">A clever solution that needs me in the room to
+          survive is not a solution.</blockquote>
+        <p>Industrial engineering gave me the formal tools — decomposition,
+          constraint analysis, optimization under cost. Software and AI gave me
+          somewhere else to point them. It is the same job either way: find the
+          part of the system that is actually limiting everything else, and
+          change that part.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Contact ════════════════════════════════════════════ -->
+<section class="band" id="contact">
+  <div class="shell">
+    <div class="close commit">
+      <p class="mono">CONTACT</p>
+      <h2 style="margin-top:var(--s-4)">Have something that keeps breaking?</h2>
+      <a class="mailto" href="mailto:you@example.com">you@example.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot">
+      <p class="mono">YOUR NAME — INDUSTRIAL ENGINEER</p>
+      <p class="mono">DOTTED VALUES ARE PLACEHOLDERS</p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /.wrap -->
+
+<script>
+(function(){
+"use strict";
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var CX = 600, CY = 350;
+
+/* ══════════════════════════════════════════════════════════
+   THE WING — three feather layers, each a tapered blade with a
+   quill. Opacity varies across the fan so it reads with depth
+   instead of flat. Geometry verified against the viewBox: no
+   feather clips, and only 48px sits unused below the body.
+   ══════════════════════════════════════════════════════════ */
+function blade(side, x0, len, w){
+  var xa = CX + side * x0, xb = CX + side * (x0 + len), L = len;
+  var u1 = CX + side * (x0 + L * 0.30), u2 = CX + side * (x0 + L * 0.74);
+  return 'M' + xa + ' ' + CY +
+         ' C' + u1 + ' ' + (CY - w) + ' ' + u2 + ' ' + (CY - w * 0.46) + ' ' + xb + ' ' + CY +
+         ' C' + u2 + ' ' + (CY + w * 0.26) + ' ' + u1 + ' ' + (CY + w * 0.52) + ' ' + xa + ' ' + CY + 'Z';
+}
+
+function layer(side, n, a0, a1, x0, base, span, w, fill, stroke, sw){
+  var out = '';
+  for (var i = 0; i < n; i++){
+    var t   = i / (n - 1);
+    var arc = Math.sin(Math.PI * t);              /* tonal depth across the fan */
+    var ang = a0 + (a1 - a0) * t;
+    var len = base + span * Math.sin(Math.PI * (0.10 + 0.80 * t));
+    var d   = blade(side, x0, len, w * (0.6 + 0.4 * arc));
+    var xb  = CX + side * (x0 + len);
+    var sO  = stroke * (0.52 + 0.48 * arc);
+    out += '<g class="feather" style="--a:' + (side * -ang).toFixed(1) + 'deg;' +
+           'transition-delay:' + Math.round(t * 60) + 'ms">' +
+           '<path class="blade" d="' + d + '" fill-opacity="' + (fill * (0.6 + 0.4 * arc)).toFixed(3) +
+           '" stroke-opacity="' + (sO * 0.8).toFixed(3) + '" stroke-width="' + sw + '"/>' +
+           '<path class="quill" d="M' + (CX + side * x0) + ' ' + CY + ' L' + xb + ' ' + CY +
+           '" stroke-opacity="' + sO.toFixed(3) + '" stroke-width="' + (sw * 0.7).toFixed(2) + '"/>' +
+           '</g>';
+  }
+  return out;
+}
+
+/* The serrated edge, riding the TRUE outer envelope of the
+   primaries — the wing's actual edge, not an arbitrary arc. */
+function serratedEdge(side, a0, a1, x0, base, span, steps){
+  var pts = [], out = '';
+  for (var i = 0; i <= steps; i++){
+    var t   = i / steps;
+    var ang = (a0 + (a1 - a0) * t) * Math.PI / 180;
+    var r   = x0 + base + span * Math.sin(Math.PI * (0.10 + 0.80 * t));
+    var x   = CX + side * Math.cos(ang) * r, y = CY - Math.sin(ang) * r;
+    pts.push([x, y]);
+    var tooth = 5 + 11 * Math.sin(Math.PI * t);
+    out += '<path class="comb" d="M' + x.toFixed(1) + ' ' + y.toFixed(1) +
+           ' L' + (CX + side * Math.cos(ang) * (r + tooth)).toFixed(1) + ' ' +
+           (CY - Math.sin(ang) * (r + tooth)).toFixed(1) + '" stroke-width="1.05"/>';
+  }
+  var poly = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+  for (var k = 1; k < pts.length; k++) poly += ' L' + pts[k][0].toFixed(1) + ' ' + pts[k][1].toFixed(1);
+  return '<path class="comb" d="' + poly + '" stroke-width="1"/>' + out;
+}
+
+var wing = document.querySelector('[data-wing]');
+function buildWing(){
+  var s = '<defs>' +
+    '<radialGradient id="irisG" cx="42%" cy="36%" r="72%">' +
+      '<stop offset="0%"   stop-color="#F7CB63"/>' +
+      '<stop offset="52%"  stop-color="#E8A21C"/>' +
+      '<stop offset="100%" stop-color="#8E5A12"/></radialGradient>' +
+    '<radialGradient id="glowG" cx="50%" cy="50%" r="50%">' +
+      '<stop offset="0%"   stop-color="#E8A21C" stop-opacity=".26"/>' +
+      '<stop offset="55%"  stop-color="#E8A21C" stop-opacity=".07"/>' +
+      '<stop offset="100%" stop-color="#E8A21C" stop-opacity="0"/></radialGradient>' +
+    '<radialGradient id="coreG" cx="50%" cy="50%" r="50%">' +
+      '<stop offset="0%"   stop-color="#F5F7F1" stop-opacity=".10"/>' +
+      '<stop offset="100%" stop-color="#F5F7F1" stop-opacity="0"/></radialGradient>' +
+    '</defs>';
+
+  /* a datum horizon — the technical language holding the organic form */
+  s += '<g class="horizon"><path d="M40 ' + CY + ' L1160 ' + CY + '" stroke="currentColor" stroke-width="1"/>';
+  for (var hx = 100; hx <= 1100; hx += 100){
+    s += '<path d="M' + hx + ' ' + (CY - 4) + ' L' + hx + ' ' + (CY + 4) + '" stroke="currentColor" stroke-width="1"/>';
+  }
+  s += '</g>';
+
+  s += '<ellipse class="core" cx="' + CX + '" cy="' + CY + '" rx="150" ry="96"/>';
+
+  for (var side = -1; side <= 1; side += 2){
+    s += layer(side, 13, 3, 38, 38, 104,  66, 15, 0.055, 0.22, 0.9);  /* coverts     */
+    s += layer(side, 16, 2, 45, 46, 176, 128, 18, 0.060, 0.30, 0.9);  /* secondaries */
+    s += layer(side, 19, 0, 52, 54, 250, 236, 21, 0.070, 0.46, 1.0);  /* primaries   */
+    s += serratedEdge(side, 0, 52, 54, 250, 236, 52);
+  }
+
+  s += '<g class="glow"><circle cx="' + CX + '" cy="' + CY + '" r="150" fill="url(#glowG)"/></g>';
+  s += '<g class="eye">' +
+       '<circle class="iris-body" cx="' + CX + '" cy="' + CY + '" r="26"/>' +
+       '<g data-pupil><circle class="pupil" cx="' + CX + '" cy="' + CY + '" r="11"/>' +
+       '<circle class="spec" cx="' + (CX - 4.5) + '" cy="' + (CY - 5.5) + '" r="2.6"/></g>' +
+       '<ellipse class="lid" cx="' + CX + '" cy="' + CY + '" rx="28" ry="29"/>' +
+       '</g>';
+  wing.innerHTML = s;
+}
+buildWing();
+
+/* On phones the full spread renders the eye at ~7px. Crop in close
+   instead, so the eye and its blink survive on a small screen. */
+var narrow = matchMedia('(max-width: 679px)');
+function frame(mq){ wing.setAttribute('viewBox', mq.matches ? '330 195 540 215' : '0 0 1200 420'); }
+frame(narrow);
+if (narrow.addEventListener) narrow.addEventListener('change', frame);
+else if (narrow.addListener) narrow.addListener(frame);
+
+/* the brand mark: the same comb, reduced to a signature */
+var bm = document.querySelector('[data-brandmark]');
+if (bm){
+  var o = '', R = 12, bx = 16, by = 21;
+  for (var i = 0; i <= 12; i++){
+    var t = i / 12, a = (10 + 160 * t) * Math.PI / 180;
+    var l = 2.4 + 4.8 * Math.sin(Math.PI * t);
+    o += '<line x1="' + (bx + Math.cos(a) * R).toFixed(1) + '" y1="' + (by - Math.sin(a) * R).toFixed(1) +
+         '" x2="' + (bx + Math.cos(a) * (R + l)).toFixed(1) + '" y2="' + (by - Math.sin(a) * (R + l)).toFixed(1) +
+         '" stroke="#E8A21C" stroke-width="1.3" stroke-linecap="round"/>';
+  }
+  bm.innerHTML = '<path d="M4 21 A12 12 0 0 1 28 21" fill="none" stroke="#E8A21C" stroke-width="1.3"/>' + o;
+}
+
+/* the wake diagram */
+var dg = document.querySelector('[data-diagram]');
+if (dg){
+  var d = '', x, i2;
+  d += '<text class="diag-label" x="26" y="34">PLAIN EDGE</text>';
+  d += '<path class="diag-line" d="M26 74 L300 74" stroke-width="2.5"/>';
+  for (i2 = 0; i2 < 4; i2++){
+    var ox = 326 + i2 * 68, oy = 74 + (i2 % 2 ? 22 : -20);
+    d += '<path class="diag-wake" d="M' + ox + ' ' + oy +
+         ' c 18 -24 44 -22 51 3 c 6 22 -19 33 -31 18 c -10 -12 3 -25 15 -18" stroke-width="1.3"/>';
+  }
+  d += '<text class="diag-label" x="326" y="140">TURBULENT WAKE — AUDIBLE</text>';
+  d += '<path class="diag-rule" d="M26 166 L594 166" stroke-width="1" stroke-dasharray="3 5"/>';
+  d += '<text class="diag-label" x="26" y="212">SERRATED EDGE</text>';
+  d += '<path class="diag-line" d="M26 250 L300 250" stroke-width="2.5"/>';
+  for (x = 26; x <= 300; x += 7){
+    d += '<path class="diag-line" d="M' + x + ' 250 L' + (x + 3.5) + ' 238" stroke-width="1.1"/>';
+  }
+  for (i2 = 0; i2 < 10; i2++){
+    var yy = 226 + i2 * 7;
+    d += '<path class="diag-wake-calm" d="M316 ' + yy + ' L' + (498 + (i2 % 3) * 30) + ' ' + yy + '" stroke-width="1.1"/>';
+  }
+  d += '<text class="diag-label" x="316" y="292">FINE PARALLEL STREAMS — SILENT</text>';
+  dg.innerHTML = d;
+}
+
+/* ══════════════════════════════════════════════════════════
+   STILLNESS, THEN ONE MOVE.
+   850ms of nothing. The wing opens and stops. Only once it has
+   come to rest does the serrated edge resolve — the fine detail
+   is the reward for holding still.
+   ══════════════════════════════════════════════════════════ */
+var hero = document.querySelector('[data-hero]');
+function open(){ wing.classList.add('is-open'); hero.classList.add('is-open'); }
+if (reduced) { open(); } else { setTimeout(open, 850); }
+
+/* ══════════════════════════════════════════════════════════
+   IT WATCHES YOU. The only idle behaviour on the page.
+   ══════════════════════════════════════════════════════════ */
+if (!reduced){
+  var pupil = wing.querySelector('[data-pupil]');
+  var px = 0, py = 0, tx = 0, ty = 0, queued = false;
+  function stepEye(){
+    queued = false;
+    px += (tx - px) * 0.16; py += (ty - py) * 0.16;
+    pupil.setAttribute('transform', 'translate(' + px.toFixed(2) + ',' + py.toFixed(2) + ')');
+    if (Math.abs(tx - px) > 0.25 || Math.abs(ty - py) > 0.25) queueEye();
+  }
+  function queueEye(){ if (!queued){ queued = true; requestAnimationFrame(stepEye); } }
+  addEventListener('pointermove', function(e){
+    var r = wing.getBoundingClientRect();
+    if (!r.width) return;
+    var nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+    var ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+    tx = Math.max(-1, Math.min(1, nx)) * 8.5;
+    ty = Math.max(-1, Math.min(1, ny)) * 8.5;
+    queueEye();
+  }, { passive: true });
+
+  /* owls blink rarely and fast — never on a fixed rhythm */
+  (function blink(){
+    setTimeout(function(){
+      if (!document.hidden && wing.classList.contains('is-open')){
+        wing.classList.add('is-blinking');
+        setTimeout(function(){ wing.classList.remove('is-blinking'); }, 145);
+      }
+      blink();
+    }, 5200 + Math.random() * 6800);
+  })();
+}
+
+/* ══ Sections commit — they do not fade in ════════════════ */
+var items = document.querySelectorAll('.commit');
+if (reduced || !('IntersectionObserver' in window)){
+  [].forEach.call(items, function(e){ e.classList.add('is-on'); });
+} else {
+  var io = new IntersectionObserver(function(en){
+    en.forEach(function(x){
+      if (x.isIntersecting){ x.target.classList.add('is-on'); io.unobserve(x.target); }
+    });
+  }, { rootMargin: '0px 0px -18% 0px', threshold: 0.2 });
+  [].forEach.call(items, function(e){ io.observe(e); });
+}
+
+/* ══ The rail is the navigation ═══════════════════════════ */
+var links = [].slice.call(document.querySelectorAll('.index a'));
+var targets = links.map(function(a){ return document.getElementById(a.dataset.idx); });
+if ('IntersectionObserver' in window){
+  var spy = new IntersectionObserver(function(en){
+    en.forEach(function(x){
+      var i = targets.indexOf(x.target);
+      if (i < 0 || !x.isIntersecting) return;
+      links.forEach(function(l){ l.removeAttribute('aria-current'); });
+      links[i].setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  targets.forEach(function(t){ if (t) spy.observe(t); });
+}
+})();
+</script>
+</body>
+</html>
