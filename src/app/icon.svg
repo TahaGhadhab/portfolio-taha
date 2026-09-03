@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="Chouette">
+  <!--
+    Favicon — même chouette que la marque de la barre (BrandMark.tsx), à un
+    détail près : elle porte ici son propre fond. Un onglet peut être clair ou
+    sombre, et un dessin qui compte sur le fond de la page y disparaîtrait une
+    fois sur deux. Couleurs en dur, forcément : une feuille de style ne suit
+    pas un favicon.
+  -->
+  <rect width="40" height="40" rx="8" fill="#0B0E0C"/>
+  <g transform="translate(4 4)">
+    <circle cx="16" cy="17" r="11.4" fill="none" stroke="#E8A21C" stroke-width="1.6"/>
+    <path d="M7.9 8.9 L8.5 2.5 L11.3 6.6 Z" fill="#E8A21C"/>
+    <path d="M24.1 8.9 L23.5 2.5 L20.7 6.6 Z" fill="#E8A21C"/>
+    <circle cx="11.6" cy="16" r="4.3" fill="#E8A21C"/>
+    <circle cx="20.4" cy="16" r="4.3" fill="#E8A21C"/>
+    <circle cx="11.6" cy="16" r="1.9" fill="#0B0E0C"/>
+    <circle cx="20.4" cy="16" r="1.9" fill="#0B0E0C"/>
+    <path d="M13.9 21.3 L18.1 21.3 L16 25.7 Z" fill="#E8A21C"/>
+  </g>
+</svg>
