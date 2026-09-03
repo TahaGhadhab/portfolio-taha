@@ -87,6 +87,9 @@
   --edge: clamp(1.125rem, 4.5vw, 3.5rem);
   --frame: clamp(10px, 1.2vw, 18px);
 
+  /* Hauteur de la barre collante — les ancres s'arrêtent dessous. */
+  --nav-h: 5.75rem;
+
   /* --- Mouvement --- */
   --commit: var(--ease-commit);
   --d-blink: 130ms;
@@ -160,9 +163,10 @@
     transition: none;
   }
 
+  /* Une ancre ne doit jamais se ranger derrière la barre collante. */
   section[id],
   header[id] {
-    scroll-margin-top: calc(var(--frame) + var(--s-6));
+    scroll-margin-top: calc(var(--nav-h) + var(--s-4));
   }
 }
 
@@ -286,6 +290,42 @@
 }
 
 /* ── Navigation — statique. Ne colle jamais, ne rétrécit jamais ── */
+/* La barre reste accessible pendant toute la lecture. Elle colle, mais ne se
+   transforme pas : hauteur constante, opacité constante, aucun retour au
+   défilement inverse.
+
+   Fond opaque et non flouté : un `backdrop-filter` ferait de cette barre un
+   bloc conteneur pour les descendants `position: fixed`, et le voile plein
+   écran du menu mobile — qui vit à l'intérieur — cesserait de couvrir la page.
+   `position: sticky`, elle, n'a pas cet effet. */
+.nav-bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+  background: var(--void);
+  border-bottom: 1px solid transparent;
+}
+
+/* Le filet de séparation n'apparaît qu'une fois la page engagée — là où il
+   sert à détacher la barre du contenu qui passe dessous. Animation pilotée
+   par le défilement, donc sans JavaScript ; les navigateurs qui ne la
+   connaissent pas gardent simplement un filet transparent. */
+@supports (animation-timeline: scroll()) {
+  .nav-bar {
+    animation: nav-settle linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 120px;
+  }
+  @keyframes nav-settle {
+    from {
+      border-bottom-color: transparent;
+    }
+    to {
+      border-bottom-color: var(--line);
+    }
+  }
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -294,9 +334,11 @@
   flex-wrap: wrap;
   padding-block: var(--s-5);
   position: relative;
-  z-index: 20;
+  z-index: 55;
 }
 .brand {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: var(--s-3);
@@ -361,6 +403,173 @@
 .nav-links a.nav-utility:hover {
   border-color: var(--iris);
   color: var(--iris);
+}
+
+/* ── Menu du petit écran ─────────────────────────────
+   Huit ancres ne tiennent pas dans une barre de 390 px. Elles se
+   replient derrière un seul bouton et s'ouvrent en planche pleine
+   largeur, une station par ligne, numérotée comme le rail latéral.
+   Le panneau vit dans la barre : il hérite de son plan, ce qui laisse
+   le bouton atteignable pendant qu'il est ouvert. */
+.menu-btn {
+  position: relative;
+  z-index: 2;
+  display: none;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  padding-inline: var(--s-4);
+  border: 1px solid var(--line-lit);
+  border-radius: 2px;
+  background: none;
+  color: var(--snow-2);
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition:
+    color var(--d-snap) var(--commit),
+    border-color var(--d-snap) var(--commit);
+}
+.menu-btn[aria-expanded="true"] {
+  border-color: var(--iris);
+  color: var(--iris);
+}
+/* Deux traits qui se rejoignent en un seul. Rien ne tourne. */
+.menu-glyph {
+  position: relative;
+  width: 15px;
+  height: 9px;
+  flex: none;
+}
+.menu-glyph span {
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  background: currentColor;
+  transition: translate var(--d-snap) var(--commit);
+}
+.menu-glyph span:first-child {
+  inset-block-start: 0;
+}
+.menu-glyph span:last-child {
+  inset-block-start: 8px;
+}
+.menu-glyph.is-open span:first-child {
+  translate: 0 4px;
+}
+.menu-glyph.is-open span:last-child {
+  translate: 0 -4px;
+}
+
+.menu-sheet {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--d-snap) var(--commit),
+    visibility 0s linear var(--d-snap);
+}
+.menu-sheet.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    opacity var(--d-snap) var(--commit),
+    visibility 0s;
+}
+.menu-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(6, 9, 7, 0.88);
+  cursor: default;
+}
+.menu-panel {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 100%;
+  inset-inline: calc(var(--frame) - var(--edge));
+  max-height: calc(100dvh - 8rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--void);
+  border-block: 1px solid var(--line-lit);
+  padding: var(--s-2) var(--edge) var(--s-6);
+  translate: 0 -6px;
+  transition: translate var(--d-snap) var(--commit);
+}
+.menu-sheet.is-open .menu-panel {
+  translate: 0 0;
+}
+.menu-panel:focus {
+  outline: none;
+}
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu-list a {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  gap: var(--s-3);
+  align-items: center;
+  min-height: 56px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.menu-list li:last-child a {
+  border-bottom: 0;
+}
+.menu-no {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.1em;
+  color: var(--iris);
+  font-variant-numeric: tabular-nums;
+}
+.menu-lab {
+  font-family: var(--f-display);
+  font-size: var(--t-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.menu-tick {
+  width: 18px;
+  height: 1px;
+  background: var(--edge-ui);
+  transition:
+    width var(--d-snap) var(--commit),
+    background var(--d-snap) var(--commit);
+}
+.menu-list a:active .menu-tick,
+.menu-list a:focus-visible .menu-tick {
+  width: 28px;
+  background: var(--iris);
+}
+.menu-utils {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+.menu-utils .nav-utility {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  color: var(--snow-2);
+  border: 1px solid var(--line-lit);
+  border-radius: 2px;
+  padding-inline: var(--s-4);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* ═══ LE VOL ══════════════════════════════════════════════════
@@ -478,9 +687,6 @@
   max-width: 15ch;
   margin-inline: auto;
   text-wrap: balance;
-}
-.hero .hero-name {
-  margin-bottom: var(--s-4);
 }
 .hero .lede {
   margin: var(--s-6) auto 0;
@@ -1284,12 +1490,222 @@ details[open] > .fold-toggle .fold-open {
     display: flex;
   }
 }
+@media (min-width: 900px) {
+  .menu-sheet {
+    display: none;
+  }
+}
+
+/* ── Sous 900 px : la barre se replie ───────────────────── */
+@media (max-width: 899px) {
+  :root {
+    --nav-h: 4.75rem;
+  }
+  .nav-wide {
+    display: none;
+  }
+  .menu-btn {
+    display: inline-flex;
+  }
+  .nav {
+    flex-wrap: nowrap;
+    gap: var(--s-3);
+    padding-block: var(--s-4);
+  }
+  .brand {
+    min-width: 0;
+  }
+  .brand-name,
+  .brand-role {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* ── Téléphone : la même page, à hauteur de pouce ────────── */
 @media (max-width: 679px) {
+  :root {
+    /* Le document respire moins haut : sept rem de blanc entre deux
+       bandes coûtent la moitié d'un écran sur un 390 px. */
+    --s-8: 3rem;
+    --s-9: 3.75rem;
+    --measure: 40ch;
+  }
+
   .flight {
     padding-block: var(--s-4) var(--s-8);
   }
   .hero {
     margin-top: var(--s-6);
+  }
+  .hero h1 {
+    max-width: none;
+    letter-spacing: -0.03em;
+  }
+  .hero .lede {
+    font-size: var(--t-0);
+    margin-top: var(--s-5);
+  }
+
+  /* Trois boutons pleine largeur : une cible par ligne, aucun choix
+     de la taille d'un ongle. */
+  .hero-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-3);
+    margin-top: var(--s-6);
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding-inline: var(--s-4);
+    min-height: 50px;
+  }
+
+  /* Les trois relevés deviennent un bandeau chiffré plutôt que trois
+     blocs qui retombent les uns sous les autres. */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin-top: var(--s-7);
+    border-block: 1px solid var(--line);
+    padding-block: var(--s-4);
+  }
+  .hero-stats div {
+    padding-inline: var(--s-2);
+  }
+  .hero-stats div + div {
+    border-inline-start: 1px solid var(--line);
+  }
+  .hero-stats .v {
+    font-size: var(--t-1);
+  }
+  .hero-stats .k {
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.35;
+  }
+  .wordmark-strip {
+    margin-top: var(--s-7);
+  }
+
+  .head {
+    margin-bottom: var(--s-6);
+  }
+  .head h2,
+  .close h2 {
+    max-width: none;
+  }
+
+  .why-figure {
+    margin-inline: calc(var(--frame) - var(--edge));
+    border-inline: 0;
+    padding: var(--s-4) var(--s-3);
+  }
+  .diag-label {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  /* La pastille entrée/sortie se rapproche de son texte : vingt-huit
+     pixels de retrait coûtent un mot par ligne sur un écran étroit. */
+  .io-row {
+    grid-template-columns: 0.5rem minmax(0, 1fr);
+    gap: var(--s-2);
+  }
+
+  /* Le numéro passe au-dessus du titre : trois rem de gouttière valent
+     mieux en largeur de texte sur un écran étroit. */
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-1);
+    padding-block: var(--s-5);
+  }
+  .step-no {
+    padding-top: 0;
+  }
+  .step h3 {
+    font-size: var(--t-1);
+  }
+
+  .sheet {
+    padding-block: var(--s-6);
+    gap: var(--s-4);
+  }
+  .sheet h3 {
+    font-size: var(--t-2);
+  }
+  .sheet-aside {
+    gap: var(--s-2);
+  }
+  .metric {
+    padding-left: var(--s-3);
+  }
+  .specs {
+    max-width: none;
+  }
+  .specs th {
+    width: 40%;
+  }
+
+  /* Le dépliage occupe toute la largeur : la ligne entière est la cible. */
+  .fold-toggle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    min-height: 52px;
+  }
+  .fold-sign {
+    order: 2;
+  }
+
+  .groups {
+    gap: var(--s-5);
+  }
+  .group li {
+    padding-block: var(--s-3);
+  }
+
+  .pull {
+    font-size: var(--t-1);
+    padding-left: var(--s-4);
+    margin-block: var(--s-5);
+  }
+
+  .mailto {
+    font-size: var(--t-1);
+  }
+  /* Libellé au-dessus de la valeur : un numéro de téléphone et son
+     intitulé ne partagent pas une ligne de 390 px. */
+  .contact-row {
+    display: grid;
+    gap: 2px;
+    justify-content: stretch;
+  }
+  .contact-row .val {
+    font-size: var(--t-0);
+  }
+  .foot {
+    gap: var(--s-2);
+  }
+
+  .cv-page {
+    padding-block: var(--s-6) var(--s-7);
+  }
+  .cv-head h1 {
+    font-size: var(--t-3);
+  }
+  .cv-row {
+    gap: var(--s-1) var(--s-3);
+  }
+}
+
+/* Sur les très petits écrans, la barre garde le nom et lâche le rôle. */
+@media (max-width: 359px) {
+  .brand-role {
+    display: none;
   }
 }
 
@@ -1328,6 +1744,8 @@ details[open] > .fold-toggle .fold-open {
   .vignette,
   .grain,
   .index,
+  .menu-btn,
+  .menu-sheet,
   .no-print {
     display: none !important;
   }

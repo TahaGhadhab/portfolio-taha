@@ -11,7 +11,7 @@ const VORTICES = Array.from({ length: 4 }, (_, i) => {
 /* Les dents du bord dentelé, régulières, et les filets qu'elles produisent. */
 const TEETH = Array.from({ length: 40 }, (_, i) => 26 + i * 7).filter((x) => x <= 300);
 const STREAMS = Array.from({ length: 10 }, (_, i) => ({
-  y: 226 + i * 7,
+  y: 218 + i * 6,
   x2: 498 + (i % 3) * 30,
 }));
 

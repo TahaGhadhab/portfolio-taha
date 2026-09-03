@@ -313,10 +313,9 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
       </div>
 
       <div className="shell">
+        {/* Le nom vit dans la barre collante, visible en permanence : le
+            répéter ici ne ferait que retarder la seule phrase qui compte. */}
         <div className={`hero${open ? " is-open" : ""}`}>
-          <p className="mono hero-name">
-            {hero.name} — {hero.role}
-          </p>
           <h1>{hero.headline}</h1>
           <p className="lede">{hero.lede}</p>
 

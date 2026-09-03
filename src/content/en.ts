@@ -89,9 +89,9 @@ export const en: Content = {
         label: "startup co-founded"
       },
       {
-        value: "42",
+        value: "4",
         unit: "",
-        label: "KPIs tracked"
+        label: "projects built"
       }
     ],
     ctaPrimary: "See the work",

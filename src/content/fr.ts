@@ -91,9 +91,9 @@ export const fr: Content = {
         label: "startup co-fondée"
       },
       {
-        value: "42",
+        value: "4",
         unit: "",
-        label: "KPI suivis"
+        label: "projets construits"
       }
     ],
     ctaPrimary: "Voir les réalisations",
