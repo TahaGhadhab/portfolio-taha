@@ -162,13 +162,28 @@ export interface Content {
   method: {
     title: string;
     intro: string;
+    /**
+     * La planche d'ouverture : le circuit fermé. La liste dit ce que contient
+     * chaque poste, la figure dit que le dernier renvoie au premier.
+     */
+    figure: {
+      alt: string;
+      caption: string;
+      /** L'arête de retour, en une ou deux lignes courtes — la figure ne renvoie pas à la ligne toute seule. */
+      returnLabel: string[];
+    };
     steps: { step: string; title: string; body: string }[];
   };
   about: {
     title: string;
     lead: string;
     body: string[];
-    positioning: { title: string; pillars: { title: string; body: string }[] };
+    positioning: {
+      title: string;
+      /** Les trois disques et leur intersection : le point commun se voit, il ne s'affirme pas. */
+      figure: { alt: string; caption: string; centerLabel: string };
+      pillars: { title: string; body: string }[];
+    };
   };
   education: { title: string; intro: string; items: Education[] };
   experience: {

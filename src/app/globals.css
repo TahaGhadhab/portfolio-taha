@@ -22,7 +22,7 @@
   --color-snow: #f5f7f1; /* plumage / texte principal — 17.98:1 ✓ */
   --color-snow-2: #c5ccc2; /* texte secondaire — 11.82:1 ✓ */
   --color-snow-3: #8b948a; /* méta en mono — 6.19:1 ✓ */
-  --color-iris: #e8a21c; /* l'œil. la seule chose chaude — 8.88:1 ✓ */
+  --color-iris: #ffab12; /* l'œil. la seule chose chaude — 10.25:1 ✓ */
 
   /* --- Signal fonctionnel : réservé aux fiches de terrain ---
      Une entrée « problème », une sortie « livré ». Les deux
@@ -1104,21 +1104,51 @@
   gap: var(--s-7);
   align-items: start;
 }
-.why-figure {
+.why-figure,
+.plate {
   border: 1px solid var(--line-lit);
   background: var(--void);
   padding: var(--s-5);
   margin: 0;
 }
-.why-figure svg {
+.why-figure svg,
+.plate svg {
   width: 100%;
   height: auto;
   display: block;
 }
-.why-figure figcaption {
+.why-figure figcaption,
+.plate figcaption {
   margin-top: var(--s-4);
   padding-top: var(--s-4);
   border-top: 1px solid var(--line);
+}
+/* Une planche posée dans le flux d'une bande respire des deux côtés.
+
+   Elle se lit aussi à sa taille de dessin : étirée sur toute la largeur de la
+   colonne, un tracé de 560 unités passe à l'échelle 2, et ses étiquettes de
+   douze pixels en font vingt-quatre. Le cadre est donc borné à la largeur du
+   tracé — au-delà, la figure grossit sans rien dire de plus. */
+.plate {
+  margin-block: var(--s-6) var(--s-7);
+  max-width: 36rem;
+}
+
+/* Deux tracés du même schéma, un seul affiché. Le `viewBox` étant fixe, c'est
+   la géométrie qui change de format, pas l'échelle du texte. */
+.plate .wide {
+  display: none;
+}
+.plate .narrow {
+  display: block;
+}
+@media (min-width: 680px) {
+  .plate .wide {
+    display: block;
+  }
+  .plate .narrow {
+    display: none;
+  }
 }
 .why-note {
   color: var(--snow-2);
@@ -1150,6 +1180,61 @@
 }
 .diag-rule {
   stroke: var(--line-lit);
+}
+
+/* --- Le circuit : postes, arêtes, et la seule arête qui remonte --- */
+.diag-node {
+  stroke: var(--line-lit);
+  fill: var(--void-lift);
+}
+.diag-title {
+  font-family: var(--f-display);
+  font-size: 19px;
+  letter-spacing: var(--tr--1);
+  fill: var(--snow);
+}
+.diag-edge {
+  stroke: var(--snow-3);
+  fill: none;
+}
+.diag-edge-head {
+  fill: var(--snow-3);
+  stroke: none;
+}
+/* Le retour est la seule affirmation de la figure : il la porte en iris. */
+.diag-return {
+  stroke: var(--iris);
+  fill: none;
+}
+.diag-return-head {
+  fill: var(--iris);
+  stroke: none;
+}
+.diag-return-label {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: var(--tr--2);
+  fill: var(--iris);
+}
+
+/* --- L'intersection : trois disques de même poids --- */
+.diag-field {
+  stroke: var(--line-lit);
+  fill: var(--snow);
+  fill-opacity: 0.03;
+}
+.diag-leader {
+  stroke: var(--line-lit);
+  fill: none;
+}
+.diag-mark {
+  fill: var(--iris);
+}
+.diag-mark-label {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: var(--tr--2);
+  fill: var(--iris);
 }
 
 /* ── Listes sur rail — méthode, formation, engagement ─────── */
@@ -1930,12 +2015,15 @@ details[open] > .fold-toggle .fold-open {
     max-width: none;
   }
 
-  .why-figure {
+  .why-figure,
+  .plate {
     margin-inline: calc(var(--frame) - var(--edge));
     border-inline: 0;
     padding: var(--s-4) var(--s-3);
   }
-  .diag-label {
+  .diag-label,
+  .diag-return-label,
+  .diag-mark-label {
     font-size: 14px;
     letter-spacing: var(--tr--2);
   }
@@ -2617,5 +2705,53 @@ details[open] > .fold-body {
   }
   a {
     text-decoration: none !important;
+  }
+  /* Le papier inverse le document : un tracé en `--snow` s'y imprimerait
+     blanc sur blanc. Les planches repassent donc en traits noirs, et seule
+     la version large est tirée — la feuille en a la largeur. */
+  .plate .narrow {
+    display: none !important;
+  }
+  .plate .wide {
+    display: block !important;
+  }
+  .why-figure,
+  .plate {
+    border-color: #999 !important;
+    background: none !important;
+  }
+  .diag-line,
+  .diag-wake,
+  .diag-wake-calm,
+  .diag-edge,
+  .diag-leader,
+  .diag-rule {
+    stroke: #666 !important;
+  }
+  .diag-node {
+    stroke: #999 !important;
+    fill: none !important;
+  }
+  .diag-field {
+    stroke: #999 !important;
+    fill: none !important;
+  }
+  .diag-return {
+    stroke: #000 !important;
+  }
+  .diag-edge-head {
+    fill: #666 !important;
+  }
+  .diag-return-head,
+  .diag-mark {
+    fill: #000 !important;
+  }
+  .diag-title {
+    fill: #000 !important;
+  }
+  .diag-label,
+  .diag-return-label,
+  .diag-mark-label {
+    fill: #333 !important;
   }
 }

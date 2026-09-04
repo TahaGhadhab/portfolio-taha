@@ -118,6 +118,11 @@ export const fr: Content = {
   method: {
     title: "Méthode de travail",
     intro: "Le même protocole sur chaque mission, du terrain jusqu'au pilotage. C'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
+    figure: {
+      alt: "Circuit fermé à quatre postes : identifier, concevoir, implémenter, mesurer. Une quatrième arête ramène la mesure vers l'identification.",
+      caption: "FIG. 02 — BOUCLE DE PROTOCOLE, SANS FIN DE COURSE",
+      returnLabel: ["Le gain mesuré", "relance l'observation"]
+    },
     steps: [
       {
         step: "01",
@@ -150,6 +155,11 @@ export const fr: Content = {
     ],
     positioning: {
       title: "Triple casquette",
+      figure: {
+        alt: "Trois disques de même taille — ingénierie industrielle, data et IA appliquée, business et entrepreneuriat — qui se recouvrent en un seul point commun.",
+        caption: "FIG. 03 — TROIS DOMAINES, UNE SEULE INTERSECTION",
+        centerLabel: "Ici"
+      },
       pillars: [
         {
           title: "Ingénierie industrielle",

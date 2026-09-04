@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getContent, getDeployments, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
 import { Flight } from "@/components/Flight";
+import { MethodLoop } from "@/components/Figures";
 import { Optics } from "@/components/Optics";
 import { PageMotion } from "@/components/PageMotion";
 import { PrincipleSection } from "@/components/PrincipleSection";
@@ -81,6 +82,9 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
               title={c.method.title}
               intro={c.method.intro}
             />
+            {/* La planche d'abord : elle donne la forme du protocole. Le rail
+                donne ensuite le contenu de chaque poste. */}
+            <MethodLoop figure={c.method.figure} steps={c.method.steps} />
             <MethodRail steps={c.method.steps} />
           </Band>
 

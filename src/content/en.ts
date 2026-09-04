@@ -116,6 +116,11 @@ export const en: Content = {
   method: {
     title: "How I work",
     intro: "The same protocol on every assignment, from the shop floor to the control tower. It is what connects an OCR tool at Safran to an academic dashboard.",
+    figure: {
+      alt: "A closed four-station circuit — identify, design, implement, measure — with a fourth edge carrying measurement back to identification.",
+      caption: "FIG. 02 — PROTOCOL LOOP, NO FINISH LINE",
+      returnLabel: ["The measured gain", "restarts the observation"]
+    },
     steps: [
       {
         step: "01",
@@ -148,6 +153,11 @@ export const en: Content = {
     ],
     positioning: {
       title: "Three disciplines, one profile",
+      figure: {
+        alt: "Three equally sized discs — industrial engineering, applied data and AI, business and entrepreneurship — overlapping at a single common point.",
+        caption: "FIG. 03 — THREE DOMAINS, ONE INTERSECTION",
+        centerLabel: "Here"
+      },
       pillars: [
         {
           title: "Industrial engineering",
