@@ -496,14 +496,18 @@ export const fr: Content = {
           "Indicateurs industriels : trafic, connexité, ratio d'optimalité"
         ],
         stack: [
-          "MATLAB",
-          "Python",
-          "Recherche opérationnelle"
+          "React",
+          "TypeScript",
+          "Vite",
+          "Tailwind CSS",
+          "Zustand",
+          "Python"
         ],
         metric: {
           value: "ROC",
           label: "Méthode de King"
-        }
+        },
+        url: "https://machine-layout-solver.vercel.app/"
       },
       {
         id: "dashboard-enib",
@@ -609,7 +613,8 @@ export const fr: Content = {
             name: "React",
             usedIn: [
               "pharmacowork",
-              "dashboard-enib"
+              "dashboard-enib",
+              "machine-layout"
             ]
           },
           {
@@ -620,9 +625,7 @@ export const fr: Content = {
           },
           {
             name: "MATLAB",
-            usedIn: [
-              "machine-layout"
-            ]
+            usedIn: []
           },
           {
             name: "OCR / Vision",
