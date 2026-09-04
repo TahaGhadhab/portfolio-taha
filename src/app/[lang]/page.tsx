@@ -38,6 +38,12 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
   const cv = resolveCv(lang);
   const deployments = getDeployments(c);
   const label = (id: string) => c.nav.sections.find((s) => s.id === id)?.label ?? id;
+  /* Le numéro de station d'une section : son rang dans le rail latéral. Les
+     deux repères portent le même chiffre, sinon le document se contredit. */
+  const no = (id: string) => {
+    const i = c.nav.sections.findIndex((s) => s.id === id);
+    return i < 0 ? undefined : String(i + 1).padStart(2, "0");
+  };
 
   return (
     <>
@@ -69,12 +75,18 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
           </Band>
 
           <Band id="methode">
-            <Head eyebrow={label("methode")} title={c.method.title} intro={c.method.intro} />
+            <Head
+              no={no("methode")}
+              eyebrow={label("methode")}
+              title={c.method.title}
+              intro={c.method.intro}
+            />
             <MethodRail steps={c.method.steps} />
           </Band>
 
           <Band id="experiences" quiet>
             <Head
+              no={no("experiences")}
               eyebrow={label("experiences")}
               title={c.experience.title}
               intro={c.experience.intro}
@@ -84,6 +96,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
 
           <Band id="projets">
             <Head
+              no={no("projets")}
               eyebrow={label("projets")}
               title={c.projects.title}
               intro={c.projects.intro}
@@ -93,6 +106,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
 
           <Band id="competences" quiet>
             <Head
+              no={no("competences")}
               eyebrow={label("competences")}
               title={c.skills.title}
               intro={c.skills.intro}
@@ -102,6 +116,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
 
           <Band id="parcours">
             <Head
+              no={no("parcours")}
               eyebrow={label("parcours")}
               title={c.education.title}
               intro={c.education.intro}
@@ -112,6 +127,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
           <Band id="a-propos" quiet>
             <OriginSection
               about={c.about}
+              no={no("a-propos")}
               pull={c.hero.signature}
               eyebrow={label("a-propos")}
             />
@@ -119,6 +135,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
 
           <Band id="associatif">
             <Head
+              no={no("associatif")}
               eyebrow={label("associatif")}
               title={c.associative.title}
               intro={c.associative.intro}

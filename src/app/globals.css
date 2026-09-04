@@ -30,13 +30,25 @@
   --color-fault: #d9705f;
   --color-ok: #6fbf8f;
 
-  /* --- Typographie : trois familles, aucun rôle partagé --- */
+  /* --- Typographie : quatre familles, aucun rôle partagé ---
+     Une voix qui affirme (le titre), une qui range (l'interface), une
+     qui raconte (le corps), une qui mesure (la donnée). --- */
+  --font-title: var(--font-instrument), "Times New Roman", Georgia, serif;
   --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-body: var(--font-literata), Georgia, "Times New Roman", serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-mono: var(--font-martian-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* --- Une seule courbe dans tout le document : rapide, arrêt net --- */
+  /* --- Deux courbes, et deux seulement -----------------------
+     `commit` sert à tout ce qui répond au doigt : survol, focus,
+     bascule. Rapide, arrêt net.
+
+     `glide` ne sert qu'à l'arrivée d'un contenu qui n'était pas
+     là. Elle démarre vite et s'éteint très long — le mouvement
+     se termine avant qu'on ait le temps de le regarder finir.
+     C'est ce qui distingue une chose qui *arrive* d'une chose
+     qui *s'anime*. --- */
   --ease-commit: cubic-bezier(0.13, 0.9, 0.16, 1);
+  --ease-glide: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* Alias courts du design system. Les composants n'écrivent jamais
@@ -53,9 +65,35 @@
   --snow-3: var(--color-snow-3);
   --iris: var(--color-iris);
 
+  --f-title: var(--font-title);
   --f-display: var(--font-display);
   --f-body: var(--font-body);
   --f-mono: var(--font-mono);
+
+  /* --- Deux corrections de corps ------------------------------
+     Deux fontes réglées au même nombre de pixels n'ont pas la même
+     présence : ce qui compte, c'est la hauteur d'œil, pas la taille
+     nominale. Plutôt que de recopier des valeurs corrigées dans
+     trente règles, on garde une seule échelle et deux facteurs.
+
+     Instrument Serif a une petite hauteur d'œil et des déliés fins :
+     à corps égal elle paraît plus légère qu'une grotesque, il lui
+     faut donc seize pour cent de plus pour peser autant.
+
+     Martian Mono est dessinée large, avec une grande hauteur d'œil :
+     au même corps elle écrase tout le reste. On la rentre de huit
+     pour cent. --- */
+  --fit-title: 1.16;
+  --fit-mono: 0.92;
+
+  /* L'échelle vue depuis la mono. Les règles qui composent une donnée
+     puisent ici plutôt que dans l'échelle nue : le facteur ne se
+     recopie ainsi nulle part, et il suffit de le bouger d'un endroit
+     si la fonte change encore. */
+  --tm--2: calc(var(--t--2) * var(--fit-mono));
+  --tm--1: calc(var(--t--1) * var(--fit-mono));
+  --tm-2: calc(var(--t-2) * var(--fit-mono));
+  --tm-3: calc(var(--t-3) * var(--fit-mono));
 
   /* --- Échelle typographique fluide --- */
   --t--2: clamp(0.75rem, 0.73rem + 0.08vw, 0.8125rem);
@@ -67,10 +105,41 @@
   --t-4: clamp(1.875rem, 1.55rem + 1.6vw, 3rem);
   --t-5: clamp(2.5rem, 1.62rem + 4.4vw, 5.75rem);
 
-  --lh-tight: 1.03;
+  /* --- Approche, indexée sur le corps -------------------------
+     Une police se resserre quand elle grandit et s'ouvre quand
+     elle rétrécit ; l'œil lit une couleur de gris constante, pas
+     une valeur constante. Chaque niveau porte donc son approche,
+     et aucune règle n'écrit de `letter-spacing` en dur. --- */
+  /* Martian Mono porte déjà son air dans le dessin : la chasse est
+     large et les contreformes ouvertes. Les quatorze centièmes qu'il
+     fallait ajouter à une mono étroite disloqueraient celle-ci. */
+  --tr--2: 0.06em;
+  /* Le seul cas où un libellé demande plus d'air : un intitulé de
+     rubrique isolé, qui doit se lire comme un en-tête et non comme une
+     valeur. */
+  --tr--2-wide: 0.1em;
+  --tr--1: 0.005em;
+  --tr-0: 0em;
+  --tr-1: -0.008em;
+  --tr-2: -0.019em;
+  --tr-3: -0.026em;
+  /* L'échelle s'arrête ici : au-dessus du niveau 3, plus rien n'est
+     composé en grotesque — les deux niveaux qui affirment sont passés
+     à la didone, et elle a ses propres valeurs, dix fois plus faibles. */
+
+  /* Une didone ne se resserre pas comme une grotesque : ses empattements
+     sont déjà des butées horizontales, et le crénage d'origine est fin.
+     Deux valeurs suffisent pour les titres, et elles sont dix fois plus
+     faibles que celles du sans. */
+  --tr-title: -0.012em;
+  --tr-title-2: -0.006em;
+
+  --lh-tight: 0.98;
   --lh-head: 1.14;
   --lh-body: 1.66;
-  --measure: 60ch;
+  /* Un empattement à 17 px se lit mal au-delà de la soixantaine de
+     signes : on descend à 58, la mesure classique du livre. */
+  --measure: 58ch;
   --measure-tight: 46ch;
 
   /* --- Espace --- */
@@ -87,14 +156,31 @@
   --edge: clamp(1.125rem, 4.5vw, 3.5rem);
   --frame: clamp(10px, 1.2vw, 18px);
 
-  /* Hauteur de la barre collante — les ancres s'arrêtent dessous. */
-  --nav-h: 5.75rem;
+  /* Hauteur de la barre collante — les ancres s'arrêtent dessous.
+     Mesurée, pas estimée : la barre fait 98 px au-dessus de 1100 et 82 en
+     dessous. Un jeton trop court fait passer le haut de chaque section
+     sous la barre à chaque saut d'ancre. */
+  --nav-h: 6.125rem;
 
-  /* --- Mouvement --- */
+  /* --- Mouvement ---------------------------------------------
+     Quatre durées. `blink` et `snap` répondent au doigt ; `commit`
+     conclut un basculement ; `arrive` est réservée à l'entrée d'un
+     contenu.
+
+     `stagger` est le décalage entre deux éléments d'une même
+     arrivée. Soixante millisecondes : assez pour que l'ordre de
+     lecture se voie, trop peu pour qu'on attende. --- */
   --commit: var(--ease-commit);
+  --glide: var(--ease-glide);
   --d-blink: 130ms;
   --d-snap: 220ms;
   --d-commit: 520ms;
+  --d-arrive: 820ms;
+  --stagger: 60ms;
+  /* Rang de l'élément dans une arrivée. Surchargé par le balisage. */
+  --i: 0;
+  /* Retard d'entrée d'un bloc, décalé par son rang. */
+  --in-delay: calc(var(--i) * var(--stagger));
 }
 
 @layer base {
@@ -125,6 +211,14 @@
     font-size: var(--t-0);
     line-height: var(--lh-body);
     font-variation-settings: "opsz" 14;
+    letter-spacing: var(--tr-0);
+    /* Ligatures et crénage demandés explicitement : un navigateur qui
+       compose vite les abandonne, et « fi », « ffl » se disloquent. */
+    font-kerning: normal;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "clig" 1;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -133,14 +227,38 @@
   h2,
   h3,
   h4 {
-    font-family: var(--f-display);
     font-style: normal;
-    font-weight: 600;
     line-height: var(--lh-head);
-    letter-spacing: -0.026em;
     overflow-wrap: anywhere;
     min-width: 0;
     margin: 0;
+  }
+
+  /* Les deux niveaux qui affirment quelque chose. Instrument Serif n'a
+     qu'un poids : demander 600 ou 700 ferait fabriquer un gras au
+     navigateur — une graisse simulée en épaississant les contours, ce
+     qui détruit précisément le contrat délié/plein qui fait le dessin.
+     On demande donc 400, et on interdit la synthèse. */
+  h1,
+  h2 {
+    font-family: var(--f-title);
+    font-weight: 400;
+    font-synthesis-weight: none;
+    letter-spacing: var(--tr-title-2);
+  }
+
+  /* Les niveaux qui rangent. Ceux-là restent dans l'interface. */
+  h3,
+  h4 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    letter-spacing: var(--tr-3);
+  }
+
+  /* Les guillemets d'une citation pendent dans la marge : le bord
+     gauche du bloc reste optiquement droit. */
+  blockquote {
+    hanging-punctuation: first last;
   }
 
   p {
@@ -274,18 +392,30 @@
   padding-inline: var(--edge);
 }
 
+/* Le mono ne porte jamais une phrase : il porte des données. On lui
+   demande donc ce qu'on demande à un cadran — des chiffres de largeur
+   constante, et un zéro qu'on ne confond pas avec un O. */
 .mono {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.14em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
   font-weight: 400;
+  font-variant-numeric: tabular-nums slashed-zero;
+  /* Une capitale suivie d'une espace fine paraît décalée à droite : le
+     dernier signe emporte son approche. On la reprend. */
+  margin-inline-end: -0.14em;
 }
 .lede {
   font-size: var(--t-1);
   max-width: var(--measure);
   color: var(--snow-2);
-  font-variation-settings: "opsz" 20;
+  /* L'axe optique suit le corps réel : à 20 pt le dessin ouvre ses
+     contreformes et affine les déliés. C'est la raison d'être d'une
+     variable, et le seul endroit où la différence se voit vraiment. */
+  font-variation-settings: "opsz" 22;
+  letter-spacing: var(--tr-1);
+  line-height: 1.58;
   text-wrap: pretty;
 }
 
@@ -356,14 +486,19 @@
   font-weight: 600;
   font-size: var(--t-0);
   font-variation-settings: "wdth" 106;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tr-1);
   display: block;
 }
+/* La légende sous le nom. Martian Mono est dessinée large : à 390 px,
+   « GÉNIE INDUSTRIEL » ne tenait plus et se coupait. On la resserre par
+   son axe de chasse plutôt qu'en réduisant le corps — un libellé qui
+   rétrécit devient illisible, un libellé qui se condense reste lu. */
 .brand-role {
   display: block;
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.1em;
+  font-size: var(--tm--2);
+  font-variation-settings: "wdth" 88;
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
   margin-top: 1px;
 }
@@ -375,8 +510,11 @@
 }
 .nav-links a {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.14em;
+  font-size: var(--tm--2);
+  /* Une ancre de barre est une étiquette, pas du texte courant : elle se
+     condense sans se dégrader, et gagne la place qui évite le repli. */
+  font-variation-settings: "wdth" 92;
+  letter-spacing: var(--tr--2);
   text-decoration: none;
   color: var(--snow-3);
   white-space: nowrap;
@@ -411,6 +549,37 @@
    largeur, une station par ligne, numérotée comme le rail latéral.
    Le panneau vit dans la barre : il hérite de son plan, ce qui laisse
    le bouton atteignable pendant qu'il est ouvert. */
+/* Le groupe de droite sur petit écran : la langue, puis le menu. */
+.nav-mobile {
+  display: none;
+  align-items: center;
+  gap: var(--s-2);
+  position: relative;
+  z-index: 2;
+  flex: none;
+}
+.lang-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--s-3);
+  border: 1px solid var(--line-lit);
+  border-radius: 2px;
+  font-family: var(--f-mono);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  color: var(--snow-2);
+  text-decoration: none;
+  transition:
+    color var(--d-snap) var(--commit),
+    border-color var(--d-snap) var(--commit);
+}
+.lang-chip:hover {
+  border-color: var(--iris);
+  color: var(--iris);
+}
 .menu-btn {
   position: relative;
   z-index: 2;
@@ -424,8 +593,8 @@
   background: none;
   color: var(--snow-2);
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.14em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   cursor: pointer;
   transition:
     color var(--d-snap) var(--commit),
@@ -526,8 +695,8 @@
 }
 .menu-no {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.1em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--iris);
   font-variant-numeric: tabular-nums;
 }
@@ -535,7 +704,7 @@
   font-family: var(--f-display);
   font-size: var(--t-2);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tr-2);
 }
 .menu-tick {
   width: 18px;
@@ -560,8 +729,8 @@
 }
 .menu-utils .nav-utility {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.14em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   text-decoration: none;
   color: var(--snow-2);
   border: 1px solid var(--line-lit);
@@ -586,9 +755,14 @@
   position: relative;
   z-index: 0;
 }
+/* L'envergure se donne toute la largeur, mais pas toute la hauteur : au-delà
+   d'un tiers du champ, elle repousse la phrase du hero sous la ligne de
+   flottaison, et on ouvre le portfolio sur une illustration muette. Le
+   plafond est donc relatif à l'écran ; l'aile se recentre dedans. */
 .wing {
   width: 100%;
   height: auto;
+  max-height: min(34vh, 380px);
   display: block;
   overflow: visible;
 }
@@ -663,28 +837,53 @@
 }
 
 /* ── Texte du hero ────────────────────────────────────────── */
+/* Le hero n'arrive pas d'un bloc : il se compose. Le titre se lève mot à
+   mot, puis chacune des pièces qui le suivent se pose à son rang. Le
+   conteneur, lui, ne bouge pas — sinon le mouvement d'ensemble couvrirait
+   celui des mots, et il ne resterait qu'un fondu de plus. */
 .hero {
   position: relative;
   z-index: 10;
   text-align: center;
   margin-top: var(--s-7);
-  opacity: 0;
-  translate: 0 12px;
-  transition:
-    opacity var(--d-commit) var(--commit) 90ms,
-    translate var(--d-commit) var(--commit) 90ms;
 }
-.hero.is-open {
+.hero .lede,
+.hero-actions,
+.hero-stats > div,
+.wordmark-strip {
+  opacity: 0;
+  translate: 0 14px;
+  transition:
+    opacity var(--d-arrive) var(--glide) var(--in-delay),
+    translate var(--d-arrive) var(--glide) var(--in-delay);
+}
+.hero.is-open .lede,
+.hero.is-open .hero-actions,
+.hero.is-open .hero-stats > div,
+.hero.is-open .wordmark-strip {
   opacity: 1;
   translate: 0 0;
 }
+/* Les deux cheveux qui encadrent le mot-marque se tirent depuis le centre,
+   une fois le reste posé. C'est le dernier geste de l'ouverture. */
+.wordmark-strip .hair {
+  scale: 0 1;
+  transition: scale var(--d-arrive) var(--glide) calc(var(--in-delay) + 120ms);
+}
+.hero.is-open .wordmark-strip .hair {
+  scale: 1 1;
+}
 .hero h1 {
-  font-size: var(--t-5);
-  font-weight: 700;
+  font-size: calc(var(--t-5) * var(--fit-title));
+  /* Une didone à ce corps porte ses propres blancs : ses lignes peuvent
+     presque se toucher, là où une grotesque grasse aurait bouché. */
   line-height: var(--lh-tight);
-  font-variation-settings: "wdth" 104;
-  letter-spacing: -0.038em;
-  max-width: 15ch;
+  letter-spacing: var(--tr-title);
+  /* Quinze signes par ligne coupaient cette phrase en trois : trois lignes
+     de titre, et l'accroche passait sous la ligne de flottaison. Vingt
+     signes la posent en deux, ce qui est la forme d'un titre — au-delà,
+     c'est un paragraphe en gros corps. */
+  max-width: 20ch;
   margin-inline: auto;
   text-wrap: balance;
 }
@@ -715,15 +914,15 @@
 }
 .hero-stats .v {
   font-family: var(--f-mono);
-  font-size: var(--t-2);
+  font-size: var(--tm-2);
   color: var(--iris);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 .hero-stats .k {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.12em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
 }
 
@@ -789,16 +988,20 @@
   background: var(--void-lift);
 }
 
+/* `align-content: start` n'est pas décoratif. Une grille dont le parent
+   étire la ligne répartit ses propres rangs sur toute la hauteur reçue :
+   dans « À propos », où la colonne voisine est bien plus haute, le titre
+   se retrouvait à deux cent vingt pixels de son surtitre. Un chapeau se
+   lit d'un bloc, il ne se distribue pas. */
 .head {
   display: grid;
+  align-content: start;
   gap: var(--s-4);
   margin-bottom: var(--s-8);
   max-width: var(--measure);
 }
 .head h2 {
-  font-size: var(--t-4);
-  font-variation-settings: "wdth" 102;
-  letter-spacing: -0.03em;
+  font-size: calc(var(--t-4) * var(--fit-title));
   max-width: 19ch;
   text-wrap: balance;
 }
@@ -808,13 +1011,90 @@
   text-wrap: pretty;
 }
 
-/* Les sections s'engagent : elles n'entrent pas en fondu prolongé. */
+/* ── L'arrivée ────────────────────────────────────────────────
+   Un bloc ne « s'anime » pas : il arrive. Il monte de seize pixels,
+   sous un masque qui découvre son bord haut, et s'arrête net. La
+   courbe `glide` fait l'essentiel du trajet dans le premier tiers du
+   temps ; ce qui reste est trop lent pour être perçu comme un
+   mouvement, et se lit comme un dépôt.
+
+   `--i` porte le rang de l'élément dans son groupe : deux blocs
+   voisins n'arrivent jamais ensemble, ils arrivent dans l'ordre où on
+   les lit.
+
+   Le bloc lui-même ne porte pas de masque. Un `clip-path` posé ici
+   suivrait la translation — il ne masquerait donc rien — et
+   deviendrait un bloc conteneur permanent : la colonne collante des
+   fiches et la tache de lumière qui déborde leur cadre seraient
+   coupées. Le masquage n'a lieu qu'au niveau du mot, là où il a un
+   sens. */
 .commit {
   opacity: 0;
+  translate: 0 var(--rise, 18px);
+  transition:
+    opacity var(--d-arrive) var(--glide) var(--in-delay),
+    translate var(--d-arrive) var(--glide) var(--in-delay);
 }
 .commit.is-on {
   opacity: 1;
-  transition: opacity var(--d-snap) linear;
+  translate: 0 0;
+}
+
+/* Un bloc marqué `data-stagger` fait arriver ses enfants un à un plutôt
+   que d'un seul tenant : une liste de huit lignes se lit alors dans
+   l'ordre où elle est écrite. Le rang vient du balisage — c'est la
+   seule information que la feuille de style ne peut pas déduire seule.
+
+   Les enfants ne portent pas de masque : ils sont déjà à l'intérieur du
+   masque du parent, et en empiler un second coûterait une couche de
+   composition par ligne sans rien changer à l'œil. */
+.commit[data-stagger] > * {
+  opacity: 0;
+  translate: 0 10px;
+  transition:
+    opacity var(--d-arrive) var(--glide) var(--in-delay),
+    translate var(--d-arrive) var(--glide) var(--in-delay);
+}
+.commit[data-stagger].is-on > * {
+  opacity: 1;
+  translate: 0 0;
+}
+/* Une fiche et la clôture n'ont que deux colonnes : l'identité d'abord,
+   le relevé ensuite. Deux rangs suffisent, et le balisage n'a rien à
+   porter. */
+.sheet[data-stagger] > *:nth-child(2),
+.close[data-stagger] > *:nth-child(2) {
+  --i: 1;
+}
+
+/* ── Le titre se lève mot à mot ───────────────────────────────
+   Chaque mot est masqué par son propre cadre et monte depuis
+   dessous, décalé de son rang. C'est le seul endroit du document où
+   le mouvement est décomposé — et il ne sert qu'aux deux ou trois
+   phrases qui portent le propos.
+
+   Le cadre déborde en haut et sur les côtés pour laisser passer les
+   accents et les jambages ; il ne serre qu'en bas, là où le masque
+   doit couper. La marge négative annule le retrait : la composition
+   du paragraphe reste exactement celle du texte nu. */
+.w {
+  display: inline-block;
+  padding: 0.14em 0.12em 0.3em;
+  margin: -0.14em -0.12em -0.3em;
+  clip-path: inset(0 0 0.3em 0);
+}
+.wi {
+  display: inline-block;
+  translate: 0 110%;
+  opacity: 0;
+  transition:
+    translate var(--d-arrive) var(--glide) var(--in-delay),
+    opacity calc(var(--d-arrive) * 0.5) linear var(--in-delay);
+}
+.is-on .wi,
+.is-open .wi {
+  translate: 0 0;
+  opacity: 1;
 }
 
 /* ── Le principe : une vraie figure d'ingénierie ──────────── */
@@ -864,8 +1144,8 @@
 }
 .diag-label {
   font-family: var(--f-mono);
-  font-size: 13px;
-  letter-spacing: 0.11em;
+  font-size: 12px;
+  letter-spacing: var(--tr--2);
   fill: var(--snow-3);
 }
 .diag-rule {
@@ -905,14 +1185,14 @@
 }
 .step-no {
   font-family: var(--f-mono);
-  font-size: var(--t--1);
+  font-size: var(--tm--1);
   color: var(--iris);
   padding-top: 0.45em;
   font-variant-numeric: tabular-nums;
 }
 .step h3 {
   font-size: var(--t-2);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tr-2);
   margin-bottom: var(--s-2);
 }
 .step p {
@@ -944,7 +1224,7 @@
 }
 .sheet h3 {
   font-size: var(--t-3);
-  letter-spacing: -0.028em;
+  letter-spacing: var(--tr-3);
   margin-block: var(--s-2) var(--s-3);
 }
 .sheet p {
@@ -965,8 +1245,8 @@
 }
 .tag {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.1em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
   border: 1px solid var(--line-lit);
   border-radius: 2px;
@@ -986,13 +1266,13 @@
   padding: var(--s-3) 0;
   border-bottom: 1px dashed var(--line-lit);
   font-family: var(--f-mono);
-  font-size: var(--t--1);
+  font-size: var(--tm--1);
   font-weight: 400;
 }
 .specs th {
   color: var(--snow-3);
   width: 44%;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tr--2);
   vertical-align: top;
 }
 
@@ -1024,8 +1304,8 @@
 }
 .io-label {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.14em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   display: block;
   margin-bottom: 2px;
 }
@@ -1081,8 +1361,8 @@
   gap: var(--s-3);
   min-height: 44px;
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.14em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
   transition: color var(--d-snap) var(--commit);
 }
@@ -1158,8 +1438,8 @@ details[open] > .fold-toggle .fold-open {
 
 .fold-label {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.16em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2-wide);
   color: var(--iris);
   display: block;
   margin-bottom: var(--s-2);
@@ -1173,22 +1453,22 @@ details[open] > .fold-toggle .fold-open {
 }
 .metric .v {
   font-family: var(--f-mono);
-  font-size: var(--t-3);
+  font-size: var(--tm-3);
   color: var(--iris);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
 .metric .k {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.12em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
 }
 
 .linkout {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.12em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--iris);
   text-decoration: none;
   border-bottom: 1px solid transparent;
@@ -1211,8 +1491,8 @@ details[open] > .fold-toggle .fold-open {
 }
 .group h3 {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.16em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2-wide);
   color: var(--iris);
   font-weight: 500;
   margin-bottom: var(--s-4);
@@ -1234,8 +1514,8 @@ details[open] > .fold-toggle .fold-open {
 .group li .note {
   display: block;
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.06em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
 }
 
@@ -1244,6 +1524,7 @@ details[open] > .fold-toggle .fold-open {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s-6);
+  align-items: start;
 }
 .about p {
   color: var(--snow-2);
@@ -1254,11 +1535,12 @@ details[open] > .fold-toggle .fold-open {
   margin-top: var(--s-4);
 }
 .pull {
-  font-family: var(--f-display);
-  font-size: var(--t-2);
-  font-weight: 500;
-  line-height: 1.32;
-  letter-spacing: -0.02em;
+  font-family: var(--f-title);
+  font-size: calc(var(--t-2) * var(--fit-title));
+  font-weight: 400;
+  font-synthesis-weight: none;
+  line-height: 1.28;
+  letter-spacing: var(--tr-title-2);
   color: var(--snow);
   border-left: 2px solid var(--iris);
   padding-left: var(--s-5);
@@ -1268,12 +1550,44 @@ details[open] > .fold-toggle .fold-open {
 }
 
 /* ── Clôture ─────────────────────────────────────────────── */
+/* Deux colonnes : la phrase à gauche, le moyen de joindre à droite. Sur
+   une seule colonne, une phrase de dix mots en corps de titre descendait
+   sur huit lignes le long du bord gauche, et la moitié droite du champ
+   restait vide — ce qui se lit comme une page inachevée, pas comme du
+   blanc. La largeur passe donc de quinze à vingt-deux signes, et les
+   coordonnées viennent occuper ce qu'elle libère. */
+.close {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: start;
+}
 .close h2 {
-  font-size: var(--t-4);
-  letter-spacing: -0.03em;
-  max-width: 15ch;
-  margin-bottom: var(--s-6);
+  font-size: calc(var(--t-4) * var(--fit-title));
+  max-width: 22ch;
   text-wrap: balance;
+}
+.close-side {
+  display: grid;
+  gap: var(--s-5);
+  align-content: start;
+}
+.close-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-top: var(--s-2);
+}
+@media (min-width: 900px) {
+  .close {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: var(--s-8);
+  }
+  /* La colonne de droite s'aligne sur la première ligne du titre, pas sur
+     le surtitre : les deux colonnes commencent à la même hauteur d'œil. */
+  .close-side {
+    padding-top: var(--s-6);
+  }
 }
 .mailto {
   font-family: var(--f-display);
@@ -1294,7 +1608,6 @@ details[open] > .fold-toggle .fold-open {
 .contact-rows {
   display: grid;
   gap: var(--s-4);
-  margin-top: var(--s-6);
   max-width: 34rem;
 }
 .contact-row {
@@ -1310,7 +1623,7 @@ details[open] > .fold-toggle .fold-open {
 }
 .contact-row .val {
   font-family: var(--f-mono);
-  font-size: var(--t--1);
+  font-size: var(--tm--1);
   color: var(--snow-2);
   text-decoration: none;
   transition: color var(--d-snap) var(--commit);
@@ -1346,8 +1659,8 @@ details[open] > .fold-toggle .fold-open {
 }
 .index .lab {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.12em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   color: var(--snow-3);
   opacity: 0;
   transition: opacity var(--d-snap) var(--commit);
@@ -1391,8 +1704,8 @@ details[open] > .fold-toggle .fold-open {
   padding-bottom: var(--s-6);
 }
 .cv-head h1 {
-  font-size: var(--t-4);
-  letter-spacing: -0.03em;
+  font-size: calc(var(--t-4) * var(--fit-title));
+  letter-spacing: var(--tr-title-2);
 }
 .cv-head .role {
   color: var(--iris);
@@ -1420,8 +1733,8 @@ details[open] > .fold-toggle .fold-open {
 }
 .cv-section > h2 {
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.16em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2-wide);
   font-weight: 500;
   color: var(--iris);
   border-bottom: 1px solid var(--line);
@@ -1434,13 +1747,13 @@ details[open] > .fold-toggle .fold-open {
 }
 .cv-entry h3 {
   font-size: var(--t-1);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tr-1);
 }
 .cv-entry .sub {
   color: var(--snow-3);
   font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.06em;
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
   margin-top: 2px;
 }
 .cv-entry p {
@@ -1490,19 +1803,29 @@ details[open] > .fold-toggle .fold-open {
     display: flex;
   }
 }
-@media (min-width: 900px) {
-  .menu-sheet {
+/* Le seuil de repli suit la largeur réelle des libellés, pas un chiffre
+   rond. Martian Mono est plus large que la mono précédente : entre 900 et
+   1100 px, cinq ancres plus trois liens de service ne tenaient plus sur
+   une ligne. La barre passait à deux lignes — et `--nav-h`, dont dépend
+   l'arrêt des ancres sous la barre, devenait faux. En dessous de 1100, la
+   planche pleine largeur fait mieux le travail. */
+@media (min-width: 1100px) {
+  .menu-sheet,
+  .nav-mobile {
     display: none;
   }
 }
 
-/* ── Sous 900 px : la barre se replie ───────────────────── */
-@media (max-width: 899px) {
+/* ── Sous 1100 px : la barre se replie ──────────────────── */
+@media (max-width: 1099px) {
   :root {
-    --nav-h: 4.75rem;
+    --nav-h: 5.125rem;
   }
   .nav-wide {
     display: none;
+  }
+  .nav-mobile {
+    display: flex;
   }
   .menu-btn {
     display: inline-flex;
@@ -1513,6 +1836,12 @@ details[open] > .fold-toggle .fold-open {
     padding-block: var(--s-4);
   }
   .brand {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  /* Sans cette ligne, l'enveloppe du nom refuse de rétrécir et le rôle
+     passe sous la pastille de langue. */
+  .brand > span {
     min-width: 0;
   }
   .brand-name,
@@ -1533,15 +1862,17 @@ details[open] > .fold-toggle .fold-open {
     --measure: 40ch;
   }
 
+  /* Le cadrage serré du petit écran laisse les rémiges déborder au-dessus
+     de leur cadre. Sans ce retrait, la barre du haut les coupe net et le
+     débordement se lit comme un défaut plutôt que comme un cadrage. */
   .flight {
-    padding-block: var(--s-4) var(--s-8);
+    padding-block: var(--s-6) var(--s-8);
   }
   .hero {
     margin-top: var(--s-6);
   }
   .hero h1 {
     max-width: none;
-    letter-spacing: -0.03em;
   }
   .hero .lede {
     font-size: var(--t-0);
@@ -1583,7 +1914,7 @@ details[open] > .fold-toggle .fold-open {
     font-size: var(--t-1);
   }
   .hero-stats .k {
-    letter-spacing: 0.06em;
+    letter-spacing: var(--tr--2);
     text-align: center;
     line-height: 1.35;
   }
@@ -1606,7 +1937,7 @@ details[open] > .fold-toggle .fold-open {
   }
   .diag-label {
     font-size: 14px;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--tr--2);
   }
 
   /* La pastille entrée/sortie se rapproche de son texte : vingt-huit
@@ -1702,11 +2033,453 @@ details[open] > .fold-toggle .fold-open {
   }
 }
 
+/* Sous 390 px, le bouton lâche son mot : le glyphe porte le sens et le
+   nom cesse d'être tronqué. Le libellé reste lu par les technologies
+   d'assistance via `aria-label`. */
+@media (max-width: 389px) {
+  .menu-word {
+    display: none;
+  }
+  .menu-btn {
+    justify-content: center;
+    min-width: 46px;
+    padding-inline: var(--s-3);
+    gap: 0;
+  }
+}
+
 /* Sur les très petits écrans, la barre garde le nom et lâche le rôle. */
-@media (max-width: 359px) {
+@media (max-width: 339px) {
   .brand-role {
     display: none;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FINITION — ce qui se passe sous le doigt
+
+   Tout ce qui suit obéit à une seule règle : rien ne bouge tant
+   qu'on ne s'en approche pas, et ce qui bouge s'arrête. Aucune
+   boucle, aucune oscillation, aucun retour à l'état initial en
+   douceur — la sortie est toujours plus rapide que l'entrée, comme
+   une pièce mécanique qui reprend sa place.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── La barre de progression ──────────────────────────────────
+   Un cheveu ambre sous la barre de navigation, long comme la part
+   du document déjà lue. Piloté par le défilement lui-même : aucune
+   ligne de JavaScript, aucun recalcul à chaque image. Les
+   navigateurs qui l'ignorent n'affichent rien — la barre garde son
+   filet, et il ne manque aucune information. */
+@supports (animation-timeline: scroll()) {
+  .nav-bar::after {
+    content: "";
+    position: absolute;
+    inset-block-end: -1px;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--iris);
+    transform-origin: left;
+    scale: 0 1;
+    animation: read-through linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes read-through {
+    to {
+      scale: 1 1;
+    }
+  }
+}
+
+/* ── Les liens de la barre ────────────────────────────────────
+   Le filet ne s'allume pas : il se déroule depuis le bord gauche,
+   et se rétracte vers le même bord. Un lien survolé puis quitté
+   revient par où il est venu. */
+.nav-links a:not(.nav-utility) {
+  position: relative;
+}
+.nav-links a:not(.nav-utility)::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0.55rem;
+  inset-inline: 0;
+  height: 1px;
+  background: currentColor;
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--d-snap) var(--commit);
+}
+.nav-links a:not(.nav-utility):hover::after,
+.nav-links a:not(.nav-utility):focus-visible::after {
+  scale: 1 1;
+}
+/* La section qu'on lit s'annonce dans la barre comme sur le rail :
+   même ambre, même filet, pour que les deux repères disent la même
+   chose au même moment. */
+.nav-links a[aria-current="true"] {
+  color: var(--snow);
+}
+.nav-links a[aria-current="true"]::after {
+  scale: 1 1;
+  background: var(--iris);
+}
+
+/* Le fond ambre du bouton plein ne s'éclaircit pas : il est balayé
+   par le blanc depuis le bord d'attaque. */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--iris);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--d-snap) var(--commit);
+}
+.btn:hover::before,
+.btn:focus-visible::before {
+  scale: 1 1;
+}
+.btn:hover,
+.btn:focus-visible {
+  color: var(--void);
+  border-color: var(--iris);
+}
+.btn-primary::before {
+  background: var(--snow);
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  border-color: var(--snow);
+}
+/* La pression s'enfonce d'un pixel et perd son balayage : le bouton
+   est déjà engagé, il n'a plus rien à annoncer. */
+.btn:active {
+  translate: 0 1px;
+}
+
+/* ── Chapeau de section ───────────────────────────────────────
+   Le surtitre gagne son numéro de station et son filet. Le filet se
+   trace au moment où la section arrive — de la largeur d'un mot à
+   la largeur de la colonne — et ne bouge plus. C'est ce trait qui
+   donne au document son air de planche technique plutôt que de page
+   de blog. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.eyebrow .no {
+  color: var(--iris);
+}
+.eyebrow .rule {
+  flex: 1 1 auto;
+  height: 1px;
+  /* Le dernier signe d'un mot en capitales espacées emporte son approche :
+     sans cette reprise, le filet démarre un cheveu trop loin. */
+  margin-inline-start: -0.14em;
+  background: var(--line-lit);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--d-arrive) var(--glide) calc(var(--in-delay) + 120ms);
+}
+.commit.is-on .eyebrow .rule {
+  scale: 1 1;
+}
+
+.head h2,
+.close h2 {
+  letter-spacing: var(--tr-title-2);
+}
+/* L'intention arrive après le titre. Elle ne bouge pas — le bloc entier
+   monte déjà — elle se contente d'attendre son tour pour être lisible :
+   on lit le titre, puis la phrase qui l'explique, jamais les deux en
+   même temps. */
+.head-intro {
+  opacity: 0;
+  transition: opacity var(--d-arrive) linear 300ms;
+}
+.commit.is-on .head-intro {
+  opacity: 1;
+}
+/* Le chapeau de clôture n'est pas dans une grille : il pose ses marges. */
+.close .eyebrow {
+  max-width: var(--measure);
+}
+.close-title {
+  display: block;
+  margin-top: var(--s-4);
+}
+
+/* ── Les listes sur rail ──────────────────────────────────────
+   Le numéro reste gris tant qu'on ne s'occupe pas de la ligne. Au
+   survol, il passe à l'ambre, le titre avance de trois pixels vers
+   la droite, et le filet du bas se déroule. Trois signaux, un seul
+   geste. */
+.step {
+  transition: background var(--d-snap) var(--commit);
+}
+.step > div:last-child {
+  transition: translate var(--d-snap) var(--commit);
+}
+.step:hover > div:last-child {
+  translate: 3px 0;
+}
+.step-no {
+  color: var(--snow-3);
+  transition: color var(--d-snap) var(--commit);
+}
+.step:hover .step-no {
+  color: var(--iris);
+}
+/* Le numéro d'une étape en cours reste ambre : c'est une donnée, pas
+   un état de survol. */
+.step:has(.step-live) .step-no {
+  color: var(--iris);
+}
+
+/* ── Les fiches de terrain ────────────────────────────────────
+   Une fiche survolée s'éclaire par-dessous, là où se trouve le
+   curseur. La tache est très faible — six pour cent d'ambre — et
+   très large : on ne la voit pas, on voit la fiche se détacher du
+   fond. Les coordonnées viennent du pointeur ; sans JavaScript, la
+   variable garde son centre par défaut et rien ne casse. */
+.sheet {
+  position: relative;
+  /* La fiche devient son propre plan : la tache posée en `z-index: -1`
+     reste alors derrière le texte de la fiche, mais devant le fond de
+     la bande. Sans cette ligne elle retomberait au fond de `.wrap`,
+     c'est-à-dire sous `.band-quiet` — invisible. */
+  isolation: isolate;
+  --mx: 50%;
+  --my: 50%;
+}
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--s-4) * -1) calc(var(--s-5) * -1);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    22rem 22rem at var(--mx) var(--my),
+    rgba(232, 162, 28, 0.055),
+    transparent 70%
+  );
+  transition: opacity var(--d-commit) var(--commit);
+}
+.sheet:hover::before,
+.sheet:focus-within::before {
+  opacity: 1;
+}
+/* Une équerre de repérage en haut à gauche, comme sur un plan. Elle
+   ne se dessine que lorsqu'on s'occupe de la fiche. */
+.sheet::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(var(--s-4) * -1);
+  inset-inline-start: calc(var(--s-4) * -1);
+  width: 10px;
+  height: 10px;
+  border-block-start: 1px solid var(--iris);
+  border-inline-start: 1px solid var(--iris);
+  opacity: 0;
+  translate: 4px 4px;
+  transition:
+    opacity var(--d-snap) var(--commit),
+    translate var(--d-snap) var(--commit);
+}
+.sheet:hover::after,
+.sheet:focus-within::after {
+  opacity: 1;
+  translate: 0 0;
+}
+.sheet h3 {
+  letter-spacing: var(--tr-3);
+}
+
+/* Le relevé chiffré : son filet ambre se remplit de haut en bas
+   quand la fiche arrive. Un chiffre qui se pose vaut mieux qu'un
+   chiffre qui défile — on lit une mesure, pas un compteur. */
+.metric {
+  border-left-color: transparent;
+  background-image: linear-gradient(var(--iris), var(--iris));
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 2px 0%;
+  transition: background-size var(--d-arrive) var(--glide) calc(var(--in-delay) + 200ms);
+}
+.commit.is-on .metric {
+  background-size: 2px 100%;
+}
+
+/* ── Étiquettes ───────────────────────────────────────────────
+   Une étiquette est une pièce, pas un bouton : elle ne s'illumine
+   pas, elle se redresse — le filet passe au premier plan et le
+   texte reprend sa pleine valeur. */
+.tag {
+  transition:
+    border-color var(--d-snap) var(--commit),
+    color var(--d-snap) var(--commit);
+}
+.tags:hover .tag:hover {
+  border-color: var(--edge-ui);
+  color: var(--snow);
+}
+
+/* ── Nomenclature ─────────────────────────────────────────────
+   Le filet de tête d'un groupe se trace à l'arrivée, et la ligne
+   survolée avance sur son rail. */
+.group {
+  border-top-color: transparent;
+  background-image: linear-gradient(var(--edge-ui), var(--edge-ui));
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 0% 1px;
+  transition: background-size var(--d-arrive) var(--glide) var(--in-delay);
+}
+.commit.is-on .group {
+  background-size: 100% 1px;
+}
+.group li {
+  transition:
+    color var(--d-snap) var(--commit),
+    padding-inline-start var(--d-snap) var(--commit);
+}
+.group li:hover {
+  color: var(--snow);
+  padding-inline-start: var(--s-2);
+}
+
+/* ── Liens de sortie et adresse ───────────────────────────────
+   Le soulignement se déroule depuis la gauche plutôt que d'apparaître
+   d'un bloc, et la flèche d'un lien externe se décale d'un pixel :
+   le lien indique sa direction avant d'être suivi. */
+.linkout,
+.linkout:hover,
+.mailto,
+.mailto:hover {
+  border-bottom-color: transparent;
+}
+.linkout,
+.mailto {
+  background-image: linear-gradient(var(--iris), var(--iris));
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size var(--d-snap) var(--commit);
+}
+.linkout {
+  background-size: 0 1px;
+}
+.mailto {
+  background-size: 0 2px;
+}
+.linkout:hover,
+.linkout:focus-visible {
+  background-size: 100% 1px;
+}
+.mailto:hover,
+.mailto:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* ── Le rail de sections ──────────────────────────────────────
+   Le trait de la station courante ne change pas seulement de
+   couleur : il s'allonge, et le libellé qui l'accompagne arrive par
+   la droite. */
+.index .lab {
+  translate: 6px 0;
+  transition:
+    opacity var(--d-snap) var(--commit),
+    translate var(--d-snap) var(--commit),
+    color var(--d-snap) var(--commit);
+}
+.index a:hover .lab,
+.index a:focus-visible .lab,
+.index a[aria-current="true"] .lab {
+  translate: 0 0;
+}
+
+/* ── Le dépliage ──────────────────────────────────────────────
+   Le contenu d'un dépliage arrive comme une section : il monte de
+   huit pixels sous son masque. `<details>` reste natif — c'est
+   l'enfant qui s'anime, pas la hauteur du bloc, qu'aucun navigateur
+   ne sait interpoler sans réserve. */
+details[open] > .fold-body {
+  animation: fold-in var(--d-commit) var(--glide) both;
+}
+@keyframes fold-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    clip-path: inset(0 0 -4px 0);
+  }
+}
+
+/* ── La citation ──────────────────────────────────────────────
+   Le filet ambre se trace de haut en bas à l'arrivée du bloc, et la
+   phrase se lève derrière lui. */
+.pull {
+  border-left-color: transparent;
+  background-image: linear-gradient(var(--iris), var(--iris));
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 2px 0%;
+  transition: background-size var(--d-arrive) var(--glide) calc(var(--in-delay) + 260ms);
+}
+.commit.is-on .pull {
+  background-size: 2px 100%;
+}
+
+/* ── Les lignes de contact ────────────────────────────────────
+   La valeur avance vers son libellé quand on la vise. */
+.contact-row .val {
+  transition:
+    color var(--d-snap) var(--commit),
+    translate var(--d-snap) var(--commit);
+}
+.contact-row:hover .val {
+  color: var(--snow);
+}
+.contact-row a.val:hover,
+.contact-row a.val:focus-visible {
+  color: var(--iris);
+  translate: -3px 0;
+}
+
+/* ── L'ascenseur ──────────────────────────────────────────────
+   Le navigateur en dessine un en gris système au milieu d'un noir
+   profond. On le ramène dans la palette : c'est le dernier pixel du
+   document qui n'appartenait pas au document. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-lit) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-lit);
+  border: 3px solid var(--void);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--edge-ui);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1726,12 +2499,42 @@ details[open] > .fold-toggle .fold-open {
   .glow {
     opacity: 0.75;
   }
-  .hero {
+  .hero,
+  .hero .lede,
+  .hero-actions,
+  .hero-stats > div,
+  .wordmark-strip {
     opacity: 1;
     translate: 0 0;
   }
+  .wordmark-strip .hair {
+    scale: 1 1;
+  }
+  /* Tout ce que l'arrivée devait révéler est déjà là. Les traits qui se
+     tracent sont tracés, les mots qui se lèvent sont levés : on retire
+     le mouvement, jamais le contenu ni la mise en page finale. */
   .commit {
     opacity: 1;
+    translate: 0 0;
+  }
+  .head-intro,
+  .commit[data-stagger] > *,
+  .wi {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .eyebrow .rule {
+    scale: 1 1;
+  }
+  .metric,
+  .pull {
+    background-size: 2px 100%;
+  }
+  .group {
+    background-size: 100% 1px;
+  }
+  .nav-bar::after {
+    display: none;
   }
   .lid {
     transform: scaleY(0) !important;
@@ -1744,7 +2547,7 @@ details[open] > .fold-toggle .fold-open {
   .vignette,
   .grain,
   .index,
-  .menu-btn,
+  .nav-mobile,
   .menu-sheet,
   .no-print {
     display: none !important;
@@ -1756,6 +2559,36 @@ details[open] > .fold-toggle .fold-open {
   }
   .commit {
     opacity: 1 !important;
+    translate: none !important;
+  }
+  .head-intro,
+  .commit[data-stagger] > *,
+  .wi,
+  .hero .lede,
+  .hero-actions,
+  .hero-stats > div,
+  .wordmark-strip {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+  .wordmark-strip .hair,
+  .eyebrow .rule {
+    scale: 1 1 !important;
+  }
+  /* Le papier n'a pas d'état de survol : les traits qui se dessinent à
+     l'écran redeviennent de simples filets. */
+  .metric,
+  .pull {
+    background: none !important;
+    border-left: 2px solid #666 !important;
+  }
+  .group {
+    background: none !important;
+    border-top: 1px solid #999 !important;
+  }
+  .linkout,
+  .mailto {
+    background: none !important;
   }
   /* À l'impression, rien n'est replié. */
   .fold-toggle {

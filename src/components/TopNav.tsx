@@ -4,6 +4,7 @@ import { LOCALE_NAMES } from "@/content";
 import type { CvTarget } from "@/lib/cv";
 import { BrandMark } from "./BrandMark";
 import { MobileNav } from "./MobileNav";
+import { NavAnchors } from "./NavAnchors";
 
 interface TopNavProps {
   lang: Locale;
@@ -60,13 +61,9 @@ export function TopNav({
           </Link>
 
           <div className="nav-links nav-wide">
-            {!onClassicPage
-              ? anchors.map((s) => (
-                  <a key={s.id} href={`#${s.id}`}>
-                    {s.label.toUpperCase()}
-                  </a>
-                ))
-              : null}
+            {!onClassicPage ? (
+              <NavAnchors anchors={anchors} sections={nav.sections} />
+            ) : null}
 
             <Link
               className="nav-utility"

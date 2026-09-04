@@ -1,5 +1,9 @@
 import type { Content, Deployment } from "@/content";
 import type { CvTarget } from "@/lib/cv";
+import { SplitWords } from "./SplitWords";
+
+/** Rang d'un élément dans une arrivée, à poser en style en ligne. */
+const rank = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
 /**
  * Une bande du document. Toutes les sections en héritent : même respiration,
@@ -22,21 +26,36 @@ export function Band({
   );
 }
 
-/** Chapeau de section : surtitre en mono, titre, intention. */
+/**
+ * Chapeau de section : numéro de station, surtitre en mono, filet, titre,
+ * intention.
+ *
+ * Le numéro et le filet ne sont pas décoratifs — ils datent le document. Un
+ * chapeau qui porte « 03 » et un trait tiré jusqu'au bord de la colonne se lit
+ * comme une planche numérotée ; le même chapeau sans eux se lit comme un
+ * article. Le titre se lève mot à mot, l'intention suit d'un temps.
+ */
 export function Head({
+  no,
   eyebrow,
   title,
   intro,
 }: {
+  /** Rang de la section dans le document, déjà formaté. */
+  no?: string;
   eyebrow: string;
   title: string;
   intro?: string;
 }) {
   return (
     <div className="head commit">
-      <p className="mono">{eyebrow.toUpperCase()}</p>
-      <h2>{title}</h2>
-      {intro ? <p>{intro}</p> : null}
+      <p className="mono eyebrow">
+        {no ? <span className="no">{no}</span> : null}
+        <span>{eyebrow.toUpperCase()}</span>
+        <span className="rule" aria-hidden="true" />
+      </p>
+      <SplitWords as="h2" text={title} from={1} />
+      {intro ? <p className="head-intro">{intro}</p> : null}
     </div>
   );
 }
@@ -45,9 +64,9 @@ export function Head({
 
 export function MethodRail({ steps }: { steps: Content["method"]["steps"] }) {
   return (
-    <ol className="rail-list commit">
-      {steps.map((s) => (
-        <li className="step" key={s.step}>
+    <ol className="rail-list commit" data-stagger>
+      {steps.map((s, i) => (
+        <li className="step" key={s.step} style={rank(i)}>
           <div className="step-no">{s.step}</div>
           <div>
             <h3>{s.title}</h3>
@@ -101,7 +120,7 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
   return (
     <>
       {experience.items.map((item, i) => (
-        <article className="sheet commit" key={item.id}>
+        <article className="sheet commit" data-stagger key={item.id}>
           <div className="sheet-aside">
             <p className="mono">{String(i + 1).padStart(2, "0")}</p>
             <h3>{item.role}</h3>
@@ -167,7 +186,7 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
   return (
     <>
       {projects.items.map((p, i) => (
-        <article className="sheet commit" key={p.id}>
+        <article className="sheet commit" data-stagger key={p.id}>
           <div className="sheet-aside">
             <p className="mono">{String(i + 1).padStart(2, "0")}</p>
             <h3>{p.name}</h3>
@@ -276,9 +295,9 @@ export function CapabilityGroups({
   const shortOf = new Map(deployments.map((d) => [d.id, d.short]));
 
   return (
-    <div className="groups commit">
-      {skills.groups.map((group) => (
-        <div className="group" key={group.id}>
+    <div className="groups commit" data-stagger>
+      {skills.groups.map((group, i) => (
+        <div className="group" key={group.id} style={rank(i)}>
           <h3>{group.domain.toUpperCase()}</h3>
           <ul>
             {group.skills.map((skill) => (
@@ -295,7 +314,7 @@ export function CapabilityGroups({
         </div>
       ))}
 
-      <div className="group">
+      <div className="group" style={rank(skills.groups.length)}>
         <h3>{skills.soft.title.toUpperCase()}</h3>
         <ul>
           {skills.soft.items.map((item) => (
@@ -304,7 +323,7 @@ export function CapabilityGroups({
         </ul>
       </div>
 
-      <div className="group">
+      <div className="group" style={rank(skills.groups.length + 1)}>
         <h3>{skills.languages.title.toUpperCase()}</h3>
         <ul>
           {skills.languages.items.map((item) => (
@@ -323,9 +342,9 @@ export function CapabilityGroups({
 
 export function EducationRail({ items }: { items: Content["education"]["items"] }) {
   return (
-    <ol className="rail-list commit">
+    <ol className="rail-list commit" data-stagger>
       {items.map((item, i) => (
-        <li className="step" key={`${item.school}-${item.period}`}>
+        <li className="step" key={`${item.school}-${item.period}`} style={rank(i)}>
           <div className="step-no">{String(items.length - i).padStart(2, "0")}</div>
           <div>
             <div className="step-meta">
@@ -348,10 +367,12 @@ export function EducationRail({ items }: { items: Content["education"]["items"] 
 
 export function OriginSection({
   about,
+  no,
   pull,
   eyebrow,
 }: {
   about: Content["about"];
+  no?: string;
   pull: string;
   eyebrow: string;
 }) {
@@ -359,8 +380,12 @@ export function OriginSection({
     <>
       <div className="about commit">
         <div className="head" style={{ marginBottom: 0 }}>
-          <p className="mono">{eyebrow.toUpperCase()}</p>
-          <h2>{about.title}</h2>
+          <p className="mono eyebrow">
+            {no ? <span className="no">{no}</span> : null}
+            <span>{eyebrow.toUpperCase()}</span>
+            <span className="rule" aria-hidden="true" />
+          </p>
+          <SplitWords as="h2" text={about.title} from={1} />
         </div>
         <div>
           <p className="lede">{about.lead}</p>
@@ -371,9 +396,9 @@ export function OriginSection({
         </div>
       </div>
 
-      <div className="groups commit" style={{ marginTop: "var(--s-8)" }}>
-        {about.positioning.pillars.map((pillar) => (
-          <div className="group" key={pillar.title}>
+      <div className="groups commit" data-stagger style={{ marginTop: "var(--s-8)" }}>
+        {about.positioning.pillars.map((pillar, i) => (
+          <div className="group" key={pillar.title} style={rank(i)}>
             <h3>{pillar.title.toUpperCase()}</h3>
             <p style={{ color: "var(--snow-2)", fontSize: "var(--t--1)" }}>{pillar.body}</p>
           </div>
@@ -394,9 +419,9 @@ export function EngagementSection({
 }) {
   return (
     <>
-      <ol className="rail-list commit">
+      <ol className="rail-list commit" data-stagger>
         {associative.items.map((role, i) => (
-          <li className="step" key={`${role.title}-${role.period}`}>
+          <li className="step" key={`${role.title}-${role.period}`} style={rank(i)}>
             <div className="step-no">{String(i + 1).padStart(2, "0")}</div>
             <div>
               <div className="step-meta">
@@ -440,47 +465,58 @@ export function ContactClose({
   cvLabel: string;
 }) {
   return (
-    <div className="close commit">
-      <p className="mono">{contact.title.toUpperCase()}</p>
-      <h2 style={{ marginTop: "var(--s-4)" }}>{contact.intro}</h2>
-      <a className="mailto" href={`mailto:${contact.email}`}>
-        {contact.email}
-      </a>
-
-      <div className="contact-rows">
-        <div className="contact-row">
-          <span className="mono">{contact.phoneLabel.toUpperCase()}</span>
-          <a className="val" href={`tel:${contact.phone.replace(/\s/g, "")}`}>
-            {contact.phone}
-          </a>
-        </div>
-        <div className="contact-row">
-          <span className="mono">LINKEDIN</span>
-          <a
-            className="val"
-            href={contact.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {contact.linkedinLabel}
-          </a>
-        </div>
-        <div className="contact-row">
-          <span className="mono">{contact.locationLabel.toUpperCase()}</span>
-          <span className="val">{contact.location}</span>
-        </div>
+    <div className="close commit" data-stagger>
+      <div className="close-lead">
+        <p className="mono eyebrow">
+          <span>{contact.title.toUpperCase()}</span>
+          <span className="rule" aria-hidden="true" />
+        </p>
+        <SplitWords as="h2" text={contact.intro} from={1} className="close-title" />
       </div>
 
-      <div className="hero-actions" style={{ justifyContent: "flex-start" }}>
-        <a
-          className="btn btn-primary"
-          href={cv.href}
-          {...(cv.isPdf
-            ? { download: cv.download, target: "_blank", rel: "noopener noreferrer" }
-            : {})}
-        >
-          {cvLabel}
+      {/* Le moyen de joindre tient dans sa propre colonne : la phrase
+          d'ouverture et les coordonnées ne se lisent pas au même moment, et
+          les empiler laissait la moitié droite de l'écran vide. */}
+      <div className="close-side">
+        <a className="mailto" href={`mailto:${contact.email}`}>
+          {contact.email}
         </a>
+
+        <div className="contact-rows">
+          <div className="contact-row">
+            <span className="mono">{contact.phoneLabel.toUpperCase()}</span>
+            <a className="val" href={`tel:${contact.phone.replace(/\s/g, "")}`}>
+              {contact.phone}
+            </a>
+          </div>
+          <div className="contact-row">
+            <span className="mono">LINKEDIN</span>
+            <a
+              className="val"
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {contact.linkedinLabel}
+            </a>
+          </div>
+          <div className="contact-row">
+            <span className="mono">{contact.locationLabel.toUpperCase()}</span>
+            <span className="val">{contact.location}</span>
+          </div>
+        </div>
+
+        <div className="close-cta">
+          <a
+            className="btn btn-primary"
+            href={cv.href}
+            {...(cv.isPdf
+              ? { download: cv.download, target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            {cvLabel}
+          </a>
+        </div>
       </div>
     </div>
   );

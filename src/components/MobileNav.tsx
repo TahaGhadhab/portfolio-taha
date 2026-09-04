@@ -82,19 +82,36 @@ export function MobileNav({
 
   return (
     <>
-      <button
-        type="button"
-        className="menu-btn"
-        aria-expanded={open}
-        aria-controls="menu-sheet"
-        onClick={() => setOpen((v) => !v)}
-      >
-        <span className={`menu-glyph${open ? " is-open" : ""}`} aria-hidden="true">
-          <span />
-          <span />
-        </span>
-        {(open ? nav.menuCloseLabel : nav.menuLabel).toUpperCase()}
-      </button>
+      <div className="nav-mobile">
+        {/* La langue ne se mérite pas : un seul appui, depuis la barre. */}
+        <Link
+          className="lang-chip"
+          href={onClassicPage ? `/${other}/cv` : `/${other}`}
+          hrefLang={other}
+          aria-label={`${nav.langLabel} : ${LOCALE_NAMES[other]}`}
+          prefetch={false}
+          onClick={close}
+        >
+          {other.toUpperCase()}
+        </Link>
+
+        <button
+          type="button"
+          className="menu-btn"
+          aria-expanded={open}
+          aria-controls="menu-sheet"
+          aria-label={open ? nav.menuCloseLabel : nav.menuLabel}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className={`menu-glyph${open ? " is-open" : ""}`} aria-hidden="true">
+            <span />
+            <span />
+          </span>
+          <span className="menu-word">
+            {(open ? nav.menuCloseLabel : nav.menuLabel).toUpperCase()}
+          </span>
+        </button>
+      </div>
 
       <div
         id="menu-sheet"
@@ -147,17 +164,6 @@ export function MobileNav({
                 {nav.downloadCv}
               </a>
             ) : null}
-
-            <Link
-              className="nav-utility"
-              href={onClassicPage ? `/${other}/cv` : `/${other}`}
-              hrefLang={other}
-              aria-label={`${nav.langLabel} : ${LOCALE_NAMES[other]}`}
-              prefetch={false}
-              onClick={close}
-            >
-              {other.toUpperCase()}
-            </Link>
           </div>
         </div>
       </div>

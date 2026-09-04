@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import type { Content } from "@/content";
 import type { CvTarget } from "@/lib/cv";
+import { SplitWords } from "./SplitWords";
+
+/** Rang d'un élément dans la chorégraphie d'ouverture. */
+const rank = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
 /* ══════════════════════════════════════════════════════════════
    L'AILE — trois couches de plumes, chacune une lame fuselée
@@ -246,6 +250,12 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
     .filter(Boolean)
     .join(" ");
 
+  /* Les rangs de l'ouverture se comptent à partir du titre : une accroche
+     ne peut pas arriver pendant que le dernier mot du titre se lève encore.
+     Le titre français fait six mots, l'anglais huit — un rang codé en dur
+     serait juste dans une langue et faux dans l'autre. */
+  const afterHeadline = hero.headline.split(/\s+/).filter(Boolean).length + 1;
+
   return (
     <header className="flight" id="vol">
       <div className="wing-holder">
@@ -315,11 +325,18 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
       <div className="shell">
         {/* Le nom vit dans la barre collante, visible en permanence : le
             répéter ici ne ferait que retarder la seule phrase qui compte. */}
+        {/* L'arrivée du hero est écrite comme une phrase : l'aile s'ouvre, le
+            titre se lève mot à mot, la ligne d'accroche suit, les boutons se
+            posent, puis les relevés. Chaque élément porte son rang ; c'est la
+            feuille de style qui le convertit en retard. Un seul enchaînement,
+            joué une fois, à l'ouverture. */}
         <div className={`hero${open ? " is-open" : ""}`}>
-          <h1>{hero.headline}</h1>
-          <p className="lede">{hero.lede}</p>
+          <SplitWords as="h1" text={hero.headline} />
+          <p className="lede" style={rank(afterHeadline)}>
+            {hero.lede}
+          </p>
 
-          <div className="hero-actions">
+          <div className="hero-actions" style={rank(afterHeadline + 2)}>
             <a className="btn btn-primary" href={primaryHref}>
               {hero.ctaPrimary}
             </a>
@@ -338,8 +355,8 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
           </div>
 
           <div className="hero-stats">
-            {hero.stats.map((s) => (
-              <div key={s.label}>
+            {hero.stats.map((s, i) => (
+              <div key={s.label} style={rank(afterHeadline + 4 + i)}>
                 <span className="v">
                   {s.value}
                   {s.unit}
@@ -349,7 +366,7 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
             ))}
           </div>
 
-          <div className="wordmark-strip">
+          <div className="wordmark-strip" style={rank(afterHeadline + 8)}>
             <span className="hair" />
             <span className="mono">{hero.wordmark}</span>
             <span className="hair" />
