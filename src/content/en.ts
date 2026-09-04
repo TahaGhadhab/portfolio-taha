@@ -76,7 +76,7 @@ export const en: Content = {
     headline: "Watch first. Move once.",
     lede: "I isolate the governing constraint in a failing system, resolve it decisively, and engineer for permanence rather than maintenance.",
     tagline: "Analytical rigour, a taste for data, and the optimisation of production systems.",
-    signature: "I don't just fix problems — I eliminate them for good, with tools built for the job.",
+    signature: "I don't just fix problems. I eliminate them for good, with tools built for the job.",
     stats: [
       {
         value: "3",
@@ -109,38 +109,43 @@ export const en: Content = {
     serratedLabel: "SERRATED EDGE",
     serratedWake: "FINE PARALLEL STREAMS — SILENT",
     notes: [
-      "I keep coming back to this because it is the whole job in one picture. The plain edge is not lazy — it is doing the obvious thing. It still makes noise.",
+      "I keep coming back to this because it is the whole job in one picture. The plain edge is not lazy; it is doing the obvious thing. It still makes noise.",
       "The serrated edge does not fight the turbulence. It divides the problem until every piece is small enough to be harmless. That is decomposition, and it is what I do to a production line, a document flow, or a cost structure."
     ]
   },
   method: {
     title: "How I work",
-    intro: "The same protocol on every assignment, from the shop floor to the control tower. It is what connects an OCR tool at Safran to an academic dashboard.",
+    intro: "Listen first. Move once. An owl's ears sit at different heights on its skull, so it places a sound in three dimensions before committing instead of hunting by trial. These five steps run in that order on every assignment, from the shop floor to the control tower; they are what connects an OCR tool at Safran to an academic dashboard.",
     figure: {
-      alt: "A closed four-station circuit — identify, design, implement, measure — with a fourth edge carrying measurement back to identification.",
-      caption: "FIG. 02 — PROTOCOL LOOP, NO FINISH LINE",
-      returnLabel: ["The measured gain", "restarts the observation"]
+      alt: "A five-station circuit: listen, stabilize, decompose, optimize, sustain. A return edge runs from the last station back to the first.",
+      caption: "FIG. 02 — ONE PASS, THEN IT RUNS WITHOUT ME",
+      returnLabel: ["The loop keeps running", "once I have left"]
     },
     steps: [
       {
         step: "01",
-        title: "Identify",
-        body: "Find the real problem or the improvement point by watching the flow, not the symptom."
+        title: "Listen",
+        body: "Talk to the people inside the problem before touching anything. They already know where it hurts; they are rarely asked."
       },
       {
         step: "02",
-        title: "Design",
-        body: "Build an intelligent system that addresses the cause — not a patch someone will have to reapply."
+        title: "Stabilize",
+        body: "A temporary fix, sized to how critical the failure is. It buys the time to do the real work properly instead of under pressure."
       },
       {
         step: "03",
-        title: "Implement",
-        body: "Ship the change in the best way available, accounting for real constraints on the ground."
+        title: "Decompose",
+        body: "Break the system apart. Solve the independent pieces first, then the ones tangled together, never the reverse."
       },
       {
         step: "04",
-        title: "Measure",
-        body: "Quantify the gain: time saved, quality raised, non-conformities avoided."
+        title: "Optimize",
+        body: "Compare the candidates on quality against cost. Pick with math, not with taste, and be able to show the working."
+      },
+      {
+        step: "05",
+        title: "Sustain",
+        body: "Manage the rollout so it holds during setup and keeps holding after handover. If it needs me in the room, it is not finished."
       }
     ]
   },
@@ -154,7 +159,7 @@ export const en: Content = {
     positioning: {
       title: "Three disciplines, one profile",
       figure: {
-        alt: "Three equally sized discs — industrial engineering, applied data and AI, business and entrepreneurship — overlapping at a single common point.",
+        alt: "Three equally sized discs overlapping at a single common point: industrial engineering, applied data and AI, business and entrepreneurship.",
         caption: "FIG. 03 — THREE DOMAINS, ONE INTERSECTION",
         centerLabel: "Here"
       },
@@ -252,7 +257,7 @@ export const en: Content = {
         role: "Assistant engineer",
         period: "June — July 2025",
         location: "Les Berges du Lac, Tunisia",
-        input: "A heavy investment decision — acquiring a coiled-tubing unit — that needed to be argued on hard numbers.",
+        input: "A heavy investment decision that needed to be argued on hard numbers: acquiring a coiled-tubing unit.",
         output: "A full techno-economic study supporting the acquisition decision.",
         missions: [
           "Techno-economic study for the acquisition of a coiled-tubing unit",
@@ -308,9 +313,9 @@ export const en: Content = {
         summary: "After Safran acquired Zodiac Aerospace, thousands of manufacturing dossiers, CAD sheets and work orders still carried the old entity in their headers and footers. The tool finds those mentions whatever their encoding inside the PDF, replaces them without damaging what surrounds them, and applies nothing without an operator's approval.",
         highlights: [
           "Five encodings behind one visible header: native text, Form XObjects from CAD exports, text vectorised into curves, raster scans, and bitmap logos",
-          "Four-level hierarchical matching, tolerant of OCR noise (Z0DIAC read for ZODIAC) — adding a containment test took detection from 0 to 18 occurrences out of 18",
+          "Four-level hierarchical matching, tolerant of OCR noise (Z0DIAC read for ZODIAC); adding a containment test took detection from 0 to 18 occurrences out of 18",
           "Minimal-bounding-box replacement: only the offending mention is wiped, the neighbouring dossier reference in the same block survives",
-          "On scans, the background is sampled at the median RGB around the zone — the patch stays invisible on yellowed paper",
+          "On scans, the background is sampled at the median RGB around the zone, so the patch stays invisible on yellowed paper",
           "Occurrence-by-occurrence human validation and an audit log: in aerospace documentation, an untraced modification is an unacceptable one"
         ],
         stack: [

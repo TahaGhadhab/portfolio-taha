@@ -65,8 +65,8 @@ function Station({
   );
 }
 
-/** Les quatre postes en colonne, le retour longe la marge. */
-const NODES = [12, 138, 264, 390];
+/** Les cinq postes en colonne, le retour longe la marge. */
+const NODES = [12, 138, 264, 390, 516];
 
 function Loop({
   figure,
@@ -76,7 +76,7 @@ function Loop({
   steps: Content["method"]["steps"];
 }) {
   return (
-    <svg viewBox="0 0 320 500" role="img" aria-label={figure.alt}>
+    <svg viewBox="0 0 320 626" role="img" aria-label={figure.alt}>
       {NODES.map((y, i) =>
         steps[i] ? (
           <Station key={steps[i].step} x={76} y={y} w={232} h={96} step={steps[i]} />
@@ -94,8 +94,8 @@ function Loop({
         </g>
       ))}
 
-      {/* Le retour descend hors de la colonne, remonte, et rentre dans 01. */}
-      <path className="diag-return" d="M76 438 L44 438 L44 60 L70 60" strokeWidth="2.2" />
+      {/* Le retour sort du dernier poste, longe la marge, et rentre dans 01. */}
+      <path className="diag-return" d="M76 564 L44 564 L44 60 L70 60" strokeWidth="2.2" />
       <path className="diag-return-head" d={head(78, 60, "e", 8)} />
 
       {/* Couchée le long du retour, comme une cote sur une planche : la
@@ -103,9 +103,9 @@ function Loop({
       <text
         className="diag-return-label"
         x="22"
-        y="249"
+        y="312"
         textAnchor="middle"
-        transform="rotate(-90 22 249)"
+        transform="rotate(-90 22 312)"
       >
         {figure.returnLabel.join(" ")}
       </text>
@@ -117,10 +117,12 @@ function Loop({
  * La méthode, vue comme un circuit fermé.
  *
  * La liste numérotée dit ce que contient chaque poste ; elle ne peut pas dire
- * que le quatrième renvoie au premier. C'est pourtant tout le propos : la
- * mesure n'est pas une fin de course, elle relance l'observation. L'arête de
- * retour est la seule tracée à l'iris — la seule couleur chaude du document,
- * réservée à ce qui se voit.
+ * que le dernier renvoie au premier. C'est pourtant tout le propos, et ce
+ * n'est pas de l'itération : on ne repasse pas parce que le premier passage a
+ * raté. La passation rend la boucle à ceux qui restent — elle continue de
+ * tourner sans moi, ce qu'affirme le poste 05. L'arête de retour est la seule
+ * tracée à l'iris — la seule couleur chaude du document, réservée à ce qui se
+ * voit.
  */
 export function MethodLoop({
   figure,

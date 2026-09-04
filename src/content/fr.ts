@@ -117,32 +117,37 @@ export const fr: Content = {
   },
   method: {
     title: "Méthode de travail",
-    intro: "Le même protocole sur chaque mission, du terrain jusqu'au pilotage. C'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
+    intro: "Écouter d'abord. N'agir qu'une fois. Les oreilles d'une chouette sont placées à des hauteurs différentes sur son crâne : elle situe un son en trois dimensions avant de s'engager, au lieu de chasser à l'essai. Ces cinq étapes se déroulent dans cet ordre sur chaque mission, du terrain jusqu'au pilotage ; c'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
     figure: {
-      alt: "Circuit fermé à quatre postes : identifier, concevoir, implémenter, mesurer. Une quatrième arête ramène la mesure vers l'identification.",
-      caption: "FIG. 02 — BOUCLE DE PROTOCOLE, SANS FIN DE COURSE",
-      returnLabel: ["Le gain mesuré", "relance l'observation"]
+      alt: "Circuit à cinq postes : écouter, stabiliser, décomposer, optimiser, pérenniser. Une arête de retour ramène le dernier poste vers le premier.",
+      caption: "FIG. 02 — UN SEUL PASSAGE, PUIS ÇA TOURNE SANS MOI",
+      returnLabel: ["La boucle continue", "une fois que je suis parti"]
     },
     steps: [
       {
         step: "01",
-        title: "Identifier",
-        body: "Repérer le problème réel ou le point d'amélioration, en observant le flux plutôt que le symptôme."
+        title: "Écouter",
+        body: "Parler aux gens qui vivent le problème avant de toucher à quoi que ce soit. Ils savent déjà où ça fait mal ; on le leur demande rarement."
       },
       {
         step: "02",
-        title: "Concevoir",
-        body: "Construire un système intelligent qui traite la cause, pas une rustine qu'il faudra réappliquer."
+        title: "Stabiliser",
+        body: "Un correctif temporaire, dimensionné selon la criticité de la panne. Il achète le temps de faire le vrai travail correctement, plutôt que sous pression."
       },
       {
         step: "03",
-        title: "Implémenter",
-        body: "Livrer le changement de la meilleure façon possible, en tenant compte des contraintes du terrain."
+        title: "Décomposer",
+        body: "Démonter le système. Résoudre d'abord les morceaux indépendants, ensuite ceux qui sont enchevêtrés, jamais l'inverse."
       },
       {
         step: "04",
-        title: "Mesurer",
-        body: "Quantifier le gain : temps gagné, qualité montée, non-conformités évitées."
+        title: "Optimiser",
+        body: "Comparer les candidats sur la qualité rapportée au coût. Choisir avec des maths, pas avec du goût, et pouvoir montrer le calcul."
+      },
+      {
+        step: "05",
+        title: "Pérenniser",
+        body: "Piloter le déploiement pour qu'il tienne à l'installation et qu'il tienne encore après la passation. Si ça exige ma présence, ce n'est pas fini."
       }
     ]
   },
@@ -156,7 +161,7 @@ export const fr: Content = {
     positioning: {
       title: "Triple casquette",
       figure: {
-        alt: "Trois disques de même taille — ingénierie industrielle, data et IA appliquée, business et entrepreneuriat — qui se recouvrent en un seul point commun.",
+        alt: "Trois disques de même taille qui se recouvrent en un seul point commun : ingénierie industrielle, data et IA appliquée, business et entrepreneuriat.",
         caption: "FIG. 03 — TROIS DOMAINES, UNE SEULE INTERSECTION",
         centerLabel: "Ici"
       },
@@ -254,7 +259,7 @@ export const fr: Content = {
         role: "Assistant ingénieur",
         period: "Juin — Juillet 2025",
         location: "Les Berges du Lac, Tunisie",
-        input: "Une décision d'investissement lourde — l'acquisition d'une unité de coiled-tubing — à instruire sur des bases chiffrées.",
+        input: "Une décision d'investissement lourde à instruire sur des bases chiffrées : l'acquisition d'une unité de coiled-tubing.",
         output: "Une étude technico-économique complète servant de support à la décision d'acquisition.",
         missions: [
           "Étude technico-économique pour l'acquisition d'une unité de coiled-tubing",
@@ -310,9 +315,9 @@ export const fr: Content = {
         summary: "Après le rachat de Zodiac Aerospace par Safran, des milliers de dossiers de fabrication, plans CAO et ordres de fabrication portent encore l'ancienne entité dans leurs en-têtes et leurs pieds de page. L'outil retrouve ces mentions quel que soit leur encodage dans le PDF, les remplace sans abîmer ce qui les entoure, et n'applique rien sans l'accord d'un opérateur.",
         highlights: [
           "Cinq encodages à couvrir pour un même en-tête visible : texte natif, Form XObject des exports CAO, texte vectorisé en courbes, scan raster et logo bitmap",
-          "Correspondance hiérarchique à quatre niveaux, tolérante au bruit OCR (Z0DIAC lu pour ZODIAC) — l'ajout d'un test d'inclusion a fait passer la détection de 0 à 18 occurrences sur 18",
+          "Correspondance hiérarchique à quatre niveaux, tolérante au bruit OCR (Z0DIAC lu pour ZODIAC) ; l'ajout d'un test d'inclusion a fait passer la détection de 0 à 18 occurrences sur 18",
           "Remplacement en boîte minimale : seule la mention fautive est effacée, la référence de dossier voisine dans le même bloc est préservée",
-          "Sur les scans, le fond est échantillonné à la médiane RGB autour de la zone — la reprise reste invisible sur un papier jauni",
+          "Sur les scans, le fond est échantillonné à la médiane RGB autour de la zone, si bien que la reprise reste invisible sur un papier jauni",
           "Validation humaine occurrence par occurrence et journal d'audit : en documentation aéronautique, une modification non tracée est une modification inacceptable"
         ],
         stack: [
