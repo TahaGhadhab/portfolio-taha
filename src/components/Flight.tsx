@@ -336,12 +336,15 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
             {hero.lede}
           </p>
 
+          {/* Les deux premières actions suivent l'ordre du document : on croise
+              la méthode (station 02) avant les réalisations (station 04). Un
+              raccourci qui contredit le plan de la page fait douter du plan. */}
           <div className="hero-actions" style={rank(afterHeadline + 2)}>
-            <a className="btn btn-primary" href={primaryHref}>
-              {hero.ctaPrimary}
-            </a>
             <a className="btn" href={secondaryHref}>
               {hero.ctaSecondary}
+            </a>
+            <a className="btn btn-primary" href={primaryHref}>
+              {hero.ctaPrimary}
             </a>
             <a
               className="btn"
