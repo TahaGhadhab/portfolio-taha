@@ -74,7 +74,7 @@ export const en: Content = {
     name: "Taha Ghadhab",
     role: "Industrial engineering student",
     headline: "Watch first. Move once.",
-    lede: "Industrial engineering. I watch a system long enough to know exactly where it breaks, change that one thing, and leave it running without me.",
+    lede: "I isolate the governing constraint in a failing system, resolve it decisively, and engineer for permanence rather than maintenance.",
     tagline: "Analytical rigour, a taste for data, and the optimisation of production systems.",
     signature: "I don't just fix problems — I eliminate them for good, with tools built for the job.",
     stats: [

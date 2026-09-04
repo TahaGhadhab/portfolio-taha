@@ -76,7 +76,7 @@ export const fr: Content = {
     name: "Taha Ghadhab",
     role: "Élève ingénieur en génie industriel",
     headline: "Observer, puis trancher une seule fois.",
-    lede: "Génie industriel. J'observe un système assez longtemps pour savoir exactement où il casse, je change ce point-là, et je le laisse tourner sans moi.",
+    lede: "J'isole la contrainte qui gouverne un système en défaut, je la lève une bonne fois, et je conçois pour la durée plutôt que pour la maintenance.",
     tagline: "Rigueur analytique, appétence pour la donnée et optimisation des systèmes de production.",
     signature: "Je ne fais pas que corriger des problèmes, je les élimine définitivement avec des outils innovants.",
     stats: [
