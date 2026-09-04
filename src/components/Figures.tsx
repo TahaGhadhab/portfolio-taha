@@ -8,13 +8,15 @@ import type { Content } from "@/content";
  * boucle de la méthode, l'intersection des trois casquettes. Rien n'y bouge :
  * ce sont des planches, pas des animations.
  *
- * Chacune est tracée deux fois. Un `viewBox` ne se règle pas en CSS : un
- * circuit large de 560 unités ramené à la largeur d'un téléphone rend ses
- * étiquettes à sept pixels, et une planche qu'on ne peut pas lire ne démontre
- * rien. Le tracé large se replie donc en colonne sous 680 px — même contenu,
- * même langue graphique, une géométrie qui tient dans la largeur disponible.
- * Le tracé masqué l'est en `display: none` : il sort aussi de l'arbre
- * d'accessibilité, et une seule des deux planches est annoncée.
+ * Un `viewBox` ne se règle pas en CSS : une planche large ramenée à la largeur
+ * d'une colonne rend ses étiquettes à sept pixels, et une planche qu'on ne peut
+ * pas lire ne démontre rien. C'est donc la géométrie qui change de format, pas
+ * l'échelle du texte.
+ *
+ * Les deux sont donc dessinées étroites, une seule fois. Chacune se lit à côté
+ * de son détail sur large écran et empilée au-dessus sur petit : la même forme
+ * en colonne convient aux deux situations, ce qui est précisément pourquoi elle
+ * peut être unique.
  */
 
 /**
@@ -63,15 +65,10 @@ function Station({
   );
 }
 
-/** Tracé large : les quatre postes aux coins d'un carré. */
-const WIDE_NODES = [
-  { x: 16, y: 28 },
-  { x: 320, y: 28 },
-  { x: 320, y: 268 },
-  { x: 16, y: 268 },
-];
+/** Les quatre postes en colonne, le retour longe la marge. */
+const NODES = [12, 138, 264, 390];
 
-function LoopWide({
+function Loop({
   figure,
   steps,
 }: {
@@ -79,59 +76,14 @@ function LoopWide({
   steps: Content["method"]["steps"];
 }) {
   return (
-    <svg className="wide" viewBox="0 0 560 400" role="img" aria-label={figure.alt}>
-      {WIDE_NODES.map((n, i) =>
-        steps[i] ? (
-          <Station key={steps[i].step} x={n.x} y={n.y} w={224} h={104} step={steps[i]} />
-        ) : null,
-      )}
-
-      {/* 01 → 02 → 03 → 04 : le sens de marche. */}
-      <path className="diag-edge" d="M240 80 L312 80" strokeWidth="1.2" />
-      <path className="diag-edge-head" d={head(318, 80, "e")} />
-      <path className="diag-edge" d="M432 132 L432 260" strokeWidth="1.2" />
-      <path className="diag-edge-head" d={head(432, 266, "s")} />
-      <path className="diag-edge" d="M320 320 L248 320" strokeWidth="1.2" />
-      <path className="diag-edge-head" d={head(242, 320, "w")} />
-
-      {/* 04 → 01 : le retour. La mesure relance l'observation. */}
-      <path className="diag-return" d="M128 268 L128 140" strokeWidth="2.2" />
-      <path className="diag-return-head" d={head(128, 132, "n", 8)} />
-
-      {figure.returnLabel.map((line, i) => (
-        <text
-          className="diag-return-label"
-          key={line}
-          x="280"
-          y={194 + i * 22}
-          textAnchor="middle"
-        >
-          {line}
-        </text>
-      ))}
-    </svg>
-  );
-}
-
-/** Tracé étroit : les quatre postes en colonne, le retour longe la marge. */
-const TALL_NODES = [12, 138, 264, 390];
-
-function LoopTall({
-  figure,
-  steps,
-}: {
-  figure: Content["method"]["figure"];
-  steps: Content["method"]["steps"];
-}) {
-  return (
-    <svg className="narrow" viewBox="0 0 320 500" role="img" aria-label={figure.alt}>
-      {TALL_NODES.map((y, i) =>
+    <svg viewBox="0 0 320 500" role="img" aria-label={figure.alt}>
+      {NODES.map((y, i) =>
         steps[i] ? (
           <Station key={steps[i].step} x={76} y={y} w={232} h={96} step={steps[i]} />
         ) : null,
       )}
 
-      {TALL_NODES.slice(0, -1).map((y) => (
+      {NODES.slice(0, -1).map((y) => (
         <g key={y}>
           <path
             className="diag-edge"
@@ -179,8 +131,7 @@ export function MethodLoop({
 }) {
   return (
     <figure className="plate commit">
-      <LoopWide figure={figure} steps={steps} />
-      <LoopTall figure={figure} steps={steps} />
+      <Loop figure={figure} steps={steps} />
       <figcaption className="mono">{figure.caption}</figcaption>
     </figure>
   );
@@ -191,65 +142,14 @@ export function MethodLoop({
 type Pillars = Content["about"]["positioning"]["pillars"];
 type PositioningFigureContent = Content["about"]["positioning"]["figure"];
 
-/** Tracé large : les trois titres tiennent autour de la figure, au bout d'une ligne de rappel. */
-function FieldsWide({
-  figure,
-  pillars,
-}: {
-  figure: PositioningFigureContent;
-  pillars: Pillars;
-}) {
-  return (
-    <svg className="wide" viewBox="0 0 560 470" role="img" aria-label={figure.alt}>
-      {[
-        { cx: 200, cy: 175 },
-        { cx: 360, cy: 175 },
-        { cx: 280, cy: 305 },
-      ].map((f, i) => (
-        <circle
-          className="diag-field"
-          key={pillars[i]?.title ?? i}
-          cx={f.cx}
-          cy={f.cy}
-          r={118}
-          strokeWidth="1.2"
-        />
-      ))}
-
-      {/* Lignes de rappel : le trait part du disque et vient se coucher
-          sous son étiquette, comme sur une planche cotée. */}
-      <path className="diag-leader" d="M117 92 L76 52 L16 52" strokeWidth="1" />
-      <text className="diag-label" x="16" y="42">
-        {pillars[0]?.title.toUpperCase()}
-      </text>
-
-      <path className="diag-leader" d="M443 92 L484 52 L544 52" strokeWidth="1" />
-      <text className="diag-label" x="544" y="42" textAnchor="end">
-        {pillars[1]?.title.toUpperCase()}
-      </text>
-
-      <path className="diag-leader" d="M280 423 L280 442" strokeWidth="1" />
-      <text className="diag-label" x="280" y="462" textAnchor="middle">
-        {pillars[2]?.title.toUpperCase()}
-      </text>
-
-      <circle className="diag-mark" cx="280" cy="214" r="4.5" />
-      <text className="diag-mark-label" x="280" y="238" textAnchor="middle">
-        {figure.centerLabel.toUpperCase()}
-      </text>
-    </svg>
-  );
-}
-
 /**
- * Tracé étroit : la figure garde ses trois disques, les titres descendent en
- * légende numérotée.
+ * Les trois disques, et les titres en légende numérotée sous le trait.
  *
  * Trois titres de vingt-cinq caractères ne tiennent pas côte à côte dans trois
  * cent vingt unités — ils se chevaucheraient. Numéroter les disques et lister
  * la clé sous le trait est la solution des planches cotées, pas un repli.
  */
-function FieldsTall({
+function Fields({
   figure,
   pillars,
 }: {
@@ -263,7 +163,7 @@ function FieldsTall({
   ];
 
   return (
-    <svg className="narrow" viewBox="0 0 320 400" role="img" aria-label={figure.alt}>
+    <svg viewBox="0 0 320 400" role="img" aria-label={figure.alt}>
       {marks.map((m, i) => (
         <circle
           className="diag-field"
@@ -329,8 +229,7 @@ export function PositioningFigure({
 }) {
   return (
     <figure className="plate commit">
-      <FieldsWide figure={figure} pillars={pillars} />
-      <FieldsTall figure={figure} pillars={pillars} />
+      <Fields figure={figure} pillars={pillars} />
       <figcaption className="mono">{figure.caption}</figcaption>
     </figure>
   );

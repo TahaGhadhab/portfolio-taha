@@ -1097,6 +1097,27 @@
   opacity: 1;
 }
 
+/* ── Une planche et son détail, côte à côte ────────────────
+
+   Empilés, le schéma et le texte qu'il résume ne se lisaient pas ensemble : il
+   fallait remonter pour relier un poste du circuit à son paragraphe, ou un
+   disque à son pilier. Côte à côte, l'œil fait l'aller-retour sans quitter la
+   bande. En dessous de 900 px la colonne redevient unique — deux colonnes y
+   seraient deux colonnes illisibles. */
+.plate-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: start;
+}
+/* Dans la grille, c'est l'écart qui espace : le retrait vertical de la planche
+   la décalerait du haut de la liste. La colonne est taillée sur le tracé —
+   vingt-quatre rem laissent au circuit sa taille de dessin, et tout ce qui
+   reste va au texte. */
+.plate-split .plate {
+  margin-block: 0;
+}
+
 /* ── Le principe : une vraie figure d'ingénierie ──────────── */
 .why {
   display: grid;
@@ -1131,24 +1152,7 @@
    tracé — au-delà, la figure grossit sans rien dire de plus. */
 .plate {
   margin-block: var(--s-6) var(--s-7);
-  max-width: 36rem;
-}
-
-/* Deux tracés du même schéma, un seul affiché. Le `viewBox` étant fixe, c'est
-   la géométrie qui change de format, pas l'échelle du texte. */
-.plate .wide {
-  display: none;
-}
-.plate .narrow {
-  display: block;
-}
-@media (min-width: 680px) {
-  .plate .wide {
-    display: block;
-  }
-  .plate .narrow {
-    display: none;
-  }
+  max-width: 26rem;
 }
 .why-note {
   color: var(--snow-2);
@@ -1868,6 +1872,15 @@ details[open] > .fold-toggle .fold-open {
     position: sticky;
     inset-block-start: calc(var(--frame) + var(--s-5));
   }
+  .plate-split {
+    grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+    gap: var(--s-7);
+  }
+  /* Trois piliers dans la colonne de droite se lisent empilés : sur deux
+     colonnes, le troisième resterait seul sur sa rangée. */
+  .plate-split .groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .why {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     gap: var(--s-8);
@@ -2015,10 +2028,16 @@ details[open] > .fold-toggle .fold-open {
     max-width: none;
   }
 
-  .why-figure,
-  .plate {
+  /* L'aile est tracée sur 620 unités : sur un téléphone elle a besoin de toute
+     la largeur, quitte à passer sous le cadre. */
+  .why-figure {
     margin-inline: calc(var(--frame) - var(--edge));
     border-inline: 0;
+    padding: var(--s-4) var(--s-3);
+  }
+  /* Les planches, elles, sont dessinées étroites : elles tiennent dans la
+     colonne. Elles n'y gagnent qu'un peu de marge intérieure. */
+  .plate {
     padding: var(--s-4) var(--s-3);
   }
   .diag-label,
@@ -2707,14 +2726,7 @@ details[open] > .fold-body {
     text-decoration: none !important;
   }
   /* Le papier inverse le document : un tracé en `--snow` s'y imprimerait
-     blanc sur blanc. Les planches repassent donc en traits noirs, et seule
-     la version large est tirée — la feuille en a la largeur. */
-  .plate .narrow {
-    display: none !important;
-  }
-  .plate .wide {
-    display: block !important;
-  }
+     blanc sur blanc. Les planches repassent donc en traits noirs. */
   .why-figure,
   .plate {
     border-color: #999 !important;

@@ -397,20 +397,24 @@ export function OriginSection({
         </div>
       </div>
 
-      {/* Les trois piliers sont énoncés côte à côte : rien dans une rangée de
-          trois blocs ne dit qu'ils se recouvrent. La figure le dit. */}
-      <PositioningFigure
-        figure={about.positioning.figure}
-        pillars={about.positioning.pillars}
-      />
+      {/* Rien dans une rangée de trois blocs ne dit que les casquettes se
+          recouvrent. La figure le dit, et se lit à côté d'eux. */}
+      <div className="plate-split">
+        <PositioningFigure
+          figure={about.positioning.figure}
+          pillars={about.positioning.pillars}
+        />
 
-      <div className="groups commit" data-stagger>
-        {about.positioning.pillars.map((pillar, i) => (
-          <div className="group" key={pillar.title} style={rank(i)}>
-            <h3>{pillar.title.toUpperCase()}</h3>
-            <p style={{ color: "var(--snow-2)", fontSize: "var(--t--1)" }}>{pillar.body}</p>
-          </div>
-        ))}
+        <div className="groups commit" data-stagger>
+          {about.positioning.pillars.map((pillar, i) => (
+            <div className="group" key={pillar.title} style={rank(i)}>
+              <h3>{pillar.title.toUpperCase()}</h3>
+              <p style={{ color: "var(--snow-2)", fontSize: "var(--t--1)" }}>
+                {pillar.body}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

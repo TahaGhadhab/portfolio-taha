@@ -82,10 +82,13 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
               title={c.method.title}
               intro={c.method.intro}
             />
-            {/* La planche d'abord : elle donne la forme du protocole. Le rail
-                donne ensuite le contenu de chaque poste. */}
-            <MethodLoop figure={c.method.figure} steps={c.method.steps} />
-            <MethodRail steps={c.method.steps} />
+            {/* La planche donne la forme du protocole, le rail le contenu de
+                chaque poste. Les deux se lisent ensemble : sur large écran ils
+                occupent deux colonnes de la même grille. */}
+            <div className="plate-split">
+              <MethodLoop figure={c.method.figure} steps={c.method.steps} />
+              <MethodRail steps={c.method.steps} />
+            </div>
           </Band>
 
           <Band id="experiences" quiet>
