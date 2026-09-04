@@ -22,7 +22,7 @@
   --color-snow: #f5f7f1; /* plumage / texte principal — 17.98:1 ✓ */
   --color-snow-2: #c5ccc2; /* texte secondaire — 11.82:1 ✓ */
   --color-snow-3: #8b948a; /* méta en mono — 6.19:1 ✓ */
-  --color-iris: #ff9410; /* l'œil. la seule chose chaude — 8.77:1 ✓ */
+  --color-iris: #fda51e; /* l'œil. la seule chose chaude — 9.77:1 ✓ */
 
   /* --- Signal fonctionnel : réservé aux fiches de terrain ---
      Une entrée « problème », une sortie « livré ». Les deux
