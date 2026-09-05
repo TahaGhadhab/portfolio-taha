@@ -391,14 +391,39 @@ export const en: Content = {
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
-        tagline: "HR management tool for pharmacies",
+        tagline: "The pharmacy's internal workspace",
         period: "2025 — Present",
-        status: "Active",
-        summary: "A mobile HR management app for pharmacies, co-founded to serve an uncovered need: handling schedules, replacements and staff tracking without a dedicated tool.",
+        status: "Pilot",
+        summary: "Pharmacy management software handles sales, stock and billing, not what moves between people. Who is preparing which prescription, who owes a patient a call, which quality check is overdue: that gap is filled today with sticky notes, a shared notebook and a WhatsApp group, the last of which carries patient names on personal phones, outside any regulatory frame. Co-founded to occupy that gap and nothing else: eleven modules, built mobile-first because the job is done standing at the counter. It replaces neither the management software, nor the till, nor the legal prescription register.",
         highlights: [
-          "Modelled the HR processes of the pharmacy sector",
-          "Designed the database and the interfaces",
-          "Optimised staff management flows"
+          "Eleven modules end to end: ~80 screens, ~180 API routes, 41 data models",
+          "Strict tenancy: every row carries its officineId, every query is filtered on it",
+          "Passwordless sign-in by magic link, with a mandatory second factor for pharmacy owners",
+          "Patient identities encrypted at rest, search preserved by HMAC index: no plaintext name server-side",
+          "Data purge that can be dry-run before activation, with a log of what it would have deleted",
+          "Prescription access traced, and readable by the pharmacy owner"
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Bound the gap",
+            body: "Pharmacy software stops at the sale. Preparations, callbacks, stock-outs and quality checks have no tool, so they have WhatsApp. The first job was to bound that gap without encroaching on what already works: not the till, not the legal register."
+          },
+          {
+            step: "02",
+            title: "Partition",
+            body: "One pharmacy is one tenant. Isolation is not a view laid over the data: every row carries its officineId and every query is filtered on it, down at the core. That is the only way the promise holds once forty-one models refer to one another."
+          },
+          {
+            step: "03",
+            title: "Hold the patient data",
+            body: "A patient's name must never be readable server-side, and yet the team has to be able to search. Identities are encrypted at rest and indexed by HMAC: search works, the plaintext name exists nowhere. Prescription access is traced, and the pharmacy owner can read the trail back."
+          },
+          {
+            step: "04",
+            title: "Make the security checkable",
+            body: "A purge policy nobody can verify is worth nothing: this one is dry-run before activation and leaves the log of what it would have deleted. Sixty-three test suites run on every commit, and the August 2026 security audit was cleared in three waves. The hosting is not certified for health data, so no real health data is admitted until it is."
+          }
         ],
         stack: [
           "NestJS 11",
@@ -481,8 +506,8 @@ export const en: Content = {
           }
         ],
         metric: {
-          value: "Co-founder",
-          label: "Role"
+          value: "11",
+          label: "Modules"
         }
       },
       {

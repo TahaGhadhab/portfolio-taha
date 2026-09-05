@@ -393,14 +393,39 @@ export const fr: Content = {
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
-        tagline: "Outil de gestion RH pour pharmacies",
+        tagline: "L'espace de travail interne de l'officine",
         period: "2025 — Présent",
-        status: "Actif",
-        summary: "Application mobile de gestion des ressources humaines pour les pharmacies, co-fondée pour répondre à un besoin non couvert : gérer les plannings, les remplacements et le suivi du personnel sans outil dédié.",
+        status: "Pilote",
+        summary: "Le logiciel d'officine gère la vente, le stock et la facturation, pas ce qui circule entre les gens. Qui prépare quelle ordonnance, qui doit rappeler un patient, quel contrôle qualité est en retard : ce vide se comble aujourd'hui au post-it, au cahier de liaison et au groupe WhatsApp, ce dernier faisant transiter des noms de patients sur des téléphones personnels, hors de tout cadre. Co-fondé pour occuper ce vide et rien d'autre : onze modules, pensés mobile d'abord parce que le métier se pratique debout au comptoir. Il ne remplace ni le logiciel d'officine, ni la caisse, ni le registre légal des ordonnances.",
         highlights: [
-          "Modélisation des processus RH du secteur officinal",
-          "Conception de la base de données et des interfaces",
-          "Optimisation des flux de gestion du personnel"
+          "Onze modules bout en bout : ~80 écrans, ~180 routes d'API, 41 modèles de données",
+          "Cloisonnement strict : chaque ligne porte son officineId, chaque requête est filtrée dessus",
+          "Connexion sans mot de passe par lien magique, et second facteur obligatoire pour les titulaires",
+          "Identités patients chiffrées au repos, recherche préservée par index HMAC : aucun nom en clair côté serveur",
+          "Purge de données simulable avant activation, avec le journal de ce qu'elle aurait supprimé",
+          "Accès aux ordonnances tracés, et consultables par le titulaire"
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Délimiter le vide",
+            body: "Le logiciel d'officine s'arrête à la vente. Les préparations, les rappels, les ruptures, les contrôles qualité n'ont pas d'outil, donc ils ont WhatsApp. Le premier travail a été de border ce vide sans déborder sur ce qui fonctionne déjà : ni caisse, ni registre légal."
+          },
+          {
+            step: "02",
+            title: "Cloisonner",
+            body: "Une officine est un locataire. L'isolement n'est pas une vue posée sur les données : chaque ligne porte son officineId et chaque requête est filtrée dessus, au niveau du socle. C'est la seule façon de tenir la promesse quand quarante et un modèles se répondent."
+          },
+          {
+            step: "03",
+            title: "Tenir la donnée patient",
+            body: "Un nom de patient ne doit jamais être lisible côté serveur, et pourtant l'équipe doit pouvoir chercher. Les identités sont chiffrées au repos et indexées par HMAC : la recherche fonctionne, le nom en clair n'existe nulle part. Les accès aux ordonnances sont tracés, et le titulaire peut les relire."
+          },
+          {
+            step: "04",
+            title: "Rendre la sécurité vérifiable",
+            body: "Une politique de purge qu'on ne peut pas contrôler ne vaut rien : celle-ci se simule avant activation et laisse le journal de ce qu'elle aurait supprimé. Soixante-trois suites de tests tournent à chaque commit, et l'audit de sécurité d'août 2026 a été soldé en trois vagues. L'hébergement n'étant pas agréé données de santé, aucune donnée de santé réelle n'y est admise tant qu'il ne l'est pas."
+          }
         ],
         stack: [
           "NestJS 11",
@@ -483,8 +508,8 @@ export const fr: Content = {
           }
         ],
         metric: {
-          value: "Co-fondateur",
-          label: "Rôle"
+          value: "11",
+          label: "Modules"
         }
       },
       {
