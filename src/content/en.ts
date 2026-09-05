@@ -422,7 +422,7 @@ export const en: Content = {
           {
             step: "04",
             title: "Make the security checkable",
-            body: "A purge policy nobody can verify is worth nothing: this one is dry-run before activation and leaves the log of what it would have deleted. Sixty-three test suites run on every commit, and the August 2026 security audit was cleared in three waves. The hosting is not certified for health data, so no real health data is admitted until it is."
+            body: "A purge policy nobody can verify is worth nothing: this one is dry-run before activation and leaves the log of what it would have deleted. Sixty-three test suites run on every commit, and the August 2026 security audit was cleared in three waves."
           }
         ],
         stack: [

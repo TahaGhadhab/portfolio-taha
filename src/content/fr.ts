@@ -424,7 +424,7 @@ export const fr: Content = {
           {
             step: "04",
             title: "Rendre la sécurité vérifiable",
-            body: "Une politique de purge qu'on ne peut pas contrôler ne vaut rien : celle-ci se simule avant activation et laisse le journal de ce qu'elle aurait supprimé. Soixante-trois suites de tests tournent à chaque commit, et l'audit de sécurité d'août 2026 a été soldé en trois vagues. L'hébergement n'étant pas agréé données de santé, aucune donnée de santé réelle n'y est admise tant qu'il ne l'est pas."
+            body: "Une politique de purge qu'on ne peut pas contrôler ne vaut rien : celle-ci se simule avant activation et laisse le journal de ce qu'elle aurait supprimé. Soixante-trois suites de tests tournent à chaque commit, et l'audit de sécurité d'août 2026 a été soldé en trois vagues."
           }
         ],
         stack: [
