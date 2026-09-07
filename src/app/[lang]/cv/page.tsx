@@ -103,7 +103,7 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
                   </div>
                   <p className="sub">
                     {item.school}
-                    {item.location ? ` — ${item.location}` : ""}
+                    {item.location ? ` · ${item.location}` : ""}
                   </p>
                   {item.detail ? (
                     <p style={{ marginTop: "var(--s-2)" }}>{item.detail}</p>
@@ -117,12 +117,12 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
                 <div className="cv-entry" key={item.id}>
                   <div className="cv-row">
                     <h3>
-                      {item.role} — {item.company}
+                      {item.role} · {item.company}
                     </h3>
                     <span className="mono">{item.period}</span>
                   </div>
                   <p className="sub">
-                    {item.fullName} — {item.location}
+                    {item.fullName} · {item.location}
                   </p>
                   <ul className="bullets">
                     {item.missions.map((mission) => (
@@ -175,7 +175,7 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
                 <div className="cv-entry" key={`${role.title}-${role.period}`}>
                   <div className="cv-row">
                     <h3>
-                      {role.title} — {role.org}
+                      {role.title} · {role.org}
                     </h3>
                     <span className="mono">{role.period}</span>
                   </div>

@@ -40,6 +40,129 @@ export interface ProjectStep {
   body: string;
 }
 
+/**
+ * Le résumé de tête d'un projet : cinq lignes, lues avant toute autre chose.
+ *
+ * Un dossier technique complet ne se refuse pas, il se diffère. Ces cinq
+ * lignes tiennent la promesse du niveau 1 — problème, réponse, rôle, socle,
+ * résultat — et tout ce qui les justifie vit derrière le dépliage.
+ */
+export interface ProjectCapsule {
+  problem: string;
+  solution: string;
+  role: string;
+  /** Signature courte du socle, en une ligne. Le détail par couche est en 06. */
+  stack: string;
+  result: string;
+}
+
+/** Un cadre d'un logigramme : son titre, sa précision. */
+export interface FlowNode {
+  title: string;
+  /**
+   * La précision, sous le titre. Un tableau pour la couper en deux lignes —
+   * un cadre de deux cents unités ne tient qu'une trentaine de caractères,
+   * et une étiquette qui déborde de son cadre ne se lit plus.
+   */
+  sub?: string | string[];
+  /** Un poste qui branche — dessiné à pans coupés, pas en rectangle. */
+  decision?: boolean;
+}
+
+/** Une sortie latérale : ce qui arrive quand le flux ne continue pas. */
+export interface FlowExit {
+  /** Index du nœud quitté, dans `nodes`. */
+  from: number;
+  /** L'étiquette portée par l'arête — « non », « ignorer », « oui »… */
+  edge: string;
+  title: string;
+  sub?: string | string[];
+  /** `fault` pour un refus, `ok` pour une branche qui aboutit. */
+  tone?: "fault" | "ok";
+}
+
+/** L'en-tête commun à toutes les planches de projet. */
+interface FigureFrame {
+  /** Rang de la planche dans le projet, déjà formaté — « FIG. 01 ». */
+  no: string;
+  title: string;
+  /** Description longue, lue par les lecteurs d'écran. */
+  alt: string;
+  /** Ce que la planche affirme et que le texte ne dirait pas aussi vite. */
+  caption: string;
+}
+
+/**
+ * Les planches d'un projet.
+ *
+ * Quatre formes seulement, et chacune répond à une question précise : par où
+ * passe la donnée (`flow`), dans quel ordre les tentatives sont faites
+ * (`ladder`), ce qui change entre deux options (`bands`), où tombe une mesure
+ * dans un intervalle (`tolerance`). Une cinquième forme voudrait dire qu'une
+ * des quatre ne démontrait rien.
+ *
+ * Les libellés vivent dans le contenu, jamais dans le tracé : une planche dont
+ * le texte est codé en dur n'a pas de version anglaise.
+ */
+export type ProjectFigure =
+  | (FigureFrame & {
+      kind: "flow";
+      nodes: FlowNode[];
+      exits?: FlowExit[];
+      /** Le dernier cadre, celui qu'on voulait atteindre. */
+      outcome: FlowNode;
+    })
+  | (FigureFrame & {
+      kind: "ladder";
+      /** Ce qui est calculé une fois, avant la première tentative. */
+      input: FlowNode;
+      levels: {
+        no: string;
+        name: string;
+        /** La condition testée à ce niveau. */
+        test: string;
+        /** Ce qu'on obtient quand elle répond. */
+        hit: string;
+        note?: string;
+        /** Le niveau décisif — le seul tracé en iris. */
+        key?: boolean;
+      }[];
+      /** L'étiquette de l'arête de chute, répétée entre les niveaux. */
+      failLabel: string;
+      /** Ce qui reste quand aucun niveau n'a répondu. */
+      none: string;
+    })
+  | (FigureFrame & {
+      kind: "bands";
+      rows: {
+        label: string;
+        /** Le segment de gauche — celui qui est visé. */
+        left: string;
+        /** Le segment de droite — le voisin, qu'on détruit ou qu'on préserve. */
+        right?: string;
+        /** Étendue du cache posé sur la bande. */
+        mask?: "none" | "wide" | "narrow";
+        note?: string;
+        tone?: "fault" | "ok";
+      }[];
+    })
+  | (FigureFrame & {
+      kind: "tolerance";
+      /** La règle qui produit l'intervalle, en une ligne. */
+      rule: string;
+      min: string;
+      target: string;
+      max: string;
+      minLabel: string;
+      targetLabel: string;
+      maxLabel: string;
+      unit: string;
+      rejectLabel: string;
+      passLabel: string;
+      /** Deux mesures posées sur l'axe. `at` va de 0 à 1 sur toute la bande. */
+      samples: { value: string; label: string; ok: boolean; at: number }[];
+    });
+
 export interface Project {
   id: string;
   name: string;
@@ -64,6 +187,17 @@ export interface Project {
   url?: string;
   /** Séquence d'inspection, réservée aux projets phares. */
   steps?: ProjectStep[];
+  /**
+   * Le résumé de tête. Quand il est renseigné, le projet est lu en étude de
+   * cas : cinq lignes visibles, la séquence numérotée 01 à 06 sous le
+   * dépliage. Sans lui, la fiche garde sa forme courte.
+   */
+  capsule?: ProjectCapsule;
+  /**
+   * Les planches du projet. La première est visible d'emblée — c'est elle qui
+   * porte la preuve avant le texte ; les suivantes attendent le dépliage.
+   */
+  figures?: ProjectFigure[];
 }
 
 export interface Education {
@@ -211,6 +345,22 @@ export interface Content {
     closeLabel: string;
     stackLabel: string;
     stepsLabel: string;
+    /**
+     * Libellés du résumé de tête. Le même gabarit sur tous les projets qui en
+     * portent un : cinq lignes comparables valent mieux que cinq résumés
+     * chacun à sa façon.
+     */
+    capsule: {
+      problem: string;
+      solution: string;
+      role: string;
+      stack: string;
+      result: string;
+    };
+    /** En-tête de la séquence numérotée, sur les projets en étude de cas. */
+    caseLabel: string;
+    /** Numéro porté par le bloc socle, dernier poste de la séquence. */
+    stackStepNo: string;
     items: Project[];
   };
   skills: {

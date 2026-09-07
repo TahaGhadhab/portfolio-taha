@@ -6,9 +6,9 @@ import type { Content } from "./types";
  */
 export const en: Content = {
   meta: {
-    title: "Taha Ghadhab — Industrial Engineering",
+    title: "Taha Ghadhab, industrial engineering",
     description: "Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC.",
-    ogAlt: "Silent flight — Taha Ghadhab's portfolio"
+    ogAlt: "Silent flight, Taha Ghadhab's portfolio"
   },
   nav: {
     sections: [
@@ -89,7 +89,7 @@ export const en: Content = {
         label: "startup co-founded"
       },
       {
-        value: "4",
+        value: "5",
         unit: "",
         label: "projects built"
       }
@@ -102,12 +102,12 @@ export const en: Content = {
     eyebrow: "THE PRINCIPLE",
     title: "Noise is a design failure",
     body: "A snowy owl flies in near silence because the leading edge of its wing is a comb of fine serrations. The teeth break one large vortex into many small ones, and small vortices carry almost no sound. Engineers copied it for wind-turbine blades and pantograph fairings.",
-    figCaption: "FIG. 01 — WAKE STRUCTURE, PLAIN vs. SERRATED EDGE",
+    figCaption: "FIG. 01 · WAKE STRUCTURE, PLAIN vs. SERRATED EDGE",
     figAlt: "Two airfoil edges compared. A plain edge sheds a large turbulent wake; a serrated edge splits the flow into fine parallel streams.",
     plainLabel: "PLAIN EDGE",
-    plainWake: "TURBULENT WAKE — AUDIBLE",
+    plainWake: "TURBULENT WAKE · AUDIBLE",
     serratedLabel: "SERRATED EDGE",
-    serratedWake: "FINE PARALLEL STREAMS — SILENT",
+    serratedWake: "FINE PARALLEL STREAMS · SILENT",
     notes: [
       "I keep coming back to this because it is the whole job in one picture. The plain edge is not lazy; it is doing the obvious thing. It still makes noise.",
       "The serrated edge does not fight the turbulence. It divides the problem until every piece is small enough to be harmless. That is decomposition, and it is what I do to a production line, a document flow, or a cost structure."
@@ -118,7 +118,7 @@ export const en: Content = {
     intro: "Listen first. Move once. An owl's ears sit at different heights on its skull, so it places a sound in three dimensions before committing instead of hunting by trial. These five steps run in that order on every assignment, from the shop floor to the control tower; they are what connects an OCR tool at Safran to an academic dashboard.",
     figure: {
       alt: "A five-station circuit: listen, stabilize, decompose, optimize, sustain. A return edge runs from the last station back to the first.",
-      caption: "FIG. 02 — ONE PASS, THEN IT RUNS WITHOUT ME",
+      caption: "FIG. 02 · ONE PASS, THEN IT RUNS WITHOUT ME",
       returnLabel: ["The loop keeps running", "once I have left"]
     },
     steps: [
@@ -160,7 +160,7 @@ export const en: Content = {
       title: "Three disciplines, one profile",
       figure: {
         alt: "Three equally sized discs overlapping at a single common point: industrial engineering, applied data and AI, business and entrepreneurship.",
-        caption: "FIG. 03 — THREE DOMAINS, ONE INTERSECTION",
+        caption: "FIG. 03 · THREE DOMAINS, ONE INTERSECTION",
         centerLabel: "Here"
       },
       pillars: [
@@ -184,25 +184,25 @@ export const en: Content = {
     intro: "A scientific path, aimed at systems engineering.",
     items: [
       {
-        degree: "Master's — Intelligent Complex Systems",
+        degree: "Master's in Intelligent Complex Systems",
         school: "École Polytechnique de Tunisie (EPT)",
-        period: "2026 — Present",
+        period: "2026 to present",
         location: "La Marsa",
         detail: "Modelling and control of complex systems, machine learning, decision support.",
         current: true
       },
       {
-        degree: "National Engineering Degree — Industrial Engineering",
+        degree: "National Engineering Degree in Industrial Engineering",
         school: "École Nationale d'Ingénieurs de Bizerte (ENIB)",
-        period: "2024 — Present",
+        period: "2024 to present",
         location: "Bizerte",
         detail: "Production systems optimisation, Lean management, industrial planning, Industry 4.0.",
         current: true
       },
       {
-        degree: "Preparatory cycle — Mathematics & Physics",
+        degree: "Preparatory cycle in Mathematics & Physics",
         school: "Faculty of Sciences of Tunis",
-        period: "2021 — 2024",
+        period: "2021 to 2024",
         location: "Tunis",
         detail: "Intensive scientific training in mathematics and physics.",
         current: false
@@ -218,11 +218,11 @@ export const en: Content = {
   experience: {
     title: "Experience",
     intro: "Three industrial environments, one way in: find what is stuck, leave with something that holds.",
-    inputLabel: "Input — problem identified",
-    outputLabel: "Output — delivered",
+    inputLabel: "Input · problem identified",
+    outputLabel: "Output · delivered",
     missionsLabel: "Assignments",
     toolsLabel: "Tools",
-    immersionLabel: "Output — gained",
+    immersionLabel: "Output · gained",
     detailsLabel: "Show detail",
     hideLabel: "Hide detail",
     items: [
@@ -232,7 +232,7 @@ export const en: Content = {
         company: "Safran",
         fullName: "Safran",
         role: "Methods engineer",
-        period: "June — July 2025",
+        period: "1 June to 24 July 2026",
         location: "Dhari",
         input: "Safran's acquisition of Zodiac left the old entity printed in the headers of thousands of manufacturing documents, with manual rework out of the question. Meanwhile, tightening-tool compliance was tracked with no dedicated system.",
         output: "A local OCR-assisted rebranding tool, with human validation and an audit log, plus a platform tracking tightening-tool compliance.",
@@ -255,7 +255,7 @@ export const en: Content = {
         company: "SMIP",
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant engineer",
-        period: "June — July 2025",
+        period: "June to July 2025",
         location: "Les Berges du Lac, Tunisia",
         input: "A heavy investment decision that needed to be argued on hard numbers: acquiring a coiled-tubing unit.",
         output: "A full techno-economic study supporting the acquisition decision.",
@@ -276,7 +276,7 @@ export const en: Content = {
         company: "AFC",
         fullName: "Arab Financial Consultants",
         role: "Trainee consultant",
-        period: "August — September 2025",
+        period: "August to September 2025",
         location: "Les Berges du Lac, Tunisia",
         input: "A purely technical reading of industrial projects, without the vocabulary or the criteria of the financial decision-maker.",
         output: "A financial lens on systems: translating an engineering gain into an investment argument.",
@@ -294,7 +294,7 @@ export const en: Content = {
   },
   projects: {
     title: "Projects",
-    intro: "Four systems built to solve a specific problem, from aerospace documentation to plant layout.",
+    intro: "Five systems built to solve a specific problem, from aerospace documentation to plant layout.",
     openLabel: "Open",
     detailsLabel: "Show detail",
     hideLabel: "Hide detail",
@@ -302,6 +302,15 @@ export const en: Content = {
     closeLabel: "Close",
     stackLabel: "Stack",
     stepsLabel: "Inspection sequence",
+    capsule: {
+      problem: "Problem",
+      solution: "Solution",
+      role: "Role",
+      stack: "Stack",
+      result: "Result"
+    },
+    caseLabel: "Case study",
+    stackStepNo: "06",
     items: [
       {
         id: "safran-rebranding",
@@ -340,9 +349,9 @@ export const en: Content = {
           {
             label: "Recognition",
             items: [
-              "Tesseract 5 — fra+eng",
-              "PaddleOCR 3.6 — DBNet + CRNN",
-              "TrOCR — handwritten notes"
+              "Tesseract 5 · fra+eng",
+              "PaddleOCR 3.6 · DBNet + CRNN",
+              "TrOCR · handwritten notes"
             ]
           },
           {
@@ -358,15 +367,15 @@ export const en: Content = {
           {
             label: "Interface",
             items: [
-              "PySide6 — MVVM, QThread",
-              "Tkinter — production tool",
+              "PySide6 · MVVM, QThread",
+              "Tkinter · production tool",
               "Per-occurrence preview and approval"
             ]
           },
           {
             label: "Traceability",
             items: [
-              "SQLite — 5 tables",
+              "SQLite · 5 tables",
               "Append-only audit log",
               "Automated quality gate"
             ]
@@ -374,10 +383,190 @@ export const en: Content = {
           {
             label: "Quality",
             items: [
-              "pytest — 210 unit tests",
+              "pytest · 210 unit tests",
               "pytest-qt",
               "black",
               "flake8"
+            ]
+          }
+        ],
+        capsule: {
+          problem: "After the Zodiac acquisition, thousands of manufacturing dossiers still carried the old entity in their headers and footers. And a PDF stores that one visible line in five different ways.",
+          solution: "A desktop tool that finds every mention whatever its encoding, replaces it without damaging what surrounds it, and writes nothing without an operator's approval.",
+          role: "Sole developer: problem framing, architecture, algorithms, interface, tests.",
+          stack: "Python 3.12 · PyMuPDF · Tesseract · PaddleOCR · OpenCV · PySide6 · SQLite",
+          result: "18/18 occurrences on the reference document · 210 unit tests · ≈ 19 300 LOC"
+        },
+        steps: [
+          {
+            step: "01",
+            title: "Context",
+            body: "Zodiac Aerospace became Safran Electronics & Defense. The brand changed on the letterhead; it did not change inside the thousands of PDFs already issued: manufacturing dossiers, CAD sheets, work orders, all still naming an entity that no longer exists."
+          },
+          {
+            step: "02",
+            title: "Constraint",
+            body: "Aerospace documentation is auditable. A silent modification is worse than no modification: whoever opens the file in five years has to be able to know what it said before, who changed it, and when. And a header is never alone on its line: the dossier reference beside it has to survive untouched."
+          },
+          {
+            step: "03",
+            title: "Approach",
+            body: "Read the file before rewriting it. One visible header exists as native text, as a Form XObject from a CAD export, as curves holding no characters at all, as a raster scan, or as a bitmap logo. Five encodings, five recovery techniques, and not one of them covers the others. Hence three extraction passes, an unconditional OCR fallback, and a matcher tolerant of what OCR gets wrong."
+          },
+          {
+            step: "04",
+            title: "Build",
+            body: "Two programs. A layered PySide6 application (≈ 12 900 LOC) where every arrow points at a framework-free domain, and a deliberately flat production tool (≈ 4 900 LOC) whose engine imports no graphics code and stays driveable from the command line. Between them one SQLite schema: pending modifications, an append-only change log, quality reports."
+          },
+          {
+            step: "05",
+            title: "Result",
+            body: "18 occurrences out of 18 on the 17-page reference document, up from 0 out of 16 before the containment level was added. 210 unit tests run without a Qt event loop or a PDF on disk. The logo detector is the one part that did not work: template correlation peaks at 0.568 against a 0.65 threshold at every scale tested. Measured, reported, not hidden."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "From source PDF to reissued file",
+            alt: "Vertical flowchart: the source PDF is classified as native or scanned, each page is zoned into header and footer, text is extracted in three passes, the VariantMatcher returns occurrences, an operator validates each one, replacement and a quality gate follow, and a new file is written. Skipping an occurrence writes nothing; every decision is appended to the change log.",
+            caption: "The chamfered station is the only path to writing. Modifications are created PENDING and the PDF stays untouched until apply_modifications() is called, so an occurrence that is skipped costs nothing, but still leaves a line in the log.",
+            nodes: [
+              {
+                title: "Source PDF",
+                sub: "never overwritten"
+              },
+              {
+                title: "Classification",
+                sub: "< 50 chars/page → scanned"
+              },
+              {
+                title: "Header + footer zoning",
+                sub: "top 30% · bottom 15%"
+              },
+              {
+                title: "Extraction",
+                sub: [
+                  "3 passes over the stream",
+                  "unconditional OCR fallback"
+                ]
+              },
+              {
+                title: "VariantMatcher",
+                sub: "4 levels · fig. 02"
+              },
+              {
+                title: "Operator validation",
+                sub: "one occurrence at a time",
+                decision: true
+              },
+              {
+                title: "Replacement",
+                sub: "auto | precise · fig. 03"
+              },
+              {
+                title: "Quality gate",
+                sub: [
+                  "4 checks",
+                  "score from 0 to 1"
+                ]
+              }
+            ],
+            exits: [
+              {
+                from: 5,
+                edge: "skip",
+                title: "Nothing written",
+                sub: "next occurrence",
+                tone: "fault"
+              },
+              {
+                from: 6,
+                edge: "trace",
+                title: "change_log",
+                sub: [
+                  "append-only",
+                  "who · when · what"
+                ]
+              }
+            ],
+            outcome: {
+              title: "*_safran.pdf",
+              sub: "a new file, not the source"
+            }
+          },
+          {
+            kind: "ladder",
+            no: "FIG. 02",
+            title: "Four levels tried in order: the first to answer wins",
+            alt: "Decision ladder: the normalised text is computed once, then four matching levels are tried in order: exact, deep, contain, fuzzy. Each returns a score when it answers and falls through to the next when it does not. The third level, containment, is highlighted as the one that took detection from zero out of sixteen to eighteen out of eighteen.",
+            caption: "Why contain comes before fuzzy. A real header reads « ZODIAC AERO ELECTRIC DOSSIER FABRICATION REF SAQ172_ »: measured against the pattern alone, the edit distance is dominated by the surrounding text and the ratio collapses. Containment answers 1.0 without ambiguity whenever it applies, so it has to be asked first.",
+            input: {
+              title: "normalize_text(ocr_normalize(text))",
+              sub: "computed once, outside the pattern loop"
+            },
+            levels: [
+              {
+                no: "LEVEL 1",
+                name: "exact",
+                test: "case, accents, spaces",
+                hit: "score 1.0",
+                note: "clean native text"
+              },
+              {
+                no: "LEVEL 2",
+                name: "deep",
+                test: "OCR substitutions",
+                hit: "score 1.0",
+                note: "Z0DIAC → ZODIAC"
+              },
+              {
+                no: "LEVEL 3 · DECISIVE",
+                name: "contain",
+                test: "pattern ⊂ normalised text",
+                hit: "score 1.0",
+                note: "0/16 → 18/18",
+                key: true
+              },
+              {
+                no: "LEVEL 4",
+                name: "fuzzy",
+                test: "Levenshtein ratio ≥ cutoff",
+                hit: "score = ratio",
+                note: "degraded scans"
+              }
+            ],
+            failLabel: "no match",
+            none: "no occurrence"
+          },
+          {
+            kind: "bands",
+            no: "FIG. 03",
+            title: "auto against precise: the width of one mask",
+            alt: "Three stacked strips. The first shows the detected header block, holding the Zodiac mention on the left and a dossier reference on the right. The second shows auto mode masking the whole block width and destroying the reference. The third shows precise mode masking only the Zodiac zone, leaving the reference readable.",
+            caption: "The only difference between the two modes is how wide the white patch is drawn, and that difference destroys or preserves the dossier reference sitting in the same block. precise measures the minimal bounding box from the spans that actually contain the mention, and falls back to the block box only when none is found.",
+            rows: [
+              {
+                label: "BEFORE · DETECTED HEADER BLOCK",
+                left: "ZODIAC AERO ELECTRIC",
+                right: "DOSSIER FAB. REF SAQ172_",
+                mask: "none"
+              },
+              {
+                label: "AUTO · MASK OVER THE WHOLE BLOCK",
+                left: "SAFRAN ELECTRONICS & DEFENSE",
+                mask: "wide",
+                tone: "fault",
+                note: "the neighbouring dossier reference is destroyed"
+              },
+              {
+                label: "PRECISE · MINIMAL BBOX COMPUTED",
+                left: "SAFRAN ELEC. & DEF.",
+                right: "DOSSIER FAB. REF SAQ172_",
+                mask: "narrow",
+                tone: "ok",
+                note: "the reference survives untouched"
+              }
             ]
           }
         ],
@@ -387,12 +576,232 @@ export const en: Content = {
         }
       },
       {
+        id: "controltorque",
+        name: "ControlTorque: torque tool traceability",
+        short: "ControlTorque",
+        tagline: "Proving a tightening was checked, years after the fact",
+        period: "2025",
+        status: "Delivered",
+        summary: "On an assembly line, a torque tightening is checked against a target value and a tolerance. The proof of that check lived in paper logs and spreadsheets. ControlTorque records every check as an immutable row carrying its own calculation, refuses one taken with an out-of-calibration torquemeter, and opens a tracked nonconformity file the moment a measurement falls outside its bounds.",
+        capsule: {
+          problem: "The proof that a tightening had been checked lived in paper logs and spreadsheets: unsearchable, unauditable, and impossible to trust years later.",
+          solution: "A web application where each check is an immutable record carrying its own calculation, and where a nonconforming result opens a tracked file rather than a note.",
+          role: "Sole developer: business rules, backend, frontend, data model.",
+          stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
+          result: "8 business rules enforced server-side · 11 entities · 1 append-only event log"
+        },
+        highlights: [
+          "Eight business rules, all enforced server-side: the frontend mirrors them for input comfort, it never enforces them",
+          "The operator's identity is read from the JWT on every request, never from the request body; recording a check under a colleague's name is not possible",
+          "A check taken with an expired calibration is refused with a 400 rather than stored: a check with no probative value is more dangerous than no check, because it looks like conformity",
+          "Tolerance, its source and both bounds are frozen into the record, and the tool and torquemeter references are copied as plain strings rather than linked, so an auditor can replay the calculation years later even if the manufacturing range has been revised since",
+          "control_checks is INSERT ONLY, every nonconformity decision is appended to an event log, and a closed file has no allowed transition back"
+        ],
+        stack: [
+          "Angular 13",
+          "Spring Boot 2.7",
+          "Java 8",
+          "Hibernate 5.6",
+          "SQL Server",
+          "JWT",
+          "BCrypt"
+        ],
+        stackDetail: [
+          {
+            label: "Frontend",
+            items: [
+              "Angular 13.3 · SPA",
+              "AuthGuard · AdminGuard",
+              "JwtInterceptor",
+              "10 HTTP services"
+            ]
+          },
+          {
+            label: "Backend",
+            items: [
+              "Spring Boot 2.7.18",
+              "11 controllers · 14 services",
+              "@Transactional",
+              "GlobalExceptionHandler"
+            ]
+          },
+          {
+            label: "Domain",
+            items: [
+              "ConformityService · BigDecimal",
+              "CalibrationService",
+              "NonconformityService",
+              "8 business rules"
+            ]
+          },
+          {
+            label: "Persistence",
+            items: [
+              "Hibernate 5.6 · 11 entities",
+              "H2 in development",
+              "SQL Server in production",
+              "Filtered queries, pagination"
+            ]
+          },
+          {
+            label: "Security",
+            items: [
+              "JWT HS256 · 8 h",
+              "BCrypt, cost 12",
+              "2 roles: OPERATOR, ADMIN",
+              "Single-origin CORS"
+            ]
+          }
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Context",
+            body: "On an assembly line, a torque tightening is checked against a target value and a tolerance. The check itself takes seconds; proving it happened, under which conditions and by whom, is the part that has to survive an audit years later. And that part was living on paper."
+          },
+          {
+            step: "02",
+            title: "Constraint",
+            body: "Everything that matters has to hold even against the person using it. An operator must not be able to record a check under someone else's name, to hand the server a verdict it did not compute, or to alter a check after the fact. And a tool whose calibration has lapsed has to stop production rather than decorate it."
+          },
+          {
+            step: "03",
+            title: "Approach",
+            body: "Put every decision in one layer, and leave it no way around. The verdict is recomputed server-side from the target and the measurement; the operator's id is read from the token, never from the body; the timestamp comes from the database. The frontend mirrors the rules so entry stays comfortable, and enforces none of them."
+          },
+          {
+            step: "04",
+            title: "Build",
+            body: "An Angular SPA over a stateless Spring Boot backend: 11 controllers, 14 services, 11 JPA entities, and no JPA entity ever reaching the client. Two rules got a service of their own: conformity, computed in BigDecimal because binary rounding has no place in an aerospace quality file, and calibration, which can refuse a request outright."
+          },
+          {
+            step: "05",
+            title: "Result",
+            body: "Eight business rules, all server-side. A check carries its own tolerance, its source and both bounds, and copies the tool and torquemeter references as plain strings, so the record still says under exactly which conditions that tightening was validated, even after the range is revised. One limit, stated rather than hidden: immutability is guaranteed by the application, not by the database, so direct SQL access would bypass it."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "What one torque check has to survive",
+            alt: "Vertical flowchart of a POST to the controls endpoint: the user is read from the JWT, references are resolved, the torquemeter is read, conformity is computed, the record is inserted, and a 201 is returned. Unknown references exit with a 404, an expired calibration exits with a 400, and a non-conforming result opens a nonconformity file.",
+            caption: "The refusal is deliberate. A torquemeter whose calibration has lapsed fails the request rather than producing a record: a check with no probative value is more dangerous than a missing one, because it looks like conformity. An unknown due date, by contrast, does not block production: it is simply recorded as it stands.",
+            nodes: [
+              {
+                title: "POST /api/controls",
+                sub: "one torque check"
+              },
+              {
+                title: "user ← JWT",
+                sub: "user_id in body ignored"
+              },
+              {
+                title: "Reference resolution",
+                sub: "ToolType · COI · cell"
+              },
+              {
+                title: "Torquemeter read",
+                sub: "calibration due date"
+              },
+              {
+                title: "ConformityService",
+                sub: [
+                  "R1 tolerance → R2 bounds",
+                  "R3 verdict · fig. 02"
+                ]
+              },
+              {
+                title: "INSERT control_checks",
+                sub: [
+                  "checked_at set by the DB",
+                  "record is immutable"
+                ]
+              },
+              {
+                title: "Result non-conforming?",
+                sub: "server-side verdict",
+                decision: true
+              }
+            ],
+            exits: [
+              {
+                from: 2,
+                edge: "unknown",
+                title: "404 Not Found",
+                sub: "ResourceNotFound",
+                tone: "fault"
+              },
+              {
+                from: 3,
+                edge: "expired",
+                title: "400 Bad Request",
+                sub: [
+                  "check refused",
+                  "rule R7"
+                ],
+                tone: "fault"
+              },
+              {
+                from: 6,
+                edge: "yes",
+                title: "Nonconformity",
+                sub: [
+                  "status A_TRAITER",
+                  "file opened"
+                ],
+                tone: "fault"
+              }
+            ],
+            outcome: {
+              title: "201 Created",
+              sub: "+ deviationPct computed"
+            }
+          },
+          {
+            kind: "tolerance",
+            no: "FIG. 02",
+            title: "The tolerance band, and why the bounds are included",
+            alt: "Number line for a 25 Nm target with a 4 percent tolerance: the conforming zone runs from 24.000 to 26.000 Nm, bounds included, with reject zones either side. A measurement of 25.400 Nm is conforming; a measurement of 26.350 Nm is not.",
+            caption: "R2 sets the bounds: min = target × (1 − tol/100) and max = target × (1 + tol/100), rounded HALF_UP to three decimals. R3 gives the verdict: the bounds are included, so a measurement of exactly 24.000 Nm is conforming. All four computed values are written into the record, which is what lets an auditor redo the calculation years later even if the range has changed since.",
+            rule: "target 25.000 Nm > 10 Nm → tolerance 4.00% (DEFAUT_4PCT)",
+            min: "24.000",
+            target: "25.000",
+            max: "26.000",
+            minLabel: "min",
+            targetLabel: "target",
+            maxLabel: "max",
+            unit: "Nm",
+            rejectLabel: "reject",
+            passLabel: "CONFORMING",
+            samples: [
+              {
+                value: "25.400 Nm",
+                label: "CONFORMING",
+                ok: true,
+                at: 0.6
+              },
+              {
+                value: "26.350 Nm",
+                label: "NON-CONFORMING",
+                ok: false,
+                at: 0.8375
+              }
+            ]
+          }
+        ],
+        metric: {
+          value: "8",
+          label: "Rules held server-side"
+        }
+      },
+      {
         id: "pharmacowork",
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
         tagline: "The pharmacy's internal workspace",
-        period: "2025 — Present",
+        period: "2025 to present",
         status: "Pilot",
         summary: "Pharmacy management software handles sales, stock and billing, not what moves between people. Who is preparing which prescription, who owes a patient a call, which quality check is overdue: that gap is filled today with sticky notes, a shared notebook and a WhatsApp group, the last of which carries patient names on personal phones, outside any regulatory frame. Co-founded to occupy that gap and nothing else: eleven modules, built mobile-first because the job is done standing at the counter. It replaces neither the management software, nor the till, nor the legal prescription register.",
         highlights: [
@@ -451,7 +860,7 @@ export const en: Content = {
           {
             label: "Frontend",
             items: [
-              "Next.js 16 — App Router",
+              "Next.js 16 · App Router",
               "React 19",
               "Tailwind CSS 4",
               "lucide-react",
@@ -474,7 +883,7 @@ export const en: Content = {
           {
             label: "Services",
             items: [
-              "S3 — presigned URLs",
+              "S3 · presigned URLs",
               "Resend / SMTP",
               "Web push VAPID",
               "Mistral OCR",
@@ -515,7 +924,7 @@ export const en: Content = {
         name: "Machine Layout Optimization App",
         short: "Machine Layout",
         tagline: "Decision support for plant layout",
-        period: "2025 — 2026",
+        period: "2025 to 2026",
         status: "In progress",
         summary: "A decision-support application for workshop layout: it groups machines into coherent production cells and scores each candidate layout on measurable industrial criteria.",
         highlights: [
@@ -541,8 +950,8 @@ export const en: Content = {
         id: "dashboard-enib",
         name: "Academic Performance Dashboard",
         short: "ENIB Dashboard",
-        tagline: "Full-stack web platform — ENIB",
-        period: "2025 — 2026",
+        tagline: "Full-stack web platform, ENIB",
+        period: "2025 to 2026",
         status: "In progress",
         summary: "A steering platform for ENIB's academic performance: it centralises tracking indicators, fires automatic alerts on drift, and makes student satisfaction readable at a glance.",
         highlights: [
@@ -606,7 +1015,8 @@ export const en: Content = {
               "safran",
               "pharmacowork",
               "machine-layout",
-              "safran-rebranding"
+              "safran-rebranding",
+              "controltorque"
             ]
           },
           {
@@ -634,7 +1044,8 @@ export const en: Content = {
             name: "SQL / PostgreSQL",
             usedIn: [
               "pharmacowork",
-              "dashboard-enib"
+              "dashboard-enib",
+              "controltorque"
             ]
           },
           {
@@ -697,12 +1108,12 @@ export const en: Content = {
   },
   associative: {
     title: "Student leadership",
-    intro: "AI Innovators Club — ENIB.",
+    intro: "AI Innovators Club, ENIB.",
     items: [
       {
         title: "President",
-        org: "AI Innovators Club — ENIB",
-        period: "2025 — 2026",
+        org: "AI Innovators Club, ENIB",
+        period: "2025 to 2026",
         points: [
           "Strategic direction of the club: cross-disciplinary AI & data projects",
           "Event organisation"
@@ -710,8 +1121,8 @@ export const en: Content = {
       },
       {
         title: "Head of HR",
-        org: "AI Innovators Club — ENIB",
-        period: "2024 — 2025",
+        org: "AI Innovators Club, ENIB",
+        period: "2024 to 2025",
         points: [
           "Managed internal recruitment",
           "Onboarded new members"
@@ -745,7 +1156,7 @@ export const en: Content = {
     cvHint: "Print-ready, one click."
   },
   classic: {
-    title: "Resume — Taha Ghadhab",
+    title: "Taha Ghadhab's resume",
     intro: "Plain text version, scannable, no styling.",
     printLabel: "Print / PDF",
     backLabel: "Back to the site",

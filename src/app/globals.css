@@ -1241,6 +1241,206 @@
   fill: var(--iris);
 }
 
+/* ── Les planches de projet ───────────────────────────────
+
+   Elles sont plus denses que le circuit de la méthode : un logigramme porte
+   quinze étiquettes là où le circuit en porte dix. Le cadre est donc un peu
+   plus large — trente rem contre vingt-six — et le texte du tracé un cran
+   plus petit, sans jamais descendre sous la taille à laquelle on le lit.
+
+   Le tracé fait 400 unités : à trente-deux rem, l'échelle est de 1,28, et une
+   étiquette de 10,5 pixels s'affiche à treize et demi. C'est la limite basse
+   acceptée, et c'est pourquoi rien n'est écrit sous 9,5. */
+.plate-project {
+  max-width: 32rem;
+}
+.pf-no {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2-wide);
+  color: var(--snow-3);
+}
+.pf-no .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line-lit);
+}
+.pf-title {
+  font-family: var(--f-display);
+  font-size: var(--t--1);
+  letter-spacing: var(--tr--1);
+  color: var(--snow);
+  margin: var(--s-2) 0 var(--s-5);
+  max-width: none;
+  text-wrap: pretty;
+}
+
+/* Les cadres. Un seul remplissage soulevé, trois teintes fonctionnelles —
+   et les trois disent quelque chose : la branche décisive, le refus, la
+   sortie atteinte. Aucune n'est là pour égayer la planche. */
+.pf-box {
+  stroke: var(--line-lit);
+  fill: var(--void-lift);
+  stroke-width: 1;
+}
+.pf-box-sunk {
+  fill: var(--void);
+  stroke-dasharray: 4 3;
+}
+.pf-box-key {
+  stroke: var(--iris);
+  fill: color-mix(in srgb, var(--iris) 9%, var(--void-lift));
+}
+.pf-box-ok {
+  stroke: var(--color-ok);
+  fill: color-mix(in srgb, var(--color-ok) 9%, var(--void-lift));
+}
+.pf-box-fault {
+  stroke: var(--color-fault);
+  fill: color-mix(in srgb, var(--color-fault) 9%, var(--void-lift));
+}
+
+.pf-line {
+  stroke: var(--snow-3);
+  fill: none;
+  stroke-width: 1;
+}
+.pf-line-key {
+  stroke: var(--iris);
+}
+.pf-line-fault {
+  stroke: var(--color-fault);
+}
+.pf-head {
+  fill: var(--snow-3);
+  stroke: none;
+}
+.pf-key-fill {
+  fill: var(--iris);
+}
+.pf-fault-fill {
+  fill: var(--color-fault);
+}
+.pf-hair {
+  stroke: var(--line-lit);
+  stroke-dasharray: 3 3;
+  fill: none;
+  stroke-width: 1;
+}
+
+/* Le cache d'un remplacement : un aplat, pas un cadre. C'est sa largeur qui
+   est l'objet de la planche — il ne doit donc rien porter d'autre. */
+.pf-mask {
+  fill: var(--void);
+  stroke: var(--edge-ui);
+  stroke-width: 1;
+}
+.pf-mask-fault {
+  stroke: var(--color-fault);
+  fill: color-mix(in srgb, var(--color-fault) 12%, var(--void));
+}
+.pf-mask-ok {
+  stroke: var(--iris);
+  fill: color-mix(in srgb, var(--iris) 12%, var(--void));
+}
+
+.pf-t {
+  font-family: var(--f-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: var(--tr--1);
+  fill: var(--snow);
+  text-anchor: middle;
+}
+.pf-s {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: var(--tr--2);
+  fill: var(--snow-3);
+  text-anchor: middle;
+}
+.pf-n {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--tr--2-wide);
+  fill: var(--snow-3);
+}
+.pf-n-mid {
+  text-anchor: middle;
+}
+.pf-e {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: var(--tr--2);
+  fill: var(--snow-3);
+}
+.pf-t-start,
+.pf-s-start,
+.pf-e-start {
+  text-anchor: start;
+}
+.pf-key {
+  fill: var(--iris);
+}
+.pf-ok {
+  fill: var(--color-ok);
+}
+.pf-fault {
+  fill: var(--color-fault);
+}
+
+/* ── Le résumé de tête d'un projet ────────────────────────
+
+   Cinq lignes, le même gabarit partout. Le libellé est en mono à gauche, la
+   réponse en corps de texte à droite : la colonne de gauche se parcourt d'un
+   coup d'œil, celle de droite se lit. Un tableau entièrement en mono aurait
+   l'air d'une fiche technique et se lirait comme un listing. */
+.capsule {
+  margin-top: var(--s-5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  max-width: var(--measure);
+}
+.capsule > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-1);
+  padding-block: var(--s-3);
+  border-bottom: 1px dashed var(--line-lit);
+}
+.capsule dt {
+  font-family: var(--f-mono);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2-wide);
+  color: var(--snow-3);
+}
+.capsule dd {
+  margin: 0;
+  color: var(--snow-2);
+  text-wrap: pretty;
+}
+/* La ligne de résultat est la seule que le lecteur pressé retiendra : elle
+   passe en iris, et rien d'autre dans le résumé ne le fait. */
+.capsule .result dd {
+  color: var(--iris);
+  font-family: var(--f-mono);
+  font-size: var(--tm--1);
+}
+
+/* Les planches secondaires, sous le dépliage : elles s'enchaînent sans se
+   toucher, chacune gardant sa largeur de tracé. */
+.plate-rack {
+  display: grid;
+  gap: var(--s-6);
+}
+.plate-rack .plate {
+  margin-block: 0;
+}
+
 /* ── Listes sur rail — méthode, formation, engagement ─────── */
 .rail-list {
   list-style: none;
@@ -1515,6 +1715,14 @@ details[open] > .fold-toggle .fold-open {
   margin-top: 0;
 }
 @media (min-width: 680px) {
+  /* Le libellé rejoint sa réponse : à 680 px la colonne de gauche tient en
+     huit rem et demie, et les cinq lignes se lisent en diagonale. */
+  .capsule > div {
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: baseline;
+  }
+
   .stack-row {
     grid-template-columns: 8.5rem minmax(0, 1fr);
     gap: var(--s-4);
@@ -2045,6 +2253,24 @@ details[open] > .fold-toggle .fold-open {
   .diag-mark-label {
     font-size: 14px;
     letter-spacing: var(--tr--2);
+  }
+
+  /* Les planches de projet perdent leur marge de cadre sur téléphone : le
+     tracé fait 360 unités, chaque pixel rendu compte pour ses étiquettes. */
+  .plate-project {
+    padding: var(--s-4) var(--s-2);
+  }
+  .pf-t {
+    font-size: 13px;
+  }
+  .pf-s {
+    font-size: 11.5px;
+  }
+  .pf-e {
+    font-size: 11px;
+  }
+  .pf-n {
+    font-size: 10.5px;
   }
 
   /* La pastille entrée/sortie se rapproche de son texte : vingt-huit
@@ -2765,5 +2991,55 @@ details[open] > .fold-body {
   .diag-return-label,
   .diag-mark-label {
     fill: #333 !important;
+  }
+  /* Les planches de projet suivent la même règle : traits noirs, aucun
+     aplat. Une teinte fonctionnelle imprimée en gris ne dit plus rien, elle
+     est donc rendue par le seul trait. */
+  .pf-box,
+  .pf-mask {
+    stroke: #999 !important;
+    fill: none !important;
+  }
+  .pf-box-key,
+  .pf-box-ok,
+  .pf-box-fault,
+  .pf-mask-fault,
+  .pf-mask-ok {
+    stroke: #000 !important;
+  }
+  .pf-line,
+  .pf-hair {
+    stroke: #666 !important;
+  }
+  .pf-line-key,
+  .pf-line-fault {
+    stroke: #000 !important;
+  }
+  .pf-head {
+    fill: #666 !important;
+  }
+  .pf-key-fill,
+  .pf-fault-fill {
+    fill: #000 !important;
+  }
+  .pf-t {
+    fill: #000 !important;
+  }
+  .pf-s,
+  .pf-n,
+  .pf-e {
+    fill: #333 !important;
+  }
+  .pf-key,
+  .pf-ok,
+  .pf-fault {
+    fill: #000 !important;
+  }
+  .pf-title {
+    color: #000 !important;
+  }
+  .capsule dd,
+  .capsule .result dd {
+    color: #333 !important;
   }
 }

@@ -44,7 +44,7 @@ export function getDeployments(content: Content): Deployment[] {
     ...content.experience.items.map((item) => ({
       id: item.id,
       short: item.short,
-      full: `${item.role} — ${item.company}`,
+      full: `${item.role} · ${item.company}`,
       kind: "experience" as const,
     })),
     ...content.projects.items.map((item) => ({

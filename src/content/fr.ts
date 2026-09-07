@@ -8,9 +8,9 @@ import type { Content } from "./types";
  */
 export const fr: Content = {
   meta: {
-    title: "Taha Ghadhab — Ingénieur génie industriel",
+    title: "Taha Ghadhab, ingénieur génie industriel",
     description: "Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
-    ogAlt: "Vol silencieux — portfolio de Taha Ghadhab"
+    ogAlt: "Vol silencieux, portfolio de Taha Ghadhab"
   },
   nav: {
     sections: [
@@ -91,7 +91,7 @@ export const fr: Content = {
         label: "startup co-fondée"
       },
       {
-        value: "4",
+        value: "5",
         unit: "",
         label: "projets construits"
       }
@@ -104,12 +104,12 @@ export const fr: Content = {
     eyebrow: "LE PRINCIPE",
     title: "Le bruit est un défaut de conception",
     body: "La chouette harfang vole en silence parce que le bord d'attaque de son aile est un peigne de fines dentelures. Les dents brisent un gros tourbillon en une multitude de petits, et les petits tourbillons ne portent presque aucun son. Les ingénieurs l'ont copié pour les pales d'éoliennes et les carénages de pantographes.",
-    figCaption: "FIG. 01 — STRUCTURE DE SILLAGE, BORD LISSE vs. BORD DENTELÉ",
+    figCaption: "FIG. 01 · STRUCTURE DE SILLAGE, BORD LISSE vs. BORD DENTELÉ",
     figAlt: "Comparaison de deux bords d'aile. Le bord lisse laisse un large sillage turbulent ; le bord dentelé divise l'écoulement en fins filets parallèles.",
     plainLabel: "BORD LISSE",
-    plainWake: "SILLAGE TURBULENT — AUDIBLE",
+    plainWake: "SILLAGE TURBULENT · AUDIBLE",
     serratedLabel: "BORD DENTELÉ",
-    serratedWake: "FILETS PARALLÈLES — SILENCIEUX",
+    serratedWake: "FILETS PARALLÈLES · SILENCIEUX",
     notes: [
       "J'y reviens toujours parce que c'est tout le métier en une image. Le bord lisse n'est pas paresseux : il fait la chose évidente. Et il fait quand même du bruit.",
       "Le bord dentelé ne combat pas la turbulence. Il divise le problème jusqu'à ce que chaque morceau soit assez petit pour être inoffensif. C'est de la décomposition, et c'est ce que je fais à une ligne de production, à un flux documentaire ou à une structure de coûts."
@@ -120,7 +120,7 @@ export const fr: Content = {
     intro: "Écouter d'abord. N'agir qu'une fois. Les oreilles d'une chouette sont placées à des hauteurs différentes sur son crâne : elle situe un son en trois dimensions avant de s'engager, au lieu de chasser à l'essai. Ces cinq étapes se déroulent dans cet ordre sur chaque mission, du terrain jusqu'au pilotage ; c'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
     figure: {
       alt: "Circuit à cinq postes : écouter, stabiliser, décomposer, optimiser, pérenniser. Une arête de retour ramène le dernier poste vers le premier.",
-      caption: "FIG. 02 — UN SEUL PASSAGE, PUIS ÇA TOURNE SANS MOI",
+      caption: "FIG. 02 · UN SEUL PASSAGE, PUIS ÇA TOURNE SANS MOI",
       returnLabel: ["La boucle continue", "une fois que je suis parti"]
     },
     steps: [
@@ -162,7 +162,7 @@ export const fr: Content = {
       title: "Triple casquette",
       figure: {
         alt: "Trois disques de même taille qui se recouvrent en un seul point commun : ingénierie industrielle, data et IA appliquée, business et entrepreneuriat.",
-        caption: "FIG. 03 — TROIS DOMAINES, UNE SEULE INTERSECTION",
+        caption: "FIG. 03 · TROIS DOMAINES, UNE SEULE INTERSECTION",
         centerLabel: "Ici"
       },
       pillars: [
@@ -186,17 +186,17 @@ export const fr: Content = {
     intro: "Une trajectoire scientifique, orientée vers l'ingénierie des systèmes.",
     items: [
       {
-        degree: "Mastère — Systèmes complexes intelligents",
+        degree: "Mastère en systèmes complexes intelligents",
         school: "École Polytechnique de Tunisie (EPT)",
-        period: "2026 — Présent",
+        period: "2026 à aujourd'hui",
         location: "La Marsa",
         detail: "Modélisation et pilotage des systèmes complexes, apprentissage automatique, aide à la décision.",
         current: true
       },
       {
-        degree: "Diplôme National d'Ingénieur — Génie Industriel",
+        degree: "Diplôme National d'Ingénieur en génie industriel",
         school: "École Nationale d'Ingénieurs de Bizerte (ENIB)",
-        period: "2024 — Présent",
+        period: "2024 à aujourd'hui",
         location: "Bizerte",
         detail: "Optimisation des systèmes de production, Lean management, planification industrielle, Industrie 4.0.",
         current: true
@@ -204,7 +204,7 @@ export const fr: Content = {
       {
         degree: "Cycle préparatoire Mathématiques-Physique",
         school: "Faculté des Sciences de Tunis",
-        period: "2021 — 2024",
+        period: "2021 à 2024",
         location: "Tunis",
         detail: "Formation scientifique intensive, socle mathématique et physique.",
         current: false
@@ -220,11 +220,11 @@ export const fr: Content = {
   experience: {
     title: "Expériences",
     intro: "Trois environnements industriels, une même façon d'entrer : identifier ce qui coince, sortir avec quelque chose qui tient.",
-    inputLabel: "Entrée — problème identifié",
-    outputLabel: "Sortie — livré",
+    inputLabel: "Entrée · problème identifié",
+    outputLabel: "Sortie · livré",
     missionsLabel: "Missions",
     toolsLabel: "Outils",
-    immersionLabel: "Sortie — acquis",
+    immersionLabel: "Sortie · acquis",
     detailsLabel: "Voir le détail",
     hideLabel: "Masquer le détail",
     items: [
@@ -234,7 +234,7 @@ export const fr: Content = {
         company: "Safran",
         fullName: "Safran",
         role: "Ingénieur méthode",
-        period: "Juin — Juillet 2025",
+        period: "1er juin au 24 juillet 2026",
         location: "Dhari",
         input: "Le rachat de Zodiac par Safran laisse l'ancienne entité imprimée dans les en-têtes de milliers de documents de fabrication ; reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
         output: "Un outil de reprise de marque assistée par OCR, avec validation humaine et journal d'audit, et une plateforme de suivi de la conformité des outils de serrage.",
@@ -257,7 +257,7 @@ export const fr: Content = {
         company: "SMIP",
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant ingénieur",
-        period: "Juin — Juillet 2025",
+        period: "Juin à juillet 2025",
         location: "Les Berges du Lac, Tunisie",
         input: "Une décision d'investissement lourde à instruire sur des bases chiffrées : l'acquisition d'une unité de coiled-tubing.",
         output: "Une étude technico-économique complète servant de support à la décision d'acquisition.",
@@ -278,7 +278,7 @@ export const fr: Content = {
         company: "AFC",
         fullName: "Arab Financial Consultants",
         role: "Apprenti consultant",
-        period: "Août — Septembre 2025",
+        period: "Août à septembre 2025",
         location: "Les Berges du Lac, Tunisie",
         input: "Une lecture purement technique des projets industriels, sans le vocabulaire ni les critères du décideur financier.",
         output: "Une grille de lecture financière des systèmes : savoir traduire un gain d'ingénierie en argument d'investissement.",
@@ -296,7 +296,7 @@ export const fr: Content = {
   },
   projects: {
     title: "Projets",
-    intro: "Quatre systèmes construits pour résoudre un problème précis, de la documentation aéronautique à l'implantation d'atelier.",
+    intro: "Cinq systèmes construits pour résoudre un problème précis, de la documentation aéronautique à l'implantation d'atelier.",
     openLabel: "Ouvrir",
     detailsLabel: "Voir le détail",
     hideLabel: "Masquer le détail",
@@ -304,6 +304,15 @@ export const fr: Content = {
     closeLabel: "Fermer",
     stackLabel: "Stack",
     stepsLabel: "Séquence d'inspection",
+    capsule: {
+      problem: "Problème",
+      solution: "Réponse",
+      role: "Rôle",
+      stack: "Socle",
+      result: "Résultat"
+    },
+    caseLabel: "Étude de cas",
+    stackStepNo: "06",
     items: [
       {
         id: "safran-rebranding",
@@ -342,9 +351,9 @@ export const fr: Content = {
           {
             label: "Reconnaissance",
             items: [
-              "Tesseract 5 — fra+eng",
-              "PaddleOCR 3.6 — DBNet + CRNN",
-              "TrOCR — annotations manuscrites"
+              "Tesseract 5 · fra+eng",
+              "PaddleOCR 3.6 · DBNet + CRNN",
+              "TrOCR · annotations manuscrites"
             ]
           },
           {
@@ -360,15 +369,15 @@ export const fr: Content = {
           {
             label: "Interface",
             items: [
-              "PySide6 — MVVM, QThread",
-              "Tkinter — outil de production",
+              "PySide6 · MVVM, QThread",
+              "Tkinter · outil de production",
               "Aperçu et validation par occurrence"
             ]
           },
           {
             label: "Traçabilité",
             items: [
-              "SQLite — 5 tables",
+              "SQLite · 5 tables",
               "Journal d'audit en ajout seul",
               "Contrôle qualité automatisé"
             ]
@@ -376,10 +385,190 @@ export const fr: Content = {
           {
             label: "Qualité",
             items: [
-              "pytest — 210 tests unitaires",
+              "pytest · 210 tests unitaires",
               "pytest-qt",
               "black",
               "flake8"
+            ]
+          }
+        ],
+        capsule: {
+          problem: "Après le rachat de Zodiac, des milliers de dossiers de fabrication portaient encore l'ancienne entité en en-tête et en pied. Et un PDF range cette même ligne visible de cinq façons différentes.",
+          solution: "Un outil de bureau qui retrouve chaque mention quel que soit son encodage, la remplace sans abîmer ce qui l'entoure, et n'écrit rien sans l'accord d'un opérateur.",
+          role: "Seul développeur : cadrage, architecture, algorithmes, interface, tests.",
+          stack: "Python 3.12 · PyMuPDF · Tesseract · PaddleOCR · OpenCV · PySide6 · SQLite",
+          result: "18/18 occurrences sur le document de référence · 210 tests unitaires · ≈ 19 300 lignes"
+        },
+        steps: [
+          {
+            step: "01",
+            title: "Contexte",
+            body: "Zodiac Aerospace est devenu Safran Electronics & Defense. La marque a changé sur le papier à en-tête ; elle n'a pas changé à l'intérieur des milliers de PDF déjà émis : dossiers de fabrication, plans CAO, ordres de fabrication, tous nommant encore une entité qui n'existe plus."
+          },
+          {
+            step: "02",
+            title: "Contrainte",
+            body: "La documentation aéronautique est auditable. Une modification silencieuse est pire qu'une absence de modification : celui qui ouvrira le fichier dans cinq ans doit pouvoir savoir ce qu'il disait avant, qui l'a changé et quand. Et un en-tête n'est jamais seul sur sa ligne : la référence de dossier posée à côté doit ressortir intacte."
+          },
+          {
+            step: "03",
+            title: "Approche",
+            body: "Lire le fichier avant de le réécrire. Un même en-tête visible existe en texte natif, en Form XObject issu d'un export CAO, en courbes ne portant aucun caractère, en scan raster ou en logo bitmap. Cinq encodages, cinq techniques de récupération, et aucune ne couvre les autres. D'où trois passes d'extraction, un repli OCR inconditionnel, et un appariement tolérant à ce que l'OCR lit de travers."
+          },
+          {
+            step: "04",
+            title: "Construction",
+            body: "Deux programmes. Une application PySide6 en couches (≈ 12 900 lignes) où toutes les flèches pointent vers un domaine sans framework, et un outil de production délibérément plat (≈ 4 900 lignes) dont le moteur n'importe pas une ligne de code graphique et reste pilotable en ligne de commande. Entre les deux, un schéma SQLite : modifications en attente, journal en ajout seul, rapports qualité."
+          },
+          {
+            step: "05",
+            title: "Résultat",
+            body: "18 occurrences sur 18 sur le document de référence de 17 pages, contre 0 sur 16 avant l'ajout du niveau d'inclusion. 210 tests unitaires tournent sans boucle d'événements Qt ni PDF sur disque. Le détecteur de logo est la seule partie qui n'a pas fonctionné : la corrélation de gabarit plafonne à 0,568 face à un seuil de 0,65, à toutes les échelles testées. Mesuré, rapporté, pas dissimulé."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "Du PDF source au fichier réémis",
+            alt: "Logigramme vertical : le PDF source est classé natif ou scanné, chaque page est zonée en en-tête et pied, le texte est extrait en trois passes, le VariantMatcher renvoie les occurrences, un opérateur valide chacune d'elles, le remplacement et un contrôle qualité suivent, et un nouveau fichier est écrit. Ignorer une occurrence n'écrit rien ; chaque décision est ajoutée au journal des modifications.",
+            caption: "Le poste à pans coupés est le seul chemin vers l'écriture. Les modifications naissent à l'état PENDING et le PDF reste intact tant que apply_modifications() n'est pas appelé. Une occurrence ignorée ne coûte donc rien, mais laisse quand même une ligne au journal.",
+            nodes: [
+              {
+                title: "PDF source",
+                sub: "jamais écrasé"
+              },
+              {
+                title: "Classification",
+                sub: "< 50 car./page → scanné"
+              },
+              {
+                title: "Zonage en-tête et pied",
+                sub: "haut 30 % · bas 15 %"
+              },
+              {
+                title: "Extraction",
+                sub: [
+                  "3 passes sur le flux",
+                  "repli OCR inconditionnel"
+                ]
+              },
+              {
+                title: "VariantMatcher",
+                sub: "4 niveaux · fig. 02"
+              },
+              {
+                title: "Validation opérateur",
+                sub: "occurrence par occurrence",
+                decision: true
+              },
+              {
+                title: "Remplacement",
+                sub: "auto | precise · fig. 03"
+              },
+              {
+                title: "Contrôle qualité",
+                sub: [
+                  "4 vérifications",
+                  "score de 0 à 1"
+                ]
+              }
+            ],
+            exits: [
+              {
+                from: 5,
+                edge: "ignorer",
+                title: "Aucune écriture",
+                sub: "occurrence suivante",
+                tone: "fault"
+              },
+              {
+                from: 6,
+                edge: "trace",
+                title: "change_log",
+                sub: [
+                  "ajout seul",
+                  "qui · quand · quoi"
+                ]
+              }
+            ],
+            outcome: {
+              title: "*_safran.pdf",
+              sub: "un fichier neuf"
+            }
+          },
+          {
+            kind: "ladder",
+            no: "FIG. 02",
+            title: "Quatre niveaux essayés dans l'ordre : le premier qui répond gagne",
+            alt: "Échelle de décision : le texte normalisé est calculé une seule fois, puis quatre niveaux d'appariement sont essayés dans l'ordre : exact, deep, contain, fuzzy. Chacun rend un score quand il répond et laisse tomber au suivant sinon. Le troisième niveau, l'inclusion, est mis en évidence comme celui qui a fait passer la détection de zéro sur seize à dix-huit sur dix-huit.",
+            caption: "Pourquoi contain passe avant fuzzy. Un en-tête réel se lit « ZODIAC AERO ELECTRIC DOSSIER FABRICATION REF SAQ172_ » : face au motif seul, la distance d'édition est dominée par le texte voisin et le ratio s'effondre. L'inclusion, elle, répond 1.0 sans ambiguïté dès qu'elle s'applique ; elle doit donc être consultée en premier.",
+            input: {
+              title: "normalize_text(ocr_normalize(texte))",
+              sub: "calculé une fois, hors de la boucle sur les motifs"
+            },
+            levels: [
+              {
+                no: "NIVEAU 1",
+                name: "exact",
+                test: "casse, accents, espaces",
+                hit: "score 1.0",
+                note: "texte natif propre"
+              },
+              {
+                no: "NIVEAU 2",
+                name: "deep",
+                test: "substitutions OCR",
+                hit: "score 1.0",
+                note: "Z0DIAC → ZODIAC"
+              },
+              {
+                no: "NIVEAU 3 · DÉCISIF",
+                name: "contain",
+                test: "variante ⊂ texte normalisé",
+                hit: "score 1.0",
+                note: "0/16 → 18/18",
+                key: true
+              },
+              {
+                no: "NIVEAU 4",
+                name: "fuzzy",
+                test: "ratio Levenshtein ≥ seuil",
+                hit: "score = ratio",
+                note: "scans dégradés"
+              }
+            ],
+            failLabel: "échec",
+            none: "aucune occurrence"
+          },
+          {
+            kind: "bands",
+            no: "FIG. 03",
+            title: "auto contre precise : la largeur d'un cache",
+            alt: "Trois bandes empilées. La première montre le bloc d'en-tête détecté, portant la mention Zodiac à gauche et une référence de dossier à droite. La deuxième montre le mode auto couvrant toute la largeur du bloc et détruisant la référence. La troisième montre le mode precise ne couvrant que la zone Zodiac, la référence restant lisible.",
+            caption: "La seule différence entre les deux modes tient à la largeur du cache blanc, et cette différence détruit ou préserve la référence de dossier posée dans le même bloc. precise calcule la bbox minimale à partir des spans qui contiennent réellement la mention, et ne se replie sur la bbox du bloc qu'à défaut.",
+            rows: [
+              {
+                label: "AVANT · BLOC D'EN-TÊTE DÉTECTÉ",
+                left: "ZODIAC AERO ELECTRIC",
+                right: "DOSSIER FAB. REF SAQ172_",
+                mask: "none"
+              },
+              {
+                label: "AUTO · CACHE SUR TOUT LE BLOC",
+                left: "SAFRAN ELECTRONICS & DEFENSE",
+                mask: "wide",
+                tone: "fault",
+                note: "la référence de dossier voisine est détruite"
+              },
+              {
+                label: "PRECISE · BBOX MINIMALE CALCULÉE",
+                left: "SAFRAN ELEC. & DEF.",
+                right: "DOSSIER FAB. REF SAQ172_",
+                mask: "narrow",
+                tone: "ok",
+                note: "la référence ressort intacte"
+              }
             ]
           }
         ],
@@ -389,12 +578,232 @@ export const fr: Content = {
         }
       },
       {
+        id: "controltorque",
+        name: "ControlTorque : traçabilité des outils de serrage",
+        short: "ControlTorque",
+        tagline: "Prouver qu'un serrage a été contrôlé, des années après",
+        period: "2025",
+        status: "Livré",
+        summary: "Sur une ligne d'assemblage, un serrage se contrôle contre un couple cible et une tolérance. La preuve de ce contrôle vivait dans des relevés papier et des tableurs. ControlTorque enregistre chaque contrôle comme une ligne immuable portant son propre calcul, refuse celui qui serait pris avec un couplemètre hors étalonnage, et ouvre une fiche de non-conformité suivie dès qu'une mesure sort de ses bornes.",
+        capsule: {
+          problem: "La preuve qu'un serrage avait été contrôlé vivait dans des relevés papier et des tableurs : introuvable, inauditable, et impossible à croire des années après.",
+          solution: "Une application web où chaque contrôle est un enregistrement immuable portant son propre calcul, et où un résultat non conforme ouvre une fiche suivie plutôt qu'une note.",
+          role: "Seul développeur : règles métier, backend, frontend, modèle de données.",
+          stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
+          result: "8 règles tenues côté serveur · 11 entités · 1 journal en ajout seul"
+        },
+        highlights: [
+          "Huit règles métier, toutes tenues côté serveur : le frontend les reflète pour le confort de saisie, il ne les fait jamais respecter",
+          "L'identité de l'opérateur est relue dans le JWT à chaque requête, jamais dans le corps du message ; enregistrer un contrôle au nom d'un collègue est impossible",
+          "Un contrôle pris avec un étalonnage expiré est refusé par un 400 plutôt qu'enregistré : un contrôle sans valeur probante est plus dangereux qu'une absence de contrôle, puisqu'il donne l'illusion de la conformité",
+          "La tolérance, sa source et les deux bornes sont figées dans l'enregistrement, et les références de l'outil et du couplemètre y sont recopiées en simples chaînes plutôt que liées, si bien qu'un auditeur peut refaire le calcul des années plus tard, même si la gamme a été révisée entre-temps",
+          "control_checks est en INSERT ONLY, chaque décision de non-conformité est ajoutée à un journal d'événements, et depuis une fiche clôturée aucune transition n'est autorisée"
+        ],
+        stack: [
+          "Angular 13",
+          "Spring Boot 2.7",
+          "Java 8",
+          "Hibernate 5.6",
+          "SQL Server",
+          "JWT",
+          "BCrypt"
+        ],
+        stackDetail: [
+          {
+            label: "Frontend",
+            items: [
+              "Angular 13.3 · SPA",
+              "AuthGuard · AdminGuard",
+              "JwtInterceptor",
+              "10 services HTTP"
+            ]
+          },
+          {
+            label: "Backend",
+            items: [
+              "Spring Boot 2.7.18",
+              "11 contrôleurs · 14 services",
+              "@Transactional",
+              "GlobalExceptionHandler"
+            ]
+          },
+          {
+            label: "Domaine",
+            items: [
+              "ConformityService · BigDecimal",
+              "CalibrationService",
+              "NonconformityService",
+              "8 règles métier"
+            ]
+          },
+          {
+            label: "Persistance",
+            items: [
+              "Hibernate 5.6 · 11 entités",
+              "H2 en développement",
+              "SQL Server en production",
+              "Requêtes filtrées, pagination"
+            ]
+          },
+          {
+            label: "Sécurité",
+            items: [
+              "JWT HS256 · 8 h",
+              "BCrypt, coût 12",
+              "2 rôles : OPERATOR, ADMIN",
+              "CORS à origine unique"
+            ]
+          }
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Contexte",
+            body: "Sur une ligne d'assemblage, un serrage se contrôle contre un couple cible et une tolérance. Le contrôle lui-même prend quelques secondes ; prouver qu'il a eu lieu, dans quelles conditions et par qui, est la partie qui doit survivre à un audit des années après. Et cette partie vivait sur du papier."
+          },
+          {
+            step: "02",
+            title: "Contrainte",
+            body: "Tout ce qui compte doit tenir même contre celui qui s'en sert. Un opérateur ne doit pas pouvoir enregistrer un contrôle au nom d'un autre, transmettre au serveur un verdict qu'il n'a pas calculé, ni modifier un contrôle après coup. Et un outil dont l'étalonnage a expiré doit arrêter la production plutôt que la décorer."
+          },
+          {
+            step: "03",
+            title: "Approche",
+            body: "Mettre toutes les décisions dans une seule couche, et ne lui laisser aucun contournement. Le verdict est recalculé côté serveur à partir du couple cible et du couple mesuré ; l'identifiant de l'opérateur est relu dans le token, jamais dans le corps ; l'horodatage vient de la base. Le frontend reflète les règles pour que la saisie reste confortable, et n'en fait respecter aucune."
+          },
+          {
+            step: "04",
+            title: "Construction",
+            body: "Un SPA Angular au-dessus d'un backend Spring Boot sans session : 11 contrôleurs, 14 services, 11 entités JPA, et aucune entité JPA qui remonte jusqu'au client. Deux règles ont leur propre service : la conformité, calculée en BigDecimal parce que les arrondis binaires n'ont pas leur place dans un dossier qualité aéronautique, et l'étalonnage, qui peut refuser une requête d'emblée."
+          },
+          {
+            step: "05",
+            title: "Résultat",
+            body: "Huit règles métier, toutes côté serveur. Un contrôle porte sa tolérance, sa source et ses deux bornes, et recopie les références de l'outil et du couplemètre en simples chaînes, si bien que l'enregistrement continue de dire sous quelles conditions exactes ce serrage a été validé, même après révision de la gamme. Une limite, énoncée plutôt que masquée : l'immuabilité est garantie par l'application, pas par la base, et un accès SQL direct la contournerait."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "Ce qu'un contrôle de serrage doit franchir",
+            alt: "Logigramme vertical d'un POST vers l'endpoint des contrôles : l'utilisateur est relu dans le JWT, les références sont résolues, le couplemètre est lu, la conformité est calculée, l'enregistrement est inséré et un 201 est renvoyé. Une référence inconnue sort en 404, un étalonnage expiré sort en 400, et un résultat non conforme ouvre une fiche de non-conformité.",
+            caption: "Le refus est volontaire. Un couplemètre dont l'étalonnage a expiré fait échouer la requête plutôt que produire un enregistrement : un contrôle sans valeur probante est plus dangereux qu'un contrôle manquant, puisqu'il donne l'illusion de la conformité. Une échéance inconnue, à l'inverse, ne bloque pas la production : elle est simplement enregistrée telle quelle.",
+            nodes: [
+              {
+                title: "POST /api/controls",
+                sub: "un contrôle de serrage"
+              },
+              {
+                title: "user ← JWT",
+                sub: "user_id du corps ignoré"
+              },
+              {
+                title: "Résolution des références",
+                sub: "ToolType · COI · îlot"
+              },
+              {
+                title: "Lecture du couplemètre",
+                sub: "échéance d'étalonnage"
+              },
+              {
+                title: "ConformityService",
+                sub: [
+                  "R1 tolérance → R2 bornes",
+                  "R3 verdict · fig. 02"
+                ]
+              },
+              {
+                title: "INSERT control_checks",
+                sub: [
+                  "checked_at posé par la base",
+                  "enregistrement immuable"
+                ]
+              },
+              {
+                title: "Résultat non conforme ?",
+                sub: "verdict calculé au serveur",
+                decision: true
+              }
+            ],
+            exits: [
+              {
+                from: 2,
+                edge: "inconnue",
+                title: "404 Not Found",
+                sub: "ResourceNotFound",
+                tone: "fault"
+              },
+              {
+                from: 3,
+                edge: "expirée",
+                title: "400 Bad Request",
+                sub: [
+                  "contrôle refusé",
+                  "règle R7"
+                ],
+                tone: "fault"
+              },
+              {
+                from: 6,
+                edge: "oui",
+                title: "Non-conformité",
+                sub: [
+                  "statut A_TRAITER",
+                  "fiche ouverte"
+                ],
+                tone: "fault"
+              }
+            ],
+            outcome: {
+              title: "201 Created",
+              sub: "+ deviationPct calculé"
+            }
+          },
+          {
+            kind: "tolerance",
+            no: "FIG. 02",
+            title: "La bande de tolérance, et pourquoi les bornes sont incluses",
+            alt: "Axe gradué pour un couple cible de 25 Nm à 4 pour cent : la zone conforme s'étend de 24,000 à 26,000 Nm, bornes incluses, avec une zone de rejet de chaque côté. Une mesure à 25,400 Nm est conforme ; une mesure à 26,350 Nm ne l'est pas.",
+            caption: "R2 pose les bornes : min = cible × (1 − tol/100) et max = cible × (1 + tol/100), arrondis HALF_UP à trois décimales. R3 rend le verdict : les bornes sont incluses, une mesure exactement à 24,000 Nm est donc conforme. Les quatre valeurs calculées sont écrites dans l'enregistrement, ce qui permet à un auditeur de refaire le calcul des années plus tard même si la gamme a changé depuis.",
+            rule: "cible 25,000 Nm > 10 Nm → tolérance 4,00 % (DEFAUT_4PCT)",
+            min: "24,000",
+            target: "25,000",
+            max: "26,000",
+            minLabel: "min",
+            targetLabel: "cible",
+            maxLabel: "max",
+            unit: "Nm",
+            rejectLabel: "rejet",
+            passLabel: "CONFORME",
+            samples: [
+              {
+                value: "25,400 Nm",
+                label: "CONFORME",
+                ok: true,
+                at: 0.6
+              },
+              {
+                value: "26,350 Nm",
+                label: "NON CONFORME",
+                ok: false,
+                at: 0.8375
+              }
+            ]
+          }
+        ],
+        metric: {
+          value: "8",
+          label: "Règles tenues côté serveur"
+        }
+      },
+      {
         id: "pharmacowork",
         name: "PharmacoWork",
         short: "PharmacoWork",
         url: "https://pharmacowork.fr",
         tagline: "L'espace de travail interne de l'officine",
-        period: "2025 — Présent",
+        period: "2025 à aujourd'hui",
         status: "Pilote",
         summary: "Le logiciel d'officine gère la vente, le stock et la facturation, pas ce qui circule entre les gens. Qui prépare quelle ordonnance, qui doit rappeler un patient, quel contrôle qualité est en retard : ce vide se comble aujourd'hui au post-it, au cahier de liaison et au groupe WhatsApp, ce dernier faisant transiter des noms de patients sur des téléphones personnels, hors de tout cadre. Co-fondé pour occuper ce vide et rien d'autre : onze modules, pensés mobile d'abord parce que le métier se pratique debout au comptoir. Il ne remplace ni le logiciel d'officine, ni la caisse, ni le registre légal des ordonnances.",
         highlights: [
@@ -453,7 +862,7 @@ export const fr: Content = {
           {
             label: "Frontend",
             items: [
-              "Next.js 16 — App Router",
+              "Next.js 16 · App Router",
               "React 19",
               "Tailwind CSS 4",
               "lucide-react",
@@ -476,7 +885,7 @@ export const fr: Content = {
           {
             label: "Services",
             items: [
-              "S3 — URL pré-signées",
+              "S3 · URL pré-signées",
               "Resend / SMTP",
               "Web-push VAPID",
               "OCR Mistral",
@@ -517,7 +926,7 @@ export const fr: Content = {
         name: "Machine Layout Optimization App",
         short: "Machine Layout",
         tagline: "Aide à la décision en implantation d'atelier",
-        period: "2025 — 2026",
+        period: "2025 à 2026",
         status: "En cours",
         summary: "Application d'aide à la décision pour l'implantation d'ateliers : elle regroupe les machines en îlots de production cohérents et évalue chaque implantation candidate sur des critères industriels mesurables.",
         highlights: [
@@ -543,8 +952,8 @@ export const fr: Content = {
         id: "dashboard-enib",
         name: "Dashboard de Performance Académique",
         short: "Dashboard ENIB",
-        tagline: "Application web fullstack de pilotage — ENIB",
-        period: "2025 — 2026",
+        tagline: "Application web fullstack de pilotage, ENIB",
+        period: "2025 à 2026",
         status: "En cours",
         summary: "Plateforme de pilotage de la performance académique de l'ENIB : elle centralise les indicateurs de suivi, déclenche des alertes automatiques sur les dérives et rend la satisfaction étudiante lisible en un coup d'œil.",
         highlights: [
@@ -608,7 +1017,8 @@ export const fr: Content = {
               "safran",
               "pharmacowork",
               "machine-layout",
-              "safran-rebranding"
+              "safran-rebranding",
+              "controltorque"
             ]
           },
           {
@@ -636,7 +1046,8 @@ export const fr: Content = {
             name: "SQL / PostgreSQL",
             usedIn: [
               "pharmacowork",
-              "dashboard-enib"
+              "dashboard-enib",
+              "controltorque"
             ]
           },
           {
@@ -699,12 +1110,12 @@ export const fr: Content = {
   },
   associative: {
     title: "Vie associative",
-    intro: "Club AI Innovators — ENIB.",
+    intro: "Club AI Innovators, ENIB.",
     items: [
       {
         title: "Président",
-        org: "Club AI Innovators — ENIB",
-        period: "2025 — 2026",
+        org: "Club AI Innovators, ENIB",
+        period: "2025 à 2026",
         points: [
           "Direction stratégique du club : projets IA & Data pluridisciplinaires",
           "Organisation d'événements"
@@ -712,8 +1123,8 @@ export const fr: Content = {
       },
       {
         title: "Responsable RH",
-        org: "Club AI Innovators — ENIB",
-        period: "2024 — 2025",
+        org: "Club AI Innovators, ENIB",
+        period: "2024 à 2025",
         points: [
           "Gestion des recrutements internes",
           "Intégration des membres"
@@ -747,7 +1158,7 @@ export const fr: Content = {
     cvHint: "Version imprimable, un clic."
   },
   classic: {
-    title: "CV — Taha Ghadhab",
+    title: "CV de Taha Ghadhab",
     intro: "Version texte, scannable, sans habillage.",
     printLabel: "Imprimer / PDF",
     backLabel: "Retour au site",

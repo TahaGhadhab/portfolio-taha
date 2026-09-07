@@ -1,6 +1,7 @@
 import type { Content, Deployment } from "@/content";
 import type { CvTarget } from "@/lib/cv";
 import { PositioningFigure } from "./Figures";
+import { ProjectPlate } from "./ProjectFigures";
 import { SplitWords } from "./SplitWords";
 
 /** Rang d'un élément dans une arrivée, à poser en style en ligne. */
@@ -127,7 +128,7 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
             <h3>{item.role}</h3>
             <p className="mono">{item.company}</p>
             <p className="mono">
-              {item.period} — {item.location}
+              {item.period} · {item.location}
             </p>
             {!item.hasDeliverable ? (
               <div className="tags">
@@ -192,7 +193,7 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
             <p className="mono">{String(i + 1).padStart(2, "0")}</p>
             <h3>{p.name}</h3>
             <p className="mono">
-              {p.period} — {p.status}
+              {p.period} · {p.status}
             </p>
             {p.metric ? (
               <div className="metric">
@@ -216,6 +217,30 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
             <p className="lede">{p.tagline}</p>
             <p style={{ marginTop: "var(--s-4)" }}>{p.summary}</p>
 
+            {p.capsule ? (
+              <dl className="capsule">
+                {(
+                  [
+                    ["problem", projects.capsule.problem],
+                    ["solution", projects.capsule.solution],
+                    ["role", projects.capsule.role],
+                    ["stack", projects.capsule.stack],
+                    ["result", projects.capsule.result],
+                  ] as const
+                ).map(([field, label]) => (
+                  <div className={field} key={field}>
+                    <dt>{label.toUpperCase()}</dt>
+                    <dd>{p.capsule![field]}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+
+            {/* La première planche est visible d'emblée : la preuve arrive
+                avant le texte qui la commente, ce qui est tout l'objet d'une
+                planche. Les suivantes attendent le dépliage. */}
+            {p.figures?.[0] ? <ProjectPlate fig={p.figures[0]} /> : null}
+
             <Fold openLabel={projects.detailsLabel} closeLabel={projects.hideLabel}>
               <div>
                 <ul className="bullets" style={{ marginTop: 0 }}>
@@ -227,7 +252,9 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
 
               {p.steps ? (
                 <div>
-                  <span className="fold-label">{projects.stepsLabel.toUpperCase()}</span>
+                  <span className="fold-label">
+                    {(p.capsule ? projects.caseLabel : projects.stepsLabel).toUpperCase()}
+                  </span>
                   <ol className="rail-list">
                     {p.steps.map((s) => (
                       <li className="step" key={s.step}>
@@ -242,8 +269,21 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
                 </div>
               ) : null}
 
+              {p.figures && p.figures.length > 1 ? (
+                <div className="plate-rack">
+                  {p.figures.slice(1).map((f) => (
+                    <ProjectPlate fig={f} key={f.no} />
+                  ))}
+                </div>
+              ) : null}
+
               <div>
-                <span className="fold-label">{projects.stackLabel.toUpperCase()}</span>
+                {/* Le socle est le dernier poste de la séquence, pas une
+                    annexe : sur une étude de cas il en porte le numéro. */}
+                <span className="fold-label">
+                  {p.capsule ? `${projects.stackStepNo} · ` : ""}
+                  {projects.stackLabel.toUpperCase()}
+                </span>
                 {p.stackDetail ? (
                   <div className="stack-groups">
                     {p.stackDetail.map((g) => (
@@ -355,7 +395,7 @@ export function EducationRail({ items }: { items: Content["education"]["items"] 
             <h3>{item.degree}</h3>
             <p>
               {item.school}
-              {item.detail ? ` — ${item.detail}` : ""}
+              {item.detail ? ` · ${item.detail}` : ""}
             </p>
           </div>
         </li>

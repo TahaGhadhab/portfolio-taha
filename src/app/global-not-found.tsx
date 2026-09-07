@@ -33,7 +33,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "404 — Taha Ghadhab",
+  title: "404 · Taha Ghadhab",
   description: "Page introuvable / Page not found.",
   robots: { index: false, follow: false },
 };
