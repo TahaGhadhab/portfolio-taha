@@ -8,8 +8,8 @@ import type { Locale } from "@/content";
  * sur la page imprimable — aucun code a changer.
  */
 const OFFICIAL_PDF: Record<Locale, string> = {
-  fr: "Taha_Ghadhab_CV_FR.pdf",
-  en: "Taha_Ghadhab_CV_EN.pdf",
+  fr: "CV_Taha_Ghadhab_FR.pdf",
+  en: "CV_Taha_Ghadhab_EN.pdf",
 };
 
 export interface CvTarget {
