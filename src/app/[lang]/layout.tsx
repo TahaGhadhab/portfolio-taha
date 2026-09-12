@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Archivo, Instrument_Serif, Literata, Martian_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { LOCALES, getContent, isLocale } from "@/content";
 import "../globals.css";
 
@@ -123,6 +124,7 @@ export default async function RootLayout({
           {c.nav.skipToContent}
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );
