@@ -983,8 +983,8 @@ export const fr: Content = {
         short: "Machine Layout",
         tagline: "Aide à la décision en implantation d'atelier",
         period: "2025 à 2026",
-        status: "En cours",
-        statusTone: "wip",
+        status: "Livré",
+        statusTone: "done",
         tracks: ["industrial"],
         summary: "Application d'aide à la décision pour l'implantation d'ateliers : elle regroupe les machines en îlots de production cohérents et évalue chaque implantation candidate sur des critères industriels mesurables.",
         highlights: [
@@ -1012,8 +1012,8 @@ export const fr: Content = {
         short: "Dashboard ENIB",
         tagline: "Application web fullstack de pilotage, ENIB",
         period: "2025 à 2026",
-        status: "En cours",
-        statusTone: "wip",
+        status: "Livré",
+        statusTone: "done",
         tracks: ["data", "business"],
         summary: "Plateforme de pilotage de la performance académique de l'ENIB : elle centralise les indicateurs de suivi, déclenche des alertes automatiques sur les dérives et rend la satisfaction étudiante lisible en un coup d'œil.",
         highlights: [

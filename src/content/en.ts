@@ -981,8 +981,8 @@ export const en: Content = {
         short: "Machine Layout",
         tagline: "Decision support for plant layout",
         period: "2025 to 2026",
-        status: "In progress",
-        statusTone: "wip",
+        status: "Delivered",
+        statusTone: "done",
         tracks: ["industrial"],
         summary: "A decision-support application for workshop layout: it groups machines into coherent production cells and scores each candidate layout on measurable industrial criteria.",
         highlights: [
@@ -1010,8 +1010,8 @@ export const en: Content = {
         short: "ENIB Dashboard",
         tagline: "Full-stack web platform, ENIB",
         period: "2025 to 2026",
-        status: "In progress",
-        statusTone: "wip",
+        status: "Delivered",
+        statusTone: "done",
         tracks: ["data", "business"],
         summary: "A steering platform for ENIB's academic performance: it centralises tracking indicators, fires automatic alerts on drift, and makes student satisfaction readable at a glance.",
         highlights: [
