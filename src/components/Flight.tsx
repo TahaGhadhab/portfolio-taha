@@ -8,6 +8,9 @@ import { SplitWords } from "./SplitWords";
 /** Rang d'un élément dans la chorégraphie d'ouverture. */
 const rank = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
+/** Éloignement d'une couche de l'aile, en unités de parallaxe. */
+const depth = (z: number) => ({ "--z": z }) as React.CSSProperties;
+
 /* ══════════════════════════════════════════════════════════════
    L'AILE — trois couches de plumes, chacune une lame fuselée
    portée par son rachis. L'opacité varie le long de l'éventail
@@ -164,6 +167,7 @@ interface FlightProps {
 
 export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: FlightProps) {
   const wingRef = useRef<SVGSVGElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const pupilRef = useRef<SVGGElement>(null);
   const [open, setOpen] = useState(false);
   const [blinking, setBlinking] = useState(false);
@@ -214,12 +218,36 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
       if (!r?.width) return;
       const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
       const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-      tx = Math.max(-1, Math.min(1, nx)) * 8.5;
-      ty = Math.max(-1, Math.min(1, ny)) * 8.5;
+      const cx = Math.max(-1, Math.min(1, nx));
+      const cy = Math.max(-1, Math.min(1, ny));
+      tx = cx * 8.5;
+      ty = cy * 8.5;
+      /* La même mesure sert deux fois : la pupille suit le pointeur, et
+         l'aile prend son assiette. Un seul relevé, donc aucun risque que
+         l'œil regarde à gauche pendant que l'aile penche à droite. */
+      const stage = stageRef.current;
+      if (stage) {
+        stage.style.setProperty("--wx", cx.toFixed(3));
+        stage.style.setProperty("--wy", cy.toFixed(3));
+      }
+      queue();
+    };
+
+    /* Le pointeur sorti de la fenêtre, l'aile revient à plat. Sans cela
+       elle resterait penchée sur sa dernière position connue, ce qui se lit
+       comme un défaut d'alignement plutôt que comme un mouvement. */
+    const onLeave = () => {
+      const stage = stageRef.current;
+      if (!stage) return;
+      stage.style.removeProperty("--wx");
+      stage.style.removeProperty("--wy");
+      tx = 0;
+      ty = 0;
       queue();
     };
 
     addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerleave", onLeave);
 
     /* Les chouettes clignent rarement, vite, et jamais sur un rythme fixe. */
     let blinkId: ReturnType<typeof setTimeout>;
@@ -240,6 +268,7 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
 
     return () => {
       removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerleave", onLeave);
       if (raf) cancelAnimationFrame(raf);
       clearTimeout(blinkId);
       clearTimeout(closeId);
@@ -258,7 +287,7 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
 
   return (
     <header className="flight" id="vol">
-      <div className="wing-holder">
+      <div className="wing-holder" ref={stageRef}>
         <svg
           ref={wingRef}
           className={wingClass}
@@ -296,19 +325,30 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
 
           <ellipse className="core" cx={CX} cy={CY} rx="150" ry="96" />
 
+          {/* Trois couches, trois profondeurs. Le pointeur qui se déplace ne
+              les emmène pas à la même vitesse : les rémiges, les plus
+              éloignées de l'axe, bougent le plus, et l'écart entre les
+              couches est ce qui donne du volume. C'est la seule façon de
+              faire tenir une aile dans un plan sans la dessiner en relief. */}
           {WING.map((w) => (
             <g key={w.side}>
-              <Feathers feathers={w.coverts} />
-              <Feathers feathers={w.secondaries} />
-              <Feathers feathers={w.primaries} />
-              <path className="comb" d={w.edge.poly} strokeWidth="1" />
-              {w.edge.teeth.map((d, i) => (
-                <path key={i} className="comb" d={d} strokeWidth="1.05" />
-              ))}
+              <g className="wing-layer" style={depth(2)}>
+                <Feathers feathers={w.coverts} />
+              </g>
+              <g className="wing-layer" style={depth(5)}>
+                <Feathers feathers={w.secondaries} />
+              </g>
+              <g className="wing-layer" style={depth(9)}>
+                <Feathers feathers={w.primaries} />
+                <path className="comb" d={w.edge.poly} strokeWidth="1" />
+                {w.edge.teeth.map((d, i) => (
+                  <path key={i} className="comb" d={d} strokeWidth="1.05" />
+                ))}
+              </g>
             </g>
           ))}
 
-          <g className="glow">
+          <g className="wing-layer glow" style={depth(3)}>
             <circle cx={CX} cy={CY} r="150" fill="url(#glowG)" />
           </g>
           <g className="eye">

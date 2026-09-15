@@ -115,7 +115,7 @@ export const en: Content = {
   },
   method: {
     title: "How I work",
-    intro: "Listen first. Move once. An owl's ears sit at different heights on its skull, so it places a sound in three dimensions before committing instead of hunting by trial. These five steps run in that order on every assignment, from the shop floor to the control tower; they are what connects an OCR tool at Safran to an academic dashboard.",
+    intro: "Listen first. Move once. Five stations, always in that order, from the shop floor to the control tower.",
     figure: {
       alt: "A five-station circuit: listen, stabilize, decompose, optimize, sustain. A return edge runs from the last station back to the first.",
       caption: "FIG. 02 · ONE PASS, THEN IT RUNS WITHOUT ME",
@@ -153,8 +153,7 @@ export const en: Content = {
     title: "About",
     lead: "Industrial engineering student at ENIB, drawn to systems that run better after I leave than before I arrived.",
     body: [
-      "My territory is the point where an industrial process meets a software tool. At Safran, the question was never “how do we fix these non-compliant documents?” but “how do we stop them from arriving?” The answer took the form of a local OCR system that detects and actively corrects.",
-      "That approach comes from a deliberately broad path: the methodological rigour of industrial engineering, the tooling of data work, and a business lens picked up in financial consulting. Three angles on one problem beat one angle applied three times."
+      "My territory is the point where an industrial process meets a software tool. At Safran, the question was never “how do we fix these non-compliant documents?” but “how do we stop them from arriving?” The answer took the form of a local OCR system that detects and actively corrects."
     ],
     positioning: {
       title: "Three disciplines, one profile",
@@ -213,7 +212,32 @@ export const en: Content = {
         period: "2021",
         current: false
       }
-    ]
+    ],
+    certifications: {
+      title: "Certifications",
+      issuer: "Claude Academy · Anthropic",
+      verifyLabel: "Verify",
+      items: [
+        {
+          name: "AI Fluency: Framework & Foundations",
+          meta: "4 h · 14 lessons",
+          body: "Training on the 4D framework (Delegation, Description, Discernment, Diligence) for working with generative AI effectively, ethically and safely. Covers how large language models work, task delegation strategies, and the critical evaluation of AI output.",
+          url: "https://academy.claude.com/verify/e3dbdaa15e6b6866a90f56dabc6a4fac"
+        },
+        {
+          name: "AI Capabilities and Limitations",
+          meta: "3.5 h · 13 lessons",
+          body: "Building a rigorous mental model of how large language models operate: next-token prediction, the limits of knowledge and working memory (the context window), and how reliably they follow instructions. Aimed at diagnosing AI failures and calibrating trust to the kind of task at hand.",
+          url: "https://academy.claude.com/verify/8eb5d609652f479c1e0b3bab3c844a32"
+        },
+        {
+          name: "Building Effective Human Agent Teams (Beta)",
+          meta: "45 min · 5 lessons",
+          body: "An introduction to moving from AI as an individual assistant to AI agents working inside a team. Sets out the four principles of a sound human-agent team: clear roles, a written shared goal, gradual rollout, and controlled access to information.",
+          url: "https://academy.claude.com/verify/18fd7cf214b2721852eb621e42bdd57f"
+        }
+      ]
+    }
   },
   experience: {
     title: "Experience",
@@ -225,6 +249,8 @@ export const en: Content = {
     immersionLabel: "Output · gained",
     detailsLabel: "Show detail",
     hideLabel: "Hide detail",
+    expandAllLabel: "Expand all",
+    collapseAllLabel: "Collapse all",
     items: [
       {
         id: "safran",
@@ -234,7 +260,7 @@ export const en: Content = {
         role: "Methods engineer",
         period: "1 June to 24 July 2026",
         location: "Dhari",
-        input: "Safran's acquisition of Zodiac left the old entity printed in the headers of thousands of manufacturing documents, with manual rework out of the question. Meanwhile, tightening-tool compliance was tracked with no dedicated system.",
+        input: "The old entity is still printed across thousands of manufacturing documents, with manual rework out of the question. In parallel, torque tool compliance is tracked with no dedicated system.",
         output: "A local OCR-assisted rebranding tool, with human validation and an audit log, plus a platform tracking tightening-tool compliance.",
         missions: [
           "Designed a local document-rebranding tool: Zodiac mentions detected in native text and in scanned pages alike, replaced under operator approval, with the source file never overwritten",
@@ -311,6 +337,26 @@ export const en: Content = {
     },
     caseLabel: "Case study",
     stackStepNo: "06",
+    expandAllLabel: "Expand all",
+    collapseAllLabel: "Collapse all",
+    grid: {
+      label: "Project index",
+      filterLabel: "Filter by field",
+      allLabel: "All",
+      countLabel: "{n} projects",
+      openLabel: "Go to {name}",
+      emptyLabel: "No project in this field."
+    },
+    tracks: {
+      industrial: "Industrial",
+      data: "Data & AI",
+      business: "Business"
+    },
+    statuses: {
+      done: "Delivered",
+      pilot: "Pilot",
+      wip: "In progress"
+    },
     items: [
       {
         id: "safran-rebranding",
@@ -319,7 +365,8 @@ export const en: Content = {
         tagline: "Brand detection and replacement across thousands of manufacturing documents",
         period: "2025",
         status: "Delivered",
-        summary: "After Safran acquired Zodiac Aerospace, thousands of manufacturing dossiers, CAD sheets and work orders still carried the old entity in their headers and footers. The tool finds those mentions whatever their encoding inside the PDF, replaces them without damaging what surrounds them, and applies nothing without an operator's approval.",
+        statusTone: "done",
+        tracks: ["data", "industrial"],
         highlights: [
           "Five encodings behind one visible header: native text, Form XObjects from CAD exports, text vectorised into curves, raster scans, and bitmap logos",
           "Four-level hierarchical matching, tolerant of OCR noise (Z0DIAC read for ZODIAC); adding a containment test took detection from 0 to 18 occurrences out of 18",
@@ -391,8 +438,8 @@ export const en: Content = {
           }
         ],
         capsule: {
-          problem: "After the Zodiac acquisition, thousands of manufacturing dossiers still carried the old entity in their headers and footers. And a PDF stores that one visible line in five different ways.",
-          solution: "A desktop tool that finds every mention whatever its encoding, replaces it without damaging what surrounds it, and writes nothing without an operator's approval.",
+          problem: "Thousands of manufacturing dossiers still carried Zodiac in their headers. And a PDF stores that one visible line in five different ways.",
+          solution: "A desktop tool that finds them whatever the encoding, replaces them without damaging their surroundings, and writes nothing without human approval.",
           role: "Sole developer: problem framing, architecture, algorithms, interface, tests.",
           stack: "Python 3.12 · PyMuPDF · Tesseract · PaddleOCR · OpenCV · PySide6 · SQLite",
           result: "18/18 occurrences on the reference document · 210 unit tests · ≈ 19 300 LOC"
@@ -582,10 +629,11 @@ export const en: Content = {
         tagline: "Proving a tightening was checked, years after the fact",
         period: "2025",
         status: "Delivered",
-        summary: "On an assembly line, a torque tightening is checked against a target value and a tolerance. The proof of that check lived in paper logs and spreadsheets. ControlTorque records every check as an immutable row carrying its own calculation, refuses one taken with an out-of-calibration torquemeter, and opens a tracked nonconformity file the moment a measurement falls outside its bounds.",
+        statusTone: "done",
+        tracks: ["industrial", "data"],
         capsule: {
           problem: "The proof that a tightening had been checked lived in paper logs and spreadsheets: unsearchable, unauditable, and impossible to trust years later.",
-          solution: "A web application where each check is an immutable record carrying its own calculation, and where a nonconforming result opens a tracked file rather than a note.",
+          solution: "A web application where each check is an immutable record carrying its calculation, and where an out-of-bounds measurement opens a tracked file.",
           role: "Sole developer: business rules, backend, frontend, data model.",
           stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
           result: "8 business rules enforced server-side · 11 entities · 1 append-only event log"
@@ -803,7 +851,15 @@ export const en: Content = {
         tagline: "The pharmacy's internal workspace",
         period: "2025 to present",
         status: "Pilot",
-        summary: "Pharmacy management software handles sales, stock and billing, not what moves between people. Who is preparing which prescription, who owes a patient a call, which quality check is overdue: that gap is filled today with sticky notes, a shared notebook and a WhatsApp group, the last of which carries patient names on personal phones, outside any regulatory frame. Co-founded to occupy that gap and nothing else: eleven modules, built mobile-first because the job is done standing at the counter. It replaces neither the management software, nor the till, nor the legal prescription register.",
+        statusTone: "pilot",
+        tracks: ["business"],
+        capsule: {
+          problem: "Pharmacy software stops at the sale. Preparations, callbacks and quality checks run on sticky notes and WhatsApp, patient names included.",
+          solution: "An internal workspace for the pharmacy: eleven modules, built mobile-first because the job is done standing at the counter.",
+          role: "Co-founder: product framing, architecture, development.",
+          stack: "NestJS 11 · Next.js 16 · React 19 · Prisma · PostgreSQL 18 · Railway",
+          result: "11 modules in pilot · 41 models isolated per pharmacy · identities encrypted at rest"
+        },
         highlights: [
           "Eleven modules end to end: ~80 screens, ~180 API routes, 41 data models",
           "Strict tenancy: every row carries its officineId, every query is filtered on it",
@@ -926,6 +982,8 @@ export const en: Content = {
         tagline: "Decision support for plant layout",
         period: "2025 to 2026",
         status: "In progress",
+        statusTone: "wip",
+        tracks: ["industrial"],
         summary: "A decision-support application for workshop layout: it groups machines into coherent production cells and scores each candidate layout on measurable industrial criteria.",
         highlights: [
           "King's method (Rank Order Clustering) to form production cells",
@@ -953,6 +1011,8 @@ export const en: Content = {
         tagline: "Full-stack web platform, ENIB",
         period: "2025 to 2026",
         status: "In progress",
+        statusTone: "wip",
+        tracks: ["data", "business"],
         summary: "A steering platform for ENIB's academic performance: it centralises tracking indicators, fires automatic alerts on drift, and makes student satisfaction readable at a glance.",
         highlights: [
           "42 KPIs tracking academic performance",
@@ -1163,6 +1223,7 @@ export const en: Content = {
     sections: {
       profile: "Profile",
       education: "Education",
+      certifications: "Certifications",
       experience: "Professional experience",
       projects: "Technical & industrial projects",
       skills: "Skills",

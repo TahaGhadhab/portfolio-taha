@@ -1,7 +1,9 @@
+import Image from "next/image";
 import type { Content, Deployment } from "@/content";
 import type { CvTarget } from "@/lib/cv";
 import { PositioningFigure } from "./Figures";
 import { ProjectPlate } from "./ProjectFigures";
+import { StatusChip } from "./ProjectGrid";
 import { SplitWords } from "./SplitWords";
 
 /** Rang d'un élément dans une arrivée, à poser en style en ligne. */
@@ -42,12 +44,19 @@ export function Head({
   eyebrow,
   title,
   intro,
+  tools,
 }: {
   /** Rang de la section dans le document, déjà formaté. */
   no?: string;
   eyebrow: string;
   title: string;
   intro?: string;
+  /**
+   * Les commandes de la section — la bascule d'ensemble, aujourd'hui.
+   * Elles se rangent au bout du surtitre : à hauteur de la ligne de service,
+   * jamais dans le chemin du titre.
+   */
+  tools?: React.ReactNode;
 }) {
   return (
     <div className="head commit">
@@ -55,6 +64,7 @@ export function Head({
         {no ? <span className="no">{no}</span> : null}
         <span>{eyebrow.toUpperCase()}</span>
         <span className="rule" aria-hidden="true" />
+        {tools ? <span className="head-tools">{tools}</span> : null}
       </p>
       <SplitWords as="h2" text={title} from={1} />
       {intro ? <p className="head-intro">{intro}</p> : null}
@@ -122,7 +132,12 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
   return (
     <>
       {experience.items.map((item, i) => (
-        <article className="sheet commit" data-stagger key={item.id}>
+        <article
+          className="sheet commit"
+          data-stagger
+          key={item.id}
+          id={`poste-${item.id}`}
+        >
           <div className="sheet-aside">
             <p className="mono">{String(i + 1).padStart(2, "0")}</p>
             <h3>{item.role}</h3>
@@ -188,13 +203,20 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
   return (
     <>
       {projects.items.map((p, i) => (
-        <article className="sheet commit" data-stagger key={p.id}>
+        <article
+          className="sheet commit"
+          data-stagger
+          key={p.id}
+          id={`projet-${p.id}`}
+        >
           <div className="sheet-aside">
             <p className="mono">{String(i + 1).padStart(2, "0")}</p>
             <h3>{p.name}</h3>
-            <p className="mono">
-              {p.period} · {p.status}
-            </p>
+            <p className="mono">{p.period}</p>
+            {/* L'état portait jusqu'ici la même graisse et la même couleur
+                que la période : « Livré » se lisait comme une date. Il a
+                maintenant son voyant. */}
+            <StatusChip tone={p.statusTone} label={p.status} />
             {p.metric ? (
               <div className="metric">
                 <span className="v">{p.metric.value}</span>
@@ -215,7 +237,23 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
 
           <div>
             <p className="lede">{p.tagline}</p>
-            <p style={{ marginTop: "var(--s-4)" }}>{p.summary}</p>
+            {/* Quand la capsule est là, elle dit déjà problème et réponse,
+                en cinq lignes comparables d'un projet à l'autre. Le
+                paragraphe qui les précédait payait le même propos deux
+                fois, et le payait en premier. */}
+            {p.summary ? <p style={{ marginTop: "var(--s-4)" }}>{p.summary}</p> : null}
+
+            {p.shot ? (
+              <figure className="shot">
+                <Image
+                  src={p.shot.src}
+                  alt={p.shot.alt}
+                  width={p.shot.width}
+                  height={p.shot.height}
+                  sizes="(max-width: 679px) 100vw, 60vw"
+                />
+              </figure>
+            ) : null}
 
             {p.capsule ? (
               <dl className="capsule">
@@ -401,6 +439,49 @@ export function EducationRail({ items }: { items: Content["education"]["items"] 
         </li>
       ))}
     </ol>
+  );
+}
+
+/**
+ * Les certifications.
+ *
+ * Elles ne prennent pas la forme du rail des diplômes, et c'est voulu : un
+ * diplôme se situe dans une trajectoire, une certification est une attestation
+ * posée à plat. Trois plaques donc, et sur chacune le lien de contrôle de
+ * l'organisme — une certification qui ne se vérifie pas ne vaut pas plus
+ * qu'une ligne de compétence auto-déclarée.
+ */
+export function CertificationPlates({
+  certs,
+}: {
+  certs: Content["education"]["certifications"];
+}) {
+  return (
+    <div className="certs commit" data-stagger>
+      <p className="mono certs-head">
+        <span>{certs.title.toUpperCase()}</span>
+        <span className="rule" aria-hidden="true" />
+        <span className="certs-issuer">{certs.issuer.toUpperCase()}</span>
+      </p>
+
+      <ul className="certs-grid">
+        {certs.items.map((item, i) => (
+          <li className="cert" key={item.url} style={rank(i)}>
+            <p className="mono cert-meta">{item.meta.toUpperCase()}</p>
+            <h3 className="cert-name">{item.name}</h3>
+            <p className="cert-body">{item.body}</p>
+            <a
+              className="linkout"
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {certs.verifyLabel.toUpperCase()} ↗
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

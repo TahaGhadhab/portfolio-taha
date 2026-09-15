@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { getContent, getDeployments, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
 import { Flight } from "@/components/Flight";
+import { FoldAll } from "@/components/FoldAll";
 import { MethodLoop } from "@/components/Figures";
+import { ProjectGrid } from "@/components/ProjectGrid";
 import { Optics } from "@/components/Optics";
 import { PageMotion } from "@/components/PageMotion";
 import { PrincipleSection } from "@/components/PrincipleSection";
@@ -11,6 +13,7 @@ import { TopNav } from "@/components/TopNav";
 import {
   Band,
   CapabilityGroups,
+  CertificationPlates,
   ContactClose,
   EducationRail,
   EngagementSection,
@@ -28,8 +31,11 @@ import {
  * L'arc suit le comportement plutôt que le calendrier : d'abord l'immobilité
  * (le vol, le principe), puis la manière (la méthode), puis les preuves (les
  * terrains, les projets, la nomenclature), et seulement ensuite d'où cela
- * vient. Tout est rendu côté serveur ; seules l'aile, le rail de sections et
- * l'observateur de bandes sont des composants client.
+ * vient.
+ *
+ * Tout est rendu côté serveur ; seules l'aile, la grille de projets, les
+ * bascules d'ensemble, le rail de sections et l'observateur de bandes sont des
+ * composants client.
  */
 export default async function FlightPage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -97,17 +103,35 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
               eyebrow={label("experiences")}
               title={c.experience.title}
               intro={c.experience.intro}
+              tools={
+                <FoldAll
+                  target="experiences"
+                  expandLabel={c.experience.expandAllLabel}
+                  collapseLabel={c.experience.collapseAllLabel}
+                />
+              }
             />
             <WorkSheets experience={c.experience} />
           </Band>
 
+          {/* La grille sert de sommaire : cinq tuiles, un filtre, et l'accès
+              direct à la fiche — au lieu de sept cents mots à franchir pour
+              savoir que le projet 04 existe. */}
           <Band id="projets">
             <Head
               no={no("projets")}
               eyebrow={label("projets")}
               title={c.projects.title}
               intro={c.projects.intro}
+              tools={
+                <FoldAll
+                  target="projets"
+                  expandLabel={c.projects.expandAllLabel}
+                  collapseLabel={c.projects.collapseAllLabel}
+                />
+              }
             />
+            <ProjectGrid projects={c.projects} />
             <ProjectSheets projects={c.projects} />
           </Band>
 
@@ -129,6 +153,9 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
               intro={c.education.intro}
             />
             <EducationRail items={c.education.items} />
+            {/* Les certifications closent le parcours : même récit que les
+                diplômes, mais posées à plat et chacune vérifiable. */}
+            <CertificationPlates certs={c.education.certifications} />
           </Band>
 
           <Band id="a-propos" quiet>

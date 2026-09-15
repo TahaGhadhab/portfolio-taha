@@ -117,7 +117,7 @@ export const fr: Content = {
   },
   method: {
     title: "Méthode de travail",
-    intro: "Écouter d'abord. N'agir qu'une fois. Les oreilles d'une chouette sont placées à des hauteurs différentes sur son crâne : elle situe un son en trois dimensions avant de s'engager, au lieu de chasser à l'essai. Ces cinq étapes se déroulent dans cet ordre sur chaque mission, du terrain jusqu'au pilotage ; c'est ce qui relie un OCR chez Safran à un tableau de bord académique.",
+    intro: "Écouter d'abord. N'agir qu'une fois. Cinq postes, toujours dans cet ordre, du terrain jusqu'au pilotage.",
     figure: {
       alt: "Circuit à cinq postes : écouter, stabiliser, décomposer, optimiser, pérenniser. Une arête de retour ramène le dernier poste vers le premier.",
       caption: "FIG. 02 · UN SEUL PASSAGE, PUIS ÇA TOURNE SANS MOI",
@@ -155,8 +155,7 @@ export const fr: Content = {
     title: "À propos",
     lead: "Élève ingénieur en génie industriel à l'ENIB, passionné par les systèmes qui tournent mieux après mon passage qu'avant.",
     body: [
-      "Mon terrain de jeu, c'est l'endroit où un processus industriel rencontre un outil logiciel. Chez Safran, la question n'était pas « comment corriger ces documents non conformes ? » mais « comment faire pour qu'ils cessent d'arriver ? ». La réponse a pris la forme d'un OCR local qui détecte et corrige activement.",
-      "Cette approche vient d'une trajectoire volontairement large : la rigueur méthodologique de l'ingénierie industrielle, les outils de la data, et une lecture business acquise en conseil financier. Trois angles sur le même problème valent mieux qu'un seul, appliqué trois fois."
+      "Mon terrain de jeu, c'est l'endroit où un processus industriel rencontre un outil logiciel. Chez Safran, la question n'était pas « comment corriger ces documents non conformes ? » mais « comment faire pour qu'ils cessent d'arriver ? ». La réponse a pris la forme d'un OCR local qui détecte et corrige activement."
     ],
     positioning: {
       title: "Triple casquette",
@@ -215,7 +214,32 @@ export const fr: Content = {
         period: "2021",
         current: false
       }
-    ]
+    ],
+    certifications: {
+      title: "Certifications",
+      issuer: "Claude Academy · Anthropic",
+      verifyLabel: "Vérifier",
+      items: [
+        {
+          name: "AI Fluency: Framework & Foundations",
+          meta: "4 h · 14 leçons",
+          body: "Formation sur le framework des 4D (Delegation, Description, Discernment, Diligence) pour collaborer efficacement, de façon éthique et sûre avec l'IA générative. Couvre les fondements des LLM, les stratégies de délégation de tâches et l'évaluation critique des résultats produits par l'IA.",
+          url: "https://academy.claude.com/verify/e3dbdaa15e6b6866a90f56dabc6a4fac"
+        },
+        {
+          name: "AI Capabilities and Limitations",
+          meta: "3,5 h · 13 leçons",
+          body: "Construction d'un modèle mental rigoureux du fonctionnement des grands modèles de langage : prédiction du prochain token, limites de connaissance et de mémoire de travail (fenêtre de contexte), et fiabilité du pilotage par instructions. Vise à diagnostiquer les erreurs de l'IA et à calibrer le niveau de confiance selon le type de tâche.",
+          url: "https://academy.claude.com/verify/8eb5d609652f479c1e0b3bab3c844a32"
+        },
+        {
+          name: "Building Effective Human Agent Teams (Beta)",
+          meta: "45 min · 5 leçons",
+          body: "Introduction au passage d'une IA « assistant individuel » à des agents IA collaborant au sein d'une équipe. Présente les quatre principes d'une équipe humain-agent saine : rôles clairs, objectif commun écrit, déploiement progressif et accès maîtrisé à l'information.",
+          url: "https://academy.claude.com/verify/18fd7cf214b2721852eb621e42bdd57f"
+        }
+      ]
+    }
   },
   experience: {
     title: "Expériences",
@@ -227,6 +251,8 @@ export const fr: Content = {
     immersionLabel: "Sortie · acquis",
     detailsLabel: "Voir le détail",
     hideLabel: "Masquer le détail",
+    expandAllLabel: "Tout déplier",
+    collapseAllLabel: "Tout replier",
     items: [
       {
         id: "safran",
@@ -236,7 +262,7 @@ export const fr: Content = {
         role: "Ingénieur méthode",
         period: "1er juin au 24 juillet 2026",
         location: "Dhari",
-        input: "Le rachat de Zodiac par Safran laisse l'ancienne entité imprimée dans les en-têtes de milliers de documents de fabrication ; reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
+        input: "L'ancienne entité reste imprimée sur des milliers de documents de fabrication, reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
         output: "Un outil de reprise de marque assistée par OCR, avec validation humaine et journal d'audit, et une plateforme de suivi de la conformité des outils de serrage.",
         missions: [
           "Conception d'un outil local de reprise de marque documentaire : détection des mentions Zodiac dans le texte natif comme dans les pages scannées, remplacement sous validation de l'opérateur, fichier source jamais écrasé",
@@ -313,6 +339,26 @@ export const fr: Content = {
     },
     caseLabel: "Étude de cas",
     stackStepNo: "06",
+    expandAllLabel: "Tout déplier",
+    collapseAllLabel: "Tout replier",
+    grid: {
+      label: "Sommaire des projets",
+      filterLabel: "Filtrer par domaine",
+      allLabel: "Tous",
+      countLabel: "{n} projets",
+      openLabel: "Aller à {name}",
+      emptyLabel: "Aucun projet sur ce domaine."
+    },
+    tracks: {
+      industrial: "Industriel",
+      data: "Data & IA",
+      business: "Business"
+    },
+    statuses: {
+      done: "Livré",
+      pilot: "Pilote",
+      wip: "En cours"
+    },
     items: [
       {
         id: "safran-rebranding",
@@ -321,7 +367,8 @@ export const fr: Content = {
         tagline: "Détection et remplacement de marque sur des milliers de documents de fabrication",
         period: "2025",
         status: "Livré",
-        summary: "Après le rachat de Zodiac Aerospace par Safran, des milliers de dossiers de fabrication, plans CAO et ordres de fabrication portent encore l'ancienne entité dans leurs en-têtes et leurs pieds de page. L'outil retrouve ces mentions quel que soit leur encodage dans le PDF, les remplace sans abîmer ce qui les entoure, et n'applique rien sans l'accord d'un opérateur.",
+        statusTone: "done",
+        tracks: ["data", "industrial"],
         highlights: [
           "Cinq encodages à couvrir pour un même en-tête visible : texte natif, Form XObject des exports CAO, texte vectorisé en courbes, scan raster et logo bitmap",
           "Correspondance hiérarchique à quatre niveaux, tolérante au bruit OCR (Z0DIAC lu pour ZODIAC) ; l'ajout d'un test d'inclusion a fait passer la détection de 0 à 18 occurrences sur 18",
@@ -393,8 +440,8 @@ export const fr: Content = {
           }
         ],
         capsule: {
-          problem: "Après le rachat de Zodiac, des milliers de dossiers de fabrication portaient encore l'ancienne entité en en-tête et en pied. Et un PDF range cette même ligne visible de cinq façons différentes.",
-          solution: "Un outil de bureau qui retrouve chaque mention quel que soit son encodage, la remplace sans abîmer ce qui l'entoure, et n'écrit rien sans l'accord d'un opérateur.",
+          problem: "Des milliers de dossiers de fabrication portaient encore Zodiac en en-tête. Et un PDF range cette même ligne visible de cinq façons différentes.",
+          solution: "Un outil de bureau qui les retrouve quel que soit l'encodage, les remplace sans abîmer le voisinage, et n'écrit rien sans validation humaine.",
           role: "Seul développeur : cadrage, architecture, algorithmes, interface, tests.",
           stack: "Python 3.12 · PyMuPDF · Tesseract · PaddleOCR · OpenCV · PySide6 · SQLite",
           result: "18/18 occurrences sur le document de référence · 210 tests unitaires · ≈ 19 300 lignes"
@@ -584,10 +631,11 @@ export const fr: Content = {
         tagline: "Prouver qu'un serrage a été contrôlé, des années après",
         period: "2025",
         status: "Livré",
-        summary: "Sur une ligne d'assemblage, un serrage se contrôle contre un couple cible et une tolérance. La preuve de ce contrôle vivait dans des relevés papier et des tableurs. ControlTorque enregistre chaque contrôle comme une ligne immuable portant son propre calcul, refuse celui qui serait pris avec un couplemètre hors étalonnage, et ouvre une fiche de non-conformité suivie dès qu'une mesure sort de ses bornes.",
+        statusTone: "done",
+        tracks: ["industrial", "data"],
         capsule: {
           problem: "La preuve qu'un serrage avait été contrôlé vivait dans des relevés papier et des tableurs : introuvable, inauditable, et impossible à croire des années après.",
-          solution: "Une application web où chaque contrôle est un enregistrement immuable portant son propre calcul, et où un résultat non conforme ouvre une fiche suivie plutôt qu'une note.",
+          solution: "Une application web où chaque contrôle est un enregistrement immuable portant son calcul, et où une mesure hors bornes ouvre une fiche suivie.",
           role: "Seul développeur : règles métier, backend, frontend, modèle de données.",
           stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
           result: "8 règles tenues côté serveur · 11 entités · 1 journal en ajout seul"
@@ -805,7 +853,15 @@ export const fr: Content = {
         tagline: "L'espace de travail interne de l'officine",
         period: "2025 à aujourd'hui",
         status: "Pilote",
-        summary: "Le logiciel d'officine gère la vente, le stock et la facturation, pas ce qui circule entre les gens. Qui prépare quelle ordonnance, qui doit rappeler un patient, quel contrôle qualité est en retard : ce vide se comble aujourd'hui au post-it, au cahier de liaison et au groupe WhatsApp, ce dernier faisant transiter des noms de patients sur des téléphones personnels, hors de tout cadre. Co-fondé pour occuper ce vide et rien d'autre : onze modules, pensés mobile d'abord parce que le métier se pratique debout au comptoir. Il ne remplace ni le logiciel d'officine, ni la caisse, ni le registre légal des ordonnances.",
+        statusTone: "pilot",
+        tracks: ["business"],
+        capsule: {
+          problem: "Le logiciel d'officine s'arrête à la vente. Préparations, rappels, contrôles qualité se traitent au post-it et sur WhatsApp, noms de patients compris.",
+          solution: "Un espace de travail interne à l'officine : onze modules, pensés mobile d'abord parce que le métier se pratique debout au comptoir.",
+          role: "Co-fondateur : cadrage produit, architecture, développement.",
+          stack: "NestJS 11 · Next.js 16 · React 19 · Prisma · PostgreSQL 18 · Railway",
+          result: "11 modules en pilote · 41 modèles cloisonnés par officine · identités chiffrées au repos"
+        },
         highlights: [
           "Onze modules bout en bout : ~80 écrans, ~180 routes d'API, 41 modèles de données",
           "Cloisonnement strict : chaque ligne porte son officineId, chaque requête est filtrée dessus",
@@ -928,6 +984,8 @@ export const fr: Content = {
         tagline: "Aide à la décision en implantation d'atelier",
         period: "2025 à 2026",
         status: "En cours",
+        statusTone: "wip",
+        tracks: ["industrial"],
         summary: "Application d'aide à la décision pour l'implantation d'ateliers : elle regroupe les machines en îlots de production cohérents et évalue chaque implantation candidate sur des critères industriels mesurables.",
         highlights: [
           "Méthode de King (Rank Order Clustering) pour la constitution d'îlots de production",
@@ -955,6 +1013,8 @@ export const fr: Content = {
         tagline: "Application web fullstack de pilotage, ENIB",
         period: "2025 à 2026",
         status: "En cours",
+        statusTone: "wip",
+        tracks: ["data", "business"],
         summary: "Plateforme de pilotage de la performance académique de l'ENIB : elle centralise les indicateurs de suivi, déclenche des alertes automatiques sur les dérives et rend la satisfaction étudiante lisible en un coup d'œil.",
         highlights: [
           "42 KPI de suivi des performances académiques",
@@ -1165,6 +1225,7 @@ export const fr: Content = {
     sections: {
       profile: "Profil",
       education: "Formation",
+      certifications: "Certifications",
       experience: "Expérience professionnelle",
       projects: "Projets techniques & industriels",
       skills: "Compétences",

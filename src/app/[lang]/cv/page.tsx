@@ -112,6 +112,29 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
               ))}
             </CvSection>
 
+            <CvSection title={s.certifications}>
+              {c.education.certifications.items.map((item) => (
+                <div className="cv-entry" key={item.url}>
+                  <div className="cv-row">
+                    <h3>{item.name}</h3>
+                    <span className="mono">{item.meta}</span>
+                  </div>
+                  <p className="sub">{c.education.certifications.issuer}</p>
+                  <p style={{ marginTop: "var(--s-2)" }}>{item.body}</p>
+                  {/* Sur papier, un lien est mort : la feuille d'impression
+                      fait suivre l'adresse de contrôle en toutes lettres. */}
+                  <a
+                    className="linkout cert-verify"
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {c.education.certifications.verifyLabel.toUpperCase()} ↗
+                  </a>
+                </div>
+              ))}
+            </CvSection>
+
             <CvSection title={s.experience}>
               {c.experience.items.map((item) => (
                 <div className="cv-entry" key={item.id}>

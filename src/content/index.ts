@@ -1,6 +1,6 @@
 import { fr } from "./fr";
 import { en } from "./en";
-import { LOCALES, DEFAULT_LOCALE, type Locale, type Content } from "./types";
+import { LOCALES, DEFAULT_LOCALE, TRACKS, type Locale, type Content } from "./types";
 
 const dictionaries: Record<Locale, Content> = { fr, en };
 
@@ -71,6 +71,8 @@ export function getDeployments(content: Content): Deployment[] {
   return deployments;
 }
 
-export { LOCALES, DEFAULT_LOCALE };
+/* `TRACKS` est une valeur, pas seulement un type : la grille itere dessus
+   pour construire son filtre. `export type *` ne la ferait pas passer. */
+export { LOCALES, DEFAULT_LOCALE, TRACKS };
 export type { Locale, Content };
 export type * from "./types";

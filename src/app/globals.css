@@ -16,6 +16,13 @@
      Les ratios notés sont mesurés sur `--color-void`. --- */
   --color-void: #0b0e0c; /* le noir dans lequel il vole */
   --color-void-lift: #12160f; /* surface à peine soulevée */
+  /* L'air n'a pas la même densité en haut et en bas du champ. Deux
+     valeurs encadrent le noir de base : un souffle plus clair là où
+     l'aile passe, un cran plus sombre au fond. L'écart est minuscule —
+     trois points de luminance — et c'est précisément ce qui le rend
+     lisible comme de la profondeur plutôt que comme un dégradé. */
+  --color-void-high: #0f1412; /* l'air au-dessus */
+  --color-void-deep: #060806; /* le fond du champ */
   --color-line: #20261f; /* filet décoratif */
   --color-line-lit: #333b31; /* filet décoratif, premier plan */
   --color-edge: #5c6559; /* bordures interactives — 3.20:1 ✓ 1.4.11 */
@@ -23,6 +30,27 @@
   --color-snow-2: #c5ccc2; /* texte secondaire — 11.82:1 ✓ */
   --color-snow-3: #8b948a; /* méta en mono — 6.19:1 ✓ */
   --color-iris: #fda51e; /* l'œil. la seule chose chaude — 9.77:1 ✓ */
+
+  /* --- Les voiles ---------------------------------------------
+     Tout ce qui se pose par transparence : les plans de l'air, la
+     bande soulevée, l'arête qui capte la lumière, le reflet d'une
+     tuile. Écrits en canaux plutôt qu'en `color-mix` — un mélange
+     portant une variable ne se calcule pas à la compilation, et le
+     repli servi aux navigateurs qui l'ignorent garde la couleur
+     pleine. Une bande soulevée y devenait blanche. --- */
+  --color-veil: rgb(245 247 241 / 0.022); /* la bande soulevée */
+  --color-edge-lit: rgb(245 247 241 / 0.14); /* l'arête éclairée */
+  --color-grid: rgb(245 247 241 / 0.035); /* la trame, pas large */
+  --color-grid-fine: rgb(245 247 241 / 0.016); /* la trame, pas fin */
+  /* La lueur et le haut du champ sont froids, et volontairement : l'ambre
+     est l'œil, la seule chose chaude du document. En mettre dans l'air
+     diluait le signal partout ailleurs — un accent qui baigne le fond
+     n'accentue plus rien. Le froid le fait ressortir. */
+  --color-bloom: rgb(150 196 214 / 0.07); /* la lueur qui descend */
+  --color-sky: rgb(158 200 186 / 0.05); /* l'air du haut du champ */
+  --color-sheen: rgb(253 165 30 / 0.13); /* le reflet d'une tuile */
+  --color-chip-on: rgb(253 165 30 / 0.1); /* le domaine retenu */
+  --color-lift-hover: #191d16; /* la tuile sous le pointeur */
 
   /* --- Signal fonctionnel : réservé aux fiches de terrain ---
      Une entrée « problème », une sortie « livré ». Les deux
@@ -57,6 +85,25 @@
 :root {
   --void: var(--color-void);
   --void-lift: var(--color-void-lift);
+  --void-high: var(--color-void-high);
+  --void-deep: var(--color-void-deep);
+
+  /* Les trois plans de l'air se reglent ici, et nulle part ailleurs.
+     Monter une valeur rend le plan plus present, la descendre l'efface
+     — sans avoir a retrouver quatre degrades dans la feuille. */
+  --veil: var(--color-veil);
+  --edge-lit: var(--color-edge-lit);
+  --grid: var(--color-grid);
+  --grid-fine: var(--color-grid-fine);
+  --bloom: var(--color-bloom);
+  --sky: var(--color-sky);
+  --sheen: var(--color-sheen);
+  --chip-on: var(--color-chip-on);
+  --lift-hover: var(--color-lift-hover);
+
+  --air-field: 1; /* la trame mesuree */
+  --air-bloom: 1; /* la lueur */
+  --air-horizon: 0.55; /* l'horizon */
   --line: var(--color-line);
   --line-lit: var(--color-line-lit);
   --edge-ui: var(--color-edge);
@@ -365,6 +412,188 @@
   border-width: 0 1px 1px 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   L'AIR
+
+   Un aplat unique derrière un vol de nuit n'est pas une nuit,
+   c'est un mur : il n'a ni haut ni bas, et rien n'y indique qu'on
+   traverse quelque chose.
+
+   Trois plans le remplacent. Une trame mesurée, qui dit que le
+   vide a une échelle. Une lueur, qui dit d'où vient la lumière.
+   Un horizon, qui dit où est le sol. Chacun se déplace à sa
+   propre vitesse quand on descend le document — c'est cet écart
+   de vitesse, et lui seul, qui fabrique l'épaisseur.
+
+   Aucune image, aucune boucle, aucun JavaScript : les trois plans
+   sont immobiles tant que le lecteur ne défile pas, et leur
+   mouvement est piloté par le défilement lui-même.
+   ═══════════════════════════════════════════════════════════════ */
+.air {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Les plans débordent du cadre pour pouvoir glisser dedans sans
+     jamais découvrir un bord. */
+  overflow: hidden;
+  /* La densité de l'air : plus clair en haut, plus dense au fond, avec
+     une chaleur très basse là où l'œil de l'aile se tient. */
+  background:
+    radial-gradient(
+      100% 60% at 50% 0%,
+      var(--sky),
+      transparent 62%
+    ),
+    linear-gradient(
+      180deg,
+      var(--void-high) 0%,
+      var(--void) 42%,
+      var(--void) 68%,
+      var(--void-deep) 100%
+    );
+}
+
+/* ── La trame ─────────────────────────────────────────────────
+   Deux pas — un fin, un large — comme un papier millimétré vu de
+   très loin. Le masque la fait mourir avant les bords : une trame
+   qui touche le cadre se lit comme un tableau, une trame qui
+   s'éteint se lit comme une étendue. */
+.air-field {
+  position: absolute;
+  inset: -25% -10%;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      var(--grid) 0 1px,
+      transparent 1px 132px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      var(--grid) 0 1px,
+      transparent 1px 132px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--grid-fine) 0 1px,
+      transparent 1px 33px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      var(--grid-fine) 0 1px,
+      transparent 1px 33px
+    );
+  mask-image: radial-gradient(78% 62% at 50% 42%, #000 12%, transparent 82%);
+  -webkit-mask-image: radial-gradient(78% 62% at 50% 42%, #000 12%, transparent 82%);
+  opacity: var(--air-field);
+}
+
+/* ── La lueur ─────────────────────────────────────────────────
+   Très large, très faible, et d'une seule couleur — la seule
+   chaude du document. Elle ne s'allume pas et ne bat pas : elle
+   descend, plus lentement que le texte. */
+.air-bloom {
+  position: absolute;
+  inset-inline: -25%;
+  inset-block-start: -30vh;
+  height: 95vh;
+  background: radial-gradient(
+    46% 50% at 50% 50%,
+    var(--bloom),
+    transparent 72%
+  );
+  opacity: var(--air-bloom);
+}
+
+/* ── L'horizon ────────────────────────────────────────────────
+   Le même repère que sous l'aile, tenu à l'échelle de la page. Il
+   s'éteint aux deux bouts pour ne pas se lire comme une bordure. */
+.air-horizon {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 46%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--line-lit) 22%,
+    var(--line-lit) 78%,
+    transparent
+  );
+  opacity: var(--air-horizon);
+}
+
+/* ── La parallaxe ─────────────────────────────────────────────
+   Trois vitesses pour trois plans. La trame, la plus lointaine,
+   bouge le moins ; l'horizon, plus près, bouge plus ; la lueur
+   traverse tout le champ. Rien n'est calculé à chaque image :
+   c'est le défilement qui tient la position.
+
+   Les navigateurs qui ignorent `animation-timeline` gardent les
+   trois plans fixes. Le fond reste texturé, il perd sa
+   profondeur — et rien ne casse. */
+@supports (animation-timeline: scroll()) {
+  .air-field {
+    animation: air-far linear both;
+    animation-timeline: scroll(root block);
+  }
+  .air-horizon {
+    animation: air-near linear both;
+    animation-timeline: scroll(root block);
+  }
+  .air-bloom {
+    animation: air-pass linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes air-far {
+    to {
+      translate: 0 -7%;
+    }
+  }
+  @keyframes air-near {
+    to {
+      translate: 0 -34vh;
+      opacity: calc(var(--air-horizon) * 0.3);
+    }
+  }
+  @keyframes air-pass {
+    to {
+      translate: 0 118vh;
+    }
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LE RELIEF DES BANDES
+
+   Les bandes étaient des aplats posés bord à bord : l'une
+   soulevée, l'autre non, et un filet entre les deux. Le fond ne
+   passait nulle part, parce que la bande soulevée était opaque.
+
+   Elle devient un voile. La même alternance se lit toujours —
+   c'est un écart de deux pour cent —, mais l'air traverse, et le
+   filet du haut capte maintenant la lumière en son milieu comme
+   le ferait l'arête d'une plaque posée sur une autre.
+   ═══════════════════════════════════════════════════════════════ */
+/* L'arête. Un filet uniforme est un trait ; un filet qui s'éteint aux
+   deux bouts est une arête éclairée. */
+.band::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--edge-lit) 28%,
+    var(--edge-lit) 72%,
+    transparent
+  );
+}
+
 .vignette {
   position: fixed;
   inset: 0;
@@ -378,7 +607,16 @@
   z-index: 2;
   pointer-events: none;
   opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Deux echelles. Le grain fin seul est une texture de surface : il se
+     pose sur l'image sans lui donner de corps. La seconde turbulence,
+     soixante-dix fois plus lache, fait la brume — et c'est elle qui
+     empeche les degrades de l'air de se voir comme des degrades. */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23h)' opacity='.6'/%3E%3C/svg%3E");
+  background-size:
+    140px 140px,
+    420px 420px;
 }
 
 .wrap {
@@ -984,8 +1222,11 @@
   border-top: 1px solid var(--line);
   position: relative;
 }
+/* Un voile, pas un aplat. La meme alternance se lit toujours — c'est un
+   ecart de deux pour cent —, mais l'air passe au travers. Opaque, cette
+   bande masquait une section sur deux et le fond n'existait nulle part. */
 .band-quiet {
-  background: var(--void-lift);
+  background: var(--veil);
 }
 
 /* `align-content: start` n'est pas décoratif. Une grille dont le parent
@@ -2065,6 +2306,516 @@ details[open] > .fold-toggle .fold-open {
   align-items: baseline;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   L'AILE EN VOLUME
+
+   Une aile dessinée à plat reste un pictogramme. Celle-ci est
+   posée dans une scène : le pointeur lui donne son assiette, et
+   ses trois couches de plumes ne le suivent pas à la même
+   vitesse. C'est l'écart entre les couches qui fait le volume —
+   aucune ombre n'est ajoutée, aucun relief n'est dessiné.
+
+   Rien n'oscille et rien ne dérive : au repos, l'aile est
+   strictement immobile. Elle ne répond qu'au doigt, comme tout
+   le reste du document.
+   ═══════════════════════════════════════════════════════════════ */
+.flight {
+  perspective: 1500px;
+}
+.wing-holder {
+  transform-style: preserve-3d;
+}
+/* L'assiette. Cinq degrés au plus : au-delà, la silhouette se lit comme
+   une image inclinée plutôt que comme un corps orienté. */
+.wing {
+  transform: rotateY(calc(var(--wx, 0) * 5deg)) rotateX(calc(var(--wy, 0) * -3.5deg));
+  transition: transform 260ms var(--commit);
+}
+/* La parallaxe. `--z` porte l'éloignement de la couche : les rémiges,
+   les plus éloignées de l'axe, s'écartent le plus ; l'œil, lui, ne
+   bouge pas — c'est le point autour duquel tout tourne. */
+.wing-layer {
+  translate: calc(var(--wx, 0) * var(--z, 0) * 1.7px)
+    calc(var(--wy, 0) * var(--z, 0) * 1.1px);
+  transition: translate 260ms var(--commit);
+}
+
+/* En quittant le champ, l'aile bascule et s'éloigne — elle ne disparaît
+   pas en fondu, elle prend du champ. Piloté par le défilement lui-même :
+   aucune ligne de JavaScript. Les navigateurs qui l'ignorent gardent une
+   aile fixe, et il ne manque rien. */
+@supports (animation-timeline: view()) {
+  .wing-holder {
+    animation: wing-recede linear both;
+    animation-timeline: view(block);
+    animation-range: exit 0% exit 100%;
+  }
+  @keyframes wing-recede {
+    to {
+      transform: perspective(1500px) rotateX(14deg) translateZ(-80px);
+      opacity: 0.4;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LE SOMMAIRE DES PROJETS
+
+   Cinq tuiles avant les cinq fiches. Rien n'y est résumé : c'est
+   une planche d'inventaire — numéro, état, chiffre, domaine — et
+   l'accès direct à la fiche correspondante.
+
+   Les tuiles sont les seuls objets du document qui quittent leur
+   plan. Elles s'inclinent vers le pointeur, et leurs couches
+   internes sont poussées en avant de la face : le relief se lit
+   au décalage entre les couches, pas à une ombre qui grossit.
+   ═══════════════════════════════════════════════════════════════ */
+.pindex {
+  margin-bottom: var(--s-8);
+}
+
+/* ── Le sélecteur de domaine ─────────────────────────────── */
+.pfilter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-5);
+}
+.pfilter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.pchip {
+  appearance: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: none;
+  font-family: var(--f-mono);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  color: var(--snow-3);
+  border: 1px solid var(--edge-ui);
+  border-radius: 2px;
+  padding: 0.4rem var(--s-3);
+  min-height: 36px;
+  transition:
+    color var(--d-snap) var(--commit),
+    border-color var(--d-snap) var(--commit),
+    background-color var(--d-snap) var(--commit);
+}
+/* Le voyant du bouton : éteint au repos, ambre quand le domaine tient. */
+.pchip-tick {
+  width: 5px;
+  height: 5px;
+  background: var(--line-lit);
+  transition:
+    background-color var(--d-snap) var(--commit),
+    scale var(--d-snap) var(--commit);
+}
+.pchip:hover {
+  color: var(--snow-2);
+  border-color: var(--edge-ui);
+}
+.pchip:hover .pchip-tick {
+  background: var(--edge-ui);
+}
+.pchip[aria-pressed="true"] {
+  color: var(--snow);
+  border-color: var(--iris);
+  background: var(--chip-on);
+}
+.pchip[aria-pressed="true"] .pchip-tick {
+  background: var(--iris);
+  scale: 1.4;
+}
+.pfilter-count {
+  color: var(--snow-3);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+/* ── La planche ──────────────────────────────────────────── */
+.pgrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-4);
+}
+/* La scène est posée sur la cellule, pas sur la planche : une fuyante
+   unique pour toute la grille donnerait à la tuile de gauche une
+   déformation en trapèze que celle du milieu n'aurait pas. Chaque tuile
+   tourne donc autour de son propre centre — c'est la seule façon d'avoir
+   la même inclinaison partout. */
+.pgrid-cell {
+  display: flex;
+  perspective: 900px;
+}
+.pgrid-empty {
+  color: var(--snow-3);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  padding-block: var(--s-6);
+}
+
+.pcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  width: 100%;
+  padding: var(--s-5);
+  text-decoration: none;
+  color: inherit;
+  background: var(--void-lift);
+  border: 1px solid var(--line);
+  /* Pas d'overflow caché ici : il aplatirait la scène et les couches
+     internes retomberaient dans le plan de la face. Le reflet est déjà
+     borné par son propre calage. */
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--rx, 0) * 1deg)) rotateY(calc(var(--ry, 0) * 1deg));
+  transition:
+    transform 140ms var(--commit),
+    border-color var(--d-snap) var(--commit),
+    background-color var(--d-snap) var(--commit);
+}
+.pcard:hover,
+.pcard:focus-visible {
+  border-color: var(--edge-ui);
+  background: var(--lift-hover);
+}
+
+/* Le reflet — une tache qui suit le pointeur sur la face de la tuile. */
+.pcard-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    260px circle at var(--gx, 50%) var(--gy, 50%),
+    var(--sheen),
+    transparent 68%
+  );
+  transition: opacity var(--d-snap) var(--commit);
+}
+.pcard:hover .pcard-sheen,
+.pcard:focus-visible .pcard-sheen {
+  opacity: 1;
+}
+
+/* Les trois couches, poussées en avant de la face. Ce sont ces
+   décalages — et non le contour — qui font voir le volume. */
+.pcard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  transform: translateZ(14px);
+}
+.pcard-no {
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  color: var(--snow-3);
+  font-variant-numeric: tabular-nums;
+}
+.pcard-body {
+  display: grid;
+  gap: var(--s-2);
+  transform: translateZ(8px);
+}
+.pcard-name {
+  font-family: var(--f-title);
+  font-size: calc(var(--t-1) * var(--fit-title));
+  letter-spacing: var(--tr-title-2);
+  line-height: var(--lh-head);
+  color: var(--snow);
+  text-wrap: balance;
+}
+.pcard-tag {
+  font-size: var(--t--1);
+  line-height: 1.5;
+  color: var(--snow-2);
+}
+.pcard-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--s-3);
+  /* La tuile la plus courte et la plus longue posent leur pied à la
+     même hauteur : une rangée de tuiles est une rangée, pas un escalier. */
+  margin-top: auto;
+  padding-top: var(--s-2);
+  transform: translateZ(20px);
+}
+.pcard-metric {
+  display: grid;
+  gap: 2px;
+  border-left: 2px solid var(--iris);
+  padding-left: var(--s-3);
+}
+.pcard-metric .v {
+  font-family: var(--f-mono);
+  font-size: var(--tm-2);
+  color: var(--iris);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.pcard-metric .k {
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  color: var(--snow-3);
+}
+.pcard-tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+}
+.pcard-track {
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  color: var(--snow-3);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 2px 0.45rem;
+  white-space: nowrap;
+}
+
+/* ── L'état, en pastille ─────────────────────────────────── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 2px 0.5rem;
+  white-space: nowrap;
+  width: fit-content;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+}
+/* Livré : la seule affirmation close du document. */
+.status-done {
+  color: var(--color-ok);
+}
+/* Pilote : en service, pas encore généralisé. Neutre mais vif — pas
+   ambre. L'ambre porte déjà le focus, le survol et « vous êtes ici » :
+   une pastille ambre au repos se lisait comme un contrôle actif. */
+.status-pilot {
+  color: var(--snow-2);
+}
+/* En cours : le dernier cran de la rampe. Aucune couleur ne lui est due
+   tant que rien n'est tenu. */
+.status-wip {
+  color: var(--snow-3);
+}
+
+/* ── La bascule d'ensemble ───────────────────────────────── */
+.head-tools {
+  flex: 0 0 auto;
+  display: inline-flex;
+}
+.foldall {
+  appearance: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: none;
+  border: 1px solid var(--edge-ui);
+  border-radius: 2px;
+  padding: 0.3rem var(--s-3);
+  min-height: 34px;
+  font-family: var(--f-mono);
+  font-size: var(--tm--2);
+  letter-spacing: var(--tr--2);
+  color: var(--snow-3);
+  transition:
+    color var(--d-snap) var(--commit),
+    border-color var(--d-snap) var(--commit);
+}
+.foldall:hover {
+  color: var(--iris);
+  border-color: var(--edge-ui);
+}
+/* Le même signe que les dépliages : le plus se rétracte en moins. */
+.foldall-sign {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+}
+.foldall-sign::before,
+.foldall-sign::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.foldall-sign::before {
+  inset-block-start: 4px;
+  inset-inline: 0;
+  height: 1px;
+}
+.foldall-sign::after {
+  inset-block: 0;
+  inset-inline-start: 4px;
+  width: 1px;
+  transition: scale var(--d-snap) var(--commit);
+}
+.foldall-sign[data-open]::after {
+  scale: 1 0;
+}
+
+/* ── La preuve qu'on peut voir ───────────────────────────── */
+.shot {
+  margin: var(--s-5) 0 0;
+  border: 1px solid var(--line);
+  background: var(--void-lift);
+  padding: var(--s-2);
+  line-height: 0;
+}
+.shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Une fiche est une ancre ─────────────────────────────── */
+/* Les fiches de projet et de poste portent un identifiant : sans cette
+   reprise, un saut vers une fiche la rangerait sous la barre collante. */
+article[id] {
+  scroll-margin-top: calc(var(--nav-h) + var(--s-4));
+}
+
+/* ── Les certifications ──────────────────────────────────────
+   Pas la forme du rail des diplômes : un diplôme se situe dans une
+   trajectoire, une certification est une attestation posée à plat.
+   Trois plaques, un filet en tête, et sur chacune le lien de
+   contrôle — c'est lui qui fait la différence entre une compétence
+   attestée et une compétence affirmée. */
+.certs {
+  margin-top: var(--s-8);
+}
+.certs-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-5);
+}
+.certs-head .rule {
+  flex: 1 1 auto;
+  height: 1px;
+  margin-inline-start: -0.14em;
+  background: var(--line-lit);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--d-arrive) var(--glide) calc(var(--in-delay) + 120ms);
+}
+.commit.is-on .certs-head .rule {
+  scale: 1 1;
+}
+/* L'organisme est dit une fois, en tête, plutôt que trois fois sur les
+   trois plaques : trois répétitions du même mot se lisent comme du
+   remplissage. */
+.certs-issuer {
+  flex: 0 0 auto;
+  color: var(--snow-3);
+}
+
+.certs-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-4);
+}
+.cert {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border: 1px solid var(--line);
+  background: var(--void-lift);
+  transition:
+    border-color var(--d-snap) var(--commit),
+    background-color var(--d-snap) var(--commit);
+}
+.cert:hover,
+.cert:focus-within {
+  border-color: var(--edge-ui);
+  background: var(--lift-hover);
+}
+.cert-meta {
+  color: var(--snow-3);
+}
+.cert-name {
+  font-family: var(--f-title);
+  font-weight: 400;
+  font-synthesis-weight: none;
+  font-size: calc(var(--t-1) * var(--fit-title));
+  letter-spacing: var(--tr-title-2);
+  line-height: var(--lh-head);
+  color: var(--snow);
+  text-wrap: balance;
+}
+.cert-body {
+  color: var(--snow-2);
+  font-size: var(--t--1);
+  line-height: 1.55;
+}
+/* Le lien de contrôle se pose en pied de plaque, à la même hauteur sur
+   les trois, quelle que soit la longueur du texte au-dessus. */
+.cert .linkout {
+  margin-top: auto;
+  padding-top: var(--s-2);
+}
+
+@media (min-width: 680px) {
+  .certs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+}
+@media (min-width: 1024px) {
+  .certs-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 679px) {
+  .certs {
+    margin-top: var(--s-7);
+  }
+  .cert {
+    padding: var(--s-4);
+  }
+  .cert-name {
+    font-size: calc(var(--t-0) * var(--fit-title));
+  }
+  /* Le lien de contrôle est une cible, pas une mention. */
+  .cert .linkout {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
 /* ── Montée en largeur ───────────────────────────────────── */
 @media (min-width: 680px) {
   .groups {
@@ -2363,6 +3114,86 @@ details[open] > .fold-toggle .fold-open {
   }
   .cv-row {
     gap: var(--s-1) var(--s-3);
+  }
+}
+
+/* ── La planche de projets monte en largeur ──────────────── */
+@media (min-width: 680px) {
+  .pgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+}
+@media (min-width: 1100px) {
+  /* Trois colonnes : cinq projets tiennent alors en deux rangées, dont la
+     seconde est volontairement incomplète — une grille pleine se lirait
+     comme un catalogue, celle-ci se lit comme un inventaire. */
+  .pgrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ── Téléphone : la planche à hauteur de pouce ───────────── */
+@media (max-width: 679px) {
+  /* Le surtitre accepte de passer à la ligne : le filet pousse la bascule
+     d'ensemble sur une seconde ligne plutôt que de la comprimer. */
+  .eyebrow {
+    flex-wrap: wrap;
+  }
+  .head-tools {
+    margin-inline-start: auto;
+  }
+
+  .pindex {
+    margin-bottom: var(--s-7);
+  }
+  .pfilter {
+    display: grid;
+    gap: var(--s-3);
+    justify-items: start;
+  }
+  /* Les domaines défilent latéralement jusqu'au bord de l'écran plutôt
+     que de retomber sur trois lignes. La barre de défilement est retirée :
+     le débord d'un demi-bouton dit déjà qu'il y a une suite. */
+  .pfilter-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    width: 100%;
+    margin-inline: calc(-1 * var(--edge));
+    padding-inline: var(--edge);
+    scrollbar-width: none;
+  }
+  .pfilter-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .pchip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-height: 40px;
+  }
+
+  .pcard {
+    padding: var(--s-4);
+    gap: var(--s-3);
+  }
+  .pcard-name {
+    font-size: calc(var(--t-0) * var(--fit-title));
+  }
+  /* Le pied se range en colonne : un chiffre et deux domaines ne partagent
+     pas une ligne de 390 px sans que l'un des deux se coupe. */
+  .pcard-foot {
+    align-items: start;
+    gap: var(--s-3);
+  }
+
+  .foldall {
+    min-height: 40px;
+  }
+  .shot {
+    margin-inline: calc(var(--frame) - var(--edge));
+    border-inline: 0;
   }
 }
 
@@ -2869,6 +3700,32 @@ details[open] > .fold-body {
   .nav-bar::after {
     display: none;
   }
+  /* Les tuiles reprennent leur plan, l'aile reprend son assiette. Le
+     relief disparaît, la planche reste : on retire le mouvement, jamais
+     le contenu ni la hiérarchie. */
+  .pcard {
+    transform: none !important;
+  }
+  .pcard-top,
+  .pcard-body,
+  .pcard-foot {
+    transform: none;
+  }
+  .pcard-sheen {
+    display: none;
+  }
+  .wing {
+    transform: none;
+  }
+  .wing-layer {
+    translate: none;
+  }
+  .wing-holder {
+    opacity: 1;
+  }
+  .pchip[aria-pressed="true"] .pchip-tick {
+    scale: 1;
+  }
   .lid {
     transform: scaleY(0) !important;
   }
@@ -2876,6 +3733,7 @@ details[open] > .fold-body {
 
 /* ── Impression : le vol reste à l'écran ─────────────────── */
 @media print {
+  .air,
   .optics,
   .vignette,
   .grain,
@@ -3041,5 +3899,54 @@ details[open] > .fold-body {
   .capsule dd,
   .capsule .result dd {
     color: #333 !important;
+  }
+  /* Le sommaire ne s'imprime pas : sur papier, les cinq fiches suivent
+     immédiatement les cinq tuiles, et la planche ne serait qu'une table
+     des matières pour une page déjà sous les yeux. */
+  .pindex,
+  .head-tools,
+  .foldall {
+    display: none !important;
+  }
+  .pcard,
+  .pcard-top,
+  .pcard-body,
+  .pcard-foot,
+  .wing,
+  .wing-layer,
+  .wing-holder {
+    transform: none !important;
+    translate: none !important;
+    opacity: 1 !important;
+  }
+  /* L'état garde son mot ; sa couleur, qui ne dit plus rien en gris,
+     repasse au trait. */
+  .status {
+    color: #000 !important;
+    border-color: #999 !important;
+  }
+  /* Un lien imprime est un lien mort : l'adresse de controle suit en
+     toutes lettres, sinon la certification n'est plus verifiable. */
+  .cert,
+  .cv-entry {
+    break-inside: avoid;
+  }
+  .cert {
+    border-color: #999 !important;
+    background: none !important;
+  }
+  .cert-name {
+    color: #000 !important;
+  }
+  .cert .linkout::after,
+  .cert-verify::after {
+    content: " " attr(href);
+    font-size: 0.85em;
+    color: #555 !important;
+  }
+  .shot {
+    border-color: #999 !important;
+    background: none !important;
+    break-inside: avoid;
   }
 }

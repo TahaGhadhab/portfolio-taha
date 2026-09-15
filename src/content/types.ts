@@ -33,6 +33,34 @@ export interface Experience {
   hasDeliverable: boolean;
 }
 
+/**
+ * Les trois axes du positionnement, réutilisés comme filtre de projets.
+ *
+ * Ce ne sont pas des étiquettes inventées pour la grille : ce sont les trois
+ * disques de la figure « triple casquette ». Filtrer les projets par eux fait
+ * tenir la promesse de la section « À propos » au lieu de la répéter.
+ */
+export const TRACKS = ["industrial", "data", "business"] as const;
+export type TrackId = (typeof TRACKS)[number];
+
+/**
+ * L'état d'un projet, rendu en pastille.
+ *
+ * Trois états seulement, et chacun porte sa couleur : livré (vert), pilote
+ * (ambre), en cours (neutre). Un quatrième voudrait dire qu'on décrit un
+ * calendrier plutôt qu'un état.
+ */
+export type StatusTone = "done" | "pilot" | "wip";
+
+/** Une capture d'écran de projet, servie par `next/image`. */
+export interface ProjectShot {
+  /** Chemin depuis `public/`, p. ex. `/shots/pharmacowork.png`. */
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 /** Une étape de la séquence d'inspection d'un projet phare. */
 export interface ProjectStep {
   step: string;
@@ -171,7 +199,23 @@ export interface Project {
   tagline: string;
   period: string;
   status: string;
-  summary: string;
+  /** L'état, en couleur. Le libellé reste dans `status`. */
+  statusTone: StatusTone;
+  /**
+   * Les axes que le projet traverse. Jamais vide : un projet qui ne relève
+   * d'aucun des trois n'a rien à faire sur cette page.
+   */
+  tracks: TrackId[];
+  /**
+   * Le paragraphe d'ouverture — réservé aux projets sans capsule.
+   *
+   * Quand la capsule est là, elle dit déjà problème et réponse, en cinq
+   * lignes comparables d'un projet à l'autre. Garder les deux, c'était payer
+   * le même propos deux fois, et le payer en premier.
+   */
+  summary?: string;
+  /** La preuve qu'on peut voir. Absente tant que l'image n'existe pas. */
+  shot?: ProjectShot;
   highlights: string[];
   /** Signature courte, reprise telle quelle sur le CV imprimable. */
   stack: string[];
@@ -198,6 +242,23 @@ export interface Project {
    * porte la preuve avant le texte ; les suivantes attendent le dépliage.
    */
   figures?: ProjectFigure[];
+}
+
+/**
+ * Une certification : une compétence attestée par un tiers.
+ *
+ * Elle ne vaut que si elle se vérifie. `url` pointe donc sur la page de
+ * contrôle de l'organisme, jamais sur une image de badge — un badge se
+ * recopie, une page de vérification se consulte. Sans elle, l'entrée n'a
+ * pas plus de poids qu'une ligne de compétence auto-déclarée.
+ */
+export interface Certification {
+  name: string;
+  /** Volume horaire et découpage, déjà formatés — « 4 h · 14 leçons ». */
+  meta: string;
+  body: string;
+  /** Page de vérification de l'organisme émetteur. */
+  url: string;
 }
 
 export interface Education {
@@ -319,7 +380,25 @@ export interface Content {
       pillars: { title: string; body: string }[];
     };
   };
-  education: { title: string; intro: string; items: Education[] };
+  education: {
+    title: string;
+    intro: string;
+    items: Education[];
+    /**
+     * Les certifications, rangées sous le parcours plutôt que dans leur
+     * propre station : ce sont des formations, elles appartiennent au même
+     * récit que les diplômes, et une station de plus pour trois lignes
+     * déséquilibrerait le rail.
+     */
+    certifications: {
+      title: string;
+      /** L'organisme, dit une fois pour les trois. */
+      issuer: string;
+      /** Libellé du lien de contrôle. */
+      verifyLabel: string;
+      items: Certification[];
+    };
+  };
   experience: {
     title: string;
     intro: string;
@@ -331,6 +410,9 @@ export interface Content {
     /** Libellés du dépliage : le détail est replié par défaut. */
     detailsLabel: string;
     hideLabel: string;
+    /** Déplier ou replier toutes les fiches d'un coup. */
+    expandAllLabel: string;
+    collapseAllLabel: string;
     items: Experience[];
   };
   projects: {
@@ -361,6 +443,33 @@ export interface Content {
     caseLabel: string;
     /** Numéro porté par le bloc socle, dernier poste de la séquence. */
     stackStepNo: string;
+    /**
+     * La grille de tête : cinq cartes avant les cinq fiches.
+     *
+     * Sans elle, savoir que le projet 04 existe demandait de faire défiler
+     * sept cents mots. La grille est un sommaire, pas un résumé — elle ne
+     * redit rien, elle donne l'inventaire et l'accès.
+     */
+    grid: {
+      /** Titre accessible de la grille et de son filtre. */
+      label: string;
+      filterLabel: string;
+      /** Le filtre au repos : tous les projets. */
+      allLabel: string;
+      /** Gabarit du compte affiché, `{n}` remplacé par le nombre. */
+      countLabel: string;
+      /** Gabarit accessible d'une carte, `{name}`. */
+      openLabel: string;
+      /** Ce qu'on lit quand un filtre ne retient rien. */
+      emptyLabel: string;
+    };
+    /** Les libellés des trois axes, dans l'ordre de `TRACKS`. */
+    tracks: Record<TrackId, string>;
+    /** Les libellés des trois états, dans l'ordre de `StatusTone`. */
+    statuses: Record<StatusTone, string>;
+    /** Déplier ou replier toutes les fiches d'un coup. */
+    expandAllLabel: string;
+    collapseAllLabel: string;
     items: Project[];
   };
   skills: {
@@ -403,6 +512,7 @@ export interface Content {
     sections: {
       profile: string;
       education: string;
+      certifications: string;
       experience: string;
       projects: string;
       skills: string;
