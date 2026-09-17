@@ -215,7 +215,14 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
               <div className="cv-entry">
                 <p>
                   {c.skills.languages.items
-                    .map((item) => `${item.name} : ${item.level.toLowerCase()}`)
+                    /* « Courant » passe en bas de casse après les deux-points ;
+                       un niveau CECRL et un organisme gardent leurs capitales. */
+                    .map((item) => {
+                      const level = /^\p{Lu}\p{Ll}/u.test(item.level)
+                        ? item.level.charAt(0).toLowerCase() + item.level.slice(1)
+                        : item.level;
+                      return `${item.name} : ${level}`;
+                    })
                     .join(" · ")}
                 </p>
               </div>

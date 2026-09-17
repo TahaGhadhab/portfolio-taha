@@ -8,7 +8,7 @@ import type { Content } from "./types";
  */
 export const fr: Content = {
   meta: {
-    title: "Taha Ghadhab, ingénieur génie industriel",
+    title: "Taha Ghadhab, élève ingénieur en génie industriel",
     description: "Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
     ogAlt: "Vol silencieux, portfolio de Taha Ghadhab"
   },
@@ -257,11 +257,12 @@ export const fr: Content = {
       {
         id: "safran",
         short: "Safran",
-        company: "Safran",
-        fullName: "Safran",
-        role: "Ingénieur méthode",
+        company: "Safran Electronics & Defense",
+        fullName: "Safran Electronics & Defense",
+        role: "Stagiaire au service Méthodes",
         period: "1er juin au 24 juillet 2026",
-        location: "Dhari",
+        start: "2026-06",
+        location: "Dhari, Tunisie",
         input: "L'ancienne entité reste imprimée sur des milliers de documents de fabrication, reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
         output: "Un outil de reprise de marque assistée par OCR, avec validation humaine et journal d'audit, et une plateforme de suivi de la conformité des outils de serrage.",
         missions: [
@@ -284,6 +285,7 @@ export const fr: Content = {
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant ingénieur",
         period: "Juin à juillet 2025",
+        start: "2025-06",
         location: "Les Berges du Lac, Tunisie",
         input: "Une décision d'investissement lourde à instruire sur des bases chiffrées : l'acquisition d'une unité de coiled-tubing.",
         output: "Une étude technico-économique complète servant de support à la décision d'acquisition.",
@@ -303,8 +305,9 @@ export const fr: Content = {
         short: "AFC",
         company: "AFC",
         fullName: "Arab Financial Consultants",
-        role: "Apprenti consultant",
+        role: "Consultant stagiaire",
         period: "Août à septembre 2025",
+        start: "2025-08",
         location: "Les Berges du Lac, Tunisie",
         input: "Une lecture purement technique des projets industriels, sans le vocabulaire ni les critères du décideur financier.",
         output: "Une grille de lecture financière des systèmes : savoir traduire un gain d'ingénierie en argument d'investissement.",
@@ -365,7 +368,7 @@ export const fr: Content = {
         name: "Reprise de marque documentaire Zodiac → Safran",
         short: "Rebranding Safran",
         tagline: "Détection et remplacement de marque sur des milliers de documents de fabrication",
-        period: "2025",
+        period: "2026",
         status: "Livré",
         statusTone: "done",
         tracks: ["data", "industrial"],
@@ -442,9 +445,9 @@ export const fr: Content = {
         capsule: {
           problem: "Des milliers de dossiers de fabrication portaient encore Zodiac en en-tête. Et un PDF range cette même ligne visible de cinq façons différentes.",
           solution: "Un outil de bureau qui les retrouve quel que soit l'encodage, les remplace sans abîmer le voisinage, et n'écrit rien sans validation humaine.",
-          role: "Seul développeur : cadrage, architecture, algorithmes, interface, tests.",
+          role: "Porteur du projet : cadrage du besoin, choix d'architecture, construction assistée par IA, puis validation par 210 tests unitaires.",
           stack: "Python 3.12 · PyMuPDF · Tesseract · PaddleOCR · OpenCV · PySide6 · SQLite",
-          result: "18/18 occurrences sur le document de référence · 210 tests unitaires · ≈ 19 300 lignes"
+          result: "18/18 occurrences sur le document de référence · 210 tests unitaires"
         },
         steps: [
           {
@@ -629,14 +632,14 @@ export const fr: Content = {
         name: "ControlTorque : traçabilité des outils de serrage",
         short: "ControlTorque",
         tagline: "Prouver qu'un serrage a été contrôlé, des années après",
-        period: "2025",
+        period: "2026",
         status: "Livré",
         statusTone: "done",
         tracks: ["industrial", "data"],
         capsule: {
           problem: "La preuve qu'un serrage avait été contrôlé vivait dans des relevés papier et des tableurs : introuvable, inauditable, et impossible à croire des années après.",
           solution: "Une application web où chaque contrôle est un enregistrement immuable portant son calcul, et où une mesure hors bornes ouvre une fiche suivie.",
-          role: "Seul développeur : règles métier, backend, frontend, modèle de données.",
+          role: "Porteur du projet : règles métier et modèle de données, construction assistée par IA, puis validation par 58 tests unitaires.",
           stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
           result: "8 règles tenues côté serveur · 11 entités · 1 journal en ajout seul"
         },
@@ -858,7 +861,7 @@ export const fr: Content = {
         capsule: {
           problem: "Le logiciel d'officine s'arrête à la vente. Préparations, rappels, contrôles qualité se traitent au post-it et sur WhatsApp, noms de patients compris.",
           solution: "Un espace de travail interne à l'officine : onze modules, pensés mobile d'abord parce que le métier se pratique debout au comptoir.",
-          role: "Co-fondateur : cadrage produit, architecture, développement.",
+          role: "Co-fondateur : cadrage produit, choix d'architecture, construction assistée par IA, tests et audit de sécurité.",
           stack: "NestJS 11 · Next.js 16 · React 19 · Prisma · PostgreSQL 18 · Railway",
           result: "11 modules en pilote · 41 modèles cloisonnés par officine · identités chiffrées au repos"
         },
@@ -1019,7 +1022,7 @@ export const fr: Content = {
         highlights: [
           "42 KPI de suivi des performances académiques",
           "Système d'alerte automatisé sur les seuils critiques",
-          "Visualisations interactives et suivi de la satisfaction estudiantine"
+          "Visualisations interactives et suivi de la satisfaction étudiante"
         ],
         stack: [
           "React",
@@ -1163,7 +1166,11 @@ export const fr: Content = {
         },
         {
           name: "Anglais",
-          level: "Courant"
+          level: "C1 · Amideast"
+        },
+        {
+          name: "Allemand",
+          level: "B1 · Goethe-Institut"
         }
       ]
     }
@@ -1208,8 +1215,8 @@ export const fr: Content = {
     intro: "Ouvert aux opportunités de stage et d'alternance en ingénierie industrielle, data et Industrie 4.0.",
     email: "taha.ghadhab@enib.ucar.tn",
     phone: "+216 54 347 150",
-    linkedin: "https://www.linkedin.com/in/taha-ghadhab",
-    linkedinLabel: "linkedin.com/in/taha-ghadhab",
+    linkedin: "https://www.linkedin.com/in/taha-ghadhab-5b5835242",
+    linkedinLabel: "linkedin.com/in/taha-ghadhab-5b5835242",
     location: "Tunisie",
     emailLabel: "E-mail",
     phoneLabel: "Téléphone",
@@ -1236,7 +1243,7 @@ export const fr: Content = {
     }
   },
   footer: {
-    builtWith: "Conçu et développé par Taha Ghadhab",
+    builtWith: "Conçu par Taha Ghadhab · construit avec l'IA, testé et audité",
     rights: "Tous droits réservés."
   }
 };

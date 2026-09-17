@@ -1,0 +1,2540 @@
+{
+  "/fr@375": [
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.menu-btn \"MENU\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 33,
+      "samples": [
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#111411",
+      "ratio": 3.07,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.foldall \"TOUT REPLIER\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "a.btn \"Ma méthode\"",
+        "a.btn \"CV PDF\"",
+        "button.foldall \"TOUT REPLIER\"",
+        "button.pchip \"INDUSTRIEL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#d9705f",
+      "bg": "#111411",
+      "ratio": 5.7,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"ENTRÉE · PROBLÈME IDENTIFIÉ\"",
+        "span.io-label \"ENTRÉE · PROBLÈME IDENTIFIÉ\"",
+        "span.io-label \"ENTRÉE · PROBLÈME IDENTIFIÉ\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#12160f",
+      "ratio": 5.84,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 21,
+      "samples": [
+        "span.pcard-no.mono \"01\"",
+        "span.k.mono \"OCCURRENCES DÉTECTÉES\"",
+        "span.pcard-track.mono \"DATA & IA\"",
+        "span.pcard-track.mono \"INDUSTRIEL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#111411",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 32,
+      "samples": [
+        "button.foldall \"TOUT REPLIER\"",
+        "span.fold-open \"MASQUER LE DÉTAIL\"",
+        "span.tag \"PYTHON\"",
+        "span.tag \"PYMUPDF\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-mask.pf-mask-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "note": "svg text",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "text.pf-t.pf-fault \"Aucune écriture\"",
+        "text.pf-s.pf-s-start \"SAFRAN ELECTRONICS & DEFENSE\"",
+        "text.pf-e.pf-fault \"la référence de dossier vois\"",
+        "text.pf-t.pf-fault \"404 Not Found\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 267,
+      "samples": [
+        "span.brand-role \"GÉNIE INDUSTRIEL\"",
+        "span.k \"stages en entreprise\"",
+        "span.k \"startup co-fondée\"",
+        "span.k \"projets construits\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#12160f",
+      "ratio": 8.3,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "span.status.status-done \"LIVRÉ\"",
+        "span.status.status-done \"LIVRÉ\"",
+        "span.status.status-done \"LIVRÉ\"",
+        "span.status.status-done \"LIVRÉ\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#111411",
+      "ratio": 8.44,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"SORTIE · LIVRÉ\"",
+        "span.io-label \"SORTIE · LIVRÉ\"",
+        "span.io-label \"SORTIE · LIVRÉ\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "span.status.status-done \"LIVRÉ\"",
+        "text.pf-t.pf-ok \"*_safran.pdf\"",
+        "span.status.status-done \"LIVRÉ\"",
+        "text.pf-t.pf-ok \"201 Created\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "rect.pf-box.pf-box-ok \"\"",
+        "rect.pf-box.pf-box-ok \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#12160f",
+      "ratio": 9.22,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.v \"18/18\"",
+        "span.v \"8\"",
+        "span.v \"11\"",
+        "span.v \"ROC\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 17,
+      "samples": [
+        "span.no \"04\"",
+        "span.fold-label \"MISSIONS\"",
+        "span.fold-label \"OUTILS\"",
+        "span.fold-label \"MISSIONS\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"Télécharger le CV en PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "a.skip \"Aller au contenu principal\"",
+        "a.btn.btn-primary \"Voir les réalisations\"",
+        "a.btn.btn-primary \"Télécharger le CV en PDF\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.btn.btn-primary \"Voir les réalisations\"",
+        "button.pchip \"TOUS\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "span.v \"3\"",
+        "span.v \"1\"",
+        "span.v \"5\"",
+        "span.no \"03\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "path.diag-return \"\"",
+        "path.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#12160f",
+      "ratio": 11.15,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "span.pcard-tag \"Détection et remplacement de\"",
+        "span.pcard-tag \"Prouver qu'un serrage a été \"",
+        "span.status.status-pilot \"PILOTE\"",
+        "span.pcard-tag \"L'espace de travail interne \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#111411",
+      "ratio": 11.33,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 56,
+      "samples": [
+        "p.mono \"LE PRINCIPE\"",
+        "p \"La chouette harfang vole en \"",
+        "p \"J'y reviens toujours parce q\"",
+        "p \"Le bord dentelé ne combat pa\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 99,
+      "samples": [
+        "a.lang-chip \"EN\"",
+        "p.lede \"J'isole la contrainte qui go\"",
+        "span \"MÉTHODE\"",
+        "p.head-intro \"Écouter d'abord. N'agir qu'u\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#231d0e",
+      "ratio": 15.5,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.pchip \"TOUS\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#12160f",
+      "ratio": 16.96,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.pcard-name \"Reprise de marque documentai\"",
+        "span.pcard-name \"ControlTorque : traçabilité \"",
+        "span.pcard-name \"PharmacoWork\"",
+        "span.pcard-name \"Machine Layout Optimization \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#111411",
+      "ratio": 17.24,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 19,
+      "samples": [
+        "h2 \"Le bruit est un défaut de co\"",
+        "span.wi \"Expériences\"",
+        "span.wi \"Compétences\"",
+        "span.wi \"À\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#111411",
+      "ratio": 17.24,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "h3 \"Ingénieur méthode\"",
+        "h3 \"Assistant ingénieur\"",
+        "h3 \"Apprenti consultant\"",
+        "blockquote.pull \"Je ne fais pas que corriger \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 70,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "a.btn \"Ma méthode\"",
+        "a.btn \"CV PDF\"",
+        "text.diag-title \"Écouter\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 14,
+      "samples": [
+        "span.wi \"Observer,\"",
+        "span.wi \"puis\"",
+        "span.wi \"trancher\"",
+        "span.wi \"une\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\""
+      ]
+    }
+  ],
+  "/fr@1440": [
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 33,
+      "samples": [
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#111411",
+      "ratio": 3.07,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.foldall \"TOUT REPLIER\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "a.btn \"Ma méthode\"",
+        "a.btn \"CV PDF\"",
+        "button.foldall \"TOUT REPLIER\"",
+        "button.pchip \"INDUSTRIEL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#d9705f",
+      "bg": "#111411",
+      "ratio": 5.7,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"ENTRÉE · PROBLÈME IDENTIFIÉ\"",
+        "span.io-label \"ENTRÉE · PROBLÈME IDENTIFIÉ\"",
+        "span.io-label \"ENTRÉE · PROBLÈME IDENTIFIÉ\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#12160f",
+      "ratio": 5.84,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 21,
+      "samples": [
+        "span.pcard-no.mono \"01\"",
+        "span.k.mono \"OCCURRENCES DÉTECTÉES\"",
+        "span.pcard-track.mono \"DATA & IA\"",
+        "span.pcard-track.mono \"INDUSTRIEL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#111411",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 32,
+      "samples": [
+        "button.foldall \"TOUT REPLIER\"",
+        "span.fold-open \"MASQUER LE DÉTAIL\"",
+        "span.tag \"PYTHON\"",
+        "span.tag \"PYMUPDF\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-mask.pf-mask-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "note": "svg text",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "text.pf-t.pf-fault \"Aucune écriture\"",
+        "text.pf-s.pf-s-start \"SAFRAN ELECTRONICS & DEFENSE\"",
+        "text.pf-e.pf-fault \"la référence de dossier vois\"",
+        "text.pf-t.pf-fault \"404 Not Found\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 272,
+      "samples": [
+        "span.brand-role \"GÉNIE INDUSTRIEL\"",
+        "a \"MÉTHODE\"",
+        "a \"EXPÉRIENCES\"",
+        "a \"PROJETS\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#12160f",
+      "ratio": 8.3,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "span.status.status-done \"LIVRÉ\"",
+        "span.status.status-done \"LIVRÉ\"",
+        "span.status.status-done \"LIVRÉ\"",
+        "span.status.status-done \"LIVRÉ\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#111411",
+      "ratio": 8.44,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"SORTIE · LIVRÉ\"",
+        "span.io-label \"SORTIE · LIVRÉ\"",
+        "span.io-label \"SORTIE · LIVRÉ\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "span.status.status-done \"LIVRÉ\"",
+        "text.pf-t.pf-ok \"*_safran.pdf\"",
+        "span.status.status-done \"LIVRÉ\"",
+        "text.pf-t.pf-ok \"201 Created\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "rect.pf-box.pf-box-ok \"\"",
+        "rect.pf-box.pf-box-ok \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#12160f",
+      "ratio": 9.22,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.v \"18/18\"",
+        "span.v \"8\"",
+        "span.v \"11\"",
+        "span.v \"ROC\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 16,
+      "samples": [
+        "span.no \"04\"",
+        "span.fold-label \"MISSIONS\"",
+        "span.fold-label \"OUTILS\"",
+        "span.fold-label \"MISSIONS\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 1,
+      "samples": [
+        "a.mailto \"taha.ghadhab@enib.ucar.tn\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"Télécharger le CV en PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "a.skip \"Aller au contenu principal\"",
+        "a.btn.btn-primary \"Voir les réalisations\"",
+        "a.btn.btn-primary \"Télécharger le CV en PDF\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.btn.btn-primary \"Voir les réalisations\"",
+        "button.pchip \"TOUS\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 35,
+      "samples": [
+        "span.v \"3\"",
+        "span.v \"1\"",
+        "span.v \"5\"",
+        "span.no \"03\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "path.diag-return \"\"",
+        "path.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 5,
+      "samples": [
+        "span.v \"18/18\"",
+        "span.v \"8\"",
+        "span.v \"11\"",
+        "span.v \"ROC\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#12160f",
+      "ratio": 11.15,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "span.pcard-tag \"Détection et remplacement de\"",
+        "span.pcard-tag \"Prouver qu'un serrage a été \"",
+        "span.status.status-pilot \"PILOTE\"",
+        "span.pcard-tag \"L'espace de travail interne \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#111411",
+      "ratio": 11.33,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 56,
+      "samples": [
+        "p.mono \"LE PRINCIPE\"",
+        "p \"La chouette harfang vole en \"",
+        "p \"J'y reviens toujours parce q\"",
+        "p \"Le bord dentelé ne combat pa\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 102,
+      "samples": [
+        "span.lab \"VOL\"",
+        "a.nav-utility \"Vue classique\"",
+        "a.nav-utility \"CV PDF\"",
+        "a.nav-utility \"EN\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#231d0e",
+      "ratio": 15.5,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.pchip \"TOUS\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#12160f",
+      "ratio": 16.96,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.pcard-name \"Reprise de marque documentai\"",
+        "span.pcard-name \"ControlTorque : traçabilité \"",
+        "span.pcard-name \"PharmacoWork\"",
+        "span.pcard-name \"Machine Layout Optimization \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#111411",
+      "ratio": 17.24,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 23,
+      "samples": [
+        "h2 \"Le bruit est un défaut de co\"",
+        "span.wi \"Expériences\"",
+        "h3 \"Ingénieur méthode\"",
+        "h3 \"Assistant ingénieur\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "a.btn \"Ma méthode\"",
+        "a.btn \"CV PDF\"",
+        "text.diag-title \"Écouter\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 44,
+      "samples": [
+        "span.wi \"Observer,\"",
+        "span.wi \"puis\"",
+        "span.wi \"trancher\"",
+        "span.wi \"une\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\""
+      ]
+    }
+  ],
+  "/en@375": [
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.menu-btn \"MENU\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 33,
+      "samples": [
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#111411",
+      "ratio": 3.07,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.foldall \"COLLAPSE ALL\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "a.btn \"How I work\"",
+        "a.btn \"Resume PDF\"",
+        "button.foldall \"COLLAPSE ALL\"",
+        "button.pchip \"INDUSTRIAL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#d9705f",
+      "bg": "#111411",
+      "ratio": 5.7,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"INPUT · PROBLEM IDENTIFIED\"",
+        "span.io-label \"INPUT · PROBLEM IDENTIFIED\"",
+        "span.io-label \"INPUT · PROBLEM IDENTIFIED\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#12160f",
+      "ratio": 5.84,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 21,
+      "samples": [
+        "span.pcard-no.mono \"01\"",
+        "span.k.mono \"OCCURRENCES DETECTED\"",
+        "span.pcard-track.mono \"DATA & AI\"",
+        "span.pcard-track.mono \"INDUSTRIAL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#111411",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 32,
+      "samples": [
+        "button.foldall \"COLLAPSE ALL\"",
+        "span.fold-open \"HIDE DETAIL\"",
+        "span.tag \"PYTHON\"",
+        "span.tag \"PYMUPDF\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-mask.pf-mask-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "note": "svg text",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "text.pf-t.pf-fault \"Nothing written\"",
+        "text.pf-s.pf-s-start \"SAFRAN ELECTRONICS & DEFENSE\"",
+        "text.pf-e.pf-fault \"the neighbouring dossier ref\"",
+        "text.pf-t.pf-fault \"404 Not Found\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 267,
+      "samples": [
+        "span.brand-role \"INDUSTRIAL ENGINEERING\"",
+        "span.k \"industry internships\"",
+        "span.k \"startup co-founded\"",
+        "span.k \"projects built\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#12160f",
+      "ratio": 8.3,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "span.status.status-done \"DELIVERED\"",
+        "span.status.status-done \"DELIVERED\"",
+        "span.status.status-done \"DELIVERED\"",
+        "span.status.status-done \"DELIVERED\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#111411",
+      "ratio": 8.44,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"OUTPUT · DELIVERED\"",
+        "span.io-label \"OUTPUT · DELIVERED\"",
+        "span.io-label \"OUTPUT · DELIVERED\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "span.status.status-done \"DELIVERED\"",
+        "text.pf-t.pf-ok \"*_safran.pdf\"",
+        "span.status.status-done \"DELIVERED\"",
+        "text.pf-t.pf-ok \"201 Created\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "rect.pf-box.pf-box-ok \"\"",
+        "rect.pf-box.pf-box-ok \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#12160f",
+      "ratio": 9.22,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.v \"18/18\"",
+        "span.v \"8\"",
+        "span.v \"11\"",
+        "span.v \"ROC\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 17,
+      "samples": [
+        "span.no \"04\"",
+        "span.fold-label \"ASSIGNMENTS\"",
+        "span.fold-label \"TOOLS\"",
+        "span.fold-label \"ASSIGNMENTS\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"Download resume as PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "a.skip \"Skip to main content\"",
+        "a.btn.btn-primary \"See the work\"",
+        "a.btn.btn-primary \"Download resume as PDF\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.btn.btn-primary \"See the work\"",
+        "button.pchip \"ALL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "span.v \"3\"",
+        "span.v \"1\"",
+        "span.v \"5\"",
+        "span.no \"03\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "path.diag-return \"\"",
+        "path.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#12160f",
+      "ratio": 11.15,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "span.pcard-tag \"Brand detection and replacem\"",
+        "span.pcard-tag \"Proving a tightening was che\"",
+        "span.status.status-pilot \"PILOT\"",
+        "span.pcard-tag \"The pharmacy's internal work\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#111411",
+      "ratio": 11.33,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 56,
+      "samples": [
+        "p.mono \"THE PRINCIPLE\"",
+        "p \"A snowy owl flies in near si\"",
+        "p \"I keep coming back to this b\"",
+        "p \"The serrated edge does not f\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 99,
+      "samples": [
+        "a.lang-chip \"FR\"",
+        "p.lede \"I isolate the governing cons\"",
+        "span \"METHOD\"",
+        "p.head-intro \"Listen first. Move once. Fiv\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#231d0e",
+      "ratio": 15.5,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.pchip \"ALL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#12160f",
+      "ratio": 16.96,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.pcard-name \"Zodiac → Safran document reb\"",
+        "span.pcard-name \"ControlTorque: torque tool t\"",
+        "span.pcard-name \"PharmacoWork\"",
+        "span.pcard-name \"Machine Layout Optimization \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#111411",
+      "ratio": 17.24,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 17,
+      "samples": [
+        "h2 \"Noise is a design failure\"",
+        "span.wi \"Experience\"",
+        "span.wi \"Skills\"",
+        "span.wi \"About\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#111411",
+      "ratio": 17.24,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "h3 \"Methods engineer\"",
+        "h3 \"Assistant engineer\"",
+        "h3 \"Trainee consultant\"",
+        "blockquote.pull \"I don't just fix problems. I\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 70,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "a.btn \"How I work\"",
+        "a.btn \"Resume PDF\"",
+        "text.diag-title \"Listen\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 11,
+      "samples": [
+        "span.wi \"Watch\"",
+        "span.wi \"first.\"",
+        "span.wi \"Move\"",
+        "span.wi \"once.\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\""
+      ]
+    }
+  ],
+  "/en@1440": [
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 33,
+      "samples": [
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\"",
+        "rect.diag-node \"\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#111411",
+      "ratio": 3.07,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.foldall \"COLLAPSE ALL\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "a.btn \"How I work\"",
+        "a.btn \"Resume PDF\"",
+        "button.foldall \"COLLAPSE ALL\"",
+        "button.pchip \"INDUSTRIAL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#d9705f",
+      "bg": "#111411",
+      "ratio": 5.7,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"INPUT · PROBLEM IDENTIFIED\"",
+        "span.io-label \"INPUT · PROBLEM IDENTIFIED\"",
+        "span.io-label \"INPUT · PROBLEM IDENTIFIED\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#12160f",
+      "ratio": 5.84,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 21,
+      "samples": [
+        "span.pcard-no.mono \"01\"",
+        "span.k.mono \"OCCURRENCES DETECTED\"",
+        "span.pcard-track.mono \"DATA & AI\"",
+        "span.pcard-track.mono \"INDUSTRIAL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#111411",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 32,
+      "samples": [
+        "button.foldall \"COLLAPSE ALL\"",
+        "span.fold-open \"HIDE DETAIL\"",
+        "span.tag \"PYTHON\"",
+        "span.tag \"PYMUPDF\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-mask.pf-mask-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\"",
+        "rect.pf-box.pf-box-fault \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "note": "svg text",
+      "fg": "#d9705f",
+      "bg": "#0b0e0c",
+      "ratio": 5.94,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "text.pf-t.pf-fault \"Nothing written\"",
+        "text.pf-s.pf-s-start \"SAFRAN ELECTRONICS & DEFENSE\"",
+        "text.pf-e.pf-fault \"the neighbouring dossier ref\"",
+        "text.pf-t.pf-fault \"404 Not Found\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 272,
+      "samples": [
+        "span.brand-role \"INDUSTRIAL ENGINEERING\"",
+        "a \"METHOD\"",
+        "a \"EXPERIENCE\"",
+        "a \"PROJECTS\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\"",
+        "path.diag-wake \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#12160f",
+      "ratio": 8.3,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 4,
+      "samples": [
+        "span.status.status-done \"DELIVERED\"",
+        "span.status.status-done \"DELIVERED\"",
+        "span.status.status-done \"DELIVERED\"",
+        "span.status.status-done \"DELIVERED\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#111411",
+      "ratio": 8.44,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "span.io-label \"OUTPUT · DELIVERED\"",
+        "span.io-label \"OUTPUT · DELIVERED\"",
+        "span.io-label \"OUTPUT · DELIVERED\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 6,
+      "samples": [
+        "span.status.status-done \"DELIVERED\"",
+        "text.pf-t.pf-ok \"*_safran.pdf\"",
+        "span.status.status-done \"DELIVERED\"",
+        "text.pf-t.pf-ok \"201 Created\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#6fbf8f",
+      "bg": "#0b0e0c",
+      "ratio": 8.8,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "rect.pf-box.pf-box-ok \"\"",
+        "rect.pf-box.pf-box-ok \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#12160f",
+      "ratio": 9.22,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.v \"18/18\"",
+        "span.v \"8\"",
+        "span.v \"11\"",
+        "span.v \"ROC\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 16,
+      "samples": [
+        "span.no \"04\"",
+        "span.fold-label \"ASSIGNMENTS\"",
+        "span.fold-label \"TOOLS\"",
+        "span.fold-label \"ASSIGNMENTS\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 1,
+      "samples": [
+        "a.mailto \"taha.ghadhab@enib.ucar.tn\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#111411",
+      "ratio": 9.37,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"Download resume as PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 3,
+      "samples": [
+        "a.skip \"Skip to main content\"",
+        "a.btn.btn-primary \"See the work\"",
+        "a.btn.btn-primary \"Download resume as PDF\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.btn.btn-primary \"See the work\"",
+        "button.pchip \"ALL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 35,
+      "samples": [
+        "span.v \"3\"",
+        "span.v \"1\"",
+        "span.v \"5\"",
+        "span.no \"03\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 7,
+      "samples": [
+        "path.diag-return \"\"",
+        "path.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\"",
+        "rect.pf-box.pf-box-key \"\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 5,
+      "samples": [
+        "span.v \"18/18\"",
+        "span.v \"8\"",
+        "span.v \"11\"",
+        "span.v \"ROC\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#12160f",
+      "ratio": 11.15,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 9,
+      "samples": [
+        "span.pcard-tag \"Brand detection and replacem\"",
+        "span.pcard-tag \"Proving a tightening was che\"",
+        "span.status.status-pilot \"PILOT\"",
+        "span.pcard-tag \"The pharmacy's internal work\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#111411",
+      "ratio": 11.33,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 56,
+      "samples": [
+        "p.mono \"THE PRINCIPLE\"",
+        "p \"A snowy owl flies in near si\"",
+        "p \"I keep coming back to this b\"",
+        "p \"The serrated edge does not f\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 102,
+      "samples": [
+        "span.lab \"FLIGHT\"",
+        "a.nav-utility \"Plain view\"",
+        "a.nav-utility \"Resume PDF\"",
+        "a.nav-utility \"FR\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#231d0e",
+      "ratio": 15.5,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.pchip \"ALL\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#12160f",
+      "ratio": 16.96,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 8,
+      "samples": [
+        "span.pcard-name \"Zodiac → Safran document reb\"",
+        "span.pcard-name \"ControlTorque: torque tool t\"",
+        "span.pcard-name \"PharmacoWork\"",
+        "span.pcard-name \"Machine Layout Optimization \""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#111411",
+      "ratio": 17.24,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 21,
+      "samples": [
+        "h2 \"Noise is a design failure\"",
+        "span.wi \"Experience\"",
+        "h3 \"Methods engineer\"",
+        "h3 \"Assistant engineer\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "a.btn \"How I work\"",
+        "a.btn \"Resume PDF\"",
+        "text.diag-title \"Listen\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 41,
+      "samples": [
+        "span.wi \"Watch\"",
+        "span.wi \"first.\"",
+        "span.wi \"Move\"",
+        "span.wi \"once.\""
+      ]
+    },
+    {
+      "kind": "graphic",
+      "note": "figure stroke",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 40,
+      "samples": [
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\"",
+        "path.diag-line \"\""
+      ]
+    }
+  ],
+  "/fr/cv@375": [
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.menu-btn \"MENU\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.btn.no-print \"Imprimer / PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 43,
+      "samples": [
+        "span.brand-role \"GÉNIE INDUSTRIEL\"",
+        "a \"taha.ghadhab@enib.ucar.tn\"",
+        "a \"+216 54 347 150\"",
+        "a \"linkedin.com/in/taha-ghadhab\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.skip \"Aller au contenu principal\"",
+        "a.btn.btn-primary \"CV PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 13,
+      "samples": [
+        "p.role \"Élève ingénieur en génie ind\"",
+        "h2 \"Profil\"",
+        "h2 \"Formation\"",
+        "h2 \"Certifications\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"CV PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 45,
+      "samples": [
+        "a.lang-chip \"EN\"",
+        "p \"Rigueur analytique, appétenc\"",
+        "p \"Modélisation et pilotage des\"",
+        "p \"Optimisation des systèmes de\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 23,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "button.btn.no-print \"Imprimer / PDF\"",
+        "p \"Je ne fais pas que corriger \"",
+        "h3 \"Mastère en systèmes complexe\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 1,
+      "samples": [
+        "h1 \"Taha Ghadhab\""
+      ]
+    }
+  ],
+  "/fr/cv@1440": [
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.btn.no-print \"Imprimer / PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 43,
+      "samples": [
+        "span.brand-role \"GÉNIE INDUSTRIEL\"",
+        "a \"taha.ghadhab@enib.ucar.tn\"",
+        "a \"+216 54 347 150\"",
+        "a \"linkedin.com/in/taha-ghadhab\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.skip \"Aller au contenu principal\"",
+        "a.btn.btn-primary \"CV PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 13,
+      "samples": [
+        "p.role \"Élève ingénieur en génie ind\"",
+        "h2 \"Profil\"",
+        "h2 \"Formation\"",
+        "h2 \"Certifications\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"CV PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 47,
+      "samples": [
+        "a.nav-utility \"Vue complète\"",
+        "a.nav-utility \"CV PDF\"",
+        "a.nav-utility \"EN\"",
+        "p \"Rigueur analytique, appétenc\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 23,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "button.btn.no-print \"Imprimer / PDF\"",
+        "p \"Je ne fais pas que corriger \"",
+        "h3 \"Mastère en systèmes complexe\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 1,
+      "samples": [
+        "h1 \"Taha Ghadhab\""
+      ]
+    }
+  ],
+  "/en/cv@375": [
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#333b31",
+      "bg": "#0b0e0c",
+      "ratio": 1.67,
+      "need": 3,
+      "pass": false,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.menu-btn \"MENU\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.btn.no-print \"Print / PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 43,
+      "samples": [
+        "span.brand-role \"INDUSTRIAL ENGINEERING\"",
+        "a \"taha.ghadhab@enib.ucar.tn\"",
+        "a \"+216 54 347 150\"",
+        "a \"linkedin.com/in/taha-ghadhab\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.skip \"Skip to main content\"",
+        "a.btn.btn-primary \"Resume PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 13,
+      "samples": [
+        "p.role \"Industrial engineering stude\"",
+        "h2 \"Profile\"",
+        "h2 \"Education\"",
+        "h2 \"Certifications\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"Resume PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 45,
+      "samples": [
+        "a.lang-chip \"FR\"",
+        "p \"Analytical rigour, a taste f\"",
+        "p \"Modelling and control of com\"",
+        "p \"Production systems optimisat\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 23,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "button.btn.no-print \"Print / PDF\"",
+        "p \"I don't just fix problems. I\"",
+        "h3 \"Master's in Intelligent Comp\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 1,
+      "samples": [
+        "h1 \"Taha Ghadhab\""
+      ]
+    }
+  ],
+  "/en/cv@1440": [
+    {
+      "kind": "ui",
+      "note": "control border vs page",
+      "fg": "#5c6559",
+      "bg": "#0b0e0c",
+      "ratio": 3.2,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "button.btn.no-print \"Print / PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#8b948a",
+      "bg": "#0b0e0c",
+      "ratio": 6.19,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 43,
+      "samples": [
+        "span.brand-role \"INDUSTRIAL ENGINEERING\"",
+        "a \"taha.ghadhab@enib.ucar.tn\"",
+        "a \"+216 54 347 150\"",
+        "a \"linkedin.com/in/taha-ghadhab\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#0b0e0c",
+      "bg": "#fda51e",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 2,
+      "samples": [
+        "a.skip \"Skip to main content\"",
+        "a.btn.btn-primary \"Resume PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 13,
+      "samples": [
+        "p.role \"Industrial engineering stude\"",
+        "h2 \"Profile\"",
+        "h2 \"Education\"",
+        "h2 \"Certifications\""
+      ]
+    },
+    {
+      "kind": "ui",
+      "note": "control fill vs page",
+      "fg": "#fda51e",
+      "bg": "#0b0e0c",
+      "ratio": 9.77,
+      "need": 3,
+      "pass": true,
+      "large": false,
+      "count": 1,
+      "samples": [
+        "a.btn.btn-primary \"Resume PDF\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#c5ccc2",
+      "bg": "#0b0e0c",
+      "ratio": 11.82,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 47,
+      "samples": [
+        "a.nav-utility \"Full view\"",
+        "a.nav-utility \"Resume PDF\"",
+        "a.nav-utility \"FR\"",
+        "p \"Analytical rigour, a taste f\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 4.5,
+      "pass": true,
+      "large": false,
+      "count": 23,
+      "samples": [
+        "span.brand-name \"Taha Ghadhab\"",
+        "button.btn.no-print \"Print / PDF\"",
+        "p \"I don't just fix problems. I\"",
+        "h3 \"Master's in Intelligent Comp\""
+      ]
+    },
+    {
+      "kind": "text",
+      "fg": "#f5f7f1",
+      "bg": "#0b0e0c",
+      "ratio": 17.98,
+      "need": 3,
+      "pass": true,
+      "large": true,
+      "count": 1,
+      "samples": [
+        "h1 \"Taha Ghadhab\""
+      ]
+    }
+  ]
+}

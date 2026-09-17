@@ -6,7 +6,7 @@ import type { Content } from "./types";
  */
 export const en: Content = {
   meta: {
-    title: "Taha Ghadhab, industrial engineering",
+    title: "Taha Ghadhab, industrial engineering student",
     description: "Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC.",
     ogAlt: "Silent flight, Taha Ghadhab's portfolio"
   },
@@ -255,11 +255,12 @@ export const en: Content = {
       {
         id: "safran",
         short: "Safran",
-        company: "Safran",
-        fullName: "Safran",
-        role: "Methods engineer",
+        company: "Safran Electronics & Defense",
+        fullName: "Safran Electronics & Defense",
+        role: "Methods department intern",
         period: "1 June to 24 July 2026",
-        location: "Dhari",
+        start: "2026-06",
+        location: "Dhari, Tunisia",
         input: "The old entity is still printed across thousands of manufacturing documents, with manual rework out of the question. In parallel, torque tool compliance is tracked with no dedicated system.",
         output: "A local OCR-assisted rebranding tool, with human validation and an audit log, plus a platform tracking tightening-tool compliance.",
         missions: [
@@ -282,6 +283,7 @@ export const en: Content = {
         fullName: "Société de Maintenance et d'Installation Pétrolière",
         role: "Assistant engineer",
         period: "June to July 2025",
+        start: "2025-06",
         location: "Les Berges du Lac, Tunisia",
         input: "A heavy investment decision that needed to be argued on hard numbers: acquiring a coiled-tubing unit.",
         output: "A full techno-economic study supporting the acquisition decision.",
@@ -301,8 +303,9 @@ export const en: Content = {
         short: "AFC",
         company: "AFC",
         fullName: "Arab Financial Consultants",
-        role: "Trainee consultant",
+        role: "Consulting intern",
         period: "August to September 2025",
+        start: "2025-08",
         location: "Les Berges du Lac, Tunisia",
         input: "A purely technical reading of industrial projects, without the vocabulary or the criteria of the financial decision-maker.",
         output: "A financial lens on systems: translating an engineering gain into an investment argument.",
@@ -363,7 +366,7 @@ export const en: Content = {
         name: "Zodiac → Safran document rebranding",
         short: "Safran rebranding",
         tagline: "Brand detection and replacement across thousands of manufacturing documents",
-        period: "2025",
+        period: "2026",
         status: "Delivered",
         statusTone: "done",
         tracks: ["data", "industrial"],
@@ -440,9 +443,9 @@ export const en: Content = {
         capsule: {
           problem: "Thousands of manufacturing dossiers still carried Zodiac in their headers. And a PDF stores that one visible line in five different ways.",
           solution: "A desktop tool that finds them whatever the encoding, replaces them without damaging their surroundings, and writes nothing without human approval.",
-          role: "Sole developer: problem framing, architecture, algorithms, interface, tests.",
+          role: "Project owner: problem framing, architecture decisions, AI-assisted build, then validation through 210 unit tests.",
           stack: "Python 3.12 · PyMuPDF · Tesseract · PaddleOCR · OpenCV · PySide6 · SQLite",
-          result: "18/18 occurrences on the reference document · 210 unit tests · ≈ 19 300 LOC"
+          result: "18/18 occurrences on the reference document · 210 unit tests"
         },
         steps: [
           {
@@ -627,14 +630,14 @@ export const en: Content = {
         name: "ControlTorque: torque tool traceability",
         short: "ControlTorque",
         tagline: "Proving a tightening was checked, years after the fact",
-        period: "2025",
+        period: "2026",
         status: "Delivered",
         statusTone: "done",
         tracks: ["industrial", "data"],
         capsule: {
           problem: "The proof that a tightening had been checked lived in paper logs and spreadsheets: unsearchable, unauditable, and impossible to trust years later.",
           solution: "A web application where each check is an immutable record carrying its calculation, and where an out-of-bounds measurement opens a tracked file.",
-          role: "Sole developer: business rules, backend, frontend, data model.",
+          role: "Project owner: business rules and data model, AI-assisted build, then validation through 58 unit tests.",
           stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
           result: "8 business rules enforced server-side · 11 entities · 1 append-only event log"
         },
@@ -856,7 +859,7 @@ export const en: Content = {
         capsule: {
           problem: "Pharmacy software stops at the sale. Preparations, callbacks and quality checks run on sticky notes and WhatsApp, patient names included.",
           solution: "An internal workspace for the pharmacy: eleven modules, built mobile-first because the job is done standing at the counter.",
-          role: "Co-founder: product framing, architecture, development.",
+          role: "Co-founder: product framing, architecture decisions, AI-assisted build, testing and security audit.",
           stack: "NestJS 11 · Next.js 16 · React 19 · Prisma · PostgreSQL 18 · Railway",
           result: "11 modules in pilot · 41 models isolated per pharmacy · identities encrypted at rest"
         },
@@ -1161,7 +1164,11 @@ export const en: Content = {
         },
         {
           name: "English",
-          level: "Fluent"
+          level: "C1 · Amideast"
+        },
+        {
+          name: "German",
+          level: "B1 · Goethe-Institut"
         }
       ]
     }
@@ -1206,8 +1213,8 @@ export const en: Content = {
     intro: "Open to internship and apprenticeship opportunities in industrial engineering, data and Industry 4.0.",
     email: "taha.ghadhab@enib.ucar.tn",
     phone: "+216 54 347 150",
-    linkedin: "https://www.linkedin.com/in/taha-ghadhab",
-    linkedinLabel: "linkedin.com/in/taha-ghadhab",
+    linkedin: "https://www.linkedin.com/in/taha-ghadhab-5b5835242",
+    linkedinLabel: "linkedin.com/in/taha-ghadhab-5b5835242",
     location: "Tunisia",
     emailLabel: "Email",
     phoneLabel: "Phone",
@@ -1234,7 +1241,7 @@ export const en: Content = {
     }
   },
   footer: {
-    builtWith: "Designed and built by Taha Ghadhab",
+    builtWith: "Designed by Taha Ghadhab · built with AI, tested and audited",
     rights: "All rights reserved."
   }
 };

@@ -145,11 +145,6 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
             <p className="mono">
               {item.period} · {item.location}
             </p>
-            {!item.hasDeliverable ? (
-              <div className="tags">
-                <span className="tag">{experience.immersionLabel.toUpperCase()}</span>
-              </div>
-            ) : null}
           </div>
 
           <div>
@@ -164,7 +159,14 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
               <div className="io-row io-out">
                 <span className="io-dot" aria-hidden="true" />
                 <div>
-                  <span className="io-label">{experience.outputLabel.toUpperCase()}</span>
+                  {/* Un poste d'immersion n'a rien livré : sa sortie est un acquis,
+                      au même emplacement que le livrable des autres fiches. */}
+                  <span className="io-label">
+                    {(item.hasDeliverable
+                      ? experience.outputLabel
+                      : experience.immersionLabel
+                    ).toUpperCase()}
+                  </span>
                   <p>{item.output}</p>
                 </div>
               </div>

@@ -2,7 +2,16 @@ import { fr } from "./fr";
 import { en } from "./en";
 import { LOCALES, DEFAULT_LOCALE, TRACKS, type Locale, type Content } from "./types";
 
-const dictionaries: Record<Locale, Content> = { fr, en };
+/** Les postes du plus récent au plus ancien, quel que soit l'ordre de saisie. */
+function withSortedExperience(content: Content): Content {
+  const items = [...content.experience.items].sort((a, b) => b.start.localeCompare(a.start));
+  return { ...content, experience: { ...content.experience, items } };
+}
+
+const dictionaries: Record<Locale, Content> = {
+  fr: withSortedExperience(fr),
+  en: withSortedExperience(en),
+};
 
 /** Narrows an arbitrary route segment to a supported locale. */
 export function isLocale(value: string): value is Locale {

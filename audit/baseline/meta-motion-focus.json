@@ -1,0 +1,298 @@
+{
+  "no-preference": {
+    "pupilTransformTopLeft": "translate(-7.13,-8.28)",
+    "pupilTransformBottomRight": "translate(7.80,8.33)",
+    "tracks": true
+  },
+  "reduce": {
+    "pupilTransformTopLeft": "",
+    "pupilTransformBottomRight": "",
+    "tracks": false
+  },
+  "meta /fr": {
+    "title": "Taha Ghadhab, ingénieur génie industriel",
+    "og": [
+      "og:title=Taha Ghadhab, ingénieur génie industriel",
+      "og:description=Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
+      "og:locale=fr_FR",
+      "og:type=profile",
+      "twitter:card=summary",
+      "twitter:title=Taha Ghadhab, ingénieur génie industriel",
+      "twitter:description=Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC."
+    ],
+    "alternates": [
+      "fr→http://localhost:3100/fr",
+      "en→http://localhost:3100/en"
+    ],
+    "canonical": "http://localhost:3100/fr",
+    "preloads": 10,
+    "fontFaces": 16,
+    "focusableWithoutVisibleFocusStyle": null,
+    "disclosureButtonsMissingAriaExpanded": []
+  },
+  "meta /en": {
+    "title": "Taha Ghadhab, industrial engineering",
+    "og": [
+      "og:title=Taha Ghadhab, industrial engineering",
+      "og:description=Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC.",
+      "og:locale=en_US",
+      "og:type=profile",
+      "twitter:card=summary",
+      "twitter:title=Taha Ghadhab, industrial engineering",
+      "twitter:description=Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC."
+    ],
+    "alternates": [
+      "fr→http://localhost:3100/fr",
+      "en→http://localhost:3100/en"
+    ],
+    "canonical": "http://localhost:3100/en",
+    "preloads": 10,
+    "fontFaces": 14,
+    "focusableWithoutVisibleFocusStyle": null,
+    "disclosureButtonsMissingAriaExpanded": []
+  },
+  "meta /fr/cv": {
+    "title": "CV de Taha Ghadhab",
+    "og": [
+      "og:title=Taha Ghadhab, ingénieur génie industriel",
+      "og:description=Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
+      "og:locale=fr_FR",
+      "og:type=profile",
+      "twitter:card=summary",
+      "twitter:title=Taha Ghadhab, ingénieur génie industriel",
+      "twitter:description=Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC."
+    ],
+    "alternates": [
+      "fr→http://localhost:3100/fr/cv",
+      "en→http://localhost:3100/en/cv"
+    ],
+    "canonical": "http://localhost:3100/fr/cv",
+    "preloads": 10,
+    "fontFaces": 13,
+    "focusableWithoutVisibleFocusStyle": null,
+    "disclosureButtonsMissingAriaExpanded": []
+  },
+  "meta /en/cv": {
+    "title": "Taha Ghadhab's resume",
+    "og": [
+      "og:title=Taha Ghadhab, industrial engineering",
+      "og:description=Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC.",
+      "og:locale=en_US",
+      "og:type=profile",
+      "twitter:card=summary",
+      "twitter:title=Taha Ghadhab, industrial engineering",
+      "twitter:description=Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC."
+    ],
+    "alternates": [
+      "fr→http://localhost:3100/fr/cv",
+      "en→http://localhost:3100/en/cv"
+    ],
+    "canonical": "http://localhost:3100/en/cv",
+    "preloads": 10,
+    "fontFaces": 13,
+    "focusableWithoutVisibleFocusStyle": null,
+    "disclosureButtonsMissingAriaExpanded": []
+  },
+  "focus": [
+    {
+      "el": "a \"Aller au contenu principa\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"VOL\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"PRINCIPE\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"MÉTHODE\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"EXPÉRIENCES\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"PROJETS\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"COMPÉTENCES\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"PARCOURS\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"À PROPOS\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"ENGAGEMENT\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"CONTACT\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"Taha GhadhabGÉNIE INDUSTR\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"MÉTHODE\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"EXPÉRIENCES\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"PROJETS\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"COMPÉTENCES\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"CONTACT\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"Vue classique\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"CV PDF\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"EN\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"Ma méthode\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"Voir les réalisations\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"CV PDF\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "button \"TOUT DÉPLIER\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "summary \"VOIR LE DÉTAILMASQUER LE \"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "summary \"VOIR LE DÉTAILMASQUER LE \"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "summary \"VOIR LE DÉTAILMASQUER LE \"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "button \"TOUT DÉPLIER\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "button \"TOUS\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "button \"INDUSTRIEL\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "button \"DATA & IA\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "button \"BUSINESS\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"01LIVRÉReprise de marque \"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"02LIVRÉControlTorque : tr\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"03PILOTEPharmacoWorkL'esp\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"04LIVRÉMachine Layout Opt\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"05LIVRÉDashboard de Perfo\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "summary \"VOIR LE DÉTAILMASQUER LE \"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "summary \"VOIR LE DÉTAILMASQUER LE \"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    },
+    {
+      "el": "a \"VOIR LE SITE ↗\"",
+      "outline": "2px rgb(253, 165, 30) off 4px",
+      "shadow": ""
+    }
+  ]
+}

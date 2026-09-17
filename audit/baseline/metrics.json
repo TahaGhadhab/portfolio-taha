@@ -1,0 +1,3195 @@
+{
+  "pages": {
+    "/fr@320": {
+      "screenshot": "audit/baseline/fr-320.png",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "horizontalScroll": false,
+      "pageHeight": 22464,
+      "overflowing": [
+        "g.horizon [-172→492]",
+        "path. [-172→492]",
+        "g. [-144→144]",
+        "g.wing-layer [-35→143]",
+        "g.feather [-6→133]",
+        "path.blade [-6→133]",
+        "path.quill [-6→133]",
+        "g.feather [-16→134]",
+        "path.blade [-16→134]",
+        "path.quill [-16→133]",
+        "g.feather [-24→134]",
+        "path.blade [-24→134]",
+        "path.quill [-24→133]",
+        "g.feather [-30→135]",
+        "path.blade [-30→135]",
+        "path.quill [-29→133]",
+        "g.feather [-34→135]",
+        "path.blade [-34→135]",
+        "path.quill [-33→134]",
+        "g.feather [-35→136]",
+        "path.blade [-35→136]",
+        "path.quill [-34→134]",
+        "g.feather [-33→137]",
+        "path.blade [-33→137]",
+        "path.quill [-32→135]"
+      ],
+      "overflowCount": 351,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (3 lines)",
+        "a \"01Vol\" (5 lines)",
+        "a \"02Principe\" (5 lines)",
+        "a \"03Méthode\" (5 lines)",
+        "a \"04Expériences\" (5 lines)",
+        "a \"05Projets\" (5 lines)",
+        "a \"06Compétences\" (5 lines)",
+        "a \"07Parcours\" (5 lines)",
+        "a \"08À propos\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"TOUT DÉPLIER\" (2 lines)",
+        "button \"TOUS\" (2 lines)",
+        "button \"INDUSTRIEL\" (2 lines)",
+        "button \"DATA & IA\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ]
+    },
+    "/fr@375": {
+      "screenshot": "audit/baseline/fr-375.png",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalScroll": false,
+      "pageHeight": 21537,
+      "overflowing": [
+        "g.horizon [-201→576]",
+        "path. [-201→576]",
+        "g. [-168→169]",
+        "g.wing-layer [-41→168]",
+        "g.feather [-7→156]",
+        "path.blade [-7→156]",
+        "path.quill [-7→156]",
+        "g.feather [-19→157]",
+        "path.blade [-19→157]",
+        "path.quill [-19→156]",
+        "g.feather [-28→157]",
+        "path.blade [-28→157]",
+        "path.quill [-28→156]",
+        "g.feather [-35→158]",
+        "path.blade [-35→158]",
+        "path.quill [-34→156]",
+        "g.feather [-39→159]",
+        "path.blade [-39→159]",
+        "path.quill [-38→157]",
+        "g.feather [-41→160]",
+        "path.blade [-41→160]",
+        "path.quill [-39→157]",
+        "g.feather [-39→161]",
+        "path.blade [-39→161]",
+        "path.quill [-37→158]"
+      ],
+      "overflowCount": 279,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)",
+        "a \"01Vol\" (5 lines)",
+        "a \"02Principe\" (5 lines)",
+        "a \"03Méthode\" (5 lines)",
+        "a \"04Expériences\" (5 lines)",
+        "a \"05Projets\" (5 lines)",
+        "a \"06Compétences\" (5 lines)",
+        "a \"07Parcours\" (5 lines)",
+        "a \"08À propos\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"TOUT DÉPLIER\" (2 lines)",
+        "button \"TOUS\" (2 lines)",
+        "button \"INDUSTRIEL\" (2 lines)",
+        "button \"DATA & IA\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ],
+      "type": {
+        "families": {
+          "Archivo": 96,
+          "Martian Mono": 478,
+          "Instrument Serif": 42,
+          "Literata": 135
+        },
+        "sizes": {
+          "13.5px": 71,
+          "11px": 356,
+          "16.1px": 72,
+          "21.2px": 32,
+          "49.2px": 6,
+          "18.1px": 22,
+          "35.7px": 27,
+          "14px": 20,
+          "19px": 5,
+          "12.4px": 28,
+          "18.7px": 8,
+          "19.5px": 5,
+          "22.4px": 5,
+          "13px": 36,
+          "11.5px": 47,
+          "10.5px": 11
+        },
+        "bodyMeasureCharsPerLine": [
+          40,
+          44,
+          40,
+          42,
+          40,
+          39,
+          39,
+          37,
+          40,
+          42,
+          42,
+          42,
+          45,
+          44,
+          37,
+          39,
+          41,
+          36,
+          41,
+          42,
+          44,
+          39
+        ],
+        "uppercasedIdentifiers": [],
+        "headingOrder": [
+          "H1:49.2072px:normal",
+          "H2:35.728px:normal",
+          "H2:35.728px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:35.728px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H2:35.728px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H2:35.728px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H2:35.728px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.6992px:normal",
+          "H3:18.6992px:normal",
+          "H3:18.6992px:normal",
+          "H2:35.728px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H2:35.728px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:35.728px:normal"
+        ]
+      }
+    },
+    "/fr@414": {
+      "screenshot": "audit/baseline/fr-414.png",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "horizontalScroll": false,
+      "pageHeight": 21225,
+      "overflowing": [
+        "g.horizon [-222→636]",
+        "path. [-222→636]",
+        "g. [-186→186]",
+        "g.wing-layer [-45→185]",
+        "g.feather [-8→172]",
+        "path.blade [-8→172]",
+        "path.quill [-8→172]",
+        "g.feather [-21→173]",
+        "path.blade [-21→173]",
+        "path.quill [-20→172]",
+        "g.feather [-31→174]",
+        "path.blade [-31→174]",
+        "path.quill [-31→172]",
+        "g.feather [-39→174]",
+        "path.blade [-39→174]",
+        "path.quill [-38→173]",
+        "g.feather [-43→175]",
+        "path.blade [-43→175]",
+        "path.quill [-42→173]",
+        "g.feather [-45→176]",
+        "path.blade [-45→176]",
+        "path.quill [-43→174]",
+        "g.feather [-43→177]",
+        "path.blade [-43→177]",
+        "path.quill [-41→174]"
+      ],
+      "overflowCount": 278,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)",
+        "button \"MENU\" (3 lines)",
+        "a \"01Vol\" (5 lines)",
+        "a \"02Principe\" (5 lines)",
+        "a \"03Méthode\" (5 lines)",
+        "a \"04Expériences\" (5 lines)",
+        "a \"05Projets\" (5 lines)",
+        "a \"06Compétences\" (5 lines)",
+        "a \"07Parcours\" (5 lines)",
+        "a \"08À propos\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"TOUT DÉPLIER\" (2 lines)",
+        "button \"TOUS\" (2 lines)",
+        "button \"INDUSTRIEL\" (2 lines)",
+        "button \"DATA & IA\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ]
+    },
+    "/fr@768": {
+      "screenshot": "audit/baseline/fr-768.png",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "horizontalScroll": false,
+      "pageHeight": 18809,
+      "overflowing": [
+        "span.tag [488→774]",
+        "span.tag [488→809]"
+      ],
+      "overflowCount": 3,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)",
+        "button \"MENU\" (3 lines)",
+        "a \"01Vol\" (5 lines)",
+        "a \"02Principe\" (5 lines)",
+        "a \"03Méthode\" (5 lines)",
+        "a \"04Expériences\" (5 lines)",
+        "a \"05Projets\" (5 lines)",
+        "a \"06Compétences\" (5 lines)",
+        "a \"07Parcours\" (5 lines)",
+        "a \"08À propos\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"TOUT DÉPLIER\" (2 lines)",
+        "button \"TOUS\" (2 lines)",
+        "button \"INDUSTRIEL\" (2 lines)",
+        "button \"DATA & IA\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ]
+    },
+    "/fr@1440": {
+      "screenshot": "audit/baseline/fr-1440.png",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalScroll": false,
+      "pageHeight": 16819,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"VOL\" (3 lines)",
+        "a \"PRINCIPE\" (3 lines)",
+        "a \"MÉTHODE\" (3 lines)",
+        "a \"EXPÉRIENCES\" (3 lines)",
+        "a \"PROJETS\" (3 lines)",
+        "a \"COMPÉTENCES\" (3 lines)",
+        "a \"PARCOURS\" (3 lines)",
+        "a \"À PROPOS\" (3 lines)",
+        "a \"ENGAGEMENT\" (3 lines)",
+        "a \"CONTACT\" (3 lines)",
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)",
+        "button \"TOUT DÉPLIER\" (2 lines)",
+        "button \"TOUS\" (2 lines)",
+        "button \"INDUSTRIEL\" (2 lines)",
+        "button \"DATA & IA\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ],
+      "type": {
+        "families": {
+          "Archivo": 96,
+          "Martian Mono": 478,
+          "Instrument Serif": 42,
+          "Literata": 135
+        },
+        "sizes": {
+          "14.5px": 71,
+          "11.8px": 342,
+          "17.5px": 68,
+          "25px": 22,
+          "103.6px": 6,
+          "20px": 7,
+          "23px": 8,
+          "55.5px": 27,
+          "12px": 56,
+          "19px": 5,
+          "13.3px": 31,
+          "31.6px": 22,
+          "23.2px": 8,
+          "29px": 6,
+          "10.5px": 47,
+          "10px": 14,
+          "9.5px": 11
+        },
+        "bodyMeasureCharsPerLine": [
+          64,
+          44,
+          55,
+          67,
+          56,
+          56,
+          56,
+          60,
+          64,
+          64,
+          64,
+          57,
+          67,
+          65,
+          60,
+          55,
+          69,
+          72,
+          36,
+          38,
+          38,
+          62
+        ],
+        "uppercasedIdentifiers": [],
+        "headingOrder": [
+          "H1:103.565px:normal",
+          "H2:55.4944px:normal",
+          "H2:55.4944px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H2:55.4944px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H2:55.4944px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H2:55.4944px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H2:55.4944px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:23.2px:normal",
+          "H3:23.2px:normal",
+          "H3:23.2px:normal",
+          "H2:55.4944px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H2:55.4944px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H2:55.4944px:normal"
+        ]
+      }
+    },
+    "/en@320": {
+      "screenshot": "audit/baseline/en-320.png",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "horizontalScroll": false,
+      "pageHeight": 21554,
+      "overflowing": [
+        "g.horizon [-172→492]",
+        "path. [-172→492]",
+        "g. [-144→144]",
+        "g.wing-layer [-35→143]",
+        "g.feather [-6→133]",
+        "path.blade [-6→133]",
+        "path.quill [-6→133]",
+        "g.feather [-16→134]",
+        "path.blade [-16→134]",
+        "path.quill [-16→133]",
+        "g.feather [-24→134]",
+        "path.blade [-24→134]",
+        "path.quill [-24→133]",
+        "g.feather [-30→135]",
+        "path.blade [-30→135]",
+        "path.quill [-29→133]",
+        "g.feather [-34→135]",
+        "path.blade [-34→135]",
+        "path.quill [-33→134]",
+        "g.feather [-35→136]",
+        "path.blade [-35→136]",
+        "path.quill [-34→134]",
+        "g.feather [-33→137]",
+        "path.blade [-33→137]",
+        "path.quill [-32→135]"
+      ],
+      "overflowCount": 349,
+      "wrappedControls": [
+        "a \"Taha GhadhabINDUSTRIAL ENGINEERING\" (3 lines)",
+        "a \"01Flight\" (5 lines)",
+        "a \"02Principle\" (5 lines)",
+        "a \"03Method\" (5 lines)",
+        "a \"04Experience\" (5 lines)",
+        "a \"05Projects\" (5 lines)",
+        "a \"06Skills\" (5 lines)",
+        "a \"07Education\" (5 lines)",
+        "a \"08About\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"EXPAND ALL\" (2 lines)",
+        "button \"ALL\" (2 lines)",
+        "button \"INDUSTRIAL\" (2 lines)",
+        "button \"DATA & AI\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ]
+    },
+    "/en@375": {
+      "screenshot": "audit/baseline/en-375.png",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalScroll": false,
+      "pageHeight": 20891,
+      "overflowing": [
+        "g.horizon [-201→576]",
+        "path. [-201→576]",
+        "g. [-168→169]",
+        "g.wing-layer [-41→168]",
+        "g.feather [-7→156]",
+        "path.blade [-7→156]",
+        "path.quill [-7→156]",
+        "g.feather [-19→157]",
+        "path.blade [-19→157]",
+        "path.quill [-19→156]",
+        "g.feather [-28→157]",
+        "path.blade [-28→157]",
+        "path.quill [-28→156]",
+        "g.feather [-35→158]",
+        "path.blade [-35→158]",
+        "path.quill [-34→156]",
+        "g.feather [-39→159]",
+        "path.blade [-39→159]",
+        "path.quill [-38→157]",
+        "g.feather [-41→160]",
+        "path.blade [-41→160]",
+        "path.quill [-39→157]",
+        "g.feather [-39→161]",
+        "path.blade [-39→161]",
+        "path.quill [-37→158]"
+      ],
+      "overflowCount": 279,
+      "wrappedControls": [
+        "a \"Taha GhadhabINDUSTRIAL ENGINEERING\" (4 lines)",
+        "a \"01Flight\" (5 lines)",
+        "a \"02Principle\" (5 lines)",
+        "a \"03Method\" (5 lines)",
+        "a \"04Experience\" (5 lines)",
+        "a \"05Projects\" (5 lines)",
+        "a \"06Skills\" (5 lines)",
+        "a \"07Education\" (5 lines)",
+        "a \"08About\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"EXPAND ALL\" (2 lines)",
+        "button \"ALL\" (2 lines)",
+        "button \"INDUSTRIAL\" (2 lines)",
+        "button \"DATA & AI\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ],
+      "type": {
+        "families": {
+          "Archivo": 96,
+          "Martian Mono": 478,
+          "Instrument Serif": 37,
+          "Literata": 135
+        },
+        "sizes": {
+          "13.5px": 71,
+          "11px": 356,
+          "16.1px": 72,
+          "21.2px": 32,
+          "49.2px": 4,
+          "18.1px": 22,
+          "35.7px": 24,
+          "14px": 20,
+          "19px": 5,
+          "12.4px": 28,
+          "18.7px": 8,
+          "19.5px": 5,
+          "22.4px": 5,
+          "13px": 36,
+          "11.5px": 47,
+          "10.5px": 11
+        },
+        "bodyMeasureCharsPerLine": [
+          38,
+          37,
+          36,
+          37,
+          42,
+          38,
+          39,
+          38,
+          40,
+          40,
+          42,
+          39,
+          41,
+          40,
+          40,
+          41,
+          42,
+          41,
+          41,
+          40
+        ],
+        "uppercasedIdentifiers": [],
+        "headingOrder": [
+          "H1:49.2072px:normal",
+          "H2:35.728px:normal",
+          "H2:35.728px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:35.728px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H2:35.728px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H3:21.19px:normal",
+          "H2:35.728px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H2:35.728px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.6992px:normal",
+          "H3:18.6992px:normal",
+          "H3:18.6992px:normal",
+          "H2:35.728px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H3:11.04px:normal",
+          "H2:35.728px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:35.728px:normal"
+        ]
+      }
+    },
+    "/en@414": {
+      "screenshot": "audit/baseline/en-414.png",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "horizontalScroll": false,
+      "pageHeight": 20556,
+      "overflowing": [
+        "g.horizon [-222→636]",
+        "path. [-222→636]",
+        "g. [-186→186]",
+        "g.wing-layer [-45→185]",
+        "g.feather [-8→172]",
+        "path.blade [-8→172]",
+        "path.quill [-8→172]",
+        "g.feather [-21→173]",
+        "path.blade [-21→173]",
+        "path.quill [-20→172]",
+        "g.feather [-31→174]",
+        "path.blade [-31→174]",
+        "path.quill [-31→172]",
+        "g.feather [-39→174]",
+        "path.blade [-39→174]",
+        "path.quill [-38→173]",
+        "g.feather [-43→175]",
+        "path.blade [-43→175]",
+        "path.quill [-42→173]",
+        "g.feather [-45→176]",
+        "path.blade [-45→176]",
+        "path.quill [-43→174]",
+        "g.feather [-43→177]",
+        "path.blade [-43→177]",
+        "path.quill [-41→174]"
+      ],
+      "overflowCount": 278,
+      "wrappedControls": [
+        "a \"Taha GhadhabINDUSTRIAL ENGINEERING\" (4 lines)",
+        "button \"MENU\" (3 lines)",
+        "a \"01Flight\" (5 lines)",
+        "a \"02Principle\" (5 lines)",
+        "a \"03Method\" (5 lines)",
+        "a \"04Experience\" (5 lines)",
+        "a \"05Projects\" (5 lines)",
+        "a \"06Skills\" (5 lines)",
+        "a \"07Education\" (5 lines)",
+        "a \"08About\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"EXPAND ALL\" (2 lines)",
+        "button \"ALL\" (2 lines)",
+        "button \"INDUSTRIAL\" (2 lines)",
+        "button \"DATA & AI\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ]
+    },
+    "/en@768": {
+      "screenshot": "audit/baseline/en-768.png",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "horizontalScroll": false,
+      "pageHeight": 18214,
+      "overflowing": [
+        "span.tag [488→809]"
+      ],
+      "overflowCount": 1,
+      "wrappedControls": [
+        "a \"Taha GhadhabINDUSTRIAL ENGINEERING\" (4 lines)",
+        "button \"MENU\" (3 lines)",
+        "a \"01Flight\" (5 lines)",
+        "a \"02Principle\" (5 lines)",
+        "a \"03Method\" (5 lines)",
+        "a \"04Experience\" (5 lines)",
+        "a \"05Projects\" (5 lines)",
+        "a \"06Skills\" (5 lines)",
+        "a \"07Education\" (5 lines)",
+        "a \"08About\" (5 lines)",
+        "a \"09Engagement\" (5 lines)",
+        "a \"10Contact\" (5 lines)",
+        "button \"EXPAND ALL\" (2 lines)",
+        "button \"ALL\" (2 lines)",
+        "button \"INDUSTRIAL\" (2 lines)",
+        "button \"DATA & AI\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ]
+    },
+    "/en@1440": {
+      "screenshot": "audit/baseline/en-1440.png",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalScroll": false,
+      "pageHeight": 16438,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"FLIGHT\" (3 lines)",
+        "a \"PRINCIPLE\" (3 lines)",
+        "a \"METHOD\" (3 lines)",
+        "a \"EXPERIENCE\" (3 lines)",
+        "a \"PROJECTS\" (3 lines)",
+        "a \"SKILLS\" (3 lines)",
+        "a \"EDUCATION\" (3 lines)",
+        "a \"ABOUT\" (3 lines)",
+        "a \"ENGAGEMENT\" (3 lines)",
+        "a \"CONTACT\" (3 lines)",
+        "a \"Taha GhadhabINDUSTRIAL ENGINEERING\" (4 lines)",
+        "button \"EXPAND ALL\" (2 lines)",
+        "button \"ALL\" (2 lines)",
+        "button \"INDUSTRIAL\" (2 lines)",
+        "button \"DATA & AI\" (2 lines)",
+        "button \"BUSINESS\" (2 lines)"
+      ],
+      "type": {
+        "families": {
+          "Archivo": 96,
+          "Martian Mono": 478,
+          "Instrument Serif": 37,
+          "Literata": 135
+        },
+        "sizes": {
+          "14.5px": 71,
+          "11.8px": 342,
+          "17.5px": 68,
+          "25px": 22,
+          "103.6px": 4,
+          "20px": 7,
+          "23px": 8,
+          "55.5px": 24,
+          "12px": 56,
+          "19px": 5,
+          "13.3px": 31,
+          "31.6px": 22,
+          "23.2px": 8,
+          "29px": 6,
+          "10.5px": 47,
+          "10px": 14,
+          "9.5px": 11
+        },
+        "bodyMeasureCharsPerLine": [
+          67,
+          45,
+          50,
+          59,
+          55,
+          58,
+          58,
+          54,
+          63,
+          54,
+          56,
+          61,
+          49,
+          60,
+          55,
+          62,
+          36,
+          36,
+          41,
+          56
+        ],
+        "uppercasedIdentifiers": [],
+        "headingOrder": [
+          "H1:103.565px:normal",
+          "H2:55.4944px:normal",
+          "H2:55.4944px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H2:55.4944px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H2:55.4944px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H3:31.552px:normal",
+          "H2:55.4944px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H2:55.4944px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H3:23.2px:normal",
+          "H3:23.2px:normal",
+          "H3:23.2px:normal",
+          "H2:55.4944px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H3:11.8054px:normal",
+          "H2:55.4944px:normal",
+          "H3:25px:normal",
+          "H3:25px:normal",
+          "H2:55.4944px:normal"
+        ]
+      }
+    },
+    "/fr/cv@320": {
+      "screenshot": "audit/baseline/fr_cv-320.png",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "horizontalScroll": false,
+      "pageHeight": 7642,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (3 lines)"
+      ]
+    },
+    "/fr/cv@375": {
+      "screenshot": "audit/baseline/fr_cv-375.png",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalScroll": false,
+      "pageHeight": 7014,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)"
+      ],
+      "type": {
+        "families": {
+          "Archivo": 24,
+          "Martian Mono": 62,
+          "Instrument Serif": 1,
+          "Literata": 49
+        },
+        "sizes": {
+          "13.5px": 48,
+          "16.1px": 4,
+          "11px": 62,
+          "24.3px": 1,
+          "18.1px": 21
+        },
+        "bodyMeasureCharsPerLine": [
+          48,
+          48,
+          44
+        ],
+        "uppercasedIdentifiers": [],
+        "headingOrder": [
+          "H1:24.31px:normal",
+          "H2:11.04px:normal",
+          "H2:11.04px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:11.04px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:11.04px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:11.04px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:11.04px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:11.04px:normal",
+          "H3:18.105px:normal",
+          "H3:18.105px:normal",
+          "H2:11.04px:normal",
+          "H2:11.04px:normal"
+        ]
+      }
+    },
+    "/fr/cv@414": {
+      "screenshot": "audit/baseline/fr_cv-414.png",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "horizontalScroll": false,
+      "pageHeight": 6800,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)",
+        "button \"MENU\" (3 lines)"
+      ]
+    },
+    "/fr/cv@768": {
+      "screenshot": "audit/baseline/fr_cv-768.png",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "horizontalScroll": false,
+      "pageHeight": 5340,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)",
+        "button \"MENU\" (3 lines)"
+      ]
+    },
+    "/fr/cv@1440": {
+      "screenshot": "audit/baseline/fr_cv-1440.png",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontalScroll": false,
+      "pageHeight": 5495,
+      "overflowing": [],
+      "overflowCount": 0,
+      "wrappedControls": [
+        "a \"Taha GhadhabGÉNIE INDUSTRIEL\" (4 lines)"
+      ],
+      "type": {
+        "families": {
+          "Archivo": 24,
+          "Martian Mono": 62,
+          "Instrument Serif": 1,
+          "Literata": 49
+        },
+        "sizes": {
+          "14.5px": 48,
+          "17.5px": 4,
+          "11.8px": 62,
+          "55.5px": 1,
+          "20px": 21
+        },
+        "bodyMeasureCharsPerLine": [
+          96,
+          85,
+          89
+        ],
+        "uppercasedIdentifiers": [],
+        "headingOrder": [
+          "H1:55.4944px:normal",
+          "H2:11.8054px:normal",
+          "H2:11.8054px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H2:11.8054px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H2:11.8054px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H2:11.8054px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H2:11.8054px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H2:11.8054px:normal",
+          "H3:20px:normal",
+          "H3:20px:normal",
+          "H2:11.8054px:normal",
+          "H2:11.8054px:normal"
+        ]
+      }
+    }
+  },
+  "contrast": {
+    "/fr@375": [
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn.btn-primary \"Voir les réalisations\"",
+          "a.btn.btn-primary \"Télécharger le CV en PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 456,
+        "samples": [
+          "div.step-no \"01\"",
+          "h3 \"Écouter\"",
+          "p \"Parler aux gens qui vivent le \""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 111,
+        "samples": [
+          "span.no \"04\"",
+          "span \"EXPÉRIENCES\"",
+          "button.foldall \"TOUT DÉPLIER\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#111411",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 2,
+        "samples": [
+          "button.foldall \"TOUT DÉPLIER\"",
+          "article.sheet.commit \"01Ingénieur méthodeSafran1er j\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 18,
+        "samples": [
+          "span.wi \"Expériences\"",
+          "span.wi \"Compétences\"",
+          "span.wi \"À\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 48,
+        "samples": [
+          "button.foldall \"TOUT DÉPLIER\"",
+          "button.pchip \"INDUSTRIEL\"",
+          "button.pchip \"DATA & IA\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 5,
+        "samples": [
+          "span.wi \"Projets\"",
+          "span.wi \"Parcours\"",
+          "span.wi \"académique\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#231d0e",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"TOUS\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#231d0e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"TOUS\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#12160f",
+        "fgToken": "rgb(32, 38, 31)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 5,
+        "samples": [
+          "a.pcard \"01LIVRÉReprise de marque docum\"",
+          "a.pcard \"02LIVRÉControlTorque : traçabi\"",
+          "a.pcard \"03PILOTEPharmacoWorkL'espace d\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#12160f",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 50,
+        "samples": [
+          "span.pcard-no.mono \"01\"",
+          "span.status.status-done \"LIVRÉ\"",
+          "span.pcard-name \"Reprise de marque documentaire\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"Télécharger le CV en PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#333b31",
+        "fgToken": "rgb(51, 59, 49)",
+        "bg": "#0b0e0c",
+        "ratio": 1.67,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 6,
+        "samples": [
+          "button.menu-btn \"MENU\"",
+          "rect.diag-node \"\"",
+          "rect.diag-node \"\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#5c6559",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 3.2,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn \"Ma méthode\"",
+          "a.btn \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 18,
+        "samples": [
+          "span.brand-role \"GÉNIE INDUSTRIEL\"",
+          "span.k \"stages en entreprise\"",
+          "span.k \"startup co-fondée\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.skip \"Aller au contenu principal\"",
+          "a.btn.btn-primary \"Voir les réalisations\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 5,
+        "samples": [
+          "span.v \"3\"",
+          "span.v \"1\"",
+          "span.v \"5\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "path.diag-return \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#111411",
+        "ratio": 11.33,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "p.mono \"LE PRINCIPE\"",
+          "p \"La chouette harfang vole en si\"",
+          "p \"J'y reviens toujours parce que\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#0b0e0c",
+        "ratio": 11.82,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "a.lang-chip \"EN\"",
+          "p.lede \"J'isole la contrainte qui gouv\"",
+          "span \"MÉTHODE\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 17.24,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "h2 \"Le bruit est un défaut de conc\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 8,
+        "samples": [
+          "span.brand-name \"Taha Ghadhab\"",
+          "a.btn \"Ma méthode\"",
+          "a.btn \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 9,
+        "samples": [
+          "span.wi \"Observer,\"",
+          "span.wi \"puis\"",
+          "span.wi \"trancher\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 40,
+        "samples": [
+          "path.diag-line \"\"",
+          "path.diag-line \"\"",
+          "path.diag-line \"\""
+        ]
+      }
+    ],
+    "/fr@1440": [
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 445,
+        "samples": [
+          "span.lab \"PRINCIPE\"",
+          "span.lab \"MÉTHODE\"",
+          "span.lab \"EXPÉRIENCES\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn.btn-primary \"Voir les réalisations\"",
+          "a.btn.btn-primary \"Télécharger le CV en PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 43,
+        "samples": [
+          "span.wi \"Méthode\"",
+          "span.wi \"de\"",
+          "span.wi \"travail\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(51, 59, 49)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 54,
+        "samples": [
+          "rect.diag-node \"\"",
+          "rect.diag-node \"\"",
+          "rect.diag-node \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 106,
+        "samples": [
+          "span.no \"04\"",
+          "span \"EXPÉRIENCES\"",
+          "button.foldall \"TOUT DÉPLIER\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#111411",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 2,
+        "samples": [
+          "button.foldall \"TOUT DÉPLIER\"",
+          "article.sheet.commit \"01Ingénieur méthodeSafran1er j\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 23,
+        "samples": [
+          "span.wi \"Expériences\"",
+          "h3 \"Ingénieur méthode\"",
+          "h3 \"Assistant ingénieur\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#231d0e",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"TOUS\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#231d0e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"TOUS\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#12160f",
+        "fgToken": "rgb(32, 38, 31)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 5,
+        "samples": [
+          "a.pcard \"01LIVRÉReprise de marque docum\"",
+          "a.pcard \"02LIVRÉControlTorque : traçabi\"",
+          "a.pcard \"03PILOTEPharmacoWorkL'espace d\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#12160f",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 50,
+        "samples": [
+          "span.pcard-no.mono \"01\"",
+          "span.status.status-done \"LIVRÉ\"",
+          "span.pcard-name \"Reprise de marque documentaire\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"Télécharger le CV en PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#5c6559",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 3.2,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn \"Ma méthode\"",
+          "a.btn \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 17,
+        "samples": [
+          "span.brand-role \"GÉNIE INDUSTRIEL\"",
+          "a \"MÉTHODE\"",
+          "a \"EXPÉRIENCES\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.skip \"Aller au contenu principal\"",
+          "a.btn.btn-primary \"Voir les réalisations\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 3,
+        "samples": [
+          "span.v \"3\"",
+          "span.v \"1\"",
+          "span.v \"5\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#111411",
+        "ratio": 11.33,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "p.mono \"LE PRINCIPE\"",
+          "p \"La chouette harfang vole en si\"",
+          "p \"J'y reviens toujours parce que\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#0b0e0c",
+        "ratio": 11.82,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 5,
+        "samples": [
+          "span.lab \"VOL\"",
+          "a.nav-utility \"Vue classique\"",
+          "a.nav-utility \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 17.24,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "h2 \"Le bruit est un défaut de conc\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 3,
+        "samples": [
+          "span.brand-name \"Taha Ghadhab\"",
+          "a.btn \"Ma méthode\"",
+          "a.btn \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 6,
+        "samples": [
+          "span.wi \"Observer,\"",
+          "span.wi \"puis\"",
+          "span.wi \"trancher\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 40,
+        "samples": [
+          "path.diag-line \"\"",
+          "path.diag-line \"\"",
+          "path.diag-line \"\""
+        ]
+      }
+    ],
+    "/en@375": [
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn.btn-primary \"See the work\"",
+          "a.btn.btn-primary \"Download resume as PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 456,
+        "samples": [
+          "div.step-no \"01\"",
+          "h3 \"Listen\"",
+          "p \"Talk to the people inside the \""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 111,
+        "samples": [
+          "span.no \"04\"",
+          "span \"EXPERIENCE\"",
+          "button.foldall \"EXPAND ALL\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#111411",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 2,
+        "samples": [
+          "button.foldall \"EXPAND ALL\"",
+          "article.sheet.commit \"01Methods engineerSafran1 June\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 16,
+        "samples": [
+          "span.wi \"Experience\"",
+          "span.wi \"Skills\"",
+          "span.wi \"About\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 48,
+        "samples": [
+          "button.foldall \"EXPAND ALL\"",
+          "button.pchip \"INDUSTRIAL\"",
+          "button.pchip \"DATA & AI\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 4,
+        "samples": [
+          "span.wi \"Projects\"",
+          "span.wi \"Education\"",
+          "span.wi \"Student\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#231d0e",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"ALL\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#231d0e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"ALL\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#12160f",
+        "fgToken": "rgb(32, 38, 31)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 5,
+        "samples": [
+          "a.pcard \"01DELIVEREDZodiac → Safran doc\"",
+          "a.pcard \"02DELIVEREDControlTorque: torq\"",
+          "a.pcard \"03PILOTPharmacoWorkThe pharmac\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#12160f",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 50,
+        "samples": [
+          "span.pcard-no.mono \"01\"",
+          "span.status.status-done \"DELIVERED\"",
+          "span.pcard-name \"Zodiac → Safran document rebra\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"Download resume as PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#333b31",
+        "fgToken": "rgb(51, 59, 49)",
+        "bg": "#0b0e0c",
+        "ratio": 1.67,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 6,
+        "samples": [
+          "button.menu-btn \"MENU\"",
+          "rect.diag-node \"\"",
+          "rect.diag-node \"\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#5c6559",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 3.2,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn \"How I work\"",
+          "a.btn \"Resume PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 18,
+        "samples": [
+          "span.brand-role \"INDUSTRIAL ENGINEERING\"",
+          "span.k \"industry internships\"",
+          "span.k \"startup co-founded\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.skip \"Skip to main content\"",
+          "a.btn.btn-primary \"See the work\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 5,
+        "samples": [
+          "span.v \"3\"",
+          "span.v \"1\"",
+          "span.v \"5\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "path.diag-return \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#111411",
+        "ratio": 11.33,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "p.mono \"THE PRINCIPLE\"",
+          "p \"A snowy owl flies in near sile\"",
+          "p \"I keep coming back to this bec\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#0b0e0c",
+        "ratio": 11.82,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "a.lang-chip \"FR\"",
+          "p.lede \"I isolate the governing constr\"",
+          "span \"METHOD\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 17.24,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "h2 \"Noise is a design failure\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 8,
+        "samples": [
+          "span.brand-name \"Taha Ghadhab\"",
+          "a.btn \"How I work\"",
+          "a.btn \"Resume PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 7,
+        "samples": [
+          "span.wi \"Watch\"",
+          "span.wi \"first.\"",
+          "span.wi \"Move\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 40,
+        "samples": [
+          "path.diag-line \"\"",
+          "path.diag-line \"\"",
+          "path.diag-line \"\""
+        ]
+      }
+    ],
+    "/en@1440": [
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 445,
+        "samples": [
+          "span.lab \"PRINCIPLE\"",
+          "span.lab \"METHOD\"",
+          "span.lab \"EXPERIENCE\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn.btn-primary \"See the work\"",
+          "a.btn.btn-primary \"Download resume as PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 42,
+        "samples": [
+          "span.wi \"How\"",
+          "span.wi \"I\"",
+          "span.wi \"work\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(51, 59, 49)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 54,
+        "samples": [
+          "rect.diag-node \"\"",
+          "rect.diag-node \"\"",
+          "rect.diag-node \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 106,
+        "samples": [
+          "span.no \"04\"",
+          "span \"EXPERIENCE\"",
+          "button.foldall \"EXPAND ALL\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#111411",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 2,
+        "samples": [
+          "button.foldall \"EXPAND ALL\"",
+          "article.sheet.commit \"01Methods engineerSafran1 June\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#111411",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 21,
+        "samples": [
+          "span.wi \"Experience\"",
+          "h3 \"Methods engineer\"",
+          "h3 \"Assistant engineer\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#231d0e",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"ALL\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#231d0e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#231d0e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.pchip \"ALL\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#12160f",
+        "fgToken": "rgb(32, 38, 31)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 5,
+        "samples": [
+          "a.pcard \"01DELIVEREDZodiac → Safran doc\"",
+          "a.pcard \"02DELIVEREDControlTorque: torq\"",
+          "a.pcard \"03PILOTPharmacoWorkThe pharmac\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#12160f",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#12160f",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 50,
+        "samples": [
+          "span.pcard-no.mono \"01\"",
+          "span.status.status-done \"DELIVERED\"",
+          "span.pcard-name \"Zodiac → Safran document rebra\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"Download resume as PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#5c6559",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 3.2,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.btn \"How I work\"",
+          "a.btn \"Resume PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 17,
+        "samples": [
+          "span.brand-role \"INDUSTRIAL ENGINEERING\"",
+          "a \"METHOD\"",
+          "a \"EXPERIENCE\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\"",
+          "path.diag-wake \"\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 2,
+        "samples": [
+          "a.skip \"Skip to main content\"",
+          "a.btn.btn-primary \"See the work\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 3,
+        "samples": [
+          "span.v \"3\"",
+          "span.v \"1\"",
+          "span.v \"5\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#111411",
+        "ratio": 11.33,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "p.mono \"THE PRINCIPLE\"",
+          "p \"A snowy owl flies in near sile\"",
+          "p \"I keep coming back to this bec\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#0b0e0c",
+        "ratio": 11.82,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 5,
+        "samples": [
+          "span.lab \"FLIGHT\"",
+          "a.nav-utility \"Plain view\"",
+          "a.nav-utility \"Resume PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#111411",
+        "ratio": 17.24,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "h2 \"Noise is a design failure\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 3,
+        "samples": [
+          "span.brand-name \"Taha Ghadhab\"",
+          "a.btn \"How I work\"",
+          "a.btn \"Resume PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 4,
+        "samples": [
+          "span.wi \"Watch\"",
+          "span.wi \"first.\"",
+          "span.wi \"Move\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 40,
+        "samples": [
+          "path.diag-line \"\"",
+          "path.diag-line \"\"",
+          "path.diag-line \"\""
+        ]
+      }
+    ],
+    "/fr/cv@375": [
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.btn.no-print \"Imprimer / PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.btn.no-print \"Imprimer / PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#333b31",
+        "fgToken": "rgb(51, 59, 49)",
+        "bg": "#0b0e0c",
+        "ratio": 1.67,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "button.menu-btn \"MENU\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 43,
+        "samples": [
+          "span.brand-role \"GÉNIE INDUSTRIEL\"",
+          "a \"taha.ghadhab@enib.ucar.tn\"",
+          "a \"+216 54 347 150\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "a.skip \"Aller au contenu principal\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 13,
+        "samples": [
+          "p.role \"Élève ingénieur en génie indus\"",
+          "h2 \"Profil\"",
+          "h2 \"Formation\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#0b0e0c",
+        "ratio": 11.82,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 45,
+        "samples": [
+          "a.lang-chip \"EN\"",
+          "p \"Rigueur analytique, appétence \"",
+          "p \"Modélisation et pilotage des s\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 22,
+        "samples": [
+          "span.brand-name \"Taha Ghadhab\"",
+          "p \"Je ne fais pas que corriger de\"",
+          "h3 \"Mastère en systèmes complexes \""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "h1 \"Taha Ghadhab\""
+        ]
+      }
+    ],
+    "/fr/cv@1440": [
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.btn.no-print \"Imprimer / PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(92, 101, 89)",
+        "bg": "#0b0e0c",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "button.btn.no-print \"Imprimer / PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 4.5,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "ui",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#fda51e",
+        "ratio": 1,
+        "need": 3,
+        "pass": false,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 0,
+        "count": 1,
+        "samples": [
+          "a.btn.btn-primary \"CV PDF\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#8b948a",
+        "fgToken": "rgb(139, 148, 138)",
+        "bg": "#0b0e0c",
+        "ratio": 6.19,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 43,
+        "samples": [
+          "span.brand-role \"GÉNIE INDUSTRIEL\"",
+          "a \"taha.ghadhab@enib.ucar.tn\"",
+          "a \"+216 54 347 150\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#0b0e0c",
+        "fgToken": "rgb(11, 14, 12)",
+        "bg": "#fda51e",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "a.skip \"Aller au contenu principal\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#fda51e",
+        "fgToken": "rgb(253, 165, 30)",
+        "bg": "#0b0e0c",
+        "ratio": 9.77,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 13,
+        "samples": [
+          "p.role \"Élève ingénieur en génie indus\"",
+          "h2 \"Profil\"",
+          "h2 \"Formation\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#c5ccc2",
+        "fgToken": "rgb(197, 204, 194)",
+        "bg": "#0b0e0c",
+        "ratio": 11.82,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 47,
+        "samples": [
+          "a.nav-utility \"Vue complète\"",
+          "a.nav-utility \"CV PDF\"",
+          "a.nav-utility \"EN\""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 4.5,
+        "pass": true,
+        "large": false,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 22,
+        "samples": [
+          "span.brand-name \"Taha Ghadhab\"",
+          "p \"Je ne fais pas que corriger de\"",
+          "h3 \"Mastère en systèmes complexes \""
+        ]
+      },
+      {
+        "kind": "text",
+        "fg": "#f5f7f1",
+        "fgToken": "rgb(245, 247, 241)",
+        "bg": "#0b0e0c",
+        "ratio": 17.98,
+        "need": 3,
+        "pass": true,
+        "large": true,
+        "gradientBehind": false,
+        "opacity": 1,
+        "count": 1,
+        "samples": [
+          "h1 \"Taha Ghadhab\""
+        ]
+      }
+    ]
+  },
+  "reducedMotion": {
+    "no-preference": {
+      "samples": [
+        {
+          "t": 100,
+          "wingOpen": false,
+          "firstCommitOpacity": "0",
+          "runningAnimations": 11
+        },
+        {
+          "t": 500,
+          "wingOpen": false,
+          "firstCommitOpacity": "0",
+          "runningAnimations": 6
+        },
+        {
+          "t": 800,
+          "wingOpen": false,
+          "firstCommitOpacity": "0",
+          "runningAnimations": 6
+        },
+        {
+          "t": 1000,
+          "wingOpen": true,
+          "firstCommitOpacity": "0",
+          "runningAnimations": 234
+        },
+        {
+          "t": 1500,
+          "wingOpen": true,
+          "firstCommitOpacity": "0",
+          "runningAnimations": 164
+        },
+        {
+          "t": 2500,
+          "wingOpen": true,
+          "firstCommitOpacity": "0",
+          "runningAnimations": 6
+        }
+      ],
+      "pupilMovedWithCursor": false,
+      "pupilBefore": "none|none",
+      "pupilAfter": "none|none"
+    },
+    "reduce": {
+      "samples": [
+        {
+          "t": 100,
+          "wingOpen": true,
+          "firstCommitOpacity": "1",
+          "runningAnimations": 1
+        },
+        {
+          "t": 500,
+          "wingOpen": true,
+          "firstCommitOpacity": "1",
+          "runningAnimations": 0
+        },
+        {
+          "t": 800,
+          "wingOpen": true,
+          "firstCommitOpacity": "1",
+          "runningAnimations": 0
+        },
+        {
+          "t": 1000,
+          "wingOpen": true,
+          "firstCommitOpacity": "1",
+          "runningAnimations": 0
+        },
+        {
+          "t": 1500,
+          "wingOpen": true,
+          "firstCommitOpacity": "1",
+          "runningAnimations": 0
+        },
+        {
+          "t": 2500,
+          "wingOpen": true,
+          "firstCommitOpacity": "1",
+          "runningAnimations": 0
+        }
+      ],
+      "pupilMovedWithCursor": false,
+      "pupilBefore": "none|none",
+      "pupilAfter": "none|none"
+    }
+  },
+  "eyes": {
+    "375": {
+      "brandMark": [
+        "svg.brand-mark 28px",
+        "svg.wing.is-open 375px"
+      ],
+      "pupils": [
+        "g.eye 39px",
+        "circle.iris-body 36px",
+        "circle.pupil 15px"
+      ],
+      "navItemsVisible": [
+        "Ma méthode",
+        "Voir les réalisations",
+        "CV PDF"
+      ],
+      "classicLinkVisible": false
+    },
+    "1440": {
+      "brandMark": [
+        "svg.brand-mark 28px",
+        "svg.wing.is-open 1440px"
+      ],
+      "pupils": [
+        "g.eye 41px",
+        "circle.iris-body 38px",
+        "circle.pupil 16px"
+      ],
+      "navItemsVisible": [
+        "Ma méthode",
+        "Voir les réalisations",
+        "CV PDF"
+      ],
+      "classicLinkVisible": true
+    }
+  }
+}

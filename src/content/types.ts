@@ -18,6 +18,11 @@ export interface Experience {
   fullName: string;
   role: string;
   period: string;
+  /**
+   * Mois de début, `AAAA-MM`. C'est lui qui ordonne les postes, pas l'ordre du
+   * tableau : `period` est un libellé, il ne se trie pas.
+   */
+  start: string;
   location: string;
   /** Entrée du poste : ce qui n'allait pas. Rendu en signal `fault`. */
   input: string;
