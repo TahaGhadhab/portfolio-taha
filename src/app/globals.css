@@ -739,6 +739,12 @@
   height: 28px;
   flex: none;
   display: block;
+  transition: opacity var(--d-snap) var(--commit);
+}
+/* Un seul œil à l'écran : tant que l'aile est visible, la chouette de la
+   barre se retire. Sa place reste réservée, le nom ne saute pas. */
+:root[data-eye-in-view] .brand-mark {
+  opacity: 0;
 }
 .brand-name {
   font-family: var(--f-display);
@@ -1021,7 +1027,7 @@
 .wing {
   width: 100%;
   height: auto;
-  max-height: min(34vh, 380px);
+  max-height: min(30vh, 340px);
   display: block;
   overflow: visible;
 }
@@ -1104,11 +1110,12 @@
   position: relative;
   z-index: 10;
   text-align: center;
-  margin-top: var(--s-7);
+  margin-top: var(--s-5);
 }
 .hero .lede,
+
 .hero-actions,
-.hero-stats > div,
+.hero-stats > li,
 .wordmark-strip {
   opacity: 0;
   translate: 0 14px;
@@ -1117,8 +1124,9 @@
     translate var(--d-arrive) var(--glide) var(--in-delay);
 }
 .hero.is-open .lede,
+
 .hero.is-open .hero-actions,
-.hero.is-open .hero-stats > div,
+.hero.is-open .hero-stats > li,
 .hero.is-open .wordmark-strip {
   opacity: 1;
   translate: 0 0;
@@ -1146,43 +1154,99 @@
   margin-inline: auto;
   text-wrap: balance;
 }
+/* Qui, et sur quel terrain. En grotesque plutôt qu'en mono : c'est une
+   phrase qu'on lit, pas une donnée qu'on relève. */
+.hero-eyebrow {
+  margin: 0 auto var(--s-5);
+  max-width: 60ch;
+  font-family: var(--f-display);
+  font-size: var(--t-0);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: var(--tr-0);
+  color: var(--snow);
+  text-wrap: balance;
+}
 .hero .lede {
-  margin: var(--s-6) auto 0;
+  margin: var(--s-5) auto 0;
   max-width: 52ch;
 }
 .hero-actions {
   display: flex;
   gap: var(--s-4);
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: var(--s-7);
+  margin-top: var(--s-6);
+}
+/* La vue classique vit dans la barre au-dessus de 900 px ; en dessous, elle
+   se replie dans le menu. On la garde donc ici, sous les boutons, pour
+   qu'un recruteur sur téléphone l'atteigne sans ouvrir quoi que ce soit. */
+.hero-classic {
+  display: none;
+}
+/* Un écran de portable est large mais bas : à 1366 × 768 comme à
+   1440 × 900, l'aile et le titre à pleine taille poussaient les boutons sous
+   la ligne de flottaison. On les borne à la hauteur du champ. */
+@media (min-width: 1100px) and (max-height: 940px) {
+  .wing {
+    max-height: min(24vh, 260px);
+  }
+  .hero h1 {
+    font-size: min(calc(var(--t-5) * var(--fit-title)), 10.5vh);
+  }
+}
+@media (max-width: 1099px) {
+  .hero-classic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding-inline: var(--s-3);
+    font-family: var(--f-display);
+    font-size: var(--t--1);
+    font-weight: 500;
+    color: var(--snow-2);
+    text-decoration: underline;
+    text-decoration-color: var(--edge-ui);
+    text-underline-offset: 4px;
+  }
+  .hero-classic:hover {
+    color: var(--iris);
+    text-decoration-color: currentColor;
+  }
 }
 
-/* Trois relevés, en mono, sous les boutons. Des faits, pas des jauges. */
+/* Trois preuves sous les boutons. Des résultats, pas des comptages. */
 .hero-stats {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--s-4) var(--s-7);
-  margin-top: var(--s-8);
+  margin: var(--s-7) 0 0;
+  padding: 0;
+  list-style: none;
 }
-.hero-stats div {
+.hero-stats li {
   display: grid;
-  gap: 2px;
+  gap: 4px;
   justify-items: center;
+  max-width: 22ch;
 }
 .hero-stats .v {
   font-family: var(--f-mono);
   font-size: var(--tm-2);
-  color: var(--iris);
+  color: var(--snow);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
+/* Le chiffre est une donnée, en mono ; sa légende est une phrase, en
+   grotesque. */
 .hero-stats .k {
-  font-family: var(--f-mono);
-  font-size: var(--tm--2);
-  letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  font-family: var(--f-display);
+  font-size: var(--t--1);
+  line-height: 1.35;
+  color: var(--snow-2);
 }
 
 .btn {
@@ -2972,29 +3036,29 @@ article[id] {
     min-height: 50px;
   }
 
-  /* Les trois relevés deviennent un bandeau chiffré plutôt que trois
-     blocs qui retombent les uns sous les autres. */
+  /* Les trois preuves deviennent un relevé à lignes : le chiffre à gauche,
+     sa légende en regard. Trois colonnes cassaient chaque légende mot à mot. */
   .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 0;
     margin-top: var(--s-7);
     border-block: 1px solid var(--line);
-    padding-block: var(--s-4);
   }
-  .hero-stats div {
-    padding-inline: var(--s-2);
+  .hero-stats li {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    align-items: baseline;
+    justify-items: start;
+    gap: var(--s-3);
+    max-width: none;
+    padding-block: var(--s-3);
+    text-align: start;
   }
-  .hero-stats div + div {
-    border-inline-start: 1px solid var(--line);
+  .hero-stats li + li {
+    border-top: 1px solid var(--line);
   }
   .hero-stats .v {
     font-size: var(--t-1);
-  }
-  .hero-stats .k {
-    letter-spacing: var(--tr--2);
-    text-align: center;
-    line-height: 1.35;
   }
   .wordmark-strip {
     margin-top: var(--s-7);
@@ -3686,8 +3750,9 @@ details[open] > .fold-body {
   }
   .hero,
   .hero .lede,
+
   .hero-actions,
-  .hero-stats > div,
+  .hero-stats > li,
   .wordmark-strip {
     opacity: 1;
     translate: 0 0;
@@ -3777,8 +3842,9 @@ details[open] > .fold-body {
   .commit[data-stagger] > *,
   .wi,
   .hero .lede,
+
   .hero-actions,
-  .hero-stats > div,
+  .hero-stats > li,
   .wordmark-strip {
     opacity: 1 !important;
     translate: none !important;

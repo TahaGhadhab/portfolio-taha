@@ -327,18 +327,19 @@ export interface Content {
     menuCloseLabel: string;
   };
   hero: {
+    /** Qui, et sur quel terrain : la première ligne lue, au-dessus du titre. */
     eyebrow: string;
     name: string;
     role: string;
     /** Le titre du vol : court, tenu sur deux lignes au plus. */
     headline: string;
-    /** Chapeau du hero — la promesse en une phrase. */
-    lede: string;
     tagline: string;
     signature: string;
+    /** Des preuves tirées du CV, jamais des comptages. */
     stats: { value: string; unit: string; label: string }[];
+    /** Étiquette accessible de la liste des preuves. */
+    statsLabel: string;
     ctaPrimary: string;
-    ctaSecondary: string;
     /** Signature typographique sous le hero, en mono. */
     wordmark: string;
   };

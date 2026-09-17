@@ -16,7 +16,28 @@ export async function generateMetadata({
   return {
     title: c.classic.title,
     description: c.meta.description,
-    alternates: { canonical: `/${lang}/cv`, languages: { fr: "/fr/cv", en: "/en/cv" } },
+    alternates: {
+      canonical: `/${lang}/cv`,
+      languages: { fr: "/fr/cv", en: "/en/cv", "x-default": "/fr/cv" },
+    },
+    /* Un `openGraph` enfant remplace celui du gabarit en entier : tout ce qui
+       doit survivre est donc redit ici. */
+    openGraph: {
+      title: c.classic.title,
+      description: c.meta.description,
+      url: `/${lang}/cv`,
+      siteName: "Taha Ghadhab",
+      locale: lang === "fr" ? "fr_FR" : "en_US",
+      alternateLocale: lang === "fr" ? "en_US" : "fr_FR",
+      type: "profile",
+      images: [{ url: `/${lang}/opengraph-image`, width: 1200, height: 630, alt: c.hero.eyebrow }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: c.classic.title,
+      description: c.meta.description,
+      images: [`/${lang}/opengraph-image`],
+    },
   };
 }
 

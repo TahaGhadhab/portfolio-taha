@@ -162,10 +162,12 @@ interface FlightProps {
   cv: CvTarget;
   cvLabel: string;
   primaryHref: string;
-  secondaryHref: string;
+  /** La vue classique, joignable sans ouvrir le menu sur téléphone. */
+  classicHref: string;
+  classicLabel: string;
 }
 
-export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: FlightProps) {
+export function Flight({ hero, cv, cvLabel, primaryHref, classicHref, classicLabel }: FlightProps) {
   const wingRef = useRef<SVGSVGElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const pupilRef = useRef<SVGGElement>(null);
@@ -190,6 +192,23 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
     const wait = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 850;
     const id = setTimeout(() => setOpen(true), wait);
     return () => clearTimeout(id);
+  }, []);
+
+  /* Un seul œil à la fois. Tant que l'aile est à l'écran, la chouette de la
+     barre s'efface ; elle revient dès que l'aile sort du champ. Sans
+     observateur, la marque reste visible. */
+  useEffect(() => {
+    const wing = wingRef.current;
+    const root = document.documentElement;
+    if (!wing || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      root.toggleAttribute("data-eye-in-view", entry.isIntersecting);
+    });
+    observer.observe(wing);
+    return () => {
+      observer.disconnect();
+      root.removeAttribute("data-eye-in-view");
+    };
   }, []);
 
   /* Le seul comportement au repos de toute la page : il vous regarde. */
@@ -371,18 +390,14 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
             feuille de style qui le convertit en retard. Un seul enchaînement,
             joué une fois, à l'ouverture. */}
         <div className={`hero${open ? " is-open" : ""}`}>
+          {/* Qui, avant la maxime : un recruteur doit savoir à qui il a affaire
+              avant de lire comment cette personne travaille. Visible d'emblée,
+              hors de l'ouverture. */}
+          <p className="hero-eyebrow">{hero.eyebrow}</p>
           <SplitWords as="h1" text={hero.headline} />
-          <p className="lede" style={rank(afterHeadline)}>
-            {hero.lede}
-          </p>
 
-          {/* Les deux premières actions suivent l'ordre du document : on croise
-              la méthode (station 02) avant les réalisations (station 04). Un
-              raccourci qui contredit le plan de la page fait douter du plan. */}
-          <div className="hero-actions" style={rank(afterHeadline + 2)}>
-            <a className="btn" href={secondaryHref}>
-              {hero.ctaSecondary}
-            </a>
+          {/* Deux actions, l'essentielle d'abord : les preuves, puis le CV. */}
+          <div className="hero-actions" style={rank(afterHeadline)}>
             <a className="btn btn-primary" href={primaryHref}>
               {hero.ctaPrimary}
             </a>
@@ -395,21 +410,24 @@ export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: Flight
             >
               {cvLabel}
             </a>
+            <a className="hero-classic" href={classicHref}>
+              {classicLabel}
+            </a>
           </div>
 
-          <div className="hero-stats">
+          <ul className="hero-stats" aria-label={hero.statsLabel}>
             {hero.stats.map((s, i) => (
-              <div key={s.label} style={rank(afterHeadline + 4 + i)}>
+              <li key={s.label} style={rank(afterHeadline + 2 + i)}>
                 <span className="v">
                   {s.value}
                   {s.unit}
                 </span>
                 <span className="k">{s.label}</span>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <div className="wordmark-strip" style={rank(afterHeadline + 8)}>
+          <div className="wordmark-strip" style={rank(afterHeadline + 6)}>
             <span className="hair" />
             <span className="mono">{hero.wordmark}</span>
             <span className="hair" />

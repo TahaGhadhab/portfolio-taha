@@ -72,32 +72,31 @@ export const fr: Content = {
     menuCloseLabel: "Fermer"
   },
   hero: {
-    eyebrow: "Vol silencieux",
+    eyebrow: "Élève ingénieur en génie industriel · data & IA appliquée",
     name: "Taha Ghadhab",
     role: "Élève ingénieur en génie industriel",
     headline: "Observer, puis trancher une seule fois.",
-    lede: "J'isole la contrainte qui gouverne un système en défaut, je la lève une bonne fois, et je conçois pour la durée plutôt que pour la maintenance.",
     tagline: "Rigueur analytique, appétence pour la donnée et optimisation des systèmes de production.",
     signature: "Je ne fais pas que corriger des problèmes, je les élimine définitivement avec des outils innovants.",
     stats: [
       {
+        value: "100",
+        unit: " %",
+        label: "de détection sur 73 documents Safran"
+      },
+      {
         value: "3",
-        unit: "",
-        label: "stages en entreprise"
+        unit: " min",
+        label: "par document, contre 30 à 60 min"
       },
       {
-        value: "1",
+        value: "11",
         unit: "",
-        label: "startup co-fondée"
-      },
-      {
-        value: "5",
-        unit: "",
-        label: "projets construits"
+        label: "modules PharmacoWork en pilote"
       }
     ],
-    ctaPrimary: "Voir les réalisations",
-    ctaSecondary: "Ma méthode",
+    statsLabel: "Résultats",
+    ctaPrimary: "Voir les projets",
     wordmark: "VOL SILENCIEUX"
   },
   principle: {

@@ -102,3 +102,29 @@ Taha's answers to the Phase 1 questions: SMIP stays "Assistant ingénieur"; "Met
 - All text pairs still pass AA; the smallest text (mono meta) improves from 6.19:1 to 7.25:1.
 - **Not included:** the font change (Martian Mono → IBM Plex Mono), the plan's green #43594C (no role in the current UI, and it fails as ink), and brass restriction D5. The hero eye gradient was already #E8A21C.
 - **Comparisons:** `audit/palette-preview/compare-*.png`
+
+---
+
+## Phase 2 — Hero, positioning & conversion · 17 Sep 2026
+
+Branch `portfolio-upgrade` (not pushed). Phase 1 committed at `ed2b245`; palette trial at `8456f0f` (Taha asked to keep going, so the palette stays on).
+
+| ID | Status | Change |
+|---|---|---|
+| H1 | Done | Identity line above the H1 in FR/EN: "Élève ingénieur en génie industriel · data & IA appliquée" / "Industrial engineering student · data & applied AI". The brand maxim stays as the H1. Alternatives B (identity as the H1, maxim below) and C (name + role as the H1) are kept here for Taha. |
+| H1 (lede) | Removed at Taha's request | Deleted the positioning lede "Méthodes industrielles, données et IA appliquée : …" / "Industrial methods, data and applied AI: …". |
+| H2 | Done | Counters replaced by sourced proof points from the updated CV: 100 % detection on 73 Safran documents · 3 min per document vs 30–60 min · 11 PharmacoWork modules in pilot. No invented numbers. Rendered as a list (`ul`) with an accessible label. |
+| H3 | Done | 2 CTAs: primary "Voir les projets" first, secondary "CV PDF". "Ma méthode" removed. Also fixes V13 (the primary was second on mobile). |
+| H4 | **Removed at Taha's request** | The availability line was added and then deleted ("Stage ingénieur dès février 2027 · mobile en Europe"). |
+| K1 | Done | `[lang]/opengraph-image.tsx` renders a 1200×630 PNG per locale (name, identity line, URL), with `og:image:*` + `twitter:card=summary_large_image` on `/fr`, `/en`, `/fr/cv`, `/en/cv`. Colours are copied as literals in that file because `ImageResponse` cannot read CSS variables (documented exception to "tokens only"). The existing 1200×627 banner was not in the repo. **Pending:** LinkedIn Post Inspector after deploy. |
+| K2 | Reverted at Taha's request | Contact kept the original intro and "Tunisie" (the dates/mobility wording was removed along with H4). |
+| K3 | Deferred | No personal email provided. |
+| K4 | Done | `metadataBase` (`src/lib/site.ts`, overridable via `NEXT_PUBLIC_SITE_URL`); canonical + `hreflang` fr/en/x-default are absolute on all 4 routes; `og:locale:alternate`. Fixes V8. |
+| K5 | Done | "Vue classique" link in the hero below 1100 px (where the header links collapse into the menu). Visible without scrolling at 375×812, 414×896 and 768×1024. |
+| V4 | Done (option 1, reversible) | The header owl fades out while the hero wing is on screen (`data-eye-in-view` on `<html>`) and returns once scrolled past. Option 2 (eyeless mark) is not implemented. |
+| V6 | Done | At 1100 px+ and ≤ 940 px tall, the wing and H1 are capped to the viewport height. The CTA row now sits well above the frame line at 1440×900 and 1366×768. |
+
+### Evidence
+- `tsc`, `eslint`, `next build` clean; 9 static routes including `/fr/opengraph-image` and `/en/opengraph-image`.
+- First-viewport check (FR + EN): identity line, H1 and primary CTA visible at 320×640, 375×667, 375×812, 414×896, 768×1024, 1366×768, 1440×900; no horizontal scroll; header owl opacity 0 on the hero and 1 after scrolling.
+- Screenshots: `audit/phase2/hero-*.png`, share images `audit/phase2/og-{fr,en}.png`.

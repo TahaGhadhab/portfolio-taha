@@ -70,32 +70,31 @@ export const en: Content = {
     menuCloseLabel: "Close"
   },
   hero: {
-    eyebrow: "Silent flight",
+    eyebrow: "Industrial engineering student · data & applied AI",
     name: "Taha Ghadhab",
     role: "Industrial engineering student",
     headline: "Watch first. Move once.",
-    lede: "I isolate the governing constraint in a failing system, resolve it decisively, and engineer for permanence rather than maintenance.",
     tagline: "Analytical rigour, a taste for data, and the optimisation of production systems.",
     signature: "I don't just fix problems. I eliminate them for good, with tools built for the job.",
     stats: [
       {
+        value: "100",
+        unit: " %",
+        label: "detection across 73 Safran documents"
+      },
+      {
         value: "3",
-        unit: "",
-        label: "industry internships"
+        unit: " min",
+        label: "per document, down from 30–60 min"
       },
       {
-        value: "1",
+        value: "11",
         unit: "",
-        label: "startup co-founded"
-      },
-      {
-        value: "5",
-        unit: "",
-        label: "projects built"
+        label: "PharmacoWork modules in pilot"
       }
     ],
-    ctaPrimary: "See the work",
-    ctaSecondary: "How I work",
+    statsLabel: "Results",
+    ctaPrimary: "See the projects",
     wordmark: "SILENT FLIGHT"
   },
   principle: {

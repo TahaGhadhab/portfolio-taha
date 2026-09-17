@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Archivo, Instrument_Serif, Literata, Martian_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { LOCALES, getContent, isLocale } from "@/content";
+import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 /* --- Quatre familles, aucun rôle partagé ------------------------------
@@ -72,17 +73,26 @@ export async function generateMetadata({
 
   const c = getContent(lang);
   return {
+    metadataBase: SITE_URL,
     title: c.meta.title,
     description: c.meta.description,
     alternates: {
       canonical: `/${lang}`,
-      languages: { fr: "/fr", en: "/en" },
+      languages: { fr: "/fr", en: "/en", "x-default": "/fr" },
     },
     openGraph: {
       title: c.meta.title,
       description: c.meta.description,
+      url: `/${lang}`,
+      siteName: "Taha Ghadhab",
       locale: lang === "fr" ? "fr_FR" : "en_US",
+      alternateLocale: lang === "fr" ? "en_US" : "fr_FR",
       type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: c.meta.title,
+      description: c.meta.description,
     },
     robots: { index: true, follow: true },
   };
@@ -110,7 +120,7 @@ export default async function RootLayout({
           <style>{
             `.commit{opacity:1 !important;translate:none !important}` +
             `.commit[data-stagger]>*,.wi{opacity:1 !important;translate:none !important}` +
-            `.hero,.hero .lede,.hero-actions,.hero-stats>div,.wordmark-strip` +
+            `.hero,.hero .lede,.hero-actions,.hero-stats>li,.wordmark-strip` +
             `{opacity:1 !important;translate:none !important}` +
             `.wordmark-strip .hair{scale:1 1 !important}` +
             `.eyebrow .rule{scale:1 1 !important}` +

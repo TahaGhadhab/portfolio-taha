@@ -73,7 +73,8 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
           cv={cv}
           cvLabel={c.nav.downloadCv}
           primaryHref="#projets"
-          secondaryHref="#methode"
+          classicHref={`/${lang}/cv`}
+          classicLabel={c.nav.classicView}
         />
 
         <main id="contenu">
