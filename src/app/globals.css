@@ -79,6 +79,27 @@
   --ease-glide: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+/* --- Palette « vellum » (aperçu, Phase 2B) -----------------------
+   Active seulement si <html> porte `data-palette="vellum"`. Retirer
+   l'attribut dans `[lang]/layout.tsx` rend la palette d'origine ;
+   supprimer ce bloc la retire tout à fait. Ratios mesurés sur le
+   noir `#0B0E0C`. --- */
+:root[data-palette="vellum"] {
+  --color-snow: #edf0e7; /* vellum, titres — 16.83:1 */
+  --color-snow-2: #c9cec3; /* corps adouci — 12.10:1 */
+  --color-snow-3: #8fa396; /* sauge, donnée et méta — 7.25:1 */
+  --color-iris: #e8a21c; /* laiton oxydé — 8.88:1 */
+  --color-void-lift: #121714; /* surface 1 */
+  --color-lift-hover: #18201b; /* surface 2 */
+  --color-line: #1f2922; /* filet, surface 3 */
+  --color-veil: rgb(237 240 231 / 0.022);
+  --color-edge-lit: rgb(237 240 231 / 0.14);
+  --color-grid: rgb(237 240 231 / 0.035);
+  --color-grid-fine: rgb(237 240 231 / 0.016);
+  --color-sheen: rgb(232 162 28 / 0.13);
+  --color-chip-on: rgb(232 162 28 / 0.1);
+}
+
 /* Alias courts du design system. Les composants n'écrivent jamais
    d'hexadécimal : ils passent par ces jetons ou par les utilitaires
    Tailwind générés depuis `@theme`. */

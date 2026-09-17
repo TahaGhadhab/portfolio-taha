@@ -100,6 +100,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
+      data-palette="vellum"
       className={`${title.variable} ${display.variable} ${body.variable} ${mono.variable}`}
     >
       <head>
