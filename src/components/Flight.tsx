@@ -315,18 +315,18 @@ export function Flight({ hero, cv, cvLabel, primaryHref, classicHref, classicLab
         >
           <defs>
             <radialGradient id="irisG" cx="42%" cy="36%" r="72%">
-              <stop offset="0%" stopColor="#F7CB63" />
-              <stop offset="52%" stopColor="#E8A21C" />
-              <stop offset="100%" stopColor="#8E5A12" />
+              <stop offset="0%" stopColor="var(--color-accent-highlight)" />
+              <stop offset="52%" stopColor="var(--color-accent)" />
+              <stop offset="100%" stopColor="var(--color-accent-shade)" />
             </radialGradient>
             <radialGradient id="glowG" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#E8A21C" stopOpacity=".26" />
-              <stop offset="55%" stopColor="#E8A21C" stopOpacity=".07" />
-              <stop offset="100%" stopColor="#E8A21C" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--color-accent)" stopOpacity=".26" />
+              <stop offset="55%" stopColor="var(--color-accent)" stopOpacity=".07" />
+              <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
             </radialGradient>
             <radialGradient id="coreG" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#F5F7F1" stopOpacity=".10" />
-              <stop offset="100%" stopColor="#F5F7F1" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--color-graphic)" stopOpacity=".10" />
+              <stop offset="100%" stopColor="var(--color-graphic)" stopOpacity="0" />
             </radialGradient>
           </defs>
 

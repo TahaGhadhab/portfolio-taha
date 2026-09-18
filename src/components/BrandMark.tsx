@@ -36,20 +36,20 @@ export function BrandMark({ className = "brand-mark" }: { className?: string }) 
         cy={HEAD.cy}
         r={HEAD.r}
         fill="none"
-        stroke="var(--iris)"
+        stroke="var(--color-accent)"
         strokeWidth="1.6"
       />
-      <path d={TUFT_LEFT} fill="var(--iris)" />
-      <path d={TUFT_RIGHT} fill="var(--iris)" />
+      <path d={TUFT_LEFT} fill="var(--color-accent)" />
+      <path d={TUFT_RIGHT} fill="var(--color-accent)" />
 
       {EYES.map((e) => (
-        <circle key={e.cx} cx={e.cx} cy={e.cy} r={EYE_R} fill="var(--iris)" />
+        <circle key={e.cx} cx={e.cx} cy={e.cy} r={EYE_R} fill="var(--color-accent)" />
       ))}
       {EYES.map((e) => (
-        <circle key={e.cx} cx={e.cx} cy={e.cy} r={PUPIL_R} fill="var(--void)" />
+        <circle key={e.cx} cx={e.cx} cy={e.cy} r={PUPIL_R} fill="var(--color-bg)" />
       ))}
 
-      <path d={BEAK} fill="var(--iris)" />
+      <path d={BEAK} fill="var(--color-accent)" />
     </svg>
   );
 }

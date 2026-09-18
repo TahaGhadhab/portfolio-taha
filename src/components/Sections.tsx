@@ -532,7 +532,7 @@ export function OriginSection({
           {about.positioning.pillars.map((pillar, i) => (
             <div className="group" key={pillar.title} style={rank(i)}>
               <h3>{pillar.title.toUpperCase()}</h3>
-              <p style={{ color: "var(--snow-2)", fontSize: "var(--t--1)" }}>
+              <p style={{ color: "var(--color-text)", fontSize: "var(--t--1)" }}>
                 {pillar.body}
               </p>
             </div>

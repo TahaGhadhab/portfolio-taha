@@ -110,7 +110,7 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
 
             <CvSection title={s.profile}>
               <div className="cv-entry">
-                <p style={{ color: "var(--snow)" }}>{c.hero.signature}</p>
+                <p style={{ color: "var(--color-text-strong)" }}>{c.hero.signature}</p>
                 <p style={{ marginTop: "var(--s-3)" }}>{c.hero.tagline}</p>
               </div>
             </CvSection>

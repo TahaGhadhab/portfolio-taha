@@ -12,52 +12,6 @@
    ═══════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* --- Couleur ------------------------------------------------
-     Les ratios notés sont mesurés sur `--color-void`. --- */
-  --color-void: #0b0e0c; /* le noir dans lequel il vole */
-  --color-void-lift: #12160f; /* surface à peine soulevée */
-  /* L'air n'a pas la même densité en haut et en bas du champ. Deux
-     valeurs encadrent le noir de base : un souffle plus clair là où
-     l'aile passe, un cran plus sombre au fond. L'écart est minuscule —
-     trois points de luminance — et c'est précisément ce qui le rend
-     lisible comme de la profondeur plutôt que comme un dégradé. */
-  --color-void-high: #0f1412; /* l'air au-dessus */
-  --color-void-deep: #060806; /* le fond du champ */
-  --color-line: #20261f; /* filet décoratif */
-  --color-line-lit: #333b31; /* filet décoratif, premier plan */
-  --color-edge: #5c6559; /* bordures interactives — 3.20:1 ✓ 1.4.11 */
-  --color-snow: #f5f7f1; /* plumage / texte principal — 17.98:1 ✓ */
-  --color-snow-2: #c5ccc2; /* texte secondaire — 11.82:1 ✓ */
-  --color-snow-3: #8b948a; /* méta en mono — 6.19:1 ✓ */
-  --color-iris: #fda51e; /* l'œil. la seule chose chaude — 9.77:1 ✓ */
-
-  /* --- Les voiles ---------------------------------------------
-     Tout ce qui se pose par transparence : les plans de l'air, la
-     bande soulevée, l'arête qui capte la lumière, le reflet d'une
-     tuile. Écrits en canaux plutôt qu'en `color-mix` — un mélange
-     portant une variable ne se calcule pas à la compilation, et le
-     repli servi aux navigateurs qui l'ignorent garde la couleur
-     pleine. Une bande soulevée y devenait blanche. --- */
-  --color-veil: rgb(245 247 241 / 0.022); /* la bande soulevée */
-  --color-edge-lit: rgb(245 247 241 / 0.14); /* l'arête éclairée */
-  --color-grid: rgb(245 247 241 / 0.035); /* la trame, pas large */
-  --color-grid-fine: rgb(245 247 241 / 0.016); /* la trame, pas fin */
-  /* La lueur et le haut du champ sont froids, et volontairement : l'ambre
-     est l'œil, la seule chose chaude du document. En mettre dans l'air
-     diluait le signal partout ailleurs — un accent qui baigne le fond
-     n'accentue plus rien. Le froid le fait ressortir. */
-  --color-bloom: rgb(150 196 214 / 0.07); /* la lueur qui descend */
-  --color-sky: rgb(158 200 186 / 0.05); /* l'air du haut du champ */
-  --color-sheen: rgb(253 165 30 / 0.13); /* le reflet d'une tuile */
-  --color-chip-on: rgb(253 165 30 / 0.1); /* le domaine retenu */
-  --color-lift-hover: #191d16; /* la tuile sous le pointeur */
-
-  /* --- Signal fonctionnel : réservé aux fiches de terrain ---
-     Une entrée « problème », une sortie « livré ». Les deux
-     tiennent le contraste sur le fond sombre. --- */
-  --color-fault: #d9705f;
-  --color-ok: #6fbf8f;
-
   /* --- Typographie : quatre familles, aucun rôle partagé ---
      Une voix qui affirme (le titre), une qui range (l'interface), une
      qui raconte (le corps), une qui mesure (la donnée). --- */
@@ -79,59 +33,112 @@
   --ease-glide: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* --- Palette « vellum » (aperçu, Phase 2B) -----------------------
-   Active seulement si <html> porte `data-palette="vellum"`. Retirer
-   l'attribut dans `[lang]/layout.tsx` rend la palette d'origine ;
-   supprimer ce bloc la retire tout à fait. Ratios mesurés sur le
-   noir `#0B0E0C`. --- */
-:root[data-palette="vellum"] {
-  --color-snow: #edf0e7; /* vellum, titres — 16.83:1 */
-  --color-snow-2: #c9cec3; /* corps adouci — 12.10:1 */
-  --color-snow-3: #8fa396; /* sauge, donnée et méta — 7.25:1 */
-  --color-iris: #e8a21c; /* laiton oxydé — 8.88:1 */
-  --color-void-lift: #121714; /* surface 1 */
-  --color-lift-hover: #18201b; /* surface 2 */
-  --color-line: #1f2922; /* filet, surface 3 */
-  --color-veil: rgb(237 240 231 / 0.022);
-  --color-edge-lit: rgb(237 240 231 / 0.14);
-  --color-grid: rgb(237 240 231 / 0.035);
-  --color-grid-fine: rgb(237 240 231 / 0.016);
-  --color-sheen: rgb(232 162 28 / 0.13);
-  --color-chip-on: rgb(232 162 28 / 0.1);
+/* ═══ JETONS DE COULEUR — deux couches ═══════════════════════════
+   1. Primitives : des valeurs, nommées par leur teinte. Aucune règle de
+      cette feuille ni aucun composant ne les lit directement.
+   2. Rôles : ce que la couleur fait (texte, donnée, action, bordure…).
+      Ce sont les seuls jetons qu'une règle a le droit d'employer.
+   Documenté dans DESIGN.md. Ratios mesurés sur `--void-950`. */
+:root {
+  /* --- Primitives : palette « vellum » --- */
+  --void-950: #0b0e0c; /* le noir dans lequel il vole */
+  /* L'air n'a pas la même densité en haut et en bas du champ : un souffle
+     plus clair là où l'aile passe, un cran plus sombre au fond. */
+  --void-925: #0f1412;
+  --void-990: #060806;
+  --void-900: #121714; /* surface 1 */
+  --void-850: #18201b; /* surface 2 */
+  --void-800: #1f2922; /* filet discret */
+  --rule-600: #333b31; /* filet décoratif, premier plan — décor seulement */
+  --edge-500: #5c6559; /* 3.20:1 — bordures d'interface (1.4.11) */
+  --vellum-50: #edf0e7; /* 16.83:1 */
+  --vellum-50-rgb: 237 240 231;
+  --vellum-200: #c9cec3; /* 12.10:1 */
+  --sage-400: #8fa396; /* 7.25:1 */
+  --brass-200: #f7cb63; /* reflet de l'iris */
+  --brass-400: #e8a21c; /* 8.88:1 */
+  --brass-400-rgb: 232 162 28;
+  --brass-800: #8e5a12; /* ombre de l'iris */
+  --red-400: #d9705f; /* 5.94:1 */
+  --green-400: #6fbf8f; /* 8.80:1 */
+  --ice-rgb: 150 196 214; /* lueur froide */
+  --mist-rgb: 158 200 186; /* air du haut du champ */
+  --black: #000;
+  --white: #fff;
+  --grey-800: #333;
+  --grey-700: #555;
+  --grey-600: #666;
+  --grey-400: #999;
 }
 
-/* Alias courts du design system. Les composants n'écrivent jamais
-   d'hexadécimal : ils passent par ces jetons ou par les utilitaires
-   Tailwind générés depuis `@theme`. */
-:root {
-  --void: var(--color-void);
-  --void-lift: var(--color-void-lift);
-  --void-high: var(--color-void-high);
-  --void-deep: var(--color-void-deep);
+/* L'ancienne palette, gardée pour comparer : `data-palette="original"` sur
+   <html> la rétablit sans toucher à une seule règle. */
+:root[data-palette="original"] {
+  --void-900: #12160f;
+  --void-850: #191d16;
+  --void-800: #20261f;
+  --vellum-50: #f5f7f1;
+  --vellum-50-rgb: 245 247 241;
+  --vellum-200: #c5ccc2;
+  --sage-400: #8b948a;
+  --brass-400: #fda51e;
+  --brass-400-rgb: 253 165 30;
+}
 
-  /* Les trois plans de l'air se reglent ici, et nulle part ailleurs.
-     Monter une valeur rend le plan plus present, la descendre l'efface
-     — sans avoir a retrouver quatre degrades dans la feuille. */
-  --veil: var(--color-veil);
-  --edge-lit: var(--color-edge-lit);
-  --grid: var(--color-grid);
-  --grid-fine: var(--color-grid-fine);
-  --bloom: var(--color-bloom);
-  --sky: var(--color-sky);
-  --sheen: var(--color-sheen);
-  --chip-on: var(--color-chip-on);
-  --lift-hover: var(--color-lift-hover);
+:root {
+  /* --- Rôles --- */
+  --color-bg: var(--void-950);
+  --color-bg-high: var(--void-925);
+  --color-bg-deep: var(--void-990);
+  --color-surface-1: var(--void-900);
+  --color-surface-2: var(--void-850);
+
+  --color-text-strong: var(--vellum-50); /* titres, noms */
+  --color-text: var(--vellum-200); /* corps */
+  --color-text-data: var(--sage-400); /* chiffres, méta, libellés */
+  --color-graphic: var(--vellum-50); /* traits des figures et de l'aile */
+
+  /* Laiton : action, focus, état actif. Jamais un décor. */
+  --color-accent: var(--brass-400);
+  --color-accent-contrast: var(--void-950);
+  --color-accent-highlight: var(--brass-200);
+  --color-accent-shade: var(--brass-800);
+  --color-focus: var(--brass-400);
+
+  --color-border-ui: var(--edge-500); /* tout ce qui se clique ou se lit comme limite */
+  --color-border-subtle: var(--void-800); /* séparateurs */
+  --color-rule: var(--rule-600); /* ornement, jamais une limite porteuse de sens */
+
+  /* État : toujours doublé d'un libellé ou d'une forme (1.4.1). */
+  --color-status-ok: var(--green-400);
+  --color-status-danger: var(--red-400);
+
+  /* Les plans de l'air, par transparence. Écrits en canaux : un mélange
+     `color-mix` portant une variable retombait sur la couleur pleine dans
+     les navigateurs qui l'ignorent. La lueur et le haut du champ restent
+     froids — l'ambre est l'œil, la seule chose chaude du document. */
+  --veil: rgb(var(--vellum-50-rgb) / 0.022);
+  --edge-lit: rgb(var(--vellum-50-rgb) / 0.14);
+  --grid: rgb(var(--vellum-50-rgb) / 0.035);
+  --grid-fine: rgb(var(--vellum-50-rgb) / 0.016);
+  --bloom: rgb(var(--ice-rgb) / 0.07);
+  --sky: rgb(var(--mist-rgb) / 0.05);
+  --sheen: rgb(var(--brass-400-rgb) / 0.13);
+  --chip-on: rgb(var(--brass-400-rgb) / 0.1);
+
+  /* Impression : noir sur blanc, gris pour la hiérarchie. */
+  --print-paper: var(--white);
+  --print-ink: var(--black);
+  --print-ink-2: var(--grey-800);
+  --print-muted: var(--grey-700);
+  --print-rule-strong: var(--grey-600);
+  --print-rule: var(--grey-400);
+  /* Un masque ne lit que l'opacité : la teinte est indifférente. */
+  --mask-solid: var(--black);
 
   --air-field: 1; /* la trame mesuree */
   --air-bloom: 1; /* la lueur */
   --air-horizon: 0.55; /* l'horizon */
-  --line: var(--color-line);
-  --line-lit: var(--color-line-lit);
-  --edge-ui: var(--color-edge);
-  --snow: var(--color-snow);
-  --snow-2: var(--color-snow-2);
-  --snow-3: var(--color-snow-3);
-  --iris: var(--color-iris);
 
   --f-title: var(--font-title);
   --f-display: var(--font-display);
@@ -263,7 +270,7 @@
     overflow-x: clip;
     margin: 0;
     padding: 0;
-    background: var(--void);
+    background: var(--color-bg);
   }
 
   html {
@@ -274,7 +281,7 @@
   }
 
   body {
-    color: var(--snow);
+    color: var(--color-text-strong);
     font-family: var(--f-body);
     font-size: var(--t-0);
     line-height: var(--lh-body);
@@ -338,12 +345,12 @@
   }
 
   ::selection {
-    background: var(--iris);
-    color: var(--void);
+    background: var(--color-accent);
+    color: var(--color-bg);
   }
 
   :focus-visible {
-    outline: 2px solid var(--iris);
+    outline: 2px solid var(--color-accent);
     outline-offset: 4px;
     border-radius: 1px;
     transition: none;
@@ -362,8 +369,8 @@
   inset-block-start: -100px;
   inset-inline-start: var(--s-4);
   z-index: 60;
-  background: var(--iris);
-  color: var(--void);
+  background: var(--color-accent);
+  color: var(--color-bg);
   font-family: var(--f-display);
   font-weight: 600;
   font-size: var(--t--1);
@@ -384,7 +391,7 @@
 }
 .optics .rule {
   position: absolute;
-  background: var(--line);
+  background: var(--color-border-subtle);
 }
 .optics .rule.t {
   inset-block-start: var(--frame);
@@ -410,7 +417,7 @@
   position: absolute;
   width: 9px;
   height: 9px;
-  border: 0 solid var(--line-lit);
+  border: 0 solid var(--color-rule);
 }
 .optics .reg.tl {
   inset-block-start: var(--frame);
@@ -468,10 +475,10 @@
     ),
     linear-gradient(
       180deg,
-      var(--void-high) 0%,
-      var(--void) 42%,
-      var(--void) 68%,
-      var(--void-deep) 100%
+      var(--color-bg-high) 0%,
+      var(--color-bg) 42%,
+      var(--color-bg) 68%,
+      var(--color-bg-deep) 100%
     );
 }
 
@@ -537,8 +544,8 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--line-lit) 22%,
-    var(--line-lit) 78%,
+    var(--color-rule) 22%,
+    var(--color-rule) 78%,
     transparent
   );
   opacity: var(--air-horizon);
@@ -658,7 +665,7 @@
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
   font-weight: 400;
   font-variant-numeric: tabular-nums slashed-zero;
   /* Une capitale suivie d'une espace fine paraît décalée à droite : le
@@ -668,7 +675,7 @@
 .lede {
   font-size: var(--t-1);
   max-width: var(--measure);
-  color: var(--snow-2);
+  color: var(--color-text);
   /* L'axe optique suit le corps réel : à 20 pt le dessin ouvre ses
      contreformes et affine les déliés. C'est la raison d'être d'une
      variable, et le seul endroit où la différence se voit vraiment. */
@@ -691,7 +698,7 @@
   position: sticky;
   inset-block-start: 0;
   z-index: 50;
-  background: var(--void);
+  background: var(--color-bg);
   border-bottom: 1px solid transparent;
 }
 
@@ -710,7 +717,7 @@
       border-bottom-color: transparent;
     }
     to {
-      border-bottom-color: var(--line);
+      border-bottom-color: var(--color-border-subtle);
     }
   }
 }
@@ -764,7 +771,7 @@
   font-size: var(--tm--2);
   font-variation-settings: "wdth" 88;
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
   margin-top: 1px;
 }
 .nav-links {
@@ -781,7 +788,7 @@
   font-variation-settings: "wdth" 92;
   letter-spacing: var(--tr--2);
   text-decoration: none;
-  color: var(--snow-3);
+  color: var(--color-text-data);
   white-space: nowrap;
   min-height: 44px;
   display: inline-flex;
@@ -789,23 +796,23 @@
   transition: color var(--d-snap) var(--commit);
 }
 .nav-links a:hover {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 /* Les deux liens de service — langue et CV — se distinguent des ancres
    de section par un filet, pas par une couleur de plus. */
 .nav-links a.nav-utility {
-  border: 1px solid var(--line-lit);
+  border: 1px solid var(--color-rule);
   border-radius: 2px;
   padding-inline: var(--s-3);
   min-height: 34px;
-  color: var(--snow-2);
+  color: var(--color-text);
   transition:
     color var(--d-snap) var(--commit),
     border-color var(--d-snap) var(--commit);
 }
 .nav-links a.nav-utility:hover {
-  border-color: var(--iris);
-  color: var(--iris);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /* ── Menu du petit écran ─────────────────────────────
@@ -830,20 +837,20 @@
   min-height: 44px;
   min-width: 44px;
   padding-inline: var(--s-3);
-  border: 1px solid var(--line-lit);
+  border: 1px solid var(--color-rule);
   border-radius: 2px;
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-2);
+  color: var(--color-text);
   text-decoration: none;
   transition:
     color var(--d-snap) var(--commit),
     border-color var(--d-snap) var(--commit);
 }
 .lang-chip:hover {
-  border-color: var(--iris);
-  color: var(--iris);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 .menu-btn {
   position: relative;
@@ -853,10 +860,10 @@
   gap: var(--s-3);
   min-height: 44px;
   padding-inline: var(--s-4);
-  border: 1px solid var(--line-lit);
+  border: 1px solid var(--color-rule);
   border-radius: 2px;
   background: none;
-  color: var(--snow-2);
+  color: var(--color-text);
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
@@ -866,8 +873,8 @@
     border-color var(--d-snap) var(--commit);
 }
 .menu-btn[aria-expanded="true"] {
-  border-color: var(--iris);
-  color: var(--iris);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 /* Deux traits qui se rejoignent en un seul. Rien ne tourne. */
 .menu-glyph {
@@ -929,8 +936,8 @@
   max-height: calc(100dvh - 8rem);
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: var(--void);
-  border-block: 1px solid var(--line-lit);
+  background: var(--color-bg);
+  border-block: 1px solid var(--color-rule);
   padding: var(--s-2) var(--edge) var(--s-6);
   translate: 0 -6px;
   transition: translate var(--d-snap) var(--commit);
@@ -953,7 +960,7 @@
   align-items: center;
   min-height: 56px;
   text-decoration: none;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 .menu-list li:last-child a {
   border-bottom: 0;
@@ -962,7 +969,7 @@
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--iris);
+  color: var(--color-accent);
   font-variant-numeric: tabular-nums;
 }
 .menu-lab {
@@ -974,7 +981,7 @@
 .menu-tick {
   width: 18px;
   height: 1px;
-  background: var(--edge-ui);
+  background: var(--color-border-ui);
   transition:
     width var(--d-snap) var(--commit),
     background var(--d-snap) var(--commit);
@@ -982,7 +989,7 @@
 .menu-list a:active .menu-tick,
 .menu-list a:focus-visible .menu-tick {
   width: 28px;
-  background: var(--iris);
+  background: var(--color-accent);
 }
 .menu-utils {
   display: flex;
@@ -990,15 +997,15 @@
   gap: var(--s-3);
   margin-top: var(--s-5);
   padding-top: var(--s-5);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 .menu-utils .nav-utility {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
   text-decoration: none;
-  color: var(--snow-2);
-  border: 1px solid var(--line-lit);
+  color: var(--color-text);
+  border: 1px solid var(--color-rule);
   border-radius: 2px;
   padding-inline: var(--s-4);
   min-height: 44px;
@@ -1042,12 +1049,12 @@
   transform: rotate(var(--a));
 }
 .blade {
-  stroke: var(--snow);
-  fill: var(--snow);
+  stroke: var(--color-text-strong);
+  fill: var(--color-text-strong);
   stroke-linejoin: round;
 }
 .quill {
-  stroke: var(--snow);
+  stroke: var(--color-text-strong);
   fill: none;
   stroke-linecap: round;
 }
@@ -1055,14 +1062,14 @@
   fill: url(#coreG);
 }
 .horizon {
-  stroke: var(--snow);
+  stroke: var(--color-text-strong);
   opacity: 0.09;
 }
 
 /* le bord dentelé — il chevauche l'enveloppe réelle des rémiges et ne
    se résout qu'une fois l'aile immobile */
 .comb {
-  stroke: var(--snow);
+  stroke: var(--color-text-strong);
   stroke-linecap: round;
   fill: none;
   opacity: 0;
@@ -1084,14 +1091,14 @@
   fill: url(#irisG);
 }
 .pupil {
-  fill: var(--void);
+  fill: var(--color-bg);
 }
 .spec {
-  fill: var(--snow);
+  fill: var(--color-text-strong);
   opacity: 0.92;
 }
 .lid {
-  fill: var(--void);
+  fill: var(--color-bg);
   transform-box: view-box;
   transform-origin: 600px 324px;
   transform: scaleY(0);
@@ -1164,7 +1171,7 @@
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: var(--tr-0);
-  color: var(--snow);
+  color: var(--color-text-strong);
   text-wrap: balance;
 }
 .hero .lede {
@@ -1206,13 +1213,13 @@
     font-family: var(--f-display);
     font-size: var(--t--1);
     font-weight: 500;
-    color: var(--snow-2);
+    color: var(--color-text);
     text-decoration: underline;
-    text-decoration-color: var(--edge-ui);
+    text-decoration-color: var(--color-border-ui);
     text-underline-offset: 4px;
   }
   .hero-classic:hover {
-    color: var(--iris);
+    color: var(--color-accent);
     text-decoration-color: currentColor;
   }
 }
@@ -1236,7 +1243,7 @@
 .hero-stats .v {
   font-family: var(--f-mono);
   font-size: var(--tm-2);
-  color: var(--snow);
+  color: var(--color-text-strong);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -1246,7 +1253,7 @@
   font-family: var(--f-display);
   font-size: var(--t--1);
   line-height: 1.35;
-  color: var(--snow-2);
+  color: var(--color-text);
 }
 
 .btn {
@@ -1260,7 +1267,7 @@
   display: inline-flex;
   align-items: center;
   padding-inline: var(--s-6);
-  border: 1px solid var(--edge-ui);
+  border: 1px solid var(--color-border-ui);
   border-radius: 2px;
   background: none;
   color: inherit;
@@ -1271,21 +1278,21 @@
     color var(--d-snap) var(--commit);
 }
 .btn:hover {
-  border-color: var(--iris);
-  color: var(--iris);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 .btn:active {
   translate: 0 1px;
 }
 .btn-primary {
-  background: var(--iris);
-  color: var(--void);
-  border-color: var(--iris);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
 }
 .btn-primary:hover {
-  background: var(--snow);
-  border-color: var(--snow);
-  color: var(--void);
+  background: var(--color-text-strong);
+  border-color: var(--color-text-strong);
+  color: var(--color-bg);
 }
 
 .wordmark-strip {
@@ -1298,13 +1305,13 @@
 .wordmark-strip .hair {
   height: 1px;
   width: clamp(28px, 7vw, 70px);
-  background: var(--line-lit);
+  background: var(--color-rule);
 }
 
 /* ═══ Sections ════════════════════════════════════════════ */
 .band {
   padding-block: var(--s-9);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
   position: relative;
 }
 /* Un voile, pas un aplat. La meme alternance se lit toujours — c'est un
@@ -1332,7 +1339,7 @@
   text-wrap: balance;
 }
 .head p {
-  color: var(--snow-2);
+  color: var(--color-text);
   max-width: var(--measure);
   text-wrap: pretty;
 }
@@ -1453,8 +1460,8 @@
 }
 .why-figure,
 .plate {
-  border: 1px solid var(--line-lit);
-  background: var(--void);
+  border: 1px solid var(--color-rule);
+  background: var(--color-bg);
   padding: var(--s-5);
   margin: 0;
 }
@@ -1468,7 +1475,7 @@
 .plate figcaption {
   margin-top: var(--s-4);
   padding-top: var(--s-4);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 /* Une planche posée dans le flux d'une bande respire des deux côtés.
 
@@ -1481,23 +1488,23 @@
   max-width: 26rem;
 }
 .why-note {
-  color: var(--snow-2);
+  color: var(--color-text);
   max-width: var(--measure-tight);
 }
 .why-note p + p {
   margin-top: var(--s-4);
 }
 .diag-line {
-  stroke: var(--snow);
+  stroke: var(--color-text-strong);
   fill: none;
 }
 .diag-wake {
-  stroke: var(--snow-3);
+  stroke: var(--color-text-data);
   fill: none;
   stroke-linecap: round;
 }
 .diag-wake-calm {
-  stroke: var(--iris);
+  stroke: var(--color-accent);
   fill: none;
   stroke-linecap: round;
   opacity: 0.85;
@@ -1506,65 +1513,65 @@
   font-family: var(--f-mono);
   font-size: 12px;
   letter-spacing: var(--tr--2);
-  fill: var(--snow-3);
+  fill: var(--color-text-data);
 }
 .diag-rule {
-  stroke: var(--line-lit);
+  stroke: var(--color-rule);
 }
 
 /* --- Le circuit : postes, arêtes, et la seule arête qui remonte --- */
 .diag-node {
-  stroke: var(--line-lit);
-  fill: var(--void-lift);
+  stroke: var(--color-rule);
+  fill: var(--color-surface-1);
 }
 .diag-title {
   font-family: var(--f-display);
   font-size: 19px;
   letter-spacing: var(--tr--1);
-  fill: var(--snow);
+  fill: var(--color-text-strong);
 }
 .diag-edge {
-  stroke: var(--snow-3);
+  stroke: var(--color-text-data);
   fill: none;
 }
 .diag-edge-head {
-  fill: var(--snow-3);
+  fill: var(--color-text-data);
   stroke: none;
 }
 /* Le retour est la seule affirmation de la figure : il la porte en iris. */
 .diag-return {
-  stroke: var(--iris);
+  stroke: var(--color-accent);
   fill: none;
 }
 .diag-return-head {
-  fill: var(--iris);
+  fill: var(--color-accent);
   stroke: none;
 }
 .diag-return-label {
   font-family: var(--f-mono);
   font-size: 12px;
   letter-spacing: var(--tr--2);
-  fill: var(--iris);
+  fill: var(--color-accent);
 }
 
 /* --- L'intersection : trois disques de même poids --- */
 .diag-field {
-  stroke: var(--line-lit);
-  fill: var(--snow);
+  stroke: var(--color-rule);
+  fill: var(--color-text-strong);
   fill-opacity: 0.03;
 }
 .diag-leader {
-  stroke: var(--line-lit);
+  stroke: var(--color-rule);
   fill: none;
 }
 .diag-mark {
-  fill: var(--iris);
+  fill: var(--color-accent);
 }
 .diag-mark-label {
   font-family: var(--f-mono);
   font-size: 12px;
   letter-spacing: var(--tr--2);
-  fill: var(--iris);
+  fill: var(--color-accent);
 }
 
 /* ── Les planches de projet ───────────────────────────────
@@ -1586,18 +1593,18 @@
   gap: var(--s-3);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 .pf-no .rule {
   flex: 1;
   height: 1px;
-  background: var(--line-lit);
+  background: var(--color-rule);
 }
 .pf-title {
   font-family: var(--f-display);
   font-size: var(--t--1);
   letter-spacing: var(--tr--1);
-  color: var(--snow);
+  color: var(--color-text-strong);
   margin: var(--s-2) 0 var(--s-5);
   max-width: none;
   text-wrap: pretty;
@@ -1607,50 +1614,50 @@
    et les trois disent quelque chose : la branche décisive, le refus, la
    sortie atteinte. Aucune n'est là pour égayer la planche. */
 .pf-box {
-  stroke: var(--line-lit);
-  fill: var(--void-lift);
+  stroke: var(--color-rule);
+  fill: var(--color-surface-1);
   stroke-width: 1;
 }
 .pf-box-sunk {
-  fill: var(--void);
+  fill: var(--color-bg);
   stroke-dasharray: 4 3;
 }
 .pf-box-key {
-  stroke: var(--iris);
-  fill: color-mix(in srgb, var(--iris) 9%, var(--void-lift));
+  stroke: var(--color-accent);
+  fill: color-mix(in srgb, var(--color-accent) 9%, var(--color-surface-1));
 }
 .pf-box-ok {
-  stroke: var(--color-ok);
-  fill: color-mix(in srgb, var(--color-ok) 9%, var(--void-lift));
+  stroke: var(--color-status-ok);
+  fill: color-mix(in srgb, var(--color-status-ok) 9%, var(--color-surface-1));
 }
 .pf-box-fault {
-  stroke: var(--color-fault);
-  fill: color-mix(in srgb, var(--color-fault) 9%, var(--void-lift));
+  stroke: var(--color-status-danger);
+  fill: color-mix(in srgb, var(--color-status-danger) 9%, var(--color-surface-1));
 }
 
 .pf-line {
-  stroke: var(--snow-3);
+  stroke: var(--color-text-data);
   fill: none;
   stroke-width: 1;
 }
 .pf-line-key {
-  stroke: var(--iris);
+  stroke: var(--color-accent);
 }
 .pf-line-fault {
-  stroke: var(--color-fault);
+  stroke: var(--color-status-danger);
 }
 .pf-head {
-  fill: var(--snow-3);
+  fill: var(--color-text-data);
   stroke: none;
 }
 .pf-key-fill {
-  fill: var(--iris);
+  fill: var(--color-accent);
 }
 .pf-fault-fill {
-  fill: var(--color-fault);
+  fill: var(--color-status-danger);
 }
 .pf-hair {
-  stroke: var(--line-lit);
+  stroke: var(--color-rule);
   stroke-dasharray: 3 3;
   fill: none;
   stroke-width: 1;
@@ -1659,17 +1666,17 @@
 /* Le cache d'un remplacement : un aplat, pas un cadre. C'est sa largeur qui
    est l'objet de la planche — il ne doit donc rien porter d'autre. */
 .pf-mask {
-  fill: var(--void);
-  stroke: var(--edge-ui);
+  fill: var(--color-bg);
+  stroke: var(--color-border-ui);
   stroke-width: 1;
 }
 .pf-mask-fault {
-  stroke: var(--color-fault);
-  fill: color-mix(in srgb, var(--color-fault) 12%, var(--void));
+  stroke: var(--color-status-danger);
+  fill: color-mix(in srgb, var(--color-status-danger) 12%, var(--color-bg));
 }
 .pf-mask-ok {
-  stroke: var(--iris);
-  fill: color-mix(in srgb, var(--iris) 12%, var(--void));
+  stroke: var(--color-accent);
+  fill: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg));
 }
 
 .pf-t {
@@ -1677,21 +1684,21 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: var(--tr--1);
-  fill: var(--snow);
+  fill: var(--color-text-strong);
   text-anchor: middle;
 }
 .pf-s {
   font-family: var(--f-mono);
   font-size: 10.5px;
   letter-spacing: var(--tr--2);
-  fill: var(--snow-3);
+  fill: var(--color-text-data);
   text-anchor: middle;
 }
 .pf-n {
   font-family: var(--f-mono);
   font-size: 9.5px;
   letter-spacing: var(--tr--2-wide);
-  fill: var(--snow-3);
+  fill: var(--color-text-data);
 }
 .pf-n-mid {
   text-anchor: middle;
@@ -1700,7 +1707,7 @@
   font-family: var(--f-mono);
   font-size: 10px;
   letter-spacing: var(--tr--2);
-  fill: var(--snow-3);
+  fill: var(--color-text-data);
 }
 .pf-t-start,
 .pf-s-start,
@@ -1708,13 +1715,13 @@
   text-anchor: start;
 }
 .pf-key {
-  fill: var(--iris);
+  fill: var(--color-accent);
 }
 .pf-ok {
-  fill: var(--color-ok);
+  fill: var(--color-status-ok);
 }
 .pf-fault {
-  fill: var(--color-fault);
+  fill: var(--color-status-danger);
 }
 
 /* ── Le résumé de tête d'un projet ────────────────────────
@@ -1728,7 +1735,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
   max-width: var(--measure);
 }
 .capsule > div {
@@ -1736,23 +1743,23 @@
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s-1);
   padding-block: var(--s-3);
-  border-bottom: 1px dashed var(--line-lit);
+  border-bottom: 1px dashed var(--color-rule);
 }
 .capsule dt {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 .capsule dd {
   margin: 0;
-  color: var(--snow-2);
+  color: var(--color-text);
   text-wrap: pretty;
 }
 /* La ligne de résultat est la seule que le lecteur pressé retiendra : elle
    passe en iris, et rien d'autre dans le résumé ne le fait. */
 .capsule .result dd {
-  color: var(--iris);
+  color: var(--color-accent);
   font-family: var(--f-mono);
   font-size: var(--tm--1);
 }
@@ -1772,7 +1779,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 .step {
   position: relative;
@@ -1780,7 +1787,7 @@
   grid-template-columns: 3rem minmax(0, 1fr);
   gap: var(--s-4);
   padding-block: var(--s-5);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-subtle);
   align-items: start;
 }
 .step::after {
@@ -1790,7 +1797,7 @@
   inset-inline-start: 0;
   width: 100%;
   height: 1px;
-  background: var(--iris);
+  background: var(--color-accent);
   scale: 0 1;
   transform-origin: left;
   transition: scale var(--d-snap) var(--commit);
@@ -1801,7 +1808,7 @@
 .step-no {
   font-family: var(--f-mono);
   font-size: var(--tm--1);
-  color: var(--iris);
+  color: var(--color-accent);
   padding-top: 0.45em;
   font-variant-numeric: tabular-nums;
 }
@@ -1811,7 +1818,7 @@
   margin-bottom: var(--s-2);
 }
 .step p {
-  color: var(--snow-2);
+  color: var(--color-text);
   max-width: var(--measure);
   text-wrap: pretty;
 }
@@ -1823,7 +1830,7 @@
   margin-bottom: var(--s-2);
 }
 .step-live {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 
 /* ── Fiches de terrain — expériences et projets ───────────── */
@@ -1832,10 +1839,10 @@
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s-5);
   padding-block: var(--s-7);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 .sheet:first-of-type {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 .sheet h3 {
   font-size: var(--t-3);
@@ -1843,7 +1850,7 @@
   margin-block: var(--s-2) var(--s-3);
 }
 .sheet p {
-  color: var(--snow-2);
+  color: var(--color-text);
   max-width: var(--measure);
   text-wrap: pretty;
 }
@@ -1862,8 +1869,8 @@
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
-  border: 1px solid var(--line-lit);
+  color: var(--color-text-data);
+  border: 1px solid var(--color-rule);
   border-radius: 2px;
   padding: 3px 0.55rem;
   white-space: nowrap;
@@ -1879,13 +1886,13 @@
 .specs td {
   text-align: start;
   padding: var(--s-3) 0;
-  border-bottom: 1px dashed var(--line-lit);
+  border-bottom: 1px dashed var(--color-rule);
   font-family: var(--f-mono);
   font-size: var(--tm--1);
   font-weight: 400;
 }
 .specs th {
-  color: var(--snow-3);
+  color: var(--color-text-data);
   width: 44%;
   letter-spacing: var(--tr--2);
   vertical-align: top;
@@ -1912,10 +1919,10 @@
   justify-self: center;
 }
 .io-in .io-dot {
-  background: var(--color-fault);
+  background: var(--color-status-danger);
 }
 .io-out .io-dot {
-  background: var(--color-ok);
+  background: var(--color-status-ok);
 }
 .io-label {
   font-family: var(--f-mono);
@@ -1925,10 +1932,10 @@
   margin-bottom: 2px;
 }
 .io-in .io-label {
-  color: var(--color-fault);
+  color: var(--color-status-danger);
 }
 .io-out .io-label {
-  color: var(--color-ok);
+  color: var(--color-status-ok);
 }
 
 /* Puces sobres, alignées sur le rail typographique.
@@ -1947,7 +1954,7 @@
   grid-template-columns: 0.75rem minmax(0, 1fr);
   gap: var(--s-3);
   align-items: start;
-  color: var(--snow-2);
+  color: var(--color-text);
   font-size: var(--t--1);
   line-height: 1.6;
   max-width: var(--measure);
@@ -1956,7 +1963,7 @@
   content: "";
   width: 7px;
   height: 1px;
-  background: var(--edge-ui);
+  background: var(--color-border-ui);
   margin-top: 0.8em;
 }
 
@@ -1966,7 +1973,7 @@
    il fonctionne sans JavaScript et reste navigable au clavier. */
 .fold {
   margin-top: var(--s-5);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 .fold-toggle {
   list-style: none;
@@ -1978,14 +1985,14 @@
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
   transition: color var(--d-snap) var(--commit);
 }
 .fold-toggle::-webkit-details-marker {
   display: none;
 }
 .fold-toggle:hover {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 /* Un plus qui devient un moins : le trait vertical se rétracte, rien ne
    tourne. Un seul mouvement, comme partout ailleurs. */
@@ -2063,7 +2070,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
-  color: var(--iris);
+  color: var(--color-accent);
   display: block;
   margin-bottom: var(--s-2);
 }
@@ -2071,13 +2078,13 @@ details[open] > .fold-toggle .fold-open {
 .metric {
   display: grid;
   gap: 2px;
-  border-left: 2px solid var(--iris);
+  border-left: 2px solid var(--color-accent);
   padding-left: var(--s-4);
 }
 .metric .v {
   font-family: var(--f-mono);
   font-size: var(--tm-3);
-  color: var(--iris);
+  color: var(--color-accent);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
@@ -2085,21 +2092,21 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 
 .linkout {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--iris);
+  color: var(--color-accent);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   justify-self: start;
   transition: border-color var(--d-snap) var(--commit);
 }
 .linkout:hover {
-  border-bottom-color: var(--iris);
+  border-bottom-color: var(--color-accent);
 }
 
 /* ── Capacités ───────────────────────────────────────────── */
@@ -2109,14 +2116,14 @@ details[open] > .fold-toggle .fold-open {
   gap: var(--s-6);
 }
 .group {
-  border-top: 1px solid var(--edge-ui);
+  border-top: 1px solid var(--color-border-ui);
   padding-top: var(--s-4);
 }
 .group h3 {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
-  color: var(--iris);
+  color: var(--color-accent);
   font-weight: 500;
   margin-bottom: var(--s-4);
 }
@@ -2128,8 +2135,8 @@ details[open] > .fold-toggle .fold-open {
 .group li {
   padding-block: var(--s-2);
   font-size: var(--t--1);
-  color: var(--snow-2);
-  border-bottom: 1px solid var(--line);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 .group li:last-child {
   border-bottom: 0;
@@ -2139,7 +2146,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 
 /* ── Origine ─────────────────────────────────────────────── */
@@ -2150,7 +2157,7 @@ details[open] > .fold-toggle .fold-open {
   align-items: start;
 }
 .about p {
-  color: var(--snow-2);
+  color: var(--color-text);
   max-width: var(--measure);
   text-wrap: pretty;
 }
@@ -2164,8 +2171,8 @@ details[open] > .fold-toggle .fold-open {
   font-synthesis-weight: none;
   line-height: 1.28;
   letter-spacing: var(--tr-title-2);
-  color: var(--snow);
-  border-left: 2px solid var(--iris);
+  color: var(--color-text-strong);
+  border-left: 2px solid var(--color-accent);
   padding-left: var(--s-5);
   margin-block: var(--s-6);
   max-width: 40ch;
@@ -2216,7 +2223,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-display);
   font-size: var(--t-2);
   font-weight: 600;
-  color: var(--iris);
+  color: var(--color-accent);
   text-decoration: none;
   min-height: 44px;
   display: inline-flex;
@@ -2226,7 +2233,7 @@ details[open] > .fold-toggle .fold-open {
   transition: border-color var(--d-snap) var(--commit);
 }
 .mailto:hover {
-  border-bottom-color: var(--iris);
+  border-bottom-color: var(--color-accent);
 }
 .contact-rows {
   display: grid;
@@ -2239,15 +2246,15 @@ details[open] > .fold-toggle .fold-open {
   gap: var(--s-2) var(--s-4);
   justify-content: space-between;
   padding-bottom: var(--s-3);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 .contact-row a:hover {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 .contact-row .val {
   font-family: var(--f-mono);
   font-size: var(--tm--1);
-  color: var(--snow-2);
+  color: var(--color-text);
   text-decoration: none;
   transition: color var(--d-snap) var(--commit);
 }
@@ -2257,7 +2264,7 @@ details[open] > .fold-toggle .fold-open {
   gap: var(--s-4);
   justify-content: space-between;
   padding-block: var(--s-6) var(--s-7);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-border-subtle);
 }
 
 /* ── Le rail de sections sert de navigation ──────────────── */
@@ -2284,7 +2291,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
   opacity: 0;
   transition: opacity var(--d-snap) var(--commit);
   white-space: nowrap;
@@ -2292,7 +2299,7 @@ details[open] > .fold-toggle .fold-open {
 .index .tick {
   width: 16px;
   height: 1px;
-  background: var(--edge-ui);
+  background: var(--color-border-ui);
   transition:
     width var(--d-snap) var(--commit),
     background var(--d-snap) var(--commit);
@@ -2302,16 +2309,16 @@ details[open] > .fold-toggle .fold-open {
   opacity: 1;
 }
 .index a:hover .tick {
-  background: var(--snow-3);
+  background: var(--color-text-data);
   width: 26px;
 }
 .index a[aria-current="true"] .tick {
-  background: var(--iris);
+  background: var(--color-accent);
   width: 30px;
 }
 .index a[aria-current="true"] .lab {
   opacity: 1;
-  color: var(--snow-2);
+  color: var(--color-text);
 }
 
 /* ── Vue classique (CV imprimable) ───────────────────────── */
@@ -2323,7 +2330,7 @@ details[open] > .fold-toggle .fold-open {
   margin-inline: auto;
 }
 .cv-head {
-  border-bottom: 1px solid var(--line-lit);
+  border-bottom: 1px solid var(--color-rule);
   padding-bottom: var(--s-6);
 }
 .cv-head h1 {
@@ -2331,7 +2338,7 @@ details[open] > .fold-toggle .fold-open {
   letter-spacing: var(--tr-title-2);
 }
 .cv-head .role {
-  color: var(--iris);
+  color: var(--color-accent);
   font-size: var(--t-1);
   margin-top: var(--s-2);
 }
@@ -2348,7 +2355,7 @@ details[open] > .fold-toggle .fold-open {
   transition: color var(--d-snap) var(--commit);
 }
 .cv-contact a:hover {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 .cv-section {
   margin-top: var(--s-7);
@@ -2359,8 +2366,8 @@ details[open] > .fold-toggle .fold-open {
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
   font-weight: 500;
-  color: var(--iris);
-  border-bottom: 1px solid var(--line);
+  color: var(--color-accent);
+  border-bottom: 1px solid var(--color-border-subtle);
   padding-bottom: var(--s-2);
 }
 .cv-body {
@@ -2373,14 +2380,14 @@ details[open] > .fold-toggle .fold-open {
   letter-spacing: var(--tr-1);
 }
 .cv-entry .sub {
-  color: var(--snow-3);
+  color: var(--color-text-data);
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
   margin-top: 2px;
 }
 .cv-entry p {
-  color: var(--snow-2);
+  color: var(--color-text);
   font-size: var(--t--1);
 }
 .cv-row {
@@ -2467,7 +2474,7 @@ details[open] > .fold-toggle .fold-open {
   justify-content: space-between;
   gap: var(--s-3) var(--s-5);
   padding-bottom: var(--s-4);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-subtle);
   margin-bottom: var(--s-5);
 }
 .pfilter-chips {
@@ -2485,8 +2492,8 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
-  border: 1px solid var(--edge-ui);
+  color: var(--color-text-data);
+  border: 1px solid var(--color-border-ui);
   border-radius: 2px;
   padding: 0.4rem var(--s-3);
   min-height: 36px;
@@ -2499,29 +2506,29 @@ details[open] > .fold-toggle .fold-open {
 .pchip-tick {
   width: 5px;
   height: 5px;
-  background: var(--line-lit);
+  background: var(--color-rule);
   transition:
     background-color var(--d-snap) var(--commit),
     scale var(--d-snap) var(--commit);
 }
 .pchip:hover {
-  color: var(--snow-2);
-  border-color: var(--edge-ui);
+  color: var(--color-text);
+  border-color: var(--color-border-ui);
 }
 .pchip:hover .pchip-tick {
-  background: var(--edge-ui);
+  background: var(--color-border-ui);
 }
 .pchip[aria-pressed="true"] {
-  color: var(--snow);
-  border-color: var(--iris);
+  color: var(--color-text-strong);
+  border-color: var(--color-accent);
   background: var(--chip-on);
 }
 .pchip[aria-pressed="true"] .pchip-tick {
-  background: var(--iris);
+  background: var(--color-accent);
   scale: 1.4;
 }
 .pfilter-count {
-  color: var(--snow-3);
+  color: var(--color-text-data);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
   font-variant-numeric: tabular-nums;
@@ -2547,7 +2554,7 @@ details[open] > .fold-toggle .fold-open {
   perspective: 900px;
 }
 .pgrid-empty {
-  color: var(--snow-3);
+  color: var(--color-text-data);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
   padding-block: var(--s-6);
@@ -2562,8 +2569,8 @@ details[open] > .fold-toggle .fold-open {
   padding: var(--s-5);
   text-decoration: none;
   color: inherit;
-  background: var(--void-lift);
-  border: 1px solid var(--line);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-subtle);
   /* Pas d'overflow caché ici : il aplatirait la scène et les couches
      internes retomberaient dans le plan de la face. Le reflet est déjà
      borné par son propre calage. */
@@ -2576,8 +2583,8 @@ details[open] > .fold-toggle .fold-open {
 }
 .pcard:hover,
 .pcard:focus-visible {
-  border-color: var(--edge-ui);
-  background: var(--lift-hover);
+  border-color: var(--color-border-ui);
+  background: var(--color-surface-2);
 }
 
 /* Le reflet — une tache qui suit le pointeur sur la face de la tuile. */
@@ -2610,7 +2617,7 @@ details[open] > .fold-toggle .fold-open {
 .pcard-no {
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
   font-variant-numeric: tabular-nums;
 }
 .pcard-body {
@@ -2623,13 +2630,13 @@ details[open] > .fold-toggle .fold-open {
   font-size: calc(var(--t-1) * var(--fit-title));
   letter-spacing: var(--tr-title-2);
   line-height: var(--lh-head);
-  color: var(--snow);
+  color: var(--color-text-strong);
   text-wrap: balance;
 }
 .pcard-tag {
   font-size: var(--t--1);
   line-height: 1.5;
-  color: var(--snow-2);
+  color: var(--color-text);
 }
 .pcard-foot {
   display: flex;
@@ -2646,20 +2653,20 @@ details[open] > .fold-toggle .fold-open {
 .pcard-metric {
   display: grid;
   gap: 2px;
-  border-left: 2px solid var(--iris);
+  border-left: 2px solid var(--color-accent);
   padding-left: var(--s-3);
 }
 .pcard-metric .v {
   font-family: var(--f-mono);
   font-size: var(--tm-2);
-  color: var(--iris);
+  color: var(--color-accent);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
 .pcard-metric .k {
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 .pcard-tracks {
   display: flex;
@@ -2669,8 +2676,8 @@ details[open] > .fold-toggle .fold-open {
 .pcard-track {
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
-  border: 1px solid var(--line);
+  color: var(--color-text-data);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 2px;
   padding: 2px 0.45rem;
   white-space: nowrap;
@@ -2697,18 +2704,18 @@ details[open] > .fold-toggle .fold-open {
 }
 /* Livré : la seule affirmation close du document. */
 .status-done {
-  color: var(--color-ok);
+  color: var(--color-status-ok);
 }
 /* Pilote : en service, pas encore généralisé. Neutre mais vif — pas
    ambre. L'ambre porte déjà le focus, le survol et « vous êtes ici » :
    une pastille ambre au repos se lisait comme un contrôle actif. */
 .status-pilot {
-  color: var(--snow-2);
+  color: var(--color-text);
 }
 /* En cours : le dernier cran de la rampe. Aucune couleur ne lui est due
    tant que rien n'est tenu. */
 .status-wip {
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 
 /* ── La bascule d'ensemble ───────────────────────────────── */
@@ -2723,21 +2730,21 @@ details[open] > .fold-toggle .fold-open {
   align-items: center;
   gap: var(--s-2);
   background: none;
-  border: 1px solid var(--edge-ui);
+  border: 1px solid var(--color-border-ui);
   border-radius: 2px;
   padding: 0.3rem var(--s-3);
   min-height: 34px;
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--snow-3);
+  color: var(--color-text-data);
   transition:
     color var(--d-snap) var(--commit),
     border-color var(--d-snap) var(--commit);
 }
 .foldall:hover {
-  color: var(--iris);
-  border-color: var(--edge-ui);
+  color: var(--color-accent);
+  border-color: var(--color-border-ui);
 }
 /* Le même signe que les dépliages : le plus se rétracte en moins. */
 .foldall-sign {
@@ -2770,8 +2777,8 @@ details[open] > .fold-toggle .fold-open {
 /* ── La preuve qu'on peut voir ───────────────────────────── */
 .shot {
   margin: var(--s-5) 0 0;
-  border: 1px solid var(--line);
-  background: var(--void-lift);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-1);
   padding: var(--s-2);
   line-height: 0;
 }
@@ -2807,7 +2814,7 @@ article[id] {
   flex: 1 1 auto;
   height: 1px;
   margin-inline-start: -0.14em;
-  background: var(--line-lit);
+  background: var(--color-rule);
   scale: 0 1;
   transform-origin: left;
   transition: scale var(--d-arrive) var(--glide) calc(var(--in-delay) + 120ms);
@@ -2820,7 +2827,7 @@ article[id] {
    remplissage. */
 .certs-issuer {
   flex: 0 0 auto;
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 
 .certs-grid {
@@ -2837,19 +2844,19 @@ article[id] {
   align-items: start;
   gap: var(--s-3);
   padding: var(--s-5);
-  border: 1px solid var(--line);
-  background: var(--void-lift);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-1);
   transition:
     border-color var(--d-snap) var(--commit),
     background-color var(--d-snap) var(--commit);
 }
 .cert:hover,
 .cert:focus-within {
-  border-color: var(--edge-ui);
-  background: var(--lift-hover);
+  border-color: var(--color-border-ui);
+  background: var(--color-surface-2);
 }
 .cert-meta {
-  color: var(--snow-3);
+  color: var(--color-text-data);
 }
 .cert-name {
   font-family: var(--f-title);
@@ -2858,11 +2865,11 @@ article[id] {
   font-size: calc(var(--t-1) * var(--fit-title));
   letter-spacing: var(--tr-title-2);
   line-height: var(--lh-head);
-  color: var(--snow);
+  color: var(--color-text-strong);
   text-wrap: balance;
 }
 .cert-body {
-  color: var(--snow-2);
+  color: var(--color-text);
   font-size: var(--t--1);
   line-height: 1.55;
 }
@@ -3043,7 +3050,7 @@ article[id] {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
     margin-top: var(--s-7);
-    border-block: 1px solid var(--line);
+    border-block: 1px solid var(--color-border-subtle);
   }
   .hero-stats li {
     grid-template-columns: 6.5rem minmax(0, 1fr);
@@ -3055,7 +3062,7 @@ article[id] {
     text-align: start;
   }
   .hero-stats li + li {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--color-border-subtle);
   }
   .hero-stats .v {
     font-size: var(--t-1);
@@ -3328,7 +3335,7 @@ article[id] {
     inset-inline-start: 0;
     width: 100%;
     height: 1px;
-    background: var(--iris);
+    background: var(--color-accent);
     transform-origin: left;
     scale: 0 1;
     animation: read-through linear both;
@@ -3367,11 +3374,11 @@ article[id] {
    même ambre, même filet, pour que les deux repères disent la même
    chose au même moment. */
 .nav-links a[aria-current="true"] {
-  color: var(--snow);
+  color: var(--color-text-strong);
 }
 .nav-links a[aria-current="true"]::after {
   scale: 1 1;
-  background: var(--iris);
+  background: var(--color-accent);
 }
 
 /* Le fond ambre du bouton plein ne s'éclaircit pas : il est balayé
@@ -3386,7 +3393,7 @@ article[id] {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--iris);
+  background: var(--color-accent);
   scale: 0 1;
   transform-origin: left;
   transition: scale var(--d-snap) var(--commit);
@@ -3397,15 +3404,15 @@ article[id] {
 }
 .btn:hover,
 .btn:focus-visible {
-  color: var(--void);
-  border-color: var(--iris);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
 }
 .btn-primary::before {
-  background: var(--snow);
+  background: var(--color-text-strong);
 }
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  border-color: var(--snow);
+  border-color: var(--color-text-strong);
 }
 /* La pression s'enfonce d'un pixel et perd son balayage : le bouton
    est déjà engagé, il n'a plus rien à annoncer. */
@@ -3425,7 +3432,7 @@ article[id] {
   gap: var(--s-3);
 }
 .eyebrow .no {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 .eyebrow .rule {
   flex: 1 1 auto;
@@ -3433,7 +3440,7 @@ article[id] {
   /* Le dernier signe d'un mot en capitales espacées emporte son approche :
      sans cette reprise, le filet démarre un cheveu trop loin. */
   margin-inline-start: -0.14em;
-  background: var(--line-lit);
+  background: var(--color-rule);
   scale: 0 1;
   transform-origin: left;
   transition: scale var(--d-arrive) var(--glide) calc(var(--in-delay) + 120ms);
@@ -3481,16 +3488,16 @@ article[id] {
   translate: 3px 0;
 }
 .step-no {
-  color: var(--snow-3);
+  color: var(--color-text-data);
   transition: color var(--d-snap) var(--commit);
 }
 .step:hover .step-no {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 /* Le numéro d'une étape en cours reste ambre : c'est une donnée, pas
    un état de survol. */
 .step:has(.step-live) .step-no {
-  color: var(--iris);
+  color: var(--color-accent);
 }
 
 /* ── Les fiches de terrain ────────────────────────────────────
@@ -3536,8 +3543,8 @@ article[id] {
   inset-inline-start: calc(var(--s-4) * -1);
   width: 10px;
   height: 10px;
-  border-block-start: 1px solid var(--iris);
-  border-inline-start: 1px solid var(--iris);
+  border-block-start: 1px solid var(--color-accent);
+  border-inline-start: 1px solid var(--color-accent);
   opacity: 0;
   translate: 4px 4px;
   transition:
@@ -3558,7 +3565,7 @@ article[id] {
    chiffre qui défile — on lit une mesure, pas un compteur. */
 .metric {
   border-left-color: transparent;
-  background-image: linear-gradient(var(--iris), var(--iris));
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 2px 0%;
@@ -3578,8 +3585,8 @@ article[id] {
     color var(--d-snap) var(--commit);
 }
 .tags:hover .tag:hover {
-  border-color: var(--edge-ui);
-  color: var(--snow);
+  border-color: var(--color-border-ui);
+  color: var(--color-text-strong);
 }
 
 /* ── Nomenclature ─────────────────────────────────────────────
@@ -3587,7 +3594,7 @@ article[id] {
    survolée avance sur son rail. */
 .group {
   border-top-color: transparent;
-  background-image: linear-gradient(var(--edge-ui), var(--edge-ui));
+  background-image: linear-gradient(var(--color-border-ui), var(--color-border-ui));
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 0% 1px;
@@ -3602,7 +3609,7 @@ article[id] {
     padding-inline-start var(--d-snap) var(--commit);
 }
 .group li:hover {
-  color: var(--snow);
+  color: var(--color-text-strong);
   padding-inline-start: var(--s-2);
 }
 
@@ -3618,7 +3625,7 @@ article[id] {
 }
 .linkout,
 .mailto {
-  background-image: linear-gradient(var(--iris), var(--iris));
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-repeat: no-repeat;
   background-position: left bottom;
   transition: background-size var(--d-snap) var(--commit);
@@ -3681,7 +3688,7 @@ details[open] > .fold-body {
    phrase se lève derrière lui. */
 .pull {
   border-left-color: transparent;
-  background-image: linear-gradient(var(--iris), var(--iris));
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 2px 0%;
@@ -3699,11 +3706,11 @@ details[open] > .fold-body {
     translate var(--d-snap) var(--commit);
 }
 .contact-row:hover .val {
-  color: var(--snow);
+  color: var(--color-text-strong);
 }
 .contact-row a.val:hover,
 .contact-row a.val:focus-visible {
-  color: var(--iris);
+  color: var(--color-accent);
   translate: -3px 0;
 }
 
@@ -3713,7 +3720,7 @@ details[open] > .fold-body {
    document qui n'appartenait pas au document. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--line-lit) transparent;
+  scrollbar-color: var(--color-rule) transparent;
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -3723,12 +3730,12 @@ details[open] > .fold-body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--line-lit);
-  border: 3px solid var(--void);
+  background: var(--color-rule);
+  border: 3px solid var(--color-bg);
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--edge-ui);
+  background: var(--color-border-ui);
 }
 
 @media (prefers-reduced-motion: reduce) {
