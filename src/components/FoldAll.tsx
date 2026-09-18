@@ -81,7 +81,7 @@ export function FoldAll({
   return (
     <button type="button" className="foldall" onClick={toggle}>
       <span className="foldall-sign" aria-hidden="true" data-open={open || undefined} />
-      {(open ? collapseLabel : expandLabel).toUpperCase()}
+      <span className="u">{open ? collapseLabel : expandLabel}</span>
     </button>
   );
 }

@@ -30,7 +30,7 @@ export function SectionIndex({ sections, label }: SectionIndexProps) {
           href={`#${s.id}`}
           {...(active === s.id ? { "aria-current": "true" as const } : {})}
         >
-          <span className="lab">{s.label.toUpperCase()}</span>
+          <span className="lab u">{s.label}</span>
           <span className="tick" />
         </a>
       ))}

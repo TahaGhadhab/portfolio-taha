@@ -62,7 +62,7 @@ export function Head({
     <div className="head commit">
       <p className="mono eyebrow">
         {no ? <span className="no">{no}</span> : null}
-        <span>{eyebrow.toUpperCase()}</span>
+        <span className="u">{eyebrow}</span>
         <span className="rule" aria-hidden="true" />
         {tools ? <span className="head-tools">{tools}</span> : null}
       </p>
@@ -110,8 +110,8 @@ function Fold({
     <details className="fold">
       <summary className="fold-toggle">
         <span className="fold-sign" aria-hidden="true" />
-        <span className="fold-closed">{openLabel.toUpperCase()}</span>
-        <span className="fold-open">{closeLabel.toUpperCase()}</span>
+        <span className="fold-closed u">{openLabel}</span>
+        <span className="fold-open u">{closeLabel}</span>
       </summary>
       <div className="fold-body">{children}</div>
     </details>
@@ -152,7 +152,7 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
               <div className="io-row io-in">
                 <span className="io-dot" aria-hidden="true" />
                 <div>
-                  <span className="io-label">{experience.inputLabel.toUpperCase()}</span>
+                  <span className="io-label u">{experience.inputLabel}</span>
                   <p>{item.input}</p>
                 </div>
               </div>
@@ -161,11 +161,10 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
                 <div>
                   {/* Un poste d'immersion n'a rien livré : sa sortie est un acquis,
                       au même emplacement que le livrable des autres fiches. */}
-                  <span className="io-label">
-                    {(item.hasDeliverable
+                  <span className="io-label u">
+                    {item.hasDeliverable
                       ? experience.outputLabel
-                      : experience.immersionLabel
-                    ).toUpperCase()}
+                      : experience.immersionLabel}
                   </span>
                   <p>{item.output}</p>
                 </div>
@@ -174,7 +173,7 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
 
             <Fold openLabel={experience.detailsLabel} closeLabel={experience.hideLabel}>
               <div>
-                <span className="fold-label">{experience.missionsLabel.toUpperCase()}</span>
+                <span className="fold-label u">{experience.missionsLabel}</span>
                 <ul className="bullets" style={{ marginTop: 0 }}>
                   {item.missions.map((m) => (
                     <li key={m}>{m}</li>
@@ -182,11 +181,11 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
                 </ul>
               </div>
               <div>
-                <span className="fold-label">{experience.toolsLabel.toUpperCase()}</span>
+                <span className="fold-label u">{experience.toolsLabel}</span>
                 <div className="tags" style={{ marginTop: 0 }}>
                   {item.tools.map((t) => (
                     <span className="tag" key={t}>
-                      {t.toUpperCase()}
+                      {t}
                     </span>
                   ))}
                 </div>
@@ -222,7 +221,7 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
             {p.metric ? (
               <div className="metric">
                 <span className="v">{p.metric.value}</span>
-                <span className="k">{p.metric.label.toUpperCase()}</span>
+                <span className="k">{p.metric.label}</span>
               </div>
             ) : null}
             {p.url ? (
@@ -232,7 +231,7 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {projects.siteLabel.toUpperCase()} ↗
+                <span className="u">{projects.siteLabel}</span> ↗
               </a>
             ) : null}
           </div>
@@ -269,7 +268,7 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
                   ] as const
                 ).map(([field, label]) => (
                   <div className={field} key={field}>
-                    <dt>{label.toUpperCase()}</dt>
+                    <dt className="u">{label}</dt>
                     <dd>{p.capsule![field]}</dd>
                   </div>
                 ))}
@@ -292,8 +291,8 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
 
               {p.steps ? (
                 <div>
-                  <span className="fold-label">
-                    {(p.capsule ? projects.caseLabel : projects.stepsLabel).toUpperCase()}
+                  <span className="fold-label u">
+                    {p.capsule ? projects.caseLabel : projects.stepsLabel}
                   </span>
                   <ol className="rail-list">
                     {p.steps.map((s) => (
@@ -320,19 +319,19 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
               <div>
                 {/* Le socle est le dernier poste de la séquence, pas une
                     annexe : sur une étude de cas il en porte le numéro. */}
-                <span className="fold-label">
+                <span className="fold-label u">
                   {p.capsule ? `${projects.stackStepNo} · ` : ""}
-                  {projects.stackLabel.toUpperCase()}
+                  {projects.stackLabel}
                 </span>
                 {p.stackDetail ? (
                   <div className="stack-groups">
                     {p.stackDetail.map((g) => (
                       <div className="stack-row" key={g.label}>
-                        <span className="mono">{g.label.toUpperCase()}</span>
+                        <span className="mono u">{g.label}</span>
                         <div className="tags">
                           {g.items.map((t) => (
                             <span className="tag" key={t}>
-                              {t.toUpperCase()}
+                              {t}
                             </span>
                           ))}
                         </div>
@@ -343,7 +342,7 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
                   <div className="tags" style={{ marginTop: 0 }}>
                     {p.stack.map((t) => (
                       <span className="tag" key={t}>
-                        {t.toUpperCase()}
+                        {t}
                       </span>
                     ))}
                   </div>
@@ -379,7 +378,7 @@ export function CapabilityGroups({
     <div className="groups commit" data-stagger>
       {skills.groups.map((group, i) => (
         <div className="group" key={group.id} style={rank(i)}>
-          <h3>{group.domain.toUpperCase()}</h3>
+          <h3 className="u">{group.domain}</h3>
           <ul>
             {group.skills.map((skill) => (
               <li key={skill.name}>
@@ -396,7 +395,7 @@ export function CapabilityGroups({
       ))}
 
       <div className="group" style={rank(skills.groups.length)}>
-        <h3>{skills.soft.title.toUpperCase()}</h3>
+        <h3 className="u">{skills.soft.title}</h3>
         <ul>
           {skills.soft.items.map((item) => (
             <li key={item}>{item}</li>
@@ -405,7 +404,7 @@ export function CapabilityGroups({
       </div>
 
       <div className="group" style={rank(skills.groups.length + 1)}>
-        <h3>{skills.languages.title.toUpperCase()}</h3>
+        <h3 className="u">{skills.languages.title}</h3>
         <ul>
           {skills.languages.items.map((item) => (
             <li key={item.name}>
@@ -461,15 +460,15 @@ export function CertificationPlates({
   return (
     <div className="certs commit" data-stagger>
       <p className="mono certs-head">
-        <span>{certs.title.toUpperCase()}</span>
+        <span className="u">{certs.title}</span>
         <span className="rule" aria-hidden="true" />
-        <span className="certs-issuer">{certs.issuer.toUpperCase()}</span>
+        <span className="certs-issuer">{certs.issuer}</span>
       </p>
 
       <ul className="certs-grid">
         {certs.items.map((item, i) => (
           <li className="cert" key={item.url} style={rank(i)}>
-            <p className="mono cert-meta">{item.meta.toUpperCase()}</p>
+            <p className="mono cert-meta">{item.meta}</p>
             <h3 className="cert-name">{item.name}</h3>
             <p className="cert-body">{item.body}</p>
             <a
@@ -478,7 +477,7 @@ export function CertificationPlates({
               target="_blank"
               rel="noopener noreferrer"
             >
-              {certs.verifyLabel.toUpperCase()} ↗
+              <span className="u">{certs.verifyLabel}</span> ↗
             </a>
           </li>
         ))}
@@ -506,7 +505,7 @@ export function OriginSection({
         <div className="head" style={{ marginBottom: 0 }}>
           <p className="mono eyebrow">
             {no ? <span className="no">{no}</span> : null}
-            <span>{eyebrow.toUpperCase()}</span>
+            <span className="u">{eyebrow}</span>
             <span className="rule" aria-hidden="true" />
           </p>
           <SplitWords as="h2" text={about.title} from={1} />
@@ -531,7 +530,7 @@ export function OriginSection({
         <div className="groups commit" data-stagger>
           {about.positioning.pillars.map((pillar, i) => (
             <div className="group" key={pillar.title} style={rank(i)}>
-              <h3>{pillar.title.toUpperCase()}</h3>
+              <h3 className="u">{pillar.title}</h3>
               <p style={{ color: "var(--color-text)", fontSize: "var(--t--1)" }}>
                 {pillar.body}
               </p>
@@ -575,11 +574,11 @@ export function EngagementSection({
       </ol>
 
       <div className="commit" style={{ marginTop: "var(--s-7)" }}>
-        <p className="mono">{interests.title.toUpperCase()}</p>
+        <p className="mono u">{interests.title}</p>
         <div className="tags">
           {interests.items.map((item) => (
             <span className="tag" key={item}>
-              {item.toUpperCase()}
+              {item}
             </span>
           ))}
         </div>
@@ -603,7 +602,7 @@ export function ContactClose({
     <div className="close commit" data-stagger>
       <div className="close-lead">
         <p className="mono eyebrow">
-          <span>{contact.title.toUpperCase()}</span>
+          <span className="u">{contact.title}</span>
           <span className="rule" aria-hidden="true" />
         </p>
         <SplitWords as="h2" text={contact.intro} from={1} className="close-title" />
@@ -619,7 +618,7 @@ export function ContactClose({
 
         <div className="contact-rows">
           <div className="contact-row">
-            <span className="mono">{contact.phoneLabel.toUpperCase()}</span>
+            <span className="mono u">{contact.phoneLabel}</span>
             <a className="val" href={`tel:${contact.phone.replace(/\s/g, "")}`}>
               {contact.phone}
             </a>
@@ -636,7 +635,7 @@ export function ContactClose({
             </a>
           </div>
           <div className="contact-row">
-            <span className="mono">{contact.locationLabel.toUpperCase()}</span>
+            <span className="mono u">{contact.locationLabel}</span>
             <span className="val">{contact.location}</span>
           </div>
         </div>

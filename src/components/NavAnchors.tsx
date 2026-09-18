@@ -35,7 +35,7 @@ export function NavAnchors({ anchors, sections }: NavAnchorsProps) {
           href={`#${s.id}`}
           {...(active === s.id ? { "aria-current": "true" as const } : {})}
         >
-          {s.label.toUpperCase()}
+          {s.label}
         </a>
       ))}
     </>

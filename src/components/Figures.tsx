@@ -191,7 +191,7 @@ function Fields({
 
       <circle className="diag-mark" cx="160" cy="143" r="4" />
       <text className="diag-mark-label" x="160" y="164" textAnchor="middle">
-        {figure.centerLabel.toUpperCase()}
+        {figure.centerLabel}
       </text>
 
       <path
@@ -206,7 +206,7 @@ function Fields({
             {i + 1}
           </text>
           <text className="diag-label" x="30" y={334 + i * 26}>
-            {p.title.toUpperCase()}
+            {p.title}
           </text>
         </g>
       ))}

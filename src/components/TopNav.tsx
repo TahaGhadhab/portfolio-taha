@@ -92,7 +92,7 @@ export function TopNav({
               aria-label={`${nav.langLabel} : ${LOCALE_NAMES[other]}`}
               prefetch={false}
             >
-              {other.toUpperCase()}
+              <span className="u">{other}</span>
             </Link>
           </div>
 

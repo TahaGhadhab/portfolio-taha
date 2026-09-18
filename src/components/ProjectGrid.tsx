@@ -99,7 +99,7 @@ function FilterChip({
   return (
     <button type="button" className="pchip" aria-pressed={on} onClick={onSelect}>
       <span className="pchip-tick" aria-hidden="true" />
-      {label.toUpperCase()}
+      <span className="u">{label}</span>
     </button>
   );
 }
@@ -191,13 +191,13 @@ function ProjectCard({
           {project.metric ? (
             <span className="pcard-metric">
               <span className="v">{project.metric.value}</span>
-              <span className="k mono">{project.metric.label.toUpperCase()}</span>
+              <span className="k mono">{project.metric.label}</span>
             </span>
           ) : null}
           <span className="pcard-tracks">
             {project.tracks.map((t) => (
               <span className="pcard-track mono" key={t}>
-                {projects.tracks[t].toUpperCase()}
+                <span className="u">{projects.tracks[t]}</span>
               </span>
             ))}
           </span>
@@ -223,7 +223,7 @@ export function StatusChip({
   return (
     <span className={`status status-${tone}`}>
       <span className="status-dot" aria-hidden="true" />
-      {label.toUpperCase()}
+      <span className="u">{label}</span>
     </span>
   );
 }

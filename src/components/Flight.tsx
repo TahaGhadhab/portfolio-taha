@@ -189,7 +189,14 @@ export function Flight({ hero, cv, cvLabel, primaryHref, classicHref, classicLab
      s'arrête. Le bord dentelé ne se résout qu'ensuite — le détail fin est la
      récompense de l'attente. */
   useEffect(() => {
-    const wait = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 850;
+    const hold = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--d-hold"),
+    );
+    const wait = matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : Number.isFinite(hold) && hold > 0
+        ? hold
+        : 850;
     const id = setTimeout(() => setOpen(true), wait);
     return () => clearTimeout(id);
   }, []);

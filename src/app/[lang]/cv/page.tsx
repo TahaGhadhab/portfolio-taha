@@ -150,7 +150,7 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {c.education.certifications.verifyLabel.toUpperCase()} ↗
+                    <span className="u">{c.education.certifications.verifyLabel}</span> ↗
                   </a>
                 </div>
               ))}

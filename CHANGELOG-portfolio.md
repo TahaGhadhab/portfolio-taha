@@ -128,3 +128,30 @@ Branch `portfolio-upgrade` (not pushed). Phase 1 committed at `ed2b245`; palette
 - `tsc`, `eslint`, `next build` clean; 9 static routes including `/fr/opengraph-image` and `/en/opengraph-image`.
 - First-viewport check (FR + EN): identity line, H1 and primary CTA visible at 320×640, 375×667, 375×812, 414×896, 768×1024, 1366×768, 1440×900; no horizontal scroll; header owl opacity 0 on the hero and 1 after scrolling.
 - Screenshots: `audit/phase2/hero-*.png`, share images `audit/phase2/og-{fr,en}.png`.
+
+---
+
+## Phase 2B — Design system · 18 Sep 2026
+
+Rebased on the palette actually shipped, plus the vellum palette Taha kept. `DESIGN.md` and `audit/token-inventory.md` are the deliverables.
+
+| ID | Status | Change |
+|---|---|---|
+| D3 | Done | Two token layers: primitives (a value with a hue) and roles (what the colour does). Renaming pass verified **pixel-identical** on `/fr`, `/en`, `/fr/cv` at 375 and 1440 (commit `8de8ebb`). |
+| D1, D2 | N/A, recorded | The failing pairs from the plan (green `#43594C`, brass on vellum) never existed in this code. |
+| D4 | Already met | Body text `#C9CEC3` at 12.10:1, inside the 11–13:1 target. Pure vellum reserved for headings. |
+| D5 | Done | Brass `var()` uses 70 → 50, and the rest are hover, focus, active or the key element of a diagram. Static labels and figures moved to sage or vellum. **Measured: 0.62 % of the first viewport at 1440.** |
+| D6 | Done | Three surfaces (`#0B0E0C` / `#121714` / `#18201B`), no shadows. |
+| D7 | Done | `--color-status-ok` / `--color-status-danger`; every state carries a word and a dot (grayscale check: `audit/phase2b/grayscale-statuses.png`). |
+| D8 | Done | Nav links move from mono uppercase to Archivo sentence case. Mono is now numbers, identifiers and short meta. Code identifiers keep their real case (fixes **P2**), and uppercase is CSS-only via `.u`, so screen readers get normal text (fixes **V11**). All 43 `.toUpperCase()` calls in JSX removed. |
+| D9 | Done | Scale and tracking were already tokenised; documented. Fonts: `latin` subset only (was `latin` + `latin-ext`), and only the H1 face is preloaded (3 of 4 families now `preload: false`). |
+| D10 | Done, one open question | Spacing scale documented. **Chamfer decision: diagrams only, UI keeps a 2px radius** — recorded in `DESIGN.md`, still needs Taha's yes/no. |
+| D11 | Done | `--focus-width` / `--focus-offset` / `--color-focus`. Keyboard walk: **45/45 stops show a visible ring, in both palettes.** |
+| D12 | Done | `--d-hold: 850ms` is now a token read by `Flight`. Section arrivals cut to a 6 px rise over 520 ms (was 18 px over 820 ms) so they stop competing with the hero. |
+| D13 | Done | `DESIGN.md` + `audit/token-inventory.md`. |
+| V7 | Done | Flowchart boxes, field circles and the mobile MENU border move from `--color-rule` (1.67:1) to `--color-border-ui` (3.20:1). |
+
+### Checkpoint 2B evidence
+- Browser-measured contrast: **29 pairs, 0 failures** (was 2). Weakest: 3.07:1 for a UI border needing 3.
+- Grep: 0 raw hex/rgb/hsl/oklch and 0 raw `font-family` outside the token block; 0 primitives referenced outside it. Documented exceptions: `icon.svg`, `themeColor`, `opengraph-image.tsx`.
+- Reduced motion: wing already open, 0 running animations, no pupil tracking, all content visible.

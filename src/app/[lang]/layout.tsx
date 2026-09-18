@@ -27,30 +27,33 @@ import "../globals.css";
    un cadran, pas à du code. --- */
 const title = Instrument_Serif({
   variable: "--font-instrument",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   weight: ["400"],
   display: "swap",
 });
 
 const display = Archivo({
   variable: "--font-archivo",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   axes: ["wdth"],
   display: "swap",
+  preload: false,
 });
 
 const body = Literata({
   variable: "--font-literata",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   axes: ["opsz"],
   display: "swap",
+  preload: false,
 });
 
 const mono = Martian_Mono({
   variable: "--font-martian-mono",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   axes: ["wdth"],
   display: "swap",
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -110,7 +113,6 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      data-palette="vellum"
       className={`${title.variable} ${display.variable} ${body.variable} ${mono.variable}`}
     >
       <head>

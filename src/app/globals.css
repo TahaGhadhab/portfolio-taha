@@ -64,6 +64,8 @@
   --ice-rgb: 150 196 214; /* lueur froide */
   --mist-rgb: 158 200 186; /* air du haut du champ */
   --black: #000;
+  --black-rgb: 0 0 0;
+  --bar-rgb: 6 9 7; /* le fond de la barre collante, un cran sous le noir */
   --white: #fff;
   --grey-800: #333;
   --grey-700: #555;
@@ -135,6 +137,10 @@
   --print-rule: var(--grey-400);
   /* Un masque ne lit que l'opacité : la teinte est indifférente. */
   --mask-solid: var(--black);
+  /* Le fond de la barre et la vignette : des noirs par transparence. */
+  --color-bar: rgb(var(--bar-rgb) / 0.88);
+  --color-vignette: rgb(var(--black-rgb) / 0.6);
+  --sheen-soft: rgb(var(--brass-400-rgb) / 0.055);
 
   --air-field: 1; /* la trame mesuree */
   --air-bloom: 1; /* la lueur */
@@ -251,6 +257,10 @@
   --d-snap: 220ms;
   --d-commit: 520ms;
   --d-arrive: 820ms;
+  /* L'immobilité avant l'ouverture de l'aile. Lue par le composant Flight. */
+  --d-hold: 850ms;
+  --focus-width: 2px;
+  --focus-offset: 4px;
   --stagger: 60ms;
   /* Rang de l'élément dans une arrivée. Surchargé par le balisage. */
   --i: 0;
@@ -350,8 +360,8 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: var(--focus-offset);
     border-radius: 1px;
     transition: none;
   }
@@ -511,8 +521,8 @@
       var(--grid-fine) 0 1px,
       transparent 1px 33px
     );
-  mask-image: radial-gradient(78% 62% at 50% 42%, #000 12%, transparent 82%);
-  -webkit-mask-image: radial-gradient(78% 62% at 50% 42%, #000 12%, transparent 82%);
+  mask-image: radial-gradient(78% 62% at 50% 42%, var(--mask-solid) 12%, transparent 82%);
+  -webkit-mask-image: radial-gradient(78% 62% at 50% 42%, var(--mask-solid) 12%, transparent 82%);
   opacity: var(--air-field);
 }
 
@@ -627,7 +637,7 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(125% 85% at 50% 34%, transparent 34%, rgba(0, 0, 0, 0.6) 100%);
+  background: radial-gradient(125% 85% at 50% 34%, transparent 34%, var(--color-vignette) 100%);
 }
 .grain {
   position: fixed;
@@ -661,6 +671,13 @@
 /* Le mono ne porte jamais une phrase : il porte des données. On lui
    demande donc ce qu'on demande à un cadran — des chiffres de largeur
    constante, et un zéro qu'on ne confond pas avec un O. */
+/* La capitale est une affaire de rendu, pas de contenu : le texte reste en
+   casse normale dans le document, et un lecteur d'écran lit « Missions », pas
+   « M-I-S-S-I-O-N-S ». Réservée aux libellés de trois mots au plus. */
+.u {
+  text-transform: uppercase;
+}
+
 .mono {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
@@ -781,12 +798,14 @@
   align-items: center;
 }
 .nav-links a {
-  font-family: var(--f-mono);
-  font-size: var(--tm--2);
-  /* Une ancre de barre est une étiquette, pas du texte courant : elle se
-     condense sans se dégrader, et gagne la place qui évite le repli. */
-  font-variation-settings: "wdth" 92;
-  letter-spacing: var(--tr--2);
+  /* La mono mesure ; elle ne nomme pas. Une ancre de barre est un mot qu'on
+     lit d'un coup d'œil : elle passe en grotesque, en casse normale. Sa
+     variation de chasse lui garde la place qui évite le repli. */
+  font-family: var(--f-display);
+  font-size: var(--t--1);
+  font-weight: 500;
+  font-variation-settings: "wdth" 96;
+  letter-spacing: var(--tr--1);
   text-decoration: none;
   color: var(--color-text-data);
   white-space: nowrap;
@@ -860,7 +879,7 @@
   gap: var(--s-3);
   min-height: 44px;
   padding-inline: var(--s-4);
-  border: 1px solid var(--color-rule);
+  border: 1px solid var(--color-border-ui);
   border-radius: 2px;
   background: none;
   color: var(--color-text);
@@ -925,7 +944,7 @@
   z-index: 0;
   border: 0;
   padding: 0;
-  background: rgba(6, 9, 7, 0.88);
+  background: var(--color-bar);
   cursor: default;
 }
 .menu-panel {
@@ -969,7 +988,7 @@
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--color-accent);
+  color: var(--color-text-data);
   font-variant-numeric: tabular-nums;
 }
 .menu-lab {
@@ -1049,12 +1068,12 @@
   transform: rotate(var(--a));
 }
 .blade {
-  stroke: var(--color-text-strong);
-  fill: var(--color-text-strong);
+  stroke: var(--color-graphic);
+  fill: var(--color-graphic);
   stroke-linejoin: round;
 }
 .quill {
-  stroke: var(--color-text-strong);
+  stroke: var(--color-graphic);
   fill: none;
   stroke-linecap: round;
 }
@@ -1062,14 +1081,14 @@
   fill: url(#coreG);
 }
 .horizon {
-  stroke: var(--color-text-strong);
+  stroke: var(--color-graphic);
   opacity: 0.09;
 }
 
 /* le bord dentelé — il chevauche l'enveloppe réelle des rémiges et ne
    se résout qu'une fois l'aile immobile */
 .comb {
-  stroke: var(--color-text-strong);
+  stroke: var(--color-graphic);
   stroke-linecap: round;
   fill: none;
   opacity: 0;
@@ -1094,7 +1113,7 @@
   fill: var(--color-bg);
 }
 .spec {
-  fill: var(--color-text-strong);
+  fill: var(--color-graphic);
   opacity: 0.92;
 }
 .lid {
@@ -1363,10 +1382,10 @@
    sens. */
 .commit {
   opacity: 0;
-  translate: 0 var(--rise, 18px);
+  translate: 0 var(--rise, 6px);
   transition:
-    opacity var(--d-arrive) var(--glide) var(--in-delay),
-    translate var(--d-arrive) var(--glide) var(--in-delay);
+    opacity var(--d-commit) var(--glide) var(--in-delay),
+    translate var(--d-commit) var(--glide) var(--in-delay);
 }
 .commit.is-on {
   opacity: 1;
@@ -1495,7 +1514,7 @@
   margin-top: var(--s-4);
 }
 .diag-line {
-  stroke: var(--color-text-strong);
+  stroke: var(--color-graphic);
   fill: none;
 }
 .diag-wake {
@@ -1521,7 +1540,7 @@
 
 /* --- Le circuit : postes, arêtes, et la seule arête qui remonte --- */
 .diag-node {
-  stroke: var(--color-rule);
+  stroke: var(--color-border-ui);
   fill: var(--color-surface-1);
 }
 .diag-title {
@@ -1555,9 +1574,11 @@
 }
 
 /* --- L'intersection : trois disques de même poids --- */
+/* Le disque de champ délimite une zone de la planche : c'est une limite
+   qu'il faut voir, donc une bordure d'interface (3.20:1), pas un ornement. */
 .diag-field {
-  stroke: var(--color-rule);
-  fill: var(--color-text-strong);
+  stroke: var(--color-border-ui);
+  fill: var(--color-graphic);
   fill-opacity: 0.03;
 }
 .diag-leader {
@@ -1614,7 +1635,7 @@
    et les trois disent quelque chose : la branche décisive, le refus, la
    sortie atteinte. Aucune n'est là pour égayer la planche. */
 .pf-box {
-  stroke: var(--color-rule);
+  stroke: var(--color-border-ui);
   fill: var(--color-surface-1);
   stroke-width: 1;
 }
@@ -1759,7 +1780,7 @@
 /* La ligne de résultat est la seule que le lecteur pressé retiendra : elle
    passe en iris, et rien d'autre dans le résumé ne le fait. */
 .capsule .result dd {
-  color: var(--color-accent);
+  color: var(--color-text-strong);
   font-family: var(--f-mono);
   font-size: var(--tm--1);
 }
@@ -1808,7 +1829,7 @@
 .step-no {
   font-family: var(--f-mono);
   font-size: var(--tm--1);
-  color: var(--color-accent);
+  color: var(--color-text-data);
   padding-top: 0.45em;
   font-variant-numeric: tabular-nums;
 }
@@ -2070,7 +2091,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
-  color: var(--color-accent);
+  color: var(--color-text-data);
   display: block;
   margin-bottom: var(--s-2);
 }
@@ -2078,13 +2099,13 @@ details[open] > .fold-toggle .fold-open {
 .metric {
   display: grid;
   gap: 2px;
-  border-left: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-text-data);
   padding-left: var(--s-4);
 }
 .metric .v {
   font-family: var(--f-mono);
   font-size: var(--tm-3);
-  color: var(--color-accent);
+  color: var(--color-text-strong);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
@@ -2099,7 +2120,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2);
-  color: var(--color-accent);
+  color: var(--color-text-strong);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   justify-self: start;
@@ -2123,7 +2144,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-mono);
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
-  color: var(--color-accent);
+  color: var(--color-text-data);
   font-weight: 500;
   margin-bottom: var(--s-4);
 }
@@ -2172,7 +2193,7 @@ details[open] > .fold-toggle .fold-open {
   line-height: 1.28;
   letter-spacing: var(--tr-title-2);
   color: var(--color-text-strong);
-  border-left: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-text-data);
   padding-left: var(--s-5);
   margin-block: var(--s-6);
   max-width: 40ch;
@@ -2223,7 +2244,7 @@ details[open] > .fold-toggle .fold-open {
   font-family: var(--f-display);
   font-size: var(--t-2);
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-text-strong);
   text-decoration: none;
   min-height: 44px;
   display: inline-flex;
@@ -2338,7 +2359,7 @@ details[open] > .fold-toggle .fold-open {
   letter-spacing: var(--tr-title-2);
 }
 .cv-head .role {
-  color: var(--color-accent);
+  color: var(--color-text-data);
   font-size: var(--t-1);
   margin-top: var(--s-2);
 }
@@ -2366,7 +2387,7 @@ details[open] > .fold-toggle .fold-open {
   font-size: var(--tm--2);
   letter-spacing: var(--tr--2-wide);
   font-weight: 500;
-  color: var(--color-accent);
+  color: var(--color-text-data);
   border-bottom: 1px solid var(--color-border-subtle);
   padding-bottom: var(--s-2);
 }
@@ -2653,13 +2674,13 @@ details[open] > .fold-toggle .fold-open {
 .pcard-metric {
   display: grid;
   gap: 2px;
-  border-left: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-text-data);
   padding-left: var(--s-3);
 }
 .pcard-metric .v {
   font-family: var(--f-mono);
   font-size: var(--tm-2);
-  color: var(--color-accent);
+  color: var(--color-text-strong);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
@@ -3432,7 +3453,7 @@ article[id] {
   gap: var(--s-3);
 }
 .eyebrow .no {
-  color: var(--color-accent);
+  color: var(--color-text-data);
 }
 .eyebrow .rule {
   flex: 1 1 auto;
@@ -3525,7 +3546,7 @@ article[id] {
   opacity: 0;
   background: radial-gradient(
     22rem 22rem at var(--mx) var(--my),
-    rgba(232, 162, 28, 0.055),
+    var(--sheen-soft),
     transparent 70%
   );
   transition: opacity var(--d-commit) var(--commit);
@@ -3565,7 +3586,7 @@ article[id] {
    chiffre qui défile — on lit une mesure, pas un compteur. */
 .metric {
   border-left-color: transparent;
-  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-image: linear-gradient(var(--color-text-data), var(--color-text-data));
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 2px 0%;
@@ -3688,7 +3709,7 @@ details[open] > .fold-body {
    phrase se lève derrière lui. */
 .pull {
   border-left-color: transparent;
-  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-image: linear-gradient(var(--color-text-data), var(--color-text-data));
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 2px 0%;
@@ -3838,8 +3859,8 @@ details[open] > .fold-body {
   }
   html,
   body {
-    background: #fff !important;
-    color: #000 !important;
+    background: var(--print-paper) !important;
+    color: var(--print-ink) !important;
   }
   .commit {
     opacity: 1 !important;
@@ -3865,11 +3886,11 @@ details[open] > .fold-body {
   .metric,
   .pull {
     background: none !important;
-    border-left: 2px solid #666 !important;
+    border-left: 2px solid var(--print-rule-strong) !important;
   }
   .group {
     background: none !important;
-    border-top: 1px solid #999 !important;
+    border-top: 1px solid var(--print-rule) !important;
   }
   .linkout,
   .mailto {
@@ -3890,15 +3911,15 @@ details[open] > .fold-body {
     max-width: none !important;
   }
   .cv-section > h2 {
-    color: #000 !important;
-    border-color: #999 !important;
+    color: var(--print-ink) !important;
+    border-color: var(--print-rule) !important;
   }
   .cv-head .role,
   .cv-entry .sub,
   .cv-entry p,
   .mono,
   .bullets li {
-    color: #333 !important;
+    color: var(--print-ink-2) !important;
   }
   a {
     text-decoration: none !important;
@@ -3907,7 +3928,7 @@ details[open] > .fold-body {
      blanc sur blanc. Les planches repassent donc en traits noirs. */
   .why-figure,
   .plate {
-    border-color: #999 !important;
+    border-color: var(--print-rule) !important;
     background: none !important;
   }
   .diag-line,
@@ -3916,40 +3937,40 @@ details[open] > .fold-body {
   .diag-edge,
   .diag-leader,
   .diag-rule {
-    stroke: #666 !important;
+    stroke: var(--print-rule-strong) !important;
   }
   .diag-node {
-    stroke: #999 !important;
+    stroke: var(--print-rule) !important;
     fill: none !important;
   }
   .diag-field {
-    stroke: #999 !important;
+    stroke: var(--print-rule) !important;
     fill: none !important;
   }
   .diag-return {
-    stroke: #000 !important;
+    stroke: var(--print-ink) !important;
   }
   .diag-edge-head {
-    fill: #666 !important;
+    fill: var(--print-rule-strong) !important;
   }
   .diag-return-head,
   .diag-mark {
-    fill: #000 !important;
+    fill: var(--print-ink) !important;
   }
   .diag-title {
-    fill: #000 !important;
+    fill: var(--print-ink) !important;
   }
   .diag-label,
   .diag-return-label,
   .diag-mark-label {
-    fill: #333 !important;
+    fill: var(--print-ink-2) !important;
   }
   /* Les planches de projet suivent la même règle : traits noirs, aucun
      aplat. Une teinte fonctionnelle imprimée en gris ne dit plus rien, elle
      est donc rendue par le seul trait. */
   .pf-box,
   .pf-mask {
-    stroke: #999 !important;
+    stroke: var(--print-rule) !important;
     fill: none !important;
   }
   .pf-box-key,
@@ -3957,42 +3978,42 @@ details[open] > .fold-body {
   .pf-box-fault,
   .pf-mask-fault,
   .pf-mask-ok {
-    stroke: #000 !important;
+    stroke: var(--print-ink) !important;
   }
   .pf-line,
   .pf-hair {
-    stroke: #666 !important;
+    stroke: var(--print-rule-strong) !important;
   }
   .pf-line-key,
   .pf-line-fault {
-    stroke: #000 !important;
+    stroke: var(--print-ink) !important;
   }
   .pf-head {
-    fill: #666 !important;
+    fill: var(--print-rule-strong) !important;
   }
   .pf-key-fill,
   .pf-fault-fill {
-    fill: #000 !important;
+    fill: var(--print-ink) !important;
   }
   .pf-t {
-    fill: #000 !important;
+    fill: var(--print-ink) !important;
   }
   .pf-s,
   .pf-n,
   .pf-e {
-    fill: #333 !important;
+    fill: var(--print-ink-2) !important;
   }
   .pf-key,
   .pf-ok,
   .pf-fault {
-    fill: #000 !important;
+    fill: var(--print-ink) !important;
   }
   .pf-title {
-    color: #000 !important;
+    color: var(--print-ink) !important;
   }
   .capsule dd,
   .capsule .result dd {
-    color: #333 !important;
+    color: var(--print-ink-2) !important;
   }
   /* Le sommaire ne s'imprime pas : sur papier, les cinq fiches suivent
      immédiatement les cinq tuiles, et la planche ne serait qu'une table
@@ -4016,8 +4037,8 @@ details[open] > .fold-body {
   /* L'état garde son mot ; sa couleur, qui ne dit plus rien en gris,
      repasse au trait. */
   .status {
-    color: #000 !important;
-    border-color: #999 !important;
+    color: var(--print-ink) !important;
+    border-color: var(--print-rule) !important;
   }
   /* Un lien imprime est un lien mort : l'adresse de controle suit en
      toutes lettres, sinon la certification n'est plus verifiable. */
@@ -4026,20 +4047,20 @@ details[open] > .fold-body {
     break-inside: avoid;
   }
   .cert {
-    border-color: #999 !important;
+    border-color: var(--print-rule) !important;
     background: none !important;
   }
   .cert-name {
-    color: #000 !important;
+    color: var(--print-ink) !important;
   }
   .cert .linkout::after,
   .cert-verify::after {
     content: " " attr(href);
     font-size: 0.85em;
-    color: #555 !important;
+    color: var(--print-muted) !important;
   }
   .shot {
-    border-color: #999 !important;
+    border-color: var(--print-rule) !important;
     background: none !important;
     break-inside: avoid;
   }

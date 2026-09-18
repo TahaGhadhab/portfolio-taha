@@ -92,7 +92,7 @@ export function MobileNav({
           prefetch={false}
           onClick={close}
         >
-          {other.toUpperCase()}
+          <span className="u">{other}</span>
         </Link>
 
         <button
@@ -108,7 +108,7 @@ export function MobileNav({
             <span />
           </span>
           <span className="menu-word">
-            {(open ? nav.menuCloseLabel : nav.menuLabel).toUpperCase()}
+            <span className="u">{open ? nav.menuCloseLabel : nav.menuLabel}</span>
           </span>
         </button>
       </div>
