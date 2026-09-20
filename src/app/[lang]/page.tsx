@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 import { getContent, getDeployments, isLocale, otherLocale } from "@/content";
 import { resolveCv } from "@/lib/cv";
 import { Flight } from "@/components/Flight";
@@ -53,7 +54,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
   };
 
   return (
-    <>
+    <div className="portfolio">
       <Optics />
       <SectionIndex sections={c.nav.sections} label={c.nav.sectionsNavLabel} />
 
@@ -69,6 +70,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
         />
 
         <Flight
+          lang={lang}
           hero={c.hero}
           cv={cv}
           cvLabel={c.nav.downloadCv}
@@ -82,17 +84,19 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
           </Band>
 
           <Band id="methode">
+            <div className="method-layout">
+            <div>
             <Head
               no={no("methode")}
               eyebrow={label("methode")}
               title={c.method.title}
               intro={c.method.intro}
             />
-            {/* La planche donne la forme du protocole, le rail le contenu de
-                chaque poste. Les deux se lisent ensemble : sur large écran ils
-                occupent deux colonnes de la même grille. */}
-            <div className="plate-split">
+            <details className="diagram-disclosure">
+              <summary><span className="mono">{c.method.figure.caption}</span><ChevronDown size={18} aria-hidden="true" /></summary>
               <MethodLoop figure={c.method.figure} steps={c.method.steps} />
+            </details>
+            </div>
               <MethodRail steps={c.method.steps} />
             </div>
           </Band>
@@ -131,7 +135,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
                 />
               }
             />
-            <ProjectGrid projects={c.projects} />
+            <ProjectGrid projects={c.projects} lang={lang} />
             <ProjectSheets projects={c.projects} />
           </Band>
 
@@ -142,7 +146,7 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
               title={c.skills.title}
               intro={c.skills.intro}
             />
-            <CapabilityGroups skills={c.skills} deployments={deployments} />
+            <CapabilityGroups skills={c.skills} deployments={deployments} openLabel={c.projects.detailsLabel} closeLabel={c.projects.hideLabel} />
           </Band>
 
           <Band id="parcours">
@@ -186,6 +190,6 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
       </div>
 
       <PageMotion />
-    </>
+    </div>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import type { Content, Project, TrackId } from "@/content";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Content, Locale, Project, TrackId } from "@/content";
 import { TRACKS } from "@/content";
 
 /**
@@ -25,10 +26,35 @@ const TILT = 5;
 
 interface ProjectGridProps {
   projects: Content["projects"];
+  lang: Locale;
 }
 
-export function ProjectGrid({ projects }: ProjectGridProps) {
+export function ProjectGrid({ projects, lang }: ProjectGridProps) {
   const [track, setTrack] = useState<TrackId | null>(null);
+  const gridRef = useRef<HTMLUListElement>(null);
+  const [edges, setEdges] = useState({ start: true, end: false });
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    grid.scrollTo({ left: 0, behavior: "instant" });
+    const update = () => setEdges({ start: grid.scrollLeft <= 2, end: grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 2 });
+    update();
+    grid.addEventListener("scroll", update, { passive: true });
+    const resize = new ResizeObserver(update);
+    resize.observe(grid);
+    return () => {
+      grid.removeEventListener("scroll", update);
+      resize.disconnect();
+    };
+  }, [track]);
+
+  const move = (direction: number) => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const card = grid.querySelector("li");
+    grid.scrollBy({ left: direction * ((card?.getBoundingClientRect().width ?? grid.clientWidth) + 16), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  };
 
   /* Un domaine qui ne porte aucun projet n'a pas de bouton : un filtre qui
      promet un ensemble vide est un filtre qui ment. */
@@ -67,10 +93,14 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
         <p className="pfilter-count mono" aria-live="polite">
           {projects.grid.countLabel.replace("{n}", String(shown.length))}
         </p>
+        <div className="pgrid-nav">
+          <button type="button" disabled={edges.start} onClick={() => move(-1)} aria-label={lang === "fr" ? "Projet précédent" : "Previous project"} title={lang === "fr" ? "Projet précédent" : "Previous project"}><ChevronLeft size={19} aria-hidden="true" /></button>
+          <button type="button" disabled={edges.end} onClick={() => move(1)} aria-label={lang === "fr" ? "Projet suivant" : "Next project"} title={lang === "fr" ? "Projet suivant" : "Next project"}><ChevronRight size={19} aria-hidden="true" /></button>
+        </div>
       </div>
 
       {shown.length ? (
-        <ul className="pgrid" aria-label={projects.grid.label}>
+        <ul className="pgrid" ref={gridRef} aria-label={projects.grid.label}>
           {shown.map((p) => (
             <ProjectCard
               key={p.id}
@@ -128,6 +158,8 @@ function ProjectCard({
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const raf = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
   const onMove = useCallback((e: React.PointerEvent<HTMLAnchorElement>) => {
     const el = ref.current;

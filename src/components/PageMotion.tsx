@@ -16,8 +16,52 @@ import { useEffect } from "react";
  */
 export function PageMotion() {
   useEffect(() => {
+    const portfolio = document.querySelector(".portfolio");
+    portfolio?.setAttribute("data-enhanced", "true");
+    const openDossier = (hash: string, focus: boolean) => {
+      if (!hash.startsWith("#projet-") && !hash.startsWith("#poste-")) return;
+      const target = document.getElementById(hash.slice(1));
+      if (!(target instanceof HTMLDetailsElement)) return;
+      target.open = true;
+      target.classList.remove("is-pending");
+      target.classList.add("is-on");
+      target.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+      if (focus) target.querySelector("summary")?.focus({ preventScroll: true });
+    };
+    const onHash = () => openDossier(location.hash, false);
+    const onToggle = (event: Event) => {
+      const dossier = event.target;
+      if (!(dossier instanceof HTMLDetailsElement) || dossier.open || !dossier.id.startsWith("projet-")) return;
+      if (document.activeElement !== dossier.querySelector("summary")) return;
+      const card = document.querySelector<HTMLAnchorElement>(`a.pcard[href="#${dossier.id}"]`);
+      card?.focus({ preventScroll: true });
+      card?.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+      history.replaceState(null, "", "#projets");
+    };
+    const onClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href^='#projet-'], a[href^='#poste-']");
+      if (!link) return;
+      event.preventDefault();
+      if (location.hash !== link.hash) history.pushState(null, "", link.hash);
+      openDossier(link.hash, true);
+    };
+    onHash();
+    addEventListener("hashchange", onHash);
+    document.addEventListener("click", onClick);
+    document.addEventListener("toggle", onToggle, true);
+    return () => {
+      removeEventListener("hashchange", onHash);
+      document.removeEventListener("click", onClick);
+      document.removeEventListener("toggle", onToggle, true);
+      portfolio?.removeAttribute("data-enhanced");
+    };
+  }, []);
+
+  useEffect(() => {
     const items = document.querySelectorAll<HTMLElement>(".commit");
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const media = matchMedia("(prefers-reduced-motion: reduce)");
+    const reduced = media.matches;
 
     if (reduced || !("IntersectionObserver" in window)) {
       items.forEach((el) => el.classList.add("is-on"));
@@ -28,15 +72,36 @@ export function PageMotion() {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
+          entry.target.classList.remove("is-pending");
           entry.target.classList.add("is-on");
           observer.unobserve(entry.target);
         }
       },
-      { rootMargin: "0px 0px -18% 0px", threshold: 0.2 },
+      { rootMargin: "0px 0px -24px 0px", threshold: 0 },
     );
 
-    items.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    items.forEach((el) => {
+      if (el.getBoundingClientRect().top < innerHeight) {
+        el.classList.add("is-on");
+      } else {
+        el.classList.add("is-pending");
+        observer.observe(el);
+      }
+    });
+    const revealAll = () => {
+      if (!media.matches) return;
+      observer.disconnect();
+      items.forEach((el) => {
+        el.classList.remove("is-pending");
+        el.classList.add("is-on");
+      });
+    };
+    media.addEventListener("change", revealAll);
+    return () => {
+      observer.disconnect();
+      media.removeEventListener("change", revealAll);
+      items.forEach((el) => el.classList.remove("is-pending"));
+    };
   }, []);
 
   /* La tache de lumière sous le curseur.
@@ -64,6 +129,7 @@ export function PageMotion() {
     };
 
     const onMove = (e: PointerEvent) => {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const target = (e.target as Element | null)?.closest<HTMLElement>(".sheet") ?? null;
       if (target !== sheet) {
         /* La fiche quittée reprend son centre : si on y revient par le

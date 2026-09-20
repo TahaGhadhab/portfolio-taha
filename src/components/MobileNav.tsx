@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { X } from "lucide-react";
 import type { Content, Locale } from "@/content";
 import { LOCALE_NAMES } from "@/content";
 import type { CvTarget } from "@/lib/cv";
@@ -47,10 +48,26 @@ export function MobileNav({
     if (!open) return;
     const body = document.body;
     const previous = body.style.overflow;
+    const previousFocus = document.activeElement as HTMLElement | null;
     body.style.overflow = "hidden";
+    const wide = matchMedia("(min-width: 1100px)");
+    const onWide = () => { if (wide.matches) close(); };
+    wide.addEventListener("change", onWide);
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
+      if (e.key !== "Tab") return;
+      const controls = panelRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
+      if (!controls?.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (e.shiftKey && (document.activeElement === first || document.activeElement === panelRef.current)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     addEventListener("keydown", onKey);
     panelRef.current?.focus();
@@ -58,6 +75,8 @@ export function MobileNav({
     return () => {
       body.style.overflow = previous;
       removeEventListener("keydown", onKey);
+      wide.removeEventListener("change", onWide);
+      previousFocus?.focus({ preventScroll: true });
     };
   }, [open, close]);
 
@@ -70,6 +89,8 @@ export function MobileNav({
     if (!target) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
     history.replaceState(null, "", `#${id}`);
   }, [open]);
 
@@ -125,7 +146,10 @@ export function MobileNav({
           aria-hidden="true"
           onClick={close}
         />
-        <div className="menu-panel" ref={panelRef} tabIndex={-1}>
+        <div className="menu-panel" ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-label={nav.sectionsNavLabel}>
+          <button className="menu-close" type="button" onClick={close} aria-label={nav.menuCloseLabel} title={nav.menuCloseLabel}>
+            <X size={20} aria-hidden="true" />
+          </button>
           {!onClassicPage ? (
             <nav aria-label={nav.sectionsNavLabel}>
               <ul className="menu-list">

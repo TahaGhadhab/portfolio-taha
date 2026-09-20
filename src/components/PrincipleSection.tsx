@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import type { Content } from "@/content";
 
 /* Le sillage turbulent : quatre tourbillons alternés, dessinés à la main
@@ -25,13 +27,20 @@ const STREAMS = Array.from({ length: 10 }, (_, i) => ({
 export function PrincipleSection({ principle }: { principle: Content["principle"] }) {
   return (
     <>
+      <div className="principle-intro">
       <div className="head commit">
         <p className="mono">{principle.eyebrow}</p>
         <h2>{principle.title}</h2>
         <p>{principle.body}</p>
       </div>
+      <div className="principle-art commit" aria-hidden="true">
+        <Image src="/images/fiber-feather.webp" alt="" fill sizes="(max-width: 899px) 100vw, 55vw" />
+      </div>
+      </div>
 
-      <div className="why commit">
+      <details className="diagram-disclosure principle-detail commit">
+        <summary><span className="mono">{principle.figCaption}</span><ChevronDown size={18} aria-hidden="true" /></summary>
+      <div className="why">
         <figure className="why-figure">
           <svg viewBox="0 0 620 300" role="img" aria-label={principle.figAlt}>
             <text className="diag-label" x="26" y="34">
@@ -41,7 +50,7 @@ export function PrincipleSection({ principle }: { principle: Content["principle"
             {VORTICES.map((d) => (
               <path key={d} className="diag-wake" d={d} strokeWidth="1.3" />
             ))}
-            <text className="diag-label" x="326" y="140">
+            <text className="diag-label" x="594" y="140" textAnchor="end">
               {principle.plainWake}
             </text>
 
@@ -72,7 +81,7 @@ export function PrincipleSection({ principle }: { principle: Content["principle"
                 strokeWidth="1.1"
               />
             ))}
-            <text className="diag-label" x="316" y="292">
+            <text className="diag-label" x="594" y="292" textAnchor="end">
               {principle.serratedWake}
             </text>
           </svg>
@@ -85,6 +94,7 @@ export function PrincipleSection({ principle }: { principle: Content["principle"
           ))}
         </div>
       </div>
+      </details>
     </>
   );
 }

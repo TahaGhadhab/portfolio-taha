@@ -52,7 +52,7 @@ export function TopNav({
     <div className="nav-bar">
       <div className="shell">
         <nav className="nav" aria-label={nav.primaryNavLabel}>
-          <Link className="brand" href={home}>
+          <Link className="brand" href={`${home}#vol`}>
             <BrandMark />
             <span>
               <span className="brand-name">{name}</span>

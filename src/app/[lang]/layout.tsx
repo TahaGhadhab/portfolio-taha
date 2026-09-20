@@ -4,6 +4,7 @@ import { Archivo, Instrument_Serif, Literata, Martian_Mono } from "next/font/goo
 import { Analytics } from "@vercel/analytics/next";
 import { LOCALES, getContent, isLocale } from "@/content";
 import "../globals.css";
+import "../portfolio.css";
 
 /* --- Quatre familles, aucun rôle partagé ------------------------------
    Le document parle de deux choses à la fois : une affirmation, et un

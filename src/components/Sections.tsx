@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import type { Content, Deployment } from "@/content";
 import type { CvTarget } from "@/lib/cv";
 import { PositioningFigure } from "./Figures";
@@ -78,12 +79,15 @@ export function MethodRail({ steps }: { steps: Content["method"]["steps"] }) {
   return (
     <ol className="rail-list commit" data-stagger>
       {steps.map((s, i) => (
-        <li className="step" key={s.step} style={rank(i)}>
-          <div className="step-no">{s.step}</div>
-          <div>
-            <h3>{s.title}</h3>
+        <li key={s.step} style={rank(i)}>
+          <details className="method-step" name="method-stations" open={i === 0}>
+            <summary>
+              <span className="step-no">{s.step}</span>
+              <h3>{s.title}</h3>
+              <ChevronDown size={18} aria-hidden="true" />
+            </summary>
             <p>{s.body}</p>
-          </div>
+          </details>
         </li>
       ))}
     </ol>
@@ -132,16 +136,19 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
   return (
     <>
       {experience.items.map((item, i) => (
-        <article
-          className="sheet commit"
-          data-stagger
+        <details
+          className="dossier experience-dossier fold commit"
           key={item.id}
           id={`poste-${item.id}`}
         >
+          <summary className="dossier-summary">
+            <span className="mono dossier-no">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="dossier-title">{item.company}<span className="dossier-subtitle">{item.role}</span></h3>
+            <span className="mono dossier-period">{item.period}</span>
+            <ChevronDown size={20} aria-hidden="true" />
+          </summary>
+          <article className="sheet dossier-body">
           <div className="sheet-aside">
-            <p className="mono">{String(i + 1).padStart(2, "0")}</p>
-            <h3>{item.role}</h3>
-            <p className="mono">{item.company}</p>
             <p className="mono">
               {item.period} · {item.location}
             </p>
@@ -191,7 +198,8 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
               </div>
             </Fold>
           </div>
-        </article>
+          </article>
+        </details>
       ))}
     </>
   );
@@ -203,20 +211,20 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
   return (
     <>
       {projects.items.map((p, i) => (
-        <article
-          className="sheet commit"
-          data-stagger
+        <details
+          className="dossier fold commit"
           key={p.id}
           id={`projet-${p.id}`}
         >
-          <div className="sheet-aside">
-            <p className="mono">{String(i + 1).padStart(2, "0")}</p>
-            <h3>{p.name}</h3>
-            <p className="mono">{p.period}</p>
-            {/* L'état portait jusqu'ici la même graisse et la même couleur
-                que la période : « Livré » se lisait comme une date. Il a
-                maintenant son voyant. */}
+          <summary className="dossier-summary">
+            <span className="mono dossier-no">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="dossier-title">{p.name}</h3>
             <StatusChip tone={p.statusTone} label={p.status} />
+            <ChevronDown size={20} aria-hidden="true" />
+          </summary>
+          <article className="sheet dossier-body">
+          <div className="sheet-aside">
+            <p className="mono">{p.period}</p>
             {p.metric ? (
               <div className="metric">
                 <span className="v">{p.metric.value}</span>
@@ -349,7 +357,8 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
               </div>
             </Fold>
           </div>
-        </article>
+          </article>
+        </details>
       ))}
     </>
   );
@@ -367,9 +376,13 @@ export function ProjectSheets({ projects }: { projects: Content["projects"] }) {
 export function CapabilityGroups({
   skills,
   deployments,
+  openLabel,
+  closeLabel,
 }: {
   skills: Content["skills"];
   deployments: Deployment[];
+  openLabel: string;
+  closeLabel: string;
 }) {
   const shortOf = new Map(deployments.map((d) => [d.id, d.short]));
 
@@ -382,14 +395,19 @@ export function CapabilityGroups({
             {group.skills.map((skill) => (
               <li key={skill.name}>
                 {skill.name}
-                {skill.usedIn.length ? (
-                  <span className="note">
-                    {skill.usedIn.map((id) => shortOf.get(id) ?? id).join(" · ")}
-                  </span>
-                ) : null}
               </li>
             ))}
           </ul>
+          <Fold openLabel={openLabel} closeLabel={closeLabel}>
+            <dl className="skill-evidence">
+              {group.skills.filter((skill) => skill.usedIn.length).map((skill) => (
+                <div key={skill.name}>
+                  <dt>{skill.name}</dt>
+                  <dd>{skill.usedIn.map((id) => shortOf.get(id) ?? id).join(" · ")}</dd>
+                </div>
+              ))}
+            </dl>
+          </Fold>
         </div>
       ))}
 
@@ -421,7 +439,7 @@ export function CapabilityGroups({
 
 export function EducationRail({ items }: { items: Content["education"]["items"] }) {
   return (
-    <ol className="rail-list commit" data-stagger>
+    <ol className="rail-list education-rail commit" data-stagger>
       {items.map((item, i) => (
         <li className="step" key={`${item.school}-${item.period}`} style={rank(i)}>
           <div className="step-no">{String(items.length - i).padStart(2, "0")}</div>
@@ -468,8 +486,10 @@ export function CertificationPlates({
         {certs.items.map((item, i) => (
           <li className="cert" key={item.url} style={rank(i)}>
             <p className="mono cert-meta">{item.meta.toUpperCase()}</p>
-            <h3 className="cert-name">{item.name}</h3>
-            <p className="cert-body">{item.body}</p>
+            <details className="cert-detail">
+              <summary><h3 className="cert-name">{item.name}</h3><ChevronDown size={18} aria-hidden="true" /></summary>
+              <p className="cert-body">{item.body}</p>
+            </details>
             <a
               className="linkout"
               href={item.url}
@@ -518,8 +538,8 @@ export function OriginSection({
         </div>
       </div>
 
-      {/* Rien dans une rangée de trois blocs ne dit que les casquettes se
-          recouvrent. La figure le dit, et se lit à côté d'eux. */}
+      <details className="diagram-disclosure positioning-detail">
+        <summary><span className="mono">{about.positioning.title}</span><ChevronDown size={18} aria-hidden="true" /></summary>
       <div className="plate-split">
         <PositioningFigure
           figure={about.positioning.figure}
@@ -537,6 +557,7 @@ export function OriginSection({
           ))}
         </div>
       </div>
+      </details>
     </>
   );
 }

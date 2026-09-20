@@ -1,163 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import type { Content } from "@/content";
+import Image from "next/image";
+import { ArrowDown, ArrowUpRight, Pause, Play } from "lucide-react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import type { Content, Locale } from "@/content";
 import type { CvTarget } from "@/lib/cv";
 import { SplitWords } from "./SplitWords";
 
-/** Rang d'un élément dans la chorégraphie d'ouverture. */
-const rank = (i: number) => ({ "--i": i }) as React.CSSProperties;
-
-/** Éloignement d'une couche de l'aile, en unités de parallaxe. */
-const depth = (z: number) => ({ "--z": z }) as React.CSSProperties;
-
-/* ══════════════════════════════════════════════════════════════
-   L'AILE — trois couches de plumes, chacune une lame fuselée
-   portée par son rachis. L'opacité varie le long de l'éventail
-   pour que la forme ait de la profondeur au lieu d'être plate.
-
-   Toute la géométrie est déterministe et calculée au chargement
-   du module : le rendu serveur et le rendu client produisent le
-   même balisage, sans écart d'hydratation.
-   ══════════════════════════════════════════════════════════════ */
-
-const CX = 600;
-const CY = 350;
-
-/** Une lame : deux courbes de Bézier refermées sur le point d'attache. */
-function blade(side: number, x0: number, len: number, w: number) {
-  const xa = CX + side * x0;
-  const xb = CX + side * (x0 + len);
-  const u1 = CX + side * (x0 + len * 0.3);
-  const u2 = CX + side * (x0 + len * 0.74);
-  return (
-    `M${xa} ${CY}` +
-    ` C${u1} ${CY - w} ${u2} ${CY - w * 0.46} ${xb} ${CY}` +
-    ` C${u2} ${CY + w * 0.26} ${u1} ${CY + w * 0.52} ${xa} ${CY}Z`
-  );
-}
-
-interface Feather {
-  angle: number;
-  delay: number;
-  d: string;
-  quill: string;
-  fill: number;
-  stroke: number;
-  width: number;
-}
-
-function layer(
-  side: number,
-  n: number,
-  a0: number,
-  a1: number,
-  x0: number,
-  base: number,
-  span: number,
-  w: number,
-  fill: number,
-  stroke: number,
-  sw: number,
-): Feather[] {
-  const out: Feather[] = [];
-  for (let i = 0; i < n; i++) {
-    const t = i / (n - 1);
-    const arc = Math.sin(Math.PI * t); // profondeur tonale le long de l'éventail
-    const ang = a0 + (a1 - a0) * t;
-    const len = base + span * Math.sin(Math.PI * (0.1 + 0.8 * t));
-    const xb = CX + side * (x0 + len);
-    const sO = stroke * (0.52 + 0.48 * arc);
-    out.push({
-      angle: side * -ang,
-      delay: Math.round(t * 60),
-      d: blade(side, x0, len, w * (0.6 + 0.4 * arc)),
-      quill: `M${CX + side * x0} ${CY} L${xb} ${CY}`,
-      fill: fill * (0.6 + 0.4 * arc),
-      stroke: sO,
-      width: sw,
-    });
-  }
-  return out;
-}
-
-/** Le bord dentelé, posé sur l'enveloppe réelle des rémiges primaires. */
-function serrated(
-  side: number,
-  a0: number,
-  a1: number,
-  x0: number,
-  base: number,
-  span: number,
-  steps: number,
-) {
-  const pts: [number, number][] = [];
-  const teeth: string[] = [];
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const ang = ((a0 + (a1 - a0) * t) * Math.PI) / 180;
-    const r = x0 + base + span * Math.sin(Math.PI * (0.1 + 0.8 * t));
-    const x = CX + side * Math.cos(ang) * r;
-    const y = CY - Math.sin(ang) * r;
-    pts.push([x, y]);
-    const tooth = 5 + 11 * Math.sin(Math.PI * t);
-    const tx = CX + side * Math.cos(ang) * (r + tooth);
-    const ty = CY - Math.sin(ang) * (r + tooth);
-    teeth.push(`M${x.toFixed(1)} ${y.toFixed(1)} L${tx.toFixed(1)} ${ty.toFixed(1)}`);
-  }
-  const poly = pts
-    .map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`)
-    .join(" ");
-  return { poly, teeth };
-}
-
-const SIDES = [-1, 1] as const;
-
-const WING = SIDES.map((side) => ({
-  side,
-  coverts: layer(side, 13, 3, 38, 38, 104, 66, 15, 0.055, 0.22, 0.9),
-  secondaries: layer(side, 16, 2, 45, 46, 176, 128, 18, 0.06, 0.3, 0.9),
-  primaries: layer(side, 19, 0, 52, 54, 250, 236, 21, 0.07, 0.46, 1),
-  edge: serrated(side, 0, 52, 54, 250, 236, 52),
-}));
-
-/** Repère technique : la ligne d'horizon graduée qui tient la forme organique. */
-const HORIZON_TICKS = Array.from({ length: 11 }, (_, i) => 100 + i * 100);
-
-function Feathers({ feathers }: { feathers: Feather[] }) {
-  return (
-    <>
-      {feathers.map((f, i) => (
-        <g
-          key={i}
-          className="feather"
-          style={
-            {
-              "--a": `${f.angle.toFixed(1)}deg`,
-              transitionDelay: `${f.delay}ms`,
-            } as React.CSSProperties
-          }
-        >
-          <path
-            className="blade"
-            d={f.d}
-            fillOpacity={f.fill.toFixed(3)}
-            strokeOpacity={(f.stroke * 0.8).toFixed(3)}
-            strokeWidth={f.width}
-          />
-          <path
-            className="quill"
-            d={f.quill}
-            strokeOpacity={f.stroke.toFixed(3)}
-            strokeWidth={(f.width * 0.7).toFixed(2)}
-          />
-        </g>
-      ))}
-    </>
-  );
-}
+const rank = (i: number) => ({ "--i": i }) as CSSProperties;
+const SIGNALS = [
+  "M280 660 C240 490 320 395 410 345 S550 235 450 110",
+  "M330 700 C280 510 370 450 420 370 S460 200 380 80",
+  "M760 700 C820 510 690 450 650 355 S645 205 720 85",
+  "M835 685 C870 510 775 395 695 335 S610 205 805 120",
+];
 
 interface FlightProps {
+  lang: Locale;
   hero: Content["hero"];
   cv: CvTarget;
   cvLabel: string;
@@ -165,255 +24,113 @@ interface FlightProps {
   secondaryHref: string;
 }
 
-export function Flight({ hero, cv, cvLabel, primaryHref, secondaryHref }: FlightProps) {
-  const wingRef = useRef<SVGSVGElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const pupilRef = useRef<SVGGElement>(null);
+export function Flight({ lang, hero, cv, cvLabel, primaryHref, secondaryHref }: FlightProps) {
+  const sceneRef = useRef<HTMLElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const [blinking, setBlinking] = useState(false);
-  /* Sur téléphone, l'envergure complète rend l'œil à 7px. On recadre serré
-     pour que l'œil — et son clignement — survivent au petit écran. */
-  const [narrow, setNarrow] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const [inView, setInView] = useState(true);
+  const [visible, setVisible] = useState(true);
+  const moving = !paused && !reduced && inView && visible;
 
   useEffect(() => {
-    const mq = matchMedia("(max-width: 679px)");
-    const apply = () => setNarrow(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  /* Immobilité, puis un seul mouvement : 850 ms de rien, l'aile s'ouvre et
-     s'arrête. Le bord dentelé ne se résout qu'ensuite — le détail fin est la
-     récompense de l'attente. */
-  useEffect(() => {
-    const wait = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 850;
-    const id = setTimeout(() => setOpen(true), wait);
-    return () => clearTimeout(id);
-  }, []);
-
-  /* Le seul comportement au repos de toute la page : il vous regarde. */
-  useEffect(() => {
-    if (!open) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let raf = 0;
-    let px = 0;
-    let py = 0;
-    let tx = 0;
-    let ty = 0;
-
-    const step = () => {
-      raf = 0;
-      px += (tx - px) * 0.16;
-      py += (ty - py) * 0.16;
-      pupilRef.current?.setAttribute("transform", `translate(${px.toFixed(2)},${py.toFixed(2)})`);
-      if (Math.abs(tx - px) > 0.25 || Math.abs(ty - py) > 0.25) queue();
-    };
-    const queue = () => {
-      if (!raf) raf = requestAnimationFrame(step);
-    };
-    const onMove = (e: PointerEvent) => {
-      const r = wingRef.current?.getBoundingClientRect();
-      if (!r?.width) return;
-      const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-      const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-      const cx = Math.max(-1, Math.min(1, nx));
-      const cy = Math.max(-1, Math.min(1, ny));
-      tx = cx * 8.5;
-      ty = cy * 8.5;
-      /* La même mesure sert deux fois : la pupille suit le pointeur, et
-         l'aile prend son assiette. Un seul relevé, donc aucun risque que
-         l'œil regarde à gauche pendant que l'aile penche à droite. */
-      const stage = stageRef.current;
-      if (stage) {
-        stage.style.setProperty("--wx", cx.toFixed(3));
-        stage.style.setProperty("--wy", cy.toFixed(3));
-      }
-      queue();
-    };
-
-    /* Le pointeur sorti de la fenêtre, l'aile revient à plat. Sans cela
-       elle resterait penchée sur sa dernière position connue, ce qui se lit
-       comme un défaut d'alignement plutôt que comme un mouvement. */
-    const onLeave = () => {
-      const stage = stageRef.current;
-      if (!stage) return;
-      stage.style.removeProperty("--wx");
-      stage.style.removeProperty("--wy");
-      tx = 0;
-      ty = 0;
-      queue();
-    };
-
-    addEventListener("pointermove", onMove, { passive: true });
-    document.addEventListener("pointerleave", onLeave);
-
-    /* Les chouettes clignent rarement, vite, et jamais sur un rythme fixe. */
-    let blinkId: ReturnType<typeof setTimeout>;
-    let closeId: ReturnType<typeof setTimeout>;
-    const schedule = () => {
-      blinkId = setTimeout(
-        () => {
-          if (!document.hidden) {
-            setBlinking(true);
-            closeId = setTimeout(() => setBlinking(false), 145);
-          }
-          schedule();
-        },
-        5200 + Math.random() * 6800,
-      );
-    };
-    schedule();
-
+    const media = matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotion = () => setReduced(media.matches);
+    const syncVisibility = () => setVisible(!document.hidden);
+    syncMotion();
+    syncVisibility();
+    media.addEventListener("change", syncMotion);
+    document.addEventListener("visibilitychange", syncVisibility);
+    const frame = requestAnimationFrame(() => setOpen(true));
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver(([entry]) => setInView(entry.isIntersecting))
+      : null;
+    if (sceneRef.current) observer?.observe(sceneRef.current);
     return () => {
-      removeEventListener("pointermove", onMove);
-      document.removeEventListener("pointerleave", onLeave);
-      if (raf) cancelAnimationFrame(raf);
-      clearTimeout(blinkId);
-      clearTimeout(closeId);
+      cancelAnimationFrame(frame);
+      observer?.disconnect();
+      media.removeEventListener("change", syncMotion);
+      document.removeEventListener("visibilitychange", syncVisibility);
     };
-  }, [open]);
+  }, []);
 
-  const wingClass = ["wing", open ? "is-open" : "", blinking ? "is-blinking" : ""]
-    .filter(Boolean)
-    .join(" ");
+  useEffect(() => {
+    const scene = sceneRef.current;
+    const visual = visualRef.current;
+    if (!scene || !visual || !moving) return;
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    const paint = () => {
+      frame = 0;
+      visual.style.setProperty("--hero-x", x.toFixed(3));
+      visual.style.setProperty("--hero-y", y.toFixed(3));
+    };
+    const onMove = (event: PointerEvent) => {
+      const rect = scene.getBoundingClientRect();
+      x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    const reset = () => {
+      x = 0;
+      y = 0;
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    scene.addEventListener("pointermove", onMove, { passive: true });
+    scene.addEventListener("pointerleave", reset);
+    return () => {
+      scene.removeEventListener("pointermove", onMove);
+      scene.removeEventListener("pointerleave", reset);
+      cancelAnimationFrame(frame);
+      visual.style.removeProperty("--hero-x");
+      visual.style.removeProperty("--hero-y");
+    };
+  }, [moving]);
 
-  /* Les rangs de l'ouverture se comptent à partir du titre : une accroche
-     ne peut pas arriver pendant que le dernier mot du titre se lève encore.
-     Le titre français fait six mots, l'anglais huit — un rang codé en dur
-     serait juste dans une langue et faux dans l'autre. */
-  const afterHeadline = hero.headline.split(/\s+/).filter(Boolean).length + 1;
+  const afterHeadline = Math.min(hero.headline.split(/\s+/).length, 6);
+  const motionLabel = lang === "fr"
+    ? paused ? "Reprendre les animations" : "Mettre les animations en pause"
+    : paused ? "Resume animations" : "Pause animations";
 
   return (
-    <header className="flight" id="vol">
-      <div className="wing-holder" ref={stageRef}>
-        <svg
-          ref={wingRef}
-          className={wingClass}
-          viewBox={narrow ? "330 195 540 215" : "0 0 1200 420"}
-          aria-hidden="true"
-        >
-          <defs>
-            <radialGradient id="irisG" cx="42%" cy="36%" r="72%">
-              <stop offset="0%" stopColor="#F7CB63" />
-              <stop offset="52%" stopColor="#E8A21C" />
-              <stop offset="100%" stopColor="#8E5A12" />
-            </radialGradient>
-            <radialGradient id="glowG" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#E8A21C" stopOpacity=".26" />
-              <stop offset="55%" stopColor="#E8A21C" stopOpacity=".07" />
-              <stop offset="100%" stopColor="#E8A21C" stopOpacity="0" />
-            </radialGradient>
-            <radialGradient id="coreG" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#F5F7F1" stopOpacity=".10" />
-              <stop offset="100%" stopColor="#F5F7F1" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-
-          <g className="horizon">
-            <path d={`M40 ${CY} L1160 ${CY}`} stroke="currentColor" strokeWidth="1" />
-            {HORIZON_TICKS.map((x) => (
-              <path
-                key={x}
-                d={`M${x} ${CY - 4} L${x} ${CY + 4}`}
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-            ))}
-          </g>
-
-          <ellipse className="core" cx={CX} cy={CY} rx="150" ry="96" />
-
-          {/* Trois couches, trois profondeurs. Le pointeur qui se déplace ne
-              les emmène pas à la même vitesse : les rémiges, les plus
-              éloignées de l'axe, bougent le plus, et l'écart entre les
-              couches est ce qui donne du volume. C'est la seule façon de
-              faire tenir une aile dans un plan sans la dessiner en relief. */}
-          {WING.map((w) => (
-            <g key={w.side}>
-              <g className="wing-layer" style={depth(2)}>
-                <Feathers feathers={w.coverts} />
-              </g>
-              <g className="wing-layer" style={depth(5)}>
-                <Feathers feathers={w.secondaries} />
-              </g>
-              <g className="wing-layer" style={depth(9)}>
-                <Feathers feathers={w.primaries} />
-                <path className="comb" d={w.edge.poly} strokeWidth="1" />
-                {w.edge.teeth.map((d, i) => (
-                  <path key={i} className="comb" d={d} strokeWidth="1.05" />
-                ))}
-              </g>
-            </g>
-          ))}
-
-          <g className="wing-layer glow" style={depth(3)}>
-            <circle cx={CX} cy={CY} r="150" fill="url(#glowG)" />
-          </g>
-          <g className="eye">
-            <circle className="iris-body" cx={CX} cy={CY} r="26" />
-            <g ref={pupilRef}>
-              <circle className="pupil" cx={CX} cy={CY} r="11" />
-              <circle className="spec" cx={CX - 4.5} cy={CY - 5.5} r="2.6" />
-            </g>
-            <ellipse className="lid" cx={CX} cy={CY} rx="28" ry="29" />
-          </g>
-        </svg>
+    <header ref={sceneRef} className={`flight fiber-flight${open ? " is-open" : ""}`} id="vol" data-moving={moving}>
+      <div className="fiber-visual" ref={visualRef} aria-hidden="true">
+        <div className="fiber-artwork">
+          <Image className="fiber-owl" src="/images/fiber-owl-hero.webp" alt="" fill priority sizes="(max-width: 699px) 100vw, 75vw" />
+          <svg className="fiber-signals" viewBox="0 0 1100 740" preserveAspectRatio="xMidYMid slice">
+            {SIGNALS.map((d, i) => <path key={d} d={d} pathLength="100" style={rank(i)} />)}
+          </svg>
+        </div>
+        <span className="fiber-visual-shade" />
       </div>
 
-      <div className="shell">
-        {/* Le nom vit dans la barre collante, visible en permanence : le
-            répéter ici ne ferait que retarder la seule phrase qui compte. */}
-        {/* L'arrivée du hero est écrite comme une phrase : l'aile s'ouvre, le
-            titre se lève mot à mot, la ligne d'accroche suit, les boutons se
-            posent, puis les relevés. Chaque élément porte son rang ; c'est la
-            feuille de style qui le convertit en retard. Un seul enchaînement,
-            joué une fois, à l'ouverture. */}
+      <div className="shell hero-shell">
         <div className={`hero${open ? " is-open" : ""}`}>
+          <p className="hero-name mono">{hero.name}</p>
           <SplitWords as="h1" text={hero.headline} />
-          <p className="lede" style={rank(afterHeadline)}>
-            {hero.lede}
-          </p>
-
-          {/* Les deux premières actions suivent l'ordre du document : on croise
-              la méthode (station 02) avant les réalisations (station 04). Un
-              raccourci qui contredit le plan de la page fait douter du plan. */}
-          <div className="hero-actions" style={rank(afterHeadline + 2)}>
-            <a className="btn" href={secondaryHref}>
-              {hero.ctaSecondary}
-            </a>
-            <a className="btn btn-primary" href={primaryHref}>
-              {hero.ctaPrimary}
-            </a>
-            <a
-              className="btn"
-              href={cv.href}
-              {...(cv.isPdf
-                ? { download: cv.download, target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-            >
-              {cvLabel}
-            </a>
+          <p className="lede" style={rank(afterHeadline)}>{hero.lede}</p>
+          <div className="hero-actions" style={rank(afterHeadline + 1)}>
+            <a className="btn btn-primary" href={primaryHref}>{hero.ctaPrimary}<ArrowUpRight size={16} aria-hidden="true" /></a>
+            <a className="btn" href={secondaryHref}>{hero.ctaSecondary}<ArrowDown size={15} aria-hidden="true" /></a>
+            <a className="hero-cv" href={cv.href} {...(cv.isPdf ? { download: cv.download, target: "_blank", rel: "noopener noreferrer" } : {})}>{cvLabel}<ArrowUpRight size={14} aria-hidden="true" /></a>
           </div>
-
           <div className="hero-stats">
-            {hero.stats.map((s, i) => (
-              <div key={s.label} style={rank(afterHeadline + 4 + i)}>
-                <span className="v">
-                  {s.value}
-                  {s.unit}
-                </span>
-                <span className="k">{s.label}</span>
+            {hero.stats.map((stat, i) => (
+              <div key={stat.label} style={rank(afterHeadline + 2 + i)}>
+                <span className="v">{stat.value}{stat.unit}</span>
+                <span className="k">{stat.label}</span>
               </div>
             ))}
           </div>
-
-          <div className="wordmark-strip" style={rank(afterHeadline + 8)}>
-            <span className="hair" />
-            <span className="mono">{hero.wordmark}</span>
-            <span className="hair" />
-          </div>
+        </div>
+        <div className="hero-bottom">
+          <a className="hero-scroll mono" href="#principe"><ArrowDown size={15} aria-hidden="true" />{hero.wordmark}</a>
+          <button className="motion-toggle" type="button" title={motionLabel} aria-label={motionLabel} aria-pressed={paused} onClick={() => setPaused(!paused)} hidden={reduced}>
+            {paused ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />}
+          </button>
         </div>
       </div>
     </header>
