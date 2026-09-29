@@ -59,48 +59,105 @@ export function PageMotion() {
   }, []);
 
   useEffect(() => {
-    const items = document.querySelectorAll<HTMLElement>(".commit");
+    const selector = ".commit, .pgrid-cell, .method-step, .step, .group, .cert";
+    const items = new Set<HTMLElement>();
+    const paths = new Set<SVGGeometryElement>();
     const media = matchMedia("(prefers-reduced-motion: reduce)");
-    const reduced = media.matches;
-
-    if (reduced || !("IntersectionObserver" in window)) {
-      items.forEach((el) => el.classList.add("is-on"));
+    const reveal = (el: HTMLElement) => {
+      el.classList.remove("is-pending");
+      el.removeAttribute("data-motion-pending");
+      el.classList.add("is-on");
+    };
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll<HTMLElement>(".commit").forEach(reveal);
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
+        let rank = 0;
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          entry.target.classList.remove("is-pending");
-          entry.target.classList.add("is-on");
-          observer.unobserve(entry.target);
+          const el = entry.target as HTMLElement;
+          if (!el.classList.contains("commit")) {
+            el.style.setProperty("--motion-delay", `calc(${Math.min(rank++, 3)} * var(--stagger))`);
+          }
+          reveal(el);
+          observer.unobserve(el);
         }
       },
       { rootMargin: "0px 0px -24px 0px", threshold: 0 },
     );
 
-    items.forEach((el) => {
-      if (el.getBoundingClientRect().top < innerHeight) {
-        el.classList.add("is-on");
-      } else {
-        el.classList.add("is-pending");
-        observer.observe(el);
+    const register = () => {
+      for (const el of items) {
+        if (!el.isConnected) {
+          observer.unobserve(el);
+          items.delete(el);
+        }
       }
-    });
+      document.querySelectorAll<SVGGeometryElement>(
+        ".plate .diag-edge, .plate .diag-return, .why .diag-wake, .why .diag-wake-calm",
+      ).forEach((path) => {
+        if (paths.has(path)) return;
+        paths.add(path);
+        path.style.setProperty("--stroke-length", String(path.getTotalLength()));
+        path.classList.add("motion-stroke");
+      });
+      document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+        if (items.has(el)) return;
+        items.add(el);
+        if (media.matches) {
+          reveal(el);
+          return;
+        }
+        if (el.classList.contains("commit")) {
+          // Preserve the existing no-JavaScript and first-viewport visibility.
+          if (el.getBoundingClientRect().top < innerHeight && el.getClientRects().length) {
+            reveal(el);
+            return;
+          }
+          el.classList.add("is-pending");
+        } else {
+          el.setAttribute("data-motion-item", "");
+          el.setAttribute("data-motion-pending", "");
+        }
+        observer.observe(el);
+      });
+    };
+    register();
+    // Project filters replace cards; each new card gets its own entrance.
+    const mutations = new MutationObserver(register);
+    mutations.observe(document.querySelector("main") ?? document.body, { childList: true, subtree: true });
     const revealAll = () => {
       if (!media.matches) return;
       observer.disconnect();
-      items.forEach((el) => {
-        el.classList.remove("is-pending");
-        el.classList.add("is-on");
-      });
+      items.forEach(reveal);
+    };
+    const onFocus = (event: FocusEvent) => {
+      if (!(event.target instanceof Element)) return;
+      for (const el of items) {
+        if (!el.contains(event.target)) continue;
+        reveal(el);
+        observer.unobserve(el);
+      }
     };
     media.addEventListener("change", revealAll);
+    document.addEventListener("focusin", onFocus);
     return () => {
       observer.disconnect();
+      mutations.disconnect();
       media.removeEventListener("change", revealAll);
-      items.forEach((el) => el.classList.remove("is-pending"));
+      document.removeEventListener("focusin", onFocus);
+      items.forEach((el) => {
+        reveal(el);
+        el.removeAttribute("data-motion-item");
+        el.style.removeProperty("--motion-delay");
+      });
+      paths.forEach((path) => {
+        path.classList.remove("motion-stroke");
+        path.style.removeProperty("--stroke-length");
+      });
     };
   }, []);
 

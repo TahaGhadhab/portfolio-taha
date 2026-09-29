@@ -9,6 +9,8 @@ interface SplitWordsProps {
   step?: number;
   as?: ElementType;
   className?: string;
+  /** Let scroll position reveal the sentence instead of a timed entrance. */
+  scroll?: boolean;
 }
 
 /**
@@ -33,19 +35,26 @@ export function SplitWords({
   step = 1,
   as: As = "span",
   className,
+  scroll = false,
 }: SplitWordsProps) {
   const words = text.split(/\s+/).filter(Boolean);
-  if (words.length > 20) return <As className={className}>{text}</As>;
+  if (words.length > (scroll ? 80 : 20)) return <As className={className}>{text}</As>;
 
   return (
-    <As className={className}>
+    <As className={[className, scroll ? "scroll-words" : ""].filter(Boolean).join(" ") || undefined}>
       {words.map((word, i) => (
         <Fragment key={`${i}-${word}`}>
           {i > 0 ? " " : null}
           <span className="w">
             <span
               className="wi"
-              style={{ "--i": from + i * step } as React.CSSProperties}
+              style={{
+                "--i": scroll ? from + Math.min(i, 12) * 0.65 : from + i * step,
+                ...(scroll ? {
+                  "--word-start": `${(i / Math.max(words.length - 1, 1)) * 26}%`,
+                  "--word-end": `${18 + (i / Math.max(words.length - 1, 1)) * 26}%`,
+                } : {}),
+              } as React.CSSProperties}
             >
               {word}
             </span>

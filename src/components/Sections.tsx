@@ -67,8 +67,8 @@ export function Head({
         <span className="rule" aria-hidden="true" />
         {tools ? <span className="head-tools">{tools}</span> : null}
       </p>
-      <SplitWords as="h2" text={title} from={1} />
-      {intro ? <p className="head-intro">{intro}</p> : null}
+      <SplitWords as="h2" text={title} from={1} scroll />
+      {intro ? <SplitWords as="p" className="head-intro" text={intro} scroll /> : null}
     </div>
   );
 }
@@ -527,10 +527,10 @@ export function OriginSection({
             <span>{eyebrow.toUpperCase()}</span>
             <span className="rule" aria-hidden="true" />
           </p>
-          <SplitWords as="h2" text={about.title} from={1} />
+          <SplitWords as="h2" text={about.title} from={1} scroll />
         </div>
         <div>
-          <p className="lede">{about.lead}</p>
+          <SplitWords as="p" className="lede" text={about.lead} scroll />
           <blockquote className="pull">{pull}</blockquote>
           {about.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -625,7 +625,7 @@ export function ContactClose({
           <span>{contact.title.toUpperCase()}</span>
           <span className="rule" aria-hidden="true" />
         </p>
-        <SplitWords as="h2" text={contact.intro} from={1} className="close-title" />
+        <SplitWords as="h2" text={contact.intro} from={1} className="close-title" scroll />
       </div>
 
       {/* Le moyen de joindre tient dans sa propre colonne : la phrase

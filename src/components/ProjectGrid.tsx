@@ -100,7 +100,7 @@ export function ProjectGrid({ projects, lang }: ProjectGridProps) {
       </div>
 
       {shown.length ? (
-        <ul className="pgrid" ref={gridRef} aria-label={projects.grid.label}>
+        <ul key={track ?? "all"} className="pgrid" ref={gridRef} aria-label={projects.grid.label}>
           {shown.map((p) => (
             <ProjectCard
               key={p.id}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import type { Content } from "@/content";
+import { SplitWords } from "./SplitWords";
 
 /* Le sillage turbulent : quatre tourbillons alternés, dessinés à la main
    plutôt que générés — leur irrégularité est le propos. */
@@ -30,8 +31,8 @@ export function PrincipleSection({ principle }: { principle: Content["principle"
       <div className="principle-intro">
       <div className="head commit">
         <p className="mono">{principle.eyebrow}</p>
-        <h2>{principle.title}</h2>
-        <p>{principle.body}</p>
+        <SplitWords as="h2" text={principle.title} scroll />
+        <SplitWords as="p" text={principle.body} scroll />
       </div>
       <div className="principle-art commit" aria-hidden="true">
         <Image src="/images/fiber-feather.webp" alt="" fill sizes="(max-width: 899px) 100vw, 55vw" />

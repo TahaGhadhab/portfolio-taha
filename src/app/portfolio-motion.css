@@ -1,0 +1,180 @@
+/* Motion for the fiber portfolio. Content stays visible without JavaScript. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .portfolio {
+    --motion-travel: 24px;
+    --motion-duration: 720ms;
+    --motion-draw: 1100ms;
+    --hero-drift: 48px;
+    --word-lift: 0.4em;
+  }
+
+  .portfolio [data-motion-item],
+  .portfolio .commit[data-stagger] > [data-motion-item] {
+    opacity: 1;
+    translate: none;
+    transition:
+      opacity var(--motion-duration) var(--glide) var(--motion-delay, 0ms),
+      translate var(--motion-duration) var(--glide) var(--motion-delay, 0ms);
+  }
+  .portfolio [data-motion-item][data-motion-pending],
+  .portfolio .commit[data-stagger] > [data-motion-item][data-motion-pending] {
+    opacity: 0;
+    translate: 0 var(--motion-travel);
+  }
+  .portfolio .commit:focus-within,
+  .portfolio .commit:focus-within .wi,
+  .portfolio [data-motion-item]:focus-within {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .portfolio .hero-name,
+  .portfolio .hero-stats > div,
+  .portfolio .hero-bottom {
+    animation: fiber-arrive var(--motion-duration) var(--glide) both;
+  }
+  .portfolio .hero-stats > div { animation-delay: calc(var(--i) * var(--stagger)); }
+  .portfolio .hero-bottom { animation-delay: var(--d-commit); }
+  @keyframes fiber-arrive {
+    from { opacity: 0; translate: 0 14px; }
+    to { opacity: 1; translate: none; }
+  }
+
+  .portfolio .motion-stroke {
+    stroke-dasharray: var(--stroke-length);
+    stroke-dashoffset: var(--stroke-length);
+    transition: stroke-dashoffset var(--motion-draw) var(--glide);
+  }
+  .portfolio .is-on .motion-stroke { stroke-dashoffset: 0; }
+  .portfolio details[open] .motion-stroke {
+    animation: fiber-draw var(--motion-draw) var(--glide) both;
+  }
+  @keyframes fiber-draw {
+    from { stroke-dashoffset: var(--stroke-length); }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .portfolio .pcard {
+    transition:
+      transform var(--d-commit) var(--glide),
+      translate var(--d-snap) var(--commit),
+      background-color var(--d-snap) var(--commit),
+      border-color var(--d-snap) var(--commit);
+  }
+  .portfolio .btn,
+  .portfolio .pchip,
+  .portfolio .pgrid-nav button {
+    transition:
+      scale var(--d-snap) var(--commit),
+      translate var(--d-snap) var(--commit),
+      color var(--d-snap) var(--commit),
+      background-color var(--d-snap) var(--commit),
+      border-color var(--d-snap) var(--commit);
+  }
+  .portfolio .btn:active,
+  .portfolio .pchip:active,
+  .portfolio .pgrid-nav button:not(:disabled):active { scale: 0.97; }
+  .portfolio .pcard:active { translate: 0 2px; }
+
+  @supports (animation-timeline: view()) {
+    /* Every sentence owns its timeline, so long mobile lines stay in order.
+       The final word resolves before the sentence reaches the reading zone. */
+    .portfolio .scroll-words {
+      view-timeline-name: --word-reveal;
+      view-timeline-inset: 8% 8%;
+    }
+    .portfolio .scroll-words .wi {
+      animation: word-unveil linear both;
+      animation-timeline: --word-reveal;
+      animation-range: cover var(--word-start) cover var(--word-end);
+      transition: none;
+    }
+    @keyframes word-unveil {
+      from { opacity: 0.12; translate: 0 var(--word-lift); }
+      to { opacity: 1; translate: 0 0; }
+    }
+    .portfolio .commit:focus-within .scroll-words .wi {
+      animation: none;
+      opacity: 1;
+      translate: none;
+    }
+    .portfolio .fiber-flight { view-timeline-name: --fiber-hero; }
+    .portfolio .fiber-visual {
+      animation: fiber-depth linear both;
+      animation-timeline: --fiber-hero;
+      animation-range: exit 0% exit 100%;
+    }
+    .portfolio .fiber-flight[data-moving="false"] .fiber-visual {
+      animation-play-state: paused;
+    }
+    @keyframes fiber-depth {
+      from { translate: 0 0; }
+      to { translate: 0 var(--hero-drift); }
+    }
+    .portfolio .band { view-timeline-name: --chapter; }
+    .portfolio .band::before {
+      transform-origin: left;
+      animation: chapter-draw linear both;
+      animation-timeline: --chapter;
+      animation-range: entry 0% entry 80%;
+    }
+    @keyframes chapter-draw {
+      from { scale: 0 1; opacity: 0.2; }
+      to { scale: 1 1; opacity: 0.7; }
+    }
+  }
+
+  @media (min-width: 700px) and (hover: hover) and (pointer: fine) {
+    .portfolio .pcard:hover { translate: 0 -4px; }
+    .portfolio .btn:hover { translate: 0 -2px; }
+    @supports (animation-timeline: view()) {
+      .portfolio .principle-art { view-timeline-name: --feather; }
+      .portfolio .principle-art img {
+        animation: feather-depth linear both;
+        animation-timeline: --feather;
+        animation-range: entry 0% exit 100%;
+      }
+      @keyframes feather-depth {
+        from { transform: scale(1.07) translateY(8px); }
+        to { transform: scale(1.02) translateY(-8px); }
+      }
+    }
+  }
+
+  @media (max-width: 699px), (pointer: coarse) {
+    .portfolio {
+      --motion-travel: 12px;
+      --motion-duration: 480ms;
+      --motion-draw: 800ms;
+      --hero-drift: 12px;
+      --word-lift: 0.22em;
+    }
+    .portfolio [data-motion-item] { --motion-delay: 0ms !important; }
+    .portfolio .commit.is-pending { translate: 0 12px; }
+    .portfolio .hero-stats > div { animation-delay: calc(var(--i) * 35ms); }
+    .portfolio .hero .wi { transition-duration: var(--motion-duration); }
+    .portfolio .pcard,
+    .portfolio .pcard-top,
+    .portfolio .pcard-body,
+    .portfolio .pcard-foot { transform: none; }
+    .portfolio .pcard-sheen { display: none; }
+    /* Swiping keeps its native scroll snap; cards enter without a 3D tilt. */
+    .portfolio .pgrid-cell[data-motion-pending] { translate: 10px 0; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .portfolio [data-motion-item],
+  .portfolio .commit[data-stagger] > [data-motion-item] {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+  .portfolio .motion-stroke { stroke-dashoffset: 0; }
+  .portfolio .scroll-words .wi {
+    opacity: 1;
+    translate: none;
+    animation: none;
+  }
+}
