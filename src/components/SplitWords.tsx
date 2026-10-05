@@ -51,8 +51,8 @@ export function SplitWords({
               style={{
                 "--i": scroll ? from + Math.min(i, 12) * 0.65 : from + i * step,
                 ...(scroll ? {
-                  "--word-start": `${(i / Math.max(words.length - 1, 1)) * 26}%`,
-                  "--word-end": `${18 + (i / Math.max(words.length - 1, 1)) * 26}%`,
+                  "--word-start": `${(i / Math.max(words.length - 1, 1)) * 35}%`,
+                  "--word-end": `${24 + (i / Math.max(words.length - 1, 1)) * 35}%`,
                 } : {}),
               } as React.CSSProperties}
             >

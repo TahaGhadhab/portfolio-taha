@@ -185,17 +185,17 @@ export const fr: Content = {
     intro: "Une trajectoire scientifique, orientée vers l'ingénierie des systèmes.",
     items: [
       {
-        degree: "Mastère en systèmes complexes intelligents",
+        degree: "Master Recherche en systèmes complexes intelligents, double diplôme",
         school: "École Polytechnique de Tunisie (EPT)",
-        period: "2026 à aujourd'hui",
+        period: "2026 à 2027",
         location: "La Marsa",
-        detail: "Modélisation et pilotage des systèmes complexes, apprentissage automatique, aide à la décision.",
+        detail: "Intelligence artificielle, robotique avancée et transports intelligents, systèmes embarqués, commande optimale, identification des systèmes.",
         current: true
       },
       {
         degree: "Diplôme National d'Ingénieur en génie industriel",
         school: "École Nationale d'Ingénieurs de Bizerte (ENIB)",
-        period: "2024 à aujourd'hui",
+        period: "2024 à 2027",
         location: "Bizerte",
         detail: "Optimisation des systèmes de production, Lean management, planification industrielle, Industrie 4.0.",
         current: true
@@ -265,13 +265,15 @@ export const fr: Content = {
         input: "L'ancienne entité reste imprimée sur des milliers de documents de fabrication, reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
         output: "Un outil de reprise de marque assistée par OCR, avec validation humaine et journal d'audit, et une plateforme de suivi de la conformité des outils de serrage.",
         missions: [
-          "Conception d'un outil local de reprise de marque documentaire : détection des mentions Zodiac dans le texte natif comme dans les pages scannées, remplacement sous validation de l'opérateur, fichier source jamais écrasé",
-          "Création d'une plateforme de suivi de la conformité des outils de serrage, en réponse aux exigences de la norme de sécurité aéronautique"
+          "Digitalisation d'un contrôle de production : suivi papier des contrôles de couple de 19 îlots remplacé par une application de traçabilité ; mesures reçues directement de plus de la moitié des 18 couplemètres, outils identifiés par code-barres, outil hors étalonnage bloqué, corrections validées par le responsable ; 8 règles métier, 58 tests unitaires ; contrôle ramené de 60-120 s à 30 s",
+          "Automatisation d'un processus documentaire par IA (OpenCV, PaddleOCR, Tesseract, PyMuPDF) : 100 % des marques détectées sur 73 documents, sans faux positif, traitement ramené de 30-60 min à environ 3 min, 210 tests unitaires",
+          "Travail quotidien avec la qualité, les méthodes et les opérateurs"
         ],
         tools: [
           "Python",
           "PyMuPDF",
-          "OCR",
+          "PaddleOCR",
+          "Tesseract",
           "OpenCV",
           "Normes qualité aéro"
         ],
@@ -1163,7 +1165,11 @@ export const fr: Content = {
         },
         {
           name: "Anglais",
-          level: "Courant"
+          level: "Courant, écrit et oral"
+        },
+        {
+          name: "Allemand",
+          level: "B1 (Goethe-Institut)"
         }
       ]
     }
@@ -1205,8 +1211,8 @@ export const fr: Content = {
   },
   contact: {
     title: "Contact",
-    intro: "Ouvert aux opportunités de stage et d'alternance en ingénierie industrielle, data et Industrie 4.0.",
-    email: "taha.ghadhab@enib.ucar.tn",
+    intro: "Stage de fin d'études (PFE), six mois, à partir de février 2027. Ouvert aux opportunités en ingénierie industrielle, IA, données et automatisation des processus.",
+    email: "tahaghadhab@gmail.com",
     phone: "+216 54 347 150",
     linkedin: "https://www.linkedin.com/in/taha-ghadhab",
     linkedinLabel: "linkedin.com/in/taha-ghadhab",

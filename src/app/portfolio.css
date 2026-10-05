@@ -41,7 +41,39 @@
 .portfolio .air-bloom, .portfolio .air-horizon, .portfolio .grain,
 .portfolio .vignette, .portfolio .optics { display: none; }
 .portfolio .air-field { opacity: 0.35; animation: none; }
-.portfolio .nav-bar { background: #101313; border-bottom: 1px solid var(--line); }
+.portfolio .nav-bar {
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+}
+.portfolio .nav-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(16, 19, 19, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+@supports (animation-timeline: scroll()) {
+  .portfolio .nav-bar::before {
+    animation: nav-frost linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 200px;
+  }
+  @keyframes nav-frost {
+    from {
+      background: rgba(16, 19, 19, 1);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+      background: rgba(16, 19, 19, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+  }
+}
 .portfolio .nav { min-height: var(--nav-h); padding-block: 0.75rem; flex-wrap: nowrap; }
 .portfolio .nav-links { gap: 1rem; }
 .portfolio .nav-links a { font-size: 0.75rem; }

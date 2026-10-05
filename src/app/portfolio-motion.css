@@ -82,7 +82,7 @@
        The final word resolves before the sentence reaches the reading zone. */
     .portfolio .scroll-words {
       view-timeline-name: --word-reveal;
-      view-timeline-inset: 8% 8%;
+      view-timeline-inset: 2% 6%;
     }
     .portfolio .scroll-words .wi {
       animation: word-unveil linear both;

@@ -183,17 +183,17 @@ export const en: Content = {
     intro: "A scientific path, aimed at systems engineering.",
     items: [
       {
-        degree: "Master's in Intelligent Complex Systems",
+        degree: "Research Master's in Intelligent Complex Systems, dual degree",
         school: "École Polytechnique de Tunisie (EPT)",
-        period: "2026 to present",
+        period: "2026 to 2027",
         location: "La Marsa",
-        detail: "Modelling and control of complex systems, machine learning, decision support.",
+        detail: "Artificial intelligence, advanced robotics and intelligent transport, embedded systems, optimal control, system identification.",
         current: true
       },
       {
         degree: "National Engineering Degree in Industrial Engineering",
         school: "École Nationale d'Ingénieurs de Bizerte (ENIB)",
-        period: "2024 to present",
+        period: "2024 to 2027",
         location: "Bizerte",
         detail: "Production systems optimisation, Lean management, industrial planning, Industry 4.0.",
         current: true
@@ -263,13 +263,15 @@ export const en: Content = {
         input: "The old entity is still printed across thousands of manufacturing documents, with manual rework out of the question. In parallel, torque tool compliance is tracked with no dedicated system.",
         output: "A local OCR-assisted rebranding tool, with human validation and an audit log, plus a platform tracking tightening-tool compliance.",
         missions: [
-          "Designed a local document-rebranding tool: Zodiac mentions detected in native text and in scanned pages alike, replaced under operator approval, with the source file never overwritten",
-          "Built a platform tracking tightening-tool compliance, meeting aerospace safety standard requirements"
+          "Digitised a production control: paper-based torque checks across 19 cells replaced by a traceability application; measurements received directly from over half of the 18 torque wrenches, tools identified by barcode, out-of-calibration tools blocked, corrections validated by the supervisor; 8 business rules, 58 unit tests; check time reduced from 60–120 s to 30 s",
+          "Automated a document workflow with AI (OpenCV, PaddleOCR, Tesseract, PyMuPDF): 100 % of marks detected across 73 documents, zero false positives, processing time reduced from 30–60 min to about 3 min, 210 unit tests",
+          "Daily collaboration with quality, methods, and shop-floor operators"
         ],
         tools: [
           "Python",
           "PyMuPDF",
-          "OCR",
+          "PaddleOCR",
+          "Tesseract",
           "OpenCV",
           "Aerospace quality standards"
         ],
@@ -1161,7 +1163,11 @@ export const en: Content = {
         },
         {
           name: "English",
-          level: "Fluent"
+          level: "Fluent, written and spoken"
+        },
+        {
+          name: "German",
+          level: "B1 (Goethe-Institut)"
         }
       ]
     }
@@ -1203,8 +1209,8 @@ export const en: Content = {
   },
   contact: {
     title: "Contact",
-    intro: "Open to internship and apprenticeship opportunities in industrial engineering, data and Industry 4.0.",
-    email: "taha.ghadhab@enib.ucar.tn",
+    intro: "Final-year internship (PFE), six months, starting February 2027. Open to opportunities in industrial engineering, AI, data and process automation.",
+    email: "tahaghadhab@gmail.com",
     phone: "+216 54 347 150",
     linkedin: "https://www.linkedin.com/in/taha-ghadhab",
     linkedinLabel: "linkedin.com/in/taha-ghadhab",
