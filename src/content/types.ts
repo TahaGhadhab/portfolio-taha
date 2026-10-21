@@ -488,7 +488,14 @@ export interface Content {
     soft: { title: string; items: string[] };
     languages: { title: string; items: { name: string; level: string }[] };
   };
-  associative: { title: string; intro: string; items: Role[] };
+  associative: {
+    title: string;
+    intro: string;
+    /** Site du club, quand il en a un. */
+    url?: string;
+    linkLabel?: string;
+    items: Role[];
+  };
   interests: { title: string; items: string[] };
   contact: {
     title: string;

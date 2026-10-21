@@ -6,6 +6,7 @@ import { LOCALES, getContent, isLocale } from "@/content";
 import "../globals.css";
 import "../portfolio.css";
 import "../portfolio-motion.css";
+import "../project-glyphs.css";
 
 /* --- Quatre familles, aucun rôle partagé ------------------------------
    Le document parle de deux choses à la fois : une affirmation, et un

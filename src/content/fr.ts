@@ -91,7 +91,7 @@ export const fr: Content = {
         label: "startup co-fondée"
       },
       {
-        value: "5",
+        value: "7",
         unit: "",
         label: "projets construits"
       }
@@ -324,7 +324,7 @@ export const fr: Content = {
   },
   projects: {
     title: "Projets",
-    intro: "Cinq systèmes construits pour résoudre un problème précis, de la documentation aéronautique à l'implantation d'atelier.",
+    intro: "Sept systèmes construits pour résoudre un problème précis, de la documentation aéronautique à l'apprentissage par renforcement.",
     openLabel: "Ouvrir",
     detailsLabel: "Voir le détail",
     hideLabel: "Masquer le détail",
@@ -1033,6 +1033,338 @@ export const fr: Content = {
           value: "42",
           label: "KPI suivis"
         }
+      },
+      {
+        id: "lunar-lander",
+        name: "Lunar Lander : reward shaping et reward hacking",
+        short: "Lunar Lander",
+        tagline: "Faire tricher une IA exprès, puis prouver la correction",
+        period: "2026",
+        status: "Livré",
+        statusTone: "done",
+        tracks: ["data"],
+        capsule: {
+          problem: "Une récompense qui paraît anodine, « +1 par image où le module est droit et lent », suffit à faire tricher un agent : il plane jusqu'à la coupure au lieu d'atterrir, et sa courbe d'entraînement dit qu'il excelle.",
+          solution: "Reproduire la triche sous protocole, puis réécrire la même idée en potential-based shaping (Ng, Harada et Russell, 1999), et prouver par ablation que c'est ce terme qui corrige.",
+          role: "Spécification, protocole expérimental, hypothèses et validation. Code écrit avec Claude Code, vérifié par 51 tests.",
+          stack: "Python 3.12 · Gymnasium · Box2D · Stable-Baselines3 (PPO) · PyTorch · pytest",
+          result: "Troncature 77 % → 0 % sur chaque graine · score réel 36,8 → 263,4 · 15 entraînements de 1 M de pas"
+        },
+        highlights: [
+          "Cinq fonctions de récompense, chacune un wrapper Gymnasium qui ajoute à la récompense native sans jamais la remplacer ni toucher à terminated, truncated et info",
+          "Hypothèse écrite avant chaque essai dans un journal daté, 3 graines par variante, et verdicts publiés tels quels : deux hypothèses ont été marquées réfutées",
+          "Évaluation que la récompense modifiée ne peut pas tromper : environnement brut, politique déterministe, 50 épisodes sur des graines réservées, pire graine rapportée entre crochets",
+          "Découverte : la triche trouvée dépend du chemin d'apprentissage. La graine 2 apprend à se poser vers 400 000 pas, puis désapprend et plane sur tous les épisodes à partir de 750 000",
+          "Lander Studio : une application web locale, sans framework, pour entraîner en direct et voir le réseau s'allumer à côté du module en vol"
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Contexte",
+            body: "Un tutoriel apprend à une IA à poser un module lunaire. L'intérêt n'est pas là. Il est dans ce qui arrive quand on ajoute une règle de récompense raisonnable en apparence : un bonus qui paie un état plutôt qu'un progrès. C'est le reward hacking, et c'est le défaut le plus courant de l'apprentissage par renforcement appliqué."
+          },
+          {
+            step: "02",
+            title: "Contrainte",
+            body: "Le score d'entraînement d'un agent tricheur est faux par construction : jugé par sa propre récompense, il réussit. Le protocole devait donc juger toutes les variantes sur la même échelle, la récompense brute du jeu, et se méfier de toute conclusion tirée d'une seule graine."
+          },
+          {
+            step: "03",
+            title: "Approche",
+            body: "Le calcul d'abord. Planer rapporte environ +0,8 par image, soit près de 800 sur un épisode coupé à 1 000 images, contre +100 pour un atterrissage qui arrête les paiements. Avec γ = 0,999 et le bootstrapping sur troncature, le critique évalue le vol stationnaire à environ 735. La correction paie l'amélioration, F = γ·Φ(s') − Φ(s) : la somme se télescope et reste bornée, il n'y a plus rien à accumuler."
+          },
+          {
+            step: "04",
+            title: "Construction",
+            body: "Un paquet Python en couches : fabrique d'environnements, registre de récompenses, entraînement PPO qui écrit dans chaque config.json versions, hash git et durée, évaluation équitable, enregistrement vidéo. Trois pièges du potentiel couverts par des tests : même γ que PPO, Φ nul sur une vraie fin mais pas sur une troncature, Φ recalculé à chaque reset."
+          },
+          {
+            step: "05",
+            title: "Résultat",
+            body: "La triche est reproduite sur 2 graines sur 3 (77 % des épisodes coupés à 1 000 images, score réel 36,8 contre 257,3 en baseline), pendant que leur score d'entraînement montait vers 1 000. Le potentiel la supprime sur toutes les graines : 0 % de troncature, score dans l'écart-type de la baseline. L'ablation sans frais par image donne le même résultat : c'est le terme potentiel qui corrige, pas les frais. Reproduit à l'identique depuis un clone propre."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "Un protocole que la récompense modifiée ne peut pas tromper",
+            alt: "Logigramme vertical : l'hypothèse est écrite avant l'essai, trois graines sont entraînées sur un million de pas, le score brut est journalisé à côté du score façonné, puis chaque modèle est évalué sur l'environnement brut avec une politique déterministe sur cinquante graines réservées. Un test vérifie si plus de vingt pour cent des épisodes sont coupés à mille images ; si oui, la triche est probable et la vidéo de la graine médiane le confirme. Le verdict est écrit au journal d'expériences.",
+            caption: "Le façonnage n'existe qu'à l'entraînement. L'évaluation ne le voit jamais : toutes les variantes sont jugées sur la récompense du jeu, et c'est pour cela qu'un agent qui affichait près de 1 000 points ressort à 36,8. Monitor est posé sous le wrapper de récompense, si bien que la courbe d'entraînement elle-même est en score brut.",
+            nodes: [
+              {
+                title: "Hypothèse écrite",
+                sub: "avant l'essai, datée"
+              },
+              {
+                title: "Entraînement PPO",
+                sub: "3 graines · 1 M de pas"
+              },
+              {
+                title: "Journal à deux colonnes",
+                sub: [
+                  "score brut (Monitor)",
+                  "score façonné, à part"
+                ]
+              },
+              {
+                title: "Évaluation brute",
+                sub: [
+                  "déterministe · 50 épisodes",
+                  "graines 10 000 à 10 049"
+                ]
+              },
+              {
+                title: "Troncature > 20 % ?",
+                sub: "signature du vol stationnaire",
+                decision: true
+              }
+            ],
+            exits: [
+              {
+                from: 4,
+                edge: "oui",
+                title: "Triche probable",
+                sub: [
+                  "vidéo de la graine",
+                  "médiane, pas la meilleure"
+                ],
+                tone: "fault"
+              }
+            ],
+            outcome: {
+              title: "Verdict au journal",
+              sub: [
+                "confirmé · réfuté",
+                "non concluant"
+              ]
+            }
+          }
+        ],
+        stack: [
+          "Python 3.12",
+          "Gymnasium",
+          "Box2D",
+          "Stable-Baselines3",
+          "PyTorch",
+          "pytest",
+          "ruff"
+        ],
+        stackDetail: [
+          {
+            label: "Apprentissage",
+            items: [
+              "PPO · Stable-Baselines3 2.9",
+              "MLP acteur-critique 2 × 64",
+              "9 797 paramètres",
+              "PyTorch CPU"
+            ]
+          },
+          {
+            label: "Simulation",
+            items: [
+              "Gymnasium 1.3 · LunarLander-v3",
+              "Box2D",
+              "16 environnements parallèles"
+            ]
+          },
+          {
+            label: "Expérience",
+            items: [
+              "5 wrappers de récompense",
+              "config.json · versions et hash git",
+              "Monitor CSV",
+              "pandas · matplotlib"
+            ]
+          },
+          {
+            label: "Interface",
+            items: [
+              "Lander Studio · http.server + SSE",
+              "HTML / JavaScript sans framework",
+              "pygame · fenêtre de jeu",
+              "moviepy · MP4"
+            ]
+          },
+          {
+            label: "Qualité",
+            items: [
+              "pytest · 51 tests",
+              "ruff",
+              "Agent d'audit en lecture seule"
+            ]
+          }
+        ],
+        metric: {
+          value: "77 → 0 %",
+          label: "Troncature, triche puis correction"
+        }
+      },
+      {
+        id: "fliplander",
+        name: "Tesla Roadster rocket",
+        short: "Tesla Roadster rocket",
+        tagline: "Une voiture qui se retourne en l'air et se pose sur ses roues",
+        period: "2026 à aujourd'hui",
+        status: "En cours",
+        statusTone: "wip",
+        tracks: ["data", "industrial"],
+        capsule: {
+          problem: "Une voiture de 1,85 t quitte une boucle tête en bas à 10 m. Elle doit se retourner de 180° en vol avec 10 propulseurs à air comprimé, freiner et se poser sur ses quatre roues, sans vider son réservoir ni dépasser 3 g. Une démonstration prouve que ça marche une fois ; la vraie question est la robustesse.",
+          solution: "Un simulateur MuJoCo 6 degrés de liberté construit depuis un fichier de configuration, un agent PPO entraîné par curriculum, et un contrôleur classique sur SO(3) comme adversaire honnête.",
+          role: "Spécification, décisions de modélisation, revue de chaque jalon, QA et audit de sécurité. Code écrit avec Claude Code et validé par les tests.",
+          stack: "Python · MuJoCo · Gymnasium · Stable-Baselines3 (PPO, SAC) · PyTorch · Railway",
+          result: "Contrôleur classique : 83,1 % de succès sur 1 000 épisodes · PPO en cours d'entraînement, aucun chiffre publié avant 5 graines"
+        },
+        highlights: [
+          "Physique écrite test d'abord : chute libre, conservation de l'énergie, impulsion des propulseurs, masse d'air (194,6 kg) et vidange du réservoir ont chacune leur test",
+          "Réservoir modélisé physiquement : 600 L à 300 bar, poussée qui chute sous 40 bar, masse du véhicule mise à jour à mesure que l'air est consommé",
+          "Contrôleur classique sur SO(3) avec allocation par moindres carrés bornés : de 0 % à 85,4 % sur le niveau nominal, la compensation du retard des vannes valant à elle seule +32 points",
+          "Curriculum de 8 niveaux, du module droit au repos jusqu'à la séquence complète avec vent, erreurs de masse et propulseur en panne",
+          "Échecs documentés et corrigés : un γ trop court rendait le vol stationnaire plus rentable qu'un atterrissage dur, et une moyenne de politique dérivait hors des bornes d'action"
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Contexte",
+            body: "Le prolongement en 3D du projet Lunar Lander, inspiré d'une démonstration publique de voiture qui se retourne en vol. Sur 2 dimensions et 2 moteurs, on passe à 6 degrés de liberté, 10 propulseurs avec retard de vanne, une ressource physique qui s'épuise et une contrainte humaine : l'occupant ne doit pas dépasser 3 g. Seuls trois chiffres publics sont repris ; tout le reste est une hypothèse d'ingénierie documentée."
+          },
+          {
+            step: "02",
+            title: "Contrainte",
+            body: "Tête en bas, les quatre propulseurs de sustentation poussent la voiture vers le sol. Il faut donc se retourner avant de pouvoir freiner, en 0,7 s environ, sur un budget d'air qui ne permet que 4,9 s de vol stationnaire. Et un taux de succès appris ne veut rien dire sans un contrôleur d'ingénieur en face : c'est lui qui fixe la barre."
+          },
+          {
+            step: "03",
+            title: "Approche",
+            body: "Le modèle MuJoCo est généré depuis un YAML, si bien que chaque paramètre se retrace jusqu'à sa source. L'observation n'utilise jamais d'angles d'Euler : rotation en représentation 6D, gravité dans le repère du véhicule, et jamais le temps, pour garder le problème markovien. La récompense est en potential-based shaping, avec le même γ que l'algorithme."
+          },
+          {
+            step: "04",
+            title: "Construction",
+            body: "Environnement Gymnasium, curriculum à promotion sur 200 épisodes avec 20 % de rejeu des niveaux précédents, entraînement local ou sur Railway depuis une branche git dédiée par lot, synchronisation des artefacts sur S3. Environ 100 tests, CI avec ruff, mypy strict, bandit et pip-audit ; politiques exportées sans pickle."
+          },
+          {
+            step: "05",
+            title: "État actuel",
+            body: "Le contrôleur classique est mesuré sur des graines réservées, 1 000 épisodes par niveau : 83,1 % en nominal, 38,0 % avec randomisation, 33,1 % avec un propulseur en panne, 22,5 % sur la séquence complète. PPO a déjà atteint 95 à 100 % sur certaines graines, mais pas de façon stable : le jalon impose 95 % sur 5 graines avec intervalles de confiance avant toute publication. Les lots v5a et v5b tournent."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "De la boucle au toucher : se retourner avant de freiner",
+            alt: "Logigramme vertical : la montée dans la boucle est scriptée, la voiture est larguée tête en bas à 9,26 mètres et 6 mètres par seconde, l'agent la retourne de 180 degrés, la freine en suivant un profil de vitesse sûre, puis les critères d'atterrissage sont vérifiés. S'ils échouent, l'épisode est classé atterrissage dur, crash ou dépassement de 3 g. S'ils sont tenus, la voiture est posée sur ses quatre roues.",
+            caption: "L'ordre n'est pas un choix de style. Tant que la voiture est inversée, les propulseurs de sustentation l'accélèrent vers le sol : freiner avant d'avoir retourné le véhicule aggrave la chute. Une des questions du projet est de savoir si l'agent découvre seul cette séquence.",
+            nodes: [
+              {
+                title: "Montée scriptée",
+                sub: "boucle R = 5 m · ventouses"
+              },
+              {
+                title: "Largage inversé",
+                sub: [
+                  "9,26 m · 5,98 m/s",
+                  "tangage 1,38 rad/s"
+                ]
+              },
+              {
+                title: "Retournement 180°",
+                sub: "≈ 0,7 s · 14,6 kN·m"
+              },
+              {
+                title: "Freinage",
+                sub: "profil v_safe(h)"
+              },
+              {
+                title: "Critères tenus ?",
+                sub: [
+                  "inclinaison < 8° · vz < 2 m/s",
+                  "pic < 3 g"
+                ],
+                decision: true
+              }
+            ],
+            exits: [
+              {
+                from: 4,
+                edge: "non",
+                title: "Échec classé",
+                sub: [
+                  "dur · crash · sur-g",
+                  "sortie de zone"
+                ],
+                tone: "fault"
+              }
+            ],
+            outcome: {
+              title: "Posé sur 4 roues",
+              sub: "stabilisé 1 s après le contact"
+            }
+          }
+        ],
+        stack: [
+          "Python",
+          "MuJoCo",
+          "Gymnasium",
+          "Stable-Baselines3",
+          "PyTorch",
+          "pydantic",
+          "Docker",
+          "Railway"
+        ],
+        stackDetail: [
+          {
+            label: "Simulation",
+            items: [
+              "MuJoCo ≥ 3.2 · 500 Hz",
+              "Modèle généré depuis YAML",
+              "Réservoir, vannes, traînée, vent",
+              "Randomisation et pannes"
+            ]
+          },
+          {
+            label: "Apprentissage",
+            items: [
+              "PPO · Stable-Baselines3",
+              "SAC en comparaison",
+              "MLP 256 × 256",
+              "VecNormalize",
+              "Curriculum 8 niveaux"
+            ]
+          },
+          {
+            label: "Contrôle",
+            items: [
+              "Contrôle d'attitude sur SO(3)",
+              "Allocation · scipy lsq_linear",
+              "Planificateur de phases"
+            ]
+          },
+          {
+            label: "Infrastructure",
+            items: [
+              "Docker",
+              "Railway",
+              "Stockage compatible S3",
+              "TensorBoard"
+            ]
+          },
+          {
+            label: "Qualité",
+            items: [
+              "pytest · ~100 tests",
+              "ruff · mypy strict",
+              "bandit · pip-audit",
+              "GitHub Actions"
+            ]
+          }
+        ],
+        metric: {
+          value: "83,1 %",
+          label: "Référence classique, niveau nominal"
+        }
       }
     ]
   },
@@ -1101,7 +1433,17 @@ export const fr: Content = {
             usedIn: [
               "safran",
               "machine-layout",
-              "safran-rebranding"
+              "safran-rebranding",
+              "lunar-lander",
+              "fliplander"
+            ]
+          },
+          {
+            name: "Apprentissage par renforcement",
+            note: "PPO, reward shaping, curriculum",
+            usedIn: [
+              "lunar-lander",
+              "fliplander"
             ]
           },
           {
@@ -1177,6 +1519,8 @@ export const fr: Content = {
   associative: {
     title: "Vie associative",
     intro: "Club AI Innovators, ENIB.",
+    url: "https://aiinnovators.vercel.app/",
+    linkLabel: "Voir le site du club",
     items: [
       {
         title: "Président",

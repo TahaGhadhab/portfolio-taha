@@ -593,6 +593,18 @@ export function EngagementSection({
         ))}
       </ol>
 
+      {associative.url ? (
+        <a
+          className="linkout commit"
+          href={associative.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ display: "inline-block", marginTop: "var(--s-5)" }}
+        >
+          {(associative.linkLabel ?? associative.url).toUpperCase()} ↗
+        </a>
+      ) : null}
+
       <div className="commit" style={{ marginTop: "var(--s-7)" }}>
         <p className="mono">{interests.title.toUpperCase()}</p>
         <div className="tags">

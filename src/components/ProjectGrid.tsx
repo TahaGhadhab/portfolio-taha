@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Content, Locale, Project, TrackId } from "@/content";
 import { TRACKS } from "@/content";
+import { ProjectGlyph } from "./ProjectGlyph";
 
 /**
  * Le sommaire des projets.
@@ -182,6 +183,19 @@ function ProjectCard({
     });
   }, []);
 
+  /* Le geste du pictogramme rejoue au survol — seulement une fois le
+     précédent terminé, pour qu'un pointeur qui traverse la grille ne
+     relance pas sept animations à la fois. */
+  const onEnter = useCallback(() => {
+    const glyph = ref.current?.querySelector(".pcard-glyph");
+    const runs = glyph?.getAnimations({ subtree: true }) ?? [];
+    if (!runs.length || runs.some((a) => a.playState !== "finished")) return;
+    for (const a of runs) {
+      a.cancel();
+      a.play();
+    }
+  }, []);
+
   const onLeave = useCallback(() => {
     const el = ref.current;
     if (!el) return;
@@ -201,6 +215,7 @@ function ProjectCard({
         className="pcard"
         href={`#projet-${project.id}`}
         aria-label={projects.grid.openLabel.replace("{name}", project.name)}
+        onPointerEnter={onEnter}
         onPointerMove={onMove}
         onPointerLeave={onLeave}
         onBlur={onLeave}
@@ -213,6 +228,8 @@ function ProjectCard({
           <span className="pcard-no mono">{String(no).padStart(2, "0")}</span>
           <StatusChip tone={project.statusTone} label={project.status} />
         </span>
+
+        <ProjectGlyph id={project.id} />
 
         <span className="pcard-body">
           <span className="pcard-name">{project.name}</span>

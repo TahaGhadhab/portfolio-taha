@@ -89,7 +89,7 @@ export const en: Content = {
         label: "startup co-founded"
       },
       {
-        value: "5",
+        value: "7",
         unit: "",
         label: "projects built"
       }
@@ -322,7 +322,7 @@ export const en: Content = {
   },
   projects: {
     title: "Projects",
-    intro: "Five systems built to solve a specific problem, from aerospace documentation to plant layout.",
+    intro: "Seven systems built to solve a specific problem, from aerospace documentation to reinforcement learning.",
     openLabel: "Open",
     detailsLabel: "Show detail",
     hideLabel: "Hide detail",
@@ -1031,6 +1031,338 @@ export const en: Content = {
           value: "42",
           label: "KPIs tracked"
         }
+      },
+      {
+        id: "lunar-lander",
+        name: "Lunar Lander: reward shaping and reward hacking",
+        short: "Lunar Lander",
+        tagline: "Making an AI cheat on purpose, then proving the fix",
+        period: "2026",
+        status: "Delivered",
+        statusTone: "done",
+        tracks: ["data"],
+        capsule: {
+          problem: "A reward that looks harmless, \"+1 per frame where the lander is upright and slow\", is enough to make an agent cheat: it hovers until the time limit instead of landing, and its training curve says it is excellent.",
+          solution: "Reproduce the cheat under a strict protocol, then rewrite the same idea as potential-based shaping (Ng, Harada and Russell, 1999), and prove through an ablation that this term is what fixes it.",
+          role: "Specification, experimental protocol, hypotheses and validation. Code written with Claude Code, checked by 51 tests.",
+          stack: "Python 3.12 · Gymnasium · Box2D · Stable-Baselines3 (PPO) · PyTorch · pytest",
+          result: "Truncation 77 % → 0 % on every seed · true score 36.8 → 263.4 · 15 training runs of 1 M steps"
+        },
+        highlights: [
+          "Five reward functions, each a Gymnasium wrapper that adds to the native reward without ever replacing it or touching terminated, truncated and info",
+          "Hypothesis written before each run in a dated log, 3 seeds per variant, and verdicts published as they came out: two hypotheses were marked refuted",
+          "An evaluation the shaped reward cannot fool: raw environment, deterministic policy, 50 episodes on held-out seeds, worst seed reported in brackets",
+          "Finding: the cheat an agent finds depends on its learning path. Seed 2 learns to land around 400,000 steps, then unlearns it and hovers on every episode from 750,000",
+          "Lander Studio: a local, framework-free web app to train live and watch the network light up next to the lander in flight"
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Context",
+            body: "A tutorial teaches an AI to land a lunar module. That is not the point here. The point is what happens when you add a reward rule that looks reasonable: a bonus that pays for a state rather than for progress. That is reward hacking, and it is the most common failure of applied reinforcement learning."
+          },
+          {
+            step: "02",
+            title: "Constraint",
+            body: "A cheating agent's training score is wrong by construction: judged by its own reward, it succeeds. The protocol therefore had to judge every variant on the same scale, the game's raw reward, and distrust any conclusion drawn from a single seed."
+          },
+          {
+            step: "03",
+            title: "Approach",
+            body: "The arithmetic first. Hovering pays about +0.8 per frame, close to 800 over an episode cut at 1,000 frames, against +100 for a landing that also stops the payments. With γ = 0.999 and bootstrapping on truncation, the critic values hovering at about 735. The fix pays for improvement, F = γ·Φ(s') − Φ(s): the sum telescopes and stays bounded, so there is nothing left to farm."
+          },
+          {
+            step: "04",
+            title: "Build",
+            body: "A layered Python package: environment factory, reward registry, PPO training that writes versions, git hash and duration into every config.json, a fair evaluator, video recording. Three potential-shaping traps covered by tests: the same γ as PPO, Φ set to zero on a real termination but not on a truncation, Φ recomputed on every reset."
+          },
+          {
+            step: "05",
+            title: "Result",
+            body: "The cheat reproduced on 2 seeds out of 3 (77 % of episodes cut at 1,000 frames, true score 36.8 against 257.3 for the baseline), while their training score climbed towards 1,000. The potential term removes it on every seed: 0 % truncation, score within the baseline's standard deviation. The ablation without the per-frame fee gives the same result: the potential term is the fix, not the fee. Reproduced bit for bit from a fresh clone."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "A protocol the shaped reward cannot fool",
+            alt: "Vertical flowchart: the hypothesis is written before the run, three seeds are trained for one million steps, the raw score is logged alongside the shaped score, then each model is evaluated on the raw environment with a deterministic policy over fifty held-out seeds. A test checks whether more than twenty percent of episodes are cut at one thousand frames; if so, cheating is likely and the median seed's video confirms it. The verdict is written to the experiment log.",
+            caption: "Shaping only exists during training. Evaluation never sees it: every variant is judged on the game's reward, which is why an agent showing nearly 1,000 points comes out at 36.8. Monitor sits beneath the reward wrapper, so even the training curve is in raw score.",
+            nodes: [
+              {
+                title: "Hypothesis written",
+                sub: "before the run, dated"
+              },
+              {
+                title: "PPO training",
+                sub: "3 seeds · 1 M steps"
+              },
+              {
+                title: "Two-column log",
+                sub: [
+                  "raw score (Monitor)",
+                  "shaped score, apart"
+                ]
+              },
+              {
+                title: "Raw evaluation",
+                sub: [
+                  "deterministic · 50 episodes",
+                  "seeds 10,000 to 10,049"
+                ]
+              },
+              {
+                title: "Truncation > 20 %?",
+                sub: "the hovering signature",
+                decision: true
+              }
+            ],
+            exits: [
+              {
+                from: 4,
+                edge: "yes",
+                title: "Likely cheating",
+                sub: [
+                  "video of the median",
+                  "seed, not the best"
+                ],
+                tone: "fault"
+              }
+            ],
+            outcome: {
+              title: "Verdict logged",
+              sub: [
+                "confirmed · refuted",
+                "inconclusive"
+              ]
+            }
+          }
+        ],
+        stack: [
+          "Python 3.12",
+          "Gymnasium",
+          "Box2D",
+          "Stable-Baselines3",
+          "PyTorch",
+          "pytest",
+          "ruff"
+        ],
+        stackDetail: [
+          {
+            label: "Learning",
+            items: [
+              "PPO · Stable-Baselines3 2.9",
+              "Actor-critic MLP 2 × 64",
+              "9,797 parameters",
+              "PyTorch CPU"
+            ]
+          },
+          {
+            label: "Simulation",
+            items: [
+              "Gymnasium 1.3 · LunarLander-v3",
+              "Box2D",
+              "16 parallel environments"
+            ]
+          },
+          {
+            label: "Experiment",
+            items: [
+              "5 reward wrappers",
+              "config.json · versions and git hash",
+              "Monitor CSV",
+              "pandas · matplotlib"
+            ]
+          },
+          {
+            label: "Interface",
+            items: [
+              "Lander Studio · http.server + SSE",
+              "Framework-free HTML / JavaScript",
+              "pygame · game window",
+              "moviepy · MP4"
+            ]
+          },
+          {
+            label: "Quality",
+            items: [
+              "pytest · 51 tests",
+              "ruff",
+              "Read-only audit agent"
+            ]
+          }
+        ],
+        metric: {
+          value: "77 → 0 %",
+          label: "Truncation, cheat then fix"
+        }
+      },
+      {
+        id: "fliplander",
+        name: "Tesla Roadster rocket",
+        short: "Tesla Roadster rocket",
+        tagline: "A car that flips in mid-air and lands on its wheels",
+        period: "2026 to present",
+        status: "In progress",
+        statusTone: "wip",
+        tracks: ["data", "industrial"],
+        capsule: {
+          problem: "A 1.85 t car leaves a loop upside down at 10 m. It must roll 180° in mid-air with 10 compressed-air thrusters, brake, and land on its four wheels without emptying its tank or exceeding 3 g. A demo proves it works once; the real question is robustness.",
+          solution: "A 6-degree-of-freedom MuJoCo simulator built from a config file, a PPO agent trained through a curriculum, and a classical SO(3) controller as an honest opponent.",
+          role: "Specification, modelling decisions, review of every milestone, QA and security audit. Code written with Claude Code and validated by tests.",
+          stack: "Python · MuJoCo · Gymnasium · Stable-Baselines3 (PPO, SAC) · PyTorch · Railway",
+          result: "Classical controller: 83.1 % success over 1,000 episodes · PPO still training, no figure published before 5 seeds"
+        },
+        highlights: [
+          "Physics written test-first: free fall, energy conservation, thruster impulse, air mass (194.6 kg) and tank blowdown each have their own test",
+          "Physically modelled tank: 600 L at 300 bar, thrust that drops below 40 bar, vehicle mass updated as air is consumed",
+          "Classical SO(3) controller with bounded least-squares allocation: from 0 % to 85.4 % on the nominal level, valve-lag compensation alone worth +32 points",
+          "An 8-level curriculum, from an upright car at rest to the full sequence with wind, mass errors and a failed thruster",
+          "Failures documented and fixed: a short γ made hovering pay better than a hard landing, and a policy mean drifted outside the action bounds"
+        ],
+        steps: [
+          {
+            step: "01",
+            title: "Context",
+            body: "The 3D follow-up to the Lunar Lander project, inspired by a public demo of a car flipping in mid-air. From 2 dimensions and 2 engines to 6 degrees of freedom, 10 thrusters with valve delay, a physical resource that runs out, and a human constraint: the occupant must stay below 3 g. Only three public figures are reused; everything else is a documented engineering assumption."
+          },
+          {
+            step: "02",
+            title: "Constraint",
+            body: "Upside down, the four lift thrusters push the car towards the ground. It has to flip before it can brake, in about 0.7 s, on an air budget that allows only 4.9 s of hover. And a learned success rate means nothing without an engineer's controller to compare against: that controller sets the bar."
+          },
+          {
+            step: "03",
+            title: "Approach",
+            body: "The MuJoCo model is generated from a YAML file, so every parameter traces back to its source. Observations never use Euler angles: a 6D rotation representation, gravity in the body frame, and never time, to keep the problem Markovian. The reward uses potential-based shaping with the same γ as the algorithm."
+          },
+          {
+            step: "04",
+            title: "Build",
+            body: "A Gymnasium environment, a curriculum promoted over 200 episodes with 20 % replay of earlier levels, training locally or on Railway from a dedicated git branch per batch, artifacts synced to S3. About 100 tests, CI with ruff, strict mypy, bandit and pip-audit; policies exported without pickle."
+          },
+          {
+            step: "05",
+            title: "Current state",
+            body: "The classical controller is measured on held-out seeds, 1,000 episodes per level: 83.1 % nominal, 38.0 % with domain randomization, 33.1 % with a failed thruster, 22.5 % on the full sequence. PPO has already reached 95 to 100 % on some seeds, but not consistently: the milestone requires 95 % across 5 seeds with confidence intervals before anything is published. Batches v5a and v5b are running."
+          }
+        ],
+        figures: [
+          {
+            kind: "flow",
+            no: "FIG. 01",
+            title: "From the loop to touchdown: flip before braking",
+            alt: "Vertical flowchart: the loop climb is scripted, the car is released upside down at 9.26 metres and 6 metres per second, the agent rolls it 180 degrees, brakes it along a safe-speed profile, then the landing criteria are checked. If they fail, the episode is classed as a hard landing, crash or over 3 g. If they hold, the car is resting on its four wheels.",
+            caption: "The order is not a matter of style. While the car is inverted, the lift thrusters accelerate it towards the ground: braking before the flip makes the fall worse. One of the project's questions is whether the agent discovers this sequence on its own.",
+            nodes: [
+              {
+                title: "Scripted climb",
+                sub: "loop R = 5 m · suction"
+              },
+              {
+                title: "Inverted release",
+                sub: [
+                  "9.26 m · 5.98 m/s",
+                  "pitch 1.38 rad/s"
+                ]
+              },
+              {
+                title: "180° roll",
+                sub: "≈ 0.7 s · 14.6 kN·m"
+              },
+              {
+                title: "Braking",
+                sub: "v_safe(h) profile"
+              },
+              {
+                title: "Criteria met?",
+                sub: [
+                  "tilt < 8° · vz < 2 m/s",
+                  "peak < 3 g"
+                ],
+                decision: true
+              }
+            ],
+            exits: [
+              {
+                from: 4,
+                edge: "no",
+                title: "Failure classed",
+                sub: [
+                  "hard · crash · over-g",
+                  "out of zone"
+                ],
+                tone: "fault"
+              }
+            ],
+            outcome: {
+              title: "On 4 wheels",
+              sub: "settled 1 s after contact"
+            }
+          }
+        ],
+        stack: [
+          "Python",
+          "MuJoCo",
+          "Gymnasium",
+          "Stable-Baselines3",
+          "PyTorch",
+          "pydantic",
+          "Docker",
+          "Railway"
+        ],
+        stackDetail: [
+          {
+            label: "Simulation",
+            items: [
+              "MuJoCo ≥ 3.2 · 500 Hz",
+              "Model generated from YAML",
+              "Tank, valves, drag, wind",
+              "Randomization and faults"
+            ]
+          },
+          {
+            label: "Learning",
+            items: [
+              "PPO · Stable-Baselines3",
+              "SAC for comparison",
+              "MLP 256 × 256",
+              "VecNormalize",
+              "8-level curriculum"
+            ]
+          },
+          {
+            label: "Control",
+            items: [
+              "Attitude control on SO(3)",
+              "Allocation · scipy lsq_linear",
+              "Phase planner"
+            ]
+          },
+          {
+            label: "Infrastructure",
+            items: [
+              "Docker",
+              "Railway",
+              "S3-compatible storage",
+              "TensorBoard"
+            ]
+          },
+          {
+            label: "Quality",
+            items: [
+              "pytest · ~100 tests",
+              "ruff · strict mypy",
+              "bandit · pip-audit",
+              "GitHub Actions"
+            ]
+          }
+        ],
+        metric: {
+          value: "83.1 %",
+          label: "Classical baseline, nominal level"
+        }
       }
     ]
   },
@@ -1099,7 +1431,17 @@ export const en: Content = {
             usedIn: [
               "safran",
               "machine-layout",
-              "safran-rebranding"
+              "safran-rebranding",
+              "lunar-lander",
+              "fliplander"
+            ]
+          },
+          {
+            name: "Reinforcement learning",
+            note: "PPO, reward shaping, curriculum",
+            usedIn: [
+              "lunar-lander",
+              "fliplander"
             ]
           },
           {
@@ -1175,6 +1517,8 @@ export const en: Content = {
   associative: {
     title: "Student leadership",
     intro: "AI Innovators Club, ENIB.",
+    url: "https://aiinnovators.vercel.app/",
+    linkLabel: "Visit the club's site",
     items: [
       {
         title: "President",

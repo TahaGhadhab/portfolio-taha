@@ -194,6 +194,11 @@ export default async function ClassicCvPage({ params }: PageProps<"/[lang]/cv">)
             </CvSection>
 
             <CvSection title={s.associative}>
+              {c.associative.url ? (
+                <p className="sub">
+                  <a href={c.associative.url}>{c.associative.url.replace(/^https?:\/\/|\/$/g, "")}</a>
+                </p>
+              ) : null}
               {c.associative.items.map((role) => (
                 <div className="cv-entry" key={`${role.title}-${role.period}`}>
                   <div className="cv-row">

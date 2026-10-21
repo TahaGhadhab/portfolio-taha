@@ -1,0 +1,142 @@
+/* Pictogrammes animés des tuiles de projet (ProjectGlyph.tsx).
+   Hors du bloc de mouvement, le SVG montre l'état final, immobile. */
+
+.pcard-glyph {
+  display: block;
+  height: 72px;
+  transform: translateZ(11px);
+  pointer-events: none;
+}
+.pcard-glyph svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.pcard-glyph svg * {
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+}
+
+.pcard-glyph .g-line { fill: none; stroke: var(--snow-3); stroke-width: 1.25; stroke-linejoin: round; }
+.pcard-glyph .g-dim { fill: none; stroke: var(--line-lit); stroke-width: 1; stroke-linecap: round; }
+.pcard-glyph .g-acc { fill: none; stroke: var(--iris); stroke-width: 1.5; stroke-linecap: round; }
+.pcard-glyph .g-ok { fill: none; stroke: var(--color-ok); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pcard-glyph .g-fault { fill: none; stroke: var(--color-fault); stroke-width: 1.25; }
+.pcard-glyph .g-dash { stroke-dasharray: 2 3; }
+.pcard-glyph .g-band { stroke-width: 3.5; stroke-linecap: butt; }
+.pcard-glyph .g-pad { stroke-width: 2.5; }
+.pcard-glyph .g-solid { fill: var(--iris); }
+.pcard-glyph .g-solid-ok { fill: var(--color-ok); }
+.pcard-glyph .g-solid-fault { fill: var(--color-fault); }
+.pcard-glyph .g-star { fill: var(--snow-3); opacity: 0.6; }
+.pcard-glyph .g-fill-acc { fill: color-mix(in srgb, var(--iris) 26%, transparent); stroke: var(--iris); stroke-width: 1; }
+.pcard-glyph .g-fill-line { fill: color-mix(in srgb, var(--snow-3) 18%, transparent); stroke: var(--snow-3); stroke-width: 1; }
+.pcard-glyph .g-fill-fault { fill: color-mix(in srgb, var(--color-fault) 30%, transparent); stroke: var(--color-fault); stroke-width: 1; }
+.pcard-glyph .g-tile { fill: color-mix(in srgb, var(--iris) 10%, transparent); stroke: var(--line-lit); stroke-width: 1; }
+.pcard-glyph .g-needle { rotate: 18deg; transform-origin: 50% 100%; }
+
+/* Ce qui n'existe que pendant le geste. */
+.pcard-glyph :is(.g-reb-old, .g-reb-scan, .g-flame, .g-dust, .g-puff, .g-ring) { opacity: 0; }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .portfolio[data-enhanced] .pcard-glyph * {
+    animation-duration: 1400ms;
+    animation-timing-function: var(--glide);
+    animation-fill-mode: both;
+  }
+  /* La tuile attend d'être à l'écran : le geste ne se joue pas hors champ. */
+  .portfolio .pgrid-cell[data-motion-pending] .pcard-glyph * { animation-play-state: paused; }
+
+  /* Rebranding — le scanner passe, l'ancien en-tête s'efface, le nouveau se pose. */
+  .portfolio[data-enhanced] .g-reb-scan { animation-name: reb-scan; animation-duration: 1100ms; animation-timing-function: linear; }
+  .portfolio[data-enhanced] .g-reb-old { animation-name: reb-old; }
+  .portfolio[data-enhanced] .g-reb-new { animation-name: reb-new; transform-origin: 0 50%; }
+  .portfolio[data-enhanced] .g-reb-tick { animation-name: g-pop; animation-duration: 320ms; animation-delay: calc(1000ms + var(--i) * 90ms); }
+  @keyframes reb-scan {
+    0% { translate: 0 0; opacity: 0; }
+    15%, 80% { opacity: 1; }
+    100% { translate: 0 54px; opacity: 0; }
+  }
+  @keyframes reb-old { 0%, 45% { opacity: 1; } 60%, 100% { opacity: 0; } }
+  @keyframes reb-new { 0%, 50% { scale: 0 1; } 80%, 100% { scale: 1 1; } }
+
+  /* ControlTorque — l'aiguille dépasse, revient, se pose dans la bande. */
+  .portfolio[data-enhanced] .g-needle { animation-name: torque-needle; animation-duration: 1500ms; }
+  .portfolio[data-enhanced] .g-log { animation-name: g-pop; animation-duration: 360ms; animation-delay: calc(1150ms + var(--i) * 150ms); }
+  @keyframes torque-needle {
+    0% { rotate: -80deg; }
+    55% { rotate: 32deg; }
+    78% { rotate: 12deg; }
+    100% { rotate: 18deg; }
+  }
+
+  /* PharmacoWork — les onze modules s'allument l'un après l'autre. */
+  .portfolio[data-enhanced] .g-tile { animation-name: pharma-tile; animation-duration: 640ms; animation-delay: calc(var(--i) * 70ms); transform-origin: 50% 50%; }
+  @keyframes pharma-tile {
+    0% { opacity: 0; scale: 0.6; stroke: var(--iris); }
+    55% { opacity: 1; scale: 1; stroke: var(--iris); }
+    100% { opacity: 1; scale: 1; stroke: var(--line-lit); }
+  }
+
+  /* Machine Layout — les machines dispersées rejoignent leur îlot. */
+  .portfolio[data-enhanced] .g-machine { animation-name: layout-gather; animation-duration: 1000ms; animation-delay: calc(var(--i) * 60ms); }
+  .portfolio[data-enhanced] .g-cell { animation-name: g-pop; animation-duration: 500ms; animation-delay: 900ms; transform-origin: 50% 50%; }
+  @keyframes layout-gather { from { translate: var(--fx) var(--fy); } to { translate: 0 0; } }
+
+  /* Dashboard — les KPI montent, celui qui passe sous le seuil donne l'alerte. */
+  .portfolio[data-enhanced] .g-bar { animation-name: dash-bar; animation-duration: 700ms; animation-delay: calc(var(--i) * 60ms); transform-origin: 50% 100%; }
+  .portfolio[data-enhanced] .g-threshold { animation-name: g-pop; animation-duration: 400ms; animation-delay: 650ms; }
+  .portfolio[data-enhanced] .g-ring { animation-name: dash-ring; animation-duration: 900ms; animation-delay: 1050ms; transform-origin: 50% 50%; }
+  @keyframes dash-bar { from { scale: 1 0; } to { scale: 1 1; } }
+  @keyframes dash-ring {
+    from { opacity: 1; scale: 1; }
+    to { opacity: 0; scale: 3.2; }
+  }
+
+  /* Lunar Lander — descente sous la flamme, la flamme se coupe au contact. */
+  .portfolio[data-enhanced] .g-lander { animation-name: lunar-descent; animation-duration: 1900ms; animation-timing-function: cubic-bezier(0.25, 0.6, 0.3, 1); transform-origin: 50% 100%; }
+  .portfolio[data-enhanced] .g-flame { animation-name: lunar-flame; animation-duration: 1900ms; animation-timing-function: linear; transform-origin: 50% 0; }
+  .portfolio[data-enhanced] .g-dust { animation-name: g-flash; animation-duration: 1900ms; }
+  @keyframes lunar-descent {
+    0% { translate: -40px -42px; rotate: -10deg; }
+    70% { translate: 0 -3px; rotate: 2deg; }
+    100% { translate: 0 0; rotate: 0deg; }
+  }
+  @keyframes lunar-flame {
+    0% { opacity: 1; scale: 1 1; }
+    20% { scale: 1 0.6; }
+    40% { scale: 1 1.15; }
+    60% { scale: 1 0.75; }
+    74% { opacity: 1; scale: 1 1; }
+    84%, 100% { opacity: 0; scale: 1 0.4; }
+  }
+
+  /* FlipLander — sortie de boucle tête en bas, retournement, freinage, toucher. */
+  .portfolio[data-enhanced] .g-car { animation-name: flip-car; animation-duration: 2200ms; animation-timing-function: linear; transform-origin: 50% 50%; }
+  .portfolio[data-enhanced] .g-puff { animation-name: flip-puff; animation-duration: 2200ms; animation-timing-function: linear; }
+  @keyframes flip-car {
+    0% { translate: -93px -30px; rotate: 180deg; animation-timing-function: ease-out; }
+    32% { translate: -52px -42px; rotate: 180deg; animation-timing-function: ease-in-out; }
+    62% { translate: -16px -24px; rotate: 0deg; animation-timing-function: ease-in; }
+    86% { translate: 0 0; rotate: 0deg; }
+    92% { translate: 0 1.5px; }
+    100% { translate: 0 0; rotate: 0deg; }
+  }
+  @keyframes flip-puff {
+    0%, 60% { opacity: 0; }
+    68%, 82% { opacity: 1; }
+    90%, 100% { opacity: 0; }
+  }
+
+  /* Gestes partagés. */
+  @keyframes g-pop {
+    from { opacity: 0; scale: 0.85; }
+    to { opacity: 1; scale: 1; }
+  }
+  @keyframes g-flash {
+    0%, 72% { opacity: 0; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+}
