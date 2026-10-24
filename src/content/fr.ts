@@ -8,7 +8,7 @@ import type { Content } from "./types";
  */
 export const fr: Content = {
   meta: {
-    title: "Taha Ghadhab, ingénieur génie industriel",
+    title: "Taha Ghadhab, élève-ingénieur en génie industriel",
     description: "Portfolio de Taha Ghadhab, élève ingénieur en génie industriel : optimisation des systèmes de production, data et Industrie 4.0. Safran, SMIP, AFC.",
     ogAlt: "Vol silencieux, portfolio de Taha Ghadhab"
   },
@@ -75,10 +75,10 @@ export const fr: Content = {
     eyebrow: "Vol silencieux",
     name: "Taha Ghadhab",
     role: "Élève ingénieur en génie industriel",
-    headline: "Observer, puis trancher une seule fois.",
-    lede: "J'isole la contrainte qui gouverne un système en défaut, je la lève une bonne fois, et je conçois pour la durée plutôt que pour la maintenance.",
+    headline: "Observer avec méthode. Agir avec précision.",
+    lede: "J'analyse les processus industriels, identifie leurs points de blocage et développe des outils pour les rendre plus fiables, plus efficaces et plus faciles à maintenir.",
     tagline: "Rigueur analytique, appétence pour la donnée et optimisation des systèmes de production.",
-    signature: "Je ne fais pas que corriger des problèmes, je les élimine définitivement avec des outils innovants.",
+    signature: "Je cherche les causes des problèmes et développe des solutions qui réduisent durablement leur réapparition.",
     stats: [
       {
         value: "3",
@@ -93,7 +93,7 @@ export const fr: Content = {
       {
         value: "7",
         unit: "",
-        label: "projets construits"
+        label: "projets développés"
       }
     ],
     ctaPrimary: "Voir les réalisations",
@@ -117,17 +117,17 @@ export const fr: Content = {
   },
   method: {
     title: "Méthode de travail",
-    intro: "Écouter d'abord. N'agir qu'une fois. Cinq postes, toujours dans cet ordre, du terrain jusqu'au pilotage.",
+    intro: "Une démarche en cinq étapes : comprendre le terrain, stabiliser l'existant, décomposer le problème, optimiser et pérenniser les résultats.",
     figure: {
       alt: "Circuit à cinq postes : écouter, stabiliser, décomposer, optimiser, pérenniser. Une arête de retour ramène le dernier poste vers le premier.",
-      caption: "FIG. 02 · UN SEUL PASSAGE, PUIS ÇA TOURNE SANS MOI",
+      caption: "FIG. 02 · DES OUTILS QUE LES ÉQUIPES PEUVENT UTILISER ET MAINTENIR EN AUTONOMIE",
       returnLabel: ["La boucle continue", "une fois que je suis parti"]
     },
     steps: [
       {
         step: "01",
         title: "Écouter",
-        body: "Parler aux gens qui vivent le problème avant de toucher à quoi que ce soit. Ils savent déjà où ça fait mal ; on le leur demande rarement."
+        body: "Échanger avec les opérateurs et les équipes concernées pour comprendre les difficultés, les contraintes et les pratiques existantes, avant de toucher à quoi que ce soit."
       },
       {
         step: "02",
@@ -153,9 +153,9 @@ export const fr: Content = {
   },
   about: {
     title: "À propos",
-    lead: "Élève ingénieur en génie industriel à l'ENIB, passionné par les systèmes qui tournent mieux après mon passage qu'avant.",
+    lead: "Élève-ingénieur en génie industriel à l'ENIB, je m'intéresse à l'amélioration des processus et au développement d'outils logiciels adaptés aux besoins du terrain.",
     body: [
-      "Mon terrain de jeu, c'est l'endroit où un processus industriel rencontre un outil logiciel. Chez Safran, la question n'était pas « comment corriger ces documents non conformes ? » mais « comment faire pour qu'ils cessent d'arriver ? ». La réponse a pris la forme d'un OCR local qui détecte et corrige activement."
+      "Mon terrain de jeu, c'est l'endroit où un processus industriel rencontre un outil logiciel. Chez Safran, j'ai développé un outil local combinant extraction PDF et OCR pour détecter les anciennes mentions de marque et les remplacer après validation humaine, avec traçabilité des modifications."
     ],
     positioning: {
       title: "Triple casquette",
@@ -243,12 +243,12 @@ export const fr: Content = {
   },
   experience: {
     title: "Expériences",
-    intro: "Trois environnements industriels, une même façon d'entrer : identifier ce qui coince, sortir avec quelque chose qui tient.",
+    intro: "Trois expériences complémentaires en industrie et en conseil, pour relier les enjeux techniques, opérationnels et économiques.",
     inputLabel: "Entrée · problème identifié",
     outputLabel: "Sortie · livré",
     missionsLabel: "Missions",
     toolsLabel: "Outils",
-    immersionLabel: "Sortie · acquis",
+    immersionLabel: "Immersion",
     detailsLabel: "Voir le détail",
     hideLabel: "Masquer le détail",
     expandAllLabel: "Tout déplier",
@@ -259,7 +259,7 @@ export const fr: Content = {
         short: "Safran",
         company: "Safran",
         fullName: "Safran",
-        role: "Ingénieur méthode",
+        role: "Stagiaire ingénieur méthodes",
         period: "1er juin au 24 juillet 2026",
         location: "Dhari",
         input: "L'ancienne entité reste imprimée sur des milliers de documents de fabrication, reprise manuelle exclue. En parallèle, la conformité des outils de serrage est suivie sans système dédié.",
@@ -305,7 +305,7 @@ export const fr: Content = {
         short: "AFC",
         company: "AFC",
         fullName: "Arab Financial Consultants",
-        role: "Apprenti consultant",
+        role: "Consultant stagiaire",
         period: "Août à septembre 2025",
         location: "Les Berges du Lac, Tunisie",
         input: "Une lecture purement technique des projets industriels, sans le vocabulaire ni les critères du décideur financier.",
@@ -318,7 +318,9 @@ export const fr: Content = {
           "Conseil",
           "Analyse financière"
         ],
-        hasDeliverable: false
+        hasDeliverable: false,
+        inputLabel: "Objectif du stage",
+        outputLabel: "Compétences acquises"
       }
     ]
   },
@@ -636,14 +638,14 @@ export const fr: Content = {
         statusTone: "done",
         tracks: ["industrial", "data"],
         capsule: {
-          problem: "La preuve qu'un serrage avait été contrôlé vivait dans des relevés papier et des tableurs : introuvable, inauditable, et impossible à croire des années après.",
+          problem: "Les contrôles étaient consignés sur papier et dans des tableurs, ce qui compliquait la recherche d'historique et la reconstitution des conditions de contrôle lors des audits.",
           solution: "Une application web où chaque contrôle est un enregistrement immuable portant son calcul, et où une mesure hors bornes ouvre une fiche suivie.",
           role: "Seul développeur : règles métier, backend, frontend, modèle de données.",
           stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
-          result: "8 règles tenues côté serveur · 11 entités · 1 journal en ajout seul"
+          result: "8 règles métier appliquées côté serveur · 11 entités · 1 journal en ajout seul"
         },
         highlights: [
-          "Huit règles métier, toutes tenues côté serveur : le frontend les reflète pour le confort de saisie, il ne les fait jamais respecter",
+          "Huit règles métier, toutes appliquées côté serveur : l'interface guide la saisie, le serveur valide systématiquement les règles métier",
           "L'identité de l'opérateur est relue dans le JWT à chaque requête, jamais dans le corps du message ; enregistrer un contrôle au nom d'un collègue est impossible",
           "Un contrôle pris avec un étalonnage expiré est refusé par un 400 plutôt qu'enregistré : un contrôle sans valeur probante est plus dangereux qu'une absence de contrôle, puisqu'il donne l'illusion de la conformité",
           "La tolérance, sa source et les deux bornes sont figées dans l'enregistrement, et les références de l'outil et du couplemètre y sont recopiées en simples chaînes plutôt que liées, si bien qu'un auditeur peut refaire le calcul des années plus tard, même si la gamme a été révisée entre-temps",
@@ -719,7 +721,7 @@ export const fr: Content = {
           {
             step: "03",
             title: "Approche",
-            body: "Mettre toutes les décisions dans une seule couche, et ne lui laisser aucun contournement. Le verdict est recalculé côté serveur à partir du couple cible et du couple mesuré ; l'identifiant de l'opérateur est relu dans le token, jamais dans le corps ; l'horodatage vient de la base. Le frontend reflète les règles pour que la saisie reste confortable, et n'en fait respecter aucune."
+            body: "Mettre toutes les décisions dans une seule couche, et ne lui laisser aucun contournement. Le verdict est recalculé côté serveur à partir du couple cible et du couple mesuré ; l'identifiant de l'opérateur est relu dans le token, jamais dans le corps ; l'horodatage vient de la base. L'interface guide la saisie ; le serveur valide systématiquement les règles métier."
           },
           {
             step: "04",
@@ -844,7 +846,7 @@ export const fr: Content = {
         ],
         metric: {
           value: "8",
-          label: "Règles tenues côté serveur"
+          label: "Règles appliquées côté serveur"
         }
       },
       {
@@ -858,8 +860,8 @@ export const fr: Content = {
         statusTone: "pilot",
         tracks: ["business"],
         capsule: {
-          problem: "Le logiciel d'officine s'arrête à la vente. Préparations, rappels, contrôles qualité se traitent au post-it et sur WhatsApp, noms de patients compris.",
-          solution: "Un espace de travail interne à l'officine : onze modules, pensés mobile d'abord parce que le métier se pratique debout au comptoir.",
+          problem: "Autour du logiciel d'officine, préparations, rappels et contrôles qualité se traitent au post-it et sur WhatsApp, noms de patients compris.",
+          solution: "PharmacoWork complète le logiciel d'officine en centralisant ces tâches dans un espace partagé : onze modules conçus pour une utilisation sur mobile, au plus près du travail au comptoir.",
           role: "Co-fondateur : cadrage produit, architecture, développement.",
           stack: "NestJS 11 · Next.js 16 · React 19 · Prisma · PostgreSQL 18 · Railway",
           result: "11 modules en pilote · 41 modèles cloisonnés par officine · identités chiffrées au repos"
@@ -868,15 +870,15 @@ export const fr: Content = {
           "Onze modules bout en bout : ~80 écrans, ~180 routes d'API, 41 modèles de données",
           "Cloisonnement strict : chaque ligne porte son officineId, chaque requête est filtrée dessus",
           "Connexion sans mot de passe par lien magique, et second facteur obligatoire pour les titulaires",
-          "Identités patients chiffrées au repos, recherche préservée par index HMAC : aucun nom en clair côté serveur",
+          "Identités patients chiffrées au repos, recherche préservée par index HMAC : aucun nom conservé en clair dans la base de données",
           "Purge de données simulable avant activation, avec le journal de ce qu'elle aurait supprimé",
           "Accès aux ordonnances tracés, et consultables par le titulaire"
         ],
         steps: [
           {
             step: "01",
-            title: "Délimiter le vide",
-            body: "Le logiciel d'officine s'arrête à la vente. Les préparations, les rappels, les ruptures, les contrôles qualité n'ont pas d'outil, donc ils ont WhatsApp. Le premier travail a été de border ce vide sans déborder sur ce qui fonctionne déjà : ni caisse, ni registre légal."
+            title: "Définir le périmètre du produit",
+            body: "Autour du logiciel d'officine, les préparations, les rappels, les ruptures, les contrôles qualité n'ont pas d'outil dédié, donc ils passent par WhatsApp. Le premier travail a été de cadrer ce besoin sans déborder sur ce qui fonctionne déjà : ni caisse, ni registre légal."
           },
           {
             step: "02",
@@ -885,8 +887,8 @@ export const fr: Content = {
           },
           {
             step: "03",
-            title: "Tenir la donnée patient",
-            body: "Un nom de patient ne doit jamais être lisible côté serveur, et pourtant l'équipe doit pouvoir chercher. Les identités sont chiffrées au repos et indexées par HMAC : la recherche fonctionne, le nom en clair n'existe nulle part. Les accès aux ordonnances sont tracés, et le titulaire peut les relire."
+            title: "Protéger les données patients",
+            body: "Un nom de patient ne doit pas être conservé en clair, et pourtant l'équipe doit pouvoir chercher. Les noms des patients sont stockés chiffrés. Un index HMAC permet la recherche sans les conserver en clair dans la base de données. Les accès aux ordonnances sont tracés, et le titulaire peut les relire."
           },
           {
             step: "04",
@@ -1010,7 +1012,7 @@ export const fr: Content = {
       },
       {
         id: "dashboard-enib",
-        name: "Dashboard de Performance Académique",
+        name: "Tableau de bord de la performance académique",
         short: "Dashboard ENIB",
         tagline: "Application web fullstack de pilotage, ENIB",
         period: "2025 à 2026",
@@ -1038,7 +1040,7 @@ export const fr: Content = {
         id: "lunar-lander",
         name: "Lunar Lander : reward shaping et reward hacking",
         short: "Lunar Lander",
-        tagline: "Faire tricher une IA exprès, puis prouver la correction",
+        tagline: "Reproduire un détournement de récompense et évaluer sa correction",
         period: "2026",
         status: "Livré",
         statusTone: "done",
@@ -1048,7 +1050,7 @@ export const fr: Content = {
           solution: "Reproduire la triche sous protocole, puis réécrire la même idée en potential-based shaping (Ng, Harada et Russell, 1999), et prouver par ablation que c'est ce terme qui corrige.",
           role: "Spécification, protocole expérimental, hypothèses et validation. Code écrit avec Claude Code, vérifié par 51 tests.",
           stack: "Python 3.12 · Gymnasium · Box2D · Stable-Baselines3 (PPO) · PyTorch · pytest",
-          result: "Troncature 77 % → 0 % sur chaque graine · score réel 36,8 → 263,4 · 15 entraînements de 1 M de pas"
+          result: "Épisodes interrompus à la limite de temps : de 77 % à 0 % dans le protocole testé · score réel 36,8 → 263,4 · 15 entraînements de 1 M de pas"
         },
         highlights: [
           "Cinq fonctions de récompense, chacune un wrapper Gymnasium qui ajoute à la récompense native sans jamais la remplacer ni toucher à terminated, truncated et info",
@@ -1061,7 +1063,7 @@ export const fr: Content = {
           {
             step: "01",
             title: "Contexte",
-            body: "Un tutoriel apprend à une IA à poser un module lunaire. L'intérêt n'est pas là. Il est dans ce qui arrive quand on ajoute une règle de récompense raisonnable en apparence : un bonus qui paie un état plutôt qu'un progrès. C'est le reward hacking, et c'est le défaut le plus courant de l'apprentissage par renforcement appliqué."
+            body: "Un tutoriel apprend à une IA à poser un module lunaire. L'intérêt n'est pas là. Il est dans ce qui arrive quand on ajoute une règle de récompense raisonnable en apparence : un bonus qui paie un état plutôt qu'un progrès. C'est le reward hacking, qui illustre un risque important : optimiser la récompense sans accomplir l'objectif attendu."
           },
           {
             step: "02",
@@ -1211,10 +1213,10 @@ export const fr: Content = {
         tracks: ["data", "industrial"],
         capsule: {
           problem: "Une voiture de 1,85 t quitte une boucle tête en bas à 10 m. Elle doit se retourner de 180° en vol avec 10 propulseurs à air comprimé, freiner et se poser sur ses quatre roues, sans vider son réservoir ni dépasser 3 g. Une démonstration prouve que ça marche une fois ; la vraie question est la robustesse.",
-          solution: "Un simulateur MuJoCo 6 degrés de liberté construit depuis un fichier de configuration, un agent PPO entraîné par curriculum, et un contrôleur classique sur SO(3) comme adversaire honnête.",
+          solution: "Un simulateur MuJoCo 6 degrés de liberté construit depuis un fichier de configuration, un agent PPO entraîné par curriculum, et un contrôleur classique sur SO(3) servant de référence de comparaison.",
           role: "Spécification, décisions de modélisation, revue de chaque jalon, QA et audit de sécurité. Code écrit avec Claude Code et validé par les tests.",
           stack: "Python · MuJoCo · Gymnasium · Stable-Baselines3 (PPO, SAC) · PyTorch · Railway",
-          result: "Contrôleur classique : 83,1 % de succès sur 1 000 épisodes · PPO en cours d'entraînement, aucun chiffre publié avant 5 graines"
+          result: "Contrôleur classique : 83,1 % de succès sur 1 000 épisodes · PPO : résultats préliminaires, validation sur cinq graines encore en cours"
         },
         highlights: [
           "Physique écrite test d'abord : chute libre, conservation de l'énergie, impulsion des propulseurs, masse d'air (194,6 kg) et vidange du réservoir ont chacune leur test",
@@ -1370,7 +1372,7 @@ export const fr: Content = {
   },
   skills: {
     title: "Compétences",
-    intro: "Plutôt qu'un pourcentage que je m'attribuerais moi-même, voici où chaque compétence a réellement servi. Sous chaque ligne, les terrains qui la prouvent.",
+    intro: "Chaque compétence est illustrée par les projets et les missions dans lesquels je l'ai mise en pratique.",
     matrix: {
       deploymentsLabel: "Déploiements",
       legend: "Cellule active = compétence mise en œuvre sur ce terrain",
@@ -1400,7 +1402,7 @@ export const fr: Content = {
             ]
           },
           {
-            name: "Layout / Implantation",
+            name: "Implantation d'ateliers",
             usedIn: [
               "machine-layout"
             ]
@@ -1491,7 +1493,7 @@ export const fr: Content = {
       items: [
         "Leadership & gestion d'équipe",
         "Travail en équipe multiculturelle",
-        "Communication publique"
+        "Prise de parole en public"
       ]
     },
     languages: {
@@ -1555,7 +1557,7 @@ export const fr: Content = {
   },
   contact: {
     title: "Contact",
-    intro: "Stage de fin d'études (PFE), six mois, à partir de février 2027. Ouvert aux opportunités en ingénierie industrielle, IA, données et automatisation des processus.",
+    intro: "Je recherche un stage de fin d'études de six mois à partir de février 2027, en génie industriel, intelligence artificielle ou automatisation des processus.",
     email: "tahaghadhab@gmail.com",
     phone: "+216 54 347 150",
     linkedin: "https://www.linkedin.com/in/taha-ghadhab",

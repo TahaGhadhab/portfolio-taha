@@ -164,14 +164,14 @@ export function WorkSheets({ experience }: { experience: Content["experience"] }
               <div className="io-row io-in">
                 <span className="io-dot" aria-hidden="true" />
                 <div>
-                  <span className="io-label">{experience.inputLabel.toUpperCase()}</span>
+                  <span className="io-label">{(item.inputLabel ?? experience.inputLabel).toUpperCase()}</span>
                   <p>{item.input}</p>
                 </div>
               </div>
               <div className="io-row io-out">
                 <span className="io-dot" aria-hidden="true" />
                 <div>
-                  <span className="io-label">{experience.outputLabel.toUpperCase()}</span>
+                  <span className="io-label">{(item.outputLabel ?? experience.outputLabel).toUpperCase()}</span>
                   <p>{item.output}</p>
                 </div>
               </div>

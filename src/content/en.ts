@@ -6,7 +6,7 @@ import type { Content } from "./types";
  */
 export const en: Content = {
   meta: {
-    title: "Taha Ghadhab, industrial engineering",
+    title: "Taha Ghadhab, industrial engineering student",
     description: "Portfolio of Taha Ghadhab, industrial engineering student: production systems optimisation, data and Industry 4.0. Safran, SMIP, AFC.",
     ogAlt: "Silent flight, Taha Ghadhab's portfolio"
   },
@@ -58,7 +58,7 @@ export const en: Content = {
         primary: true
       }
     ],
-    classicView: "Plain view",
+    classicView: "Resume view",
     siteView: "Full view",
     downloadCv: "Resume PDF",
     skipToContent: "Skip to main content",
@@ -73,10 +73,10 @@ export const en: Content = {
     eyebrow: "Silent flight",
     name: "Taha Ghadhab",
     role: "Industrial engineering student",
-    headline: "Watch first. Move once.",
-    lede: "I isolate the governing constraint in a failing system, resolve it decisively, and engineer for permanence rather than maintenance.",
+    headline: "Observe carefully. Act precisely.",
+    lede: "I analyse industrial processes, identify bottlenecks, and build tools that improve reliability, efficiency, and maintainability.",
     tagline: "Analytical rigour, a taste for data, and the optimisation of production systems.",
-    signature: "I don't just fix problems. I eliminate them for good, with tools built for the job.",
+    signature: "I investigate root causes and build solutions that reduce the likelihood of recurring problems.",
     stats: [
       {
         value: "3",
@@ -115,17 +115,17 @@ export const en: Content = {
   },
   method: {
     title: "How I work",
-    intro: "Listen first. Move once. Five stations, always in that order, from the shop floor to the control tower.",
+    intro: "A five-step approach: understand the operation, stabilise the process, break down the problem, optimise, and sustain the results.",
     figure: {
       alt: "A five-station circuit: listen, stabilize, decompose, optimize, sustain. A return edge runs from the last station back to the first.",
-      caption: "FIG. 02 · ONE PASS, THEN IT RUNS WITHOUT ME",
+      caption: "FIG. 02 · TOOLS THAT TEAMS CAN OPERATE AND MAINTAIN INDEPENDENTLY",
       returnLabel: ["The loop keeps running", "once I have left"]
     },
     steps: [
       {
         step: "01",
         title: "Listen",
-        body: "Talk to the people inside the problem before touching anything. They already know where it hurts; they are rarely asked."
+        body: "Talk to operators and stakeholders to understand their challenges, constraints, and existing ways of working, before touching anything."
       },
       {
         step: "02",
@@ -151,9 +151,9 @@ export const en: Content = {
   },
   about: {
     title: "About",
-    lead: "Industrial engineering student at ENIB, drawn to systems that run better after I leave than before I arrived.",
+    lead: "I am an industrial engineering student at ENIB, interested in process improvement and software tools built around operational needs.",
     body: [
-      "My territory is the point where an industrial process meets a software tool. At Safran, the question was never “how do we fix these non-compliant documents?” but “how do we stop them from arriving?” The answer took the form of a local OCR system that detects and actively corrects."
+      "My territory is the point where an industrial process meets a software tool. At Safran, I developed a local tool combining PDF text extraction and OCR to detect legacy branding and replace it after human approval, with an audit trail of changes."
     ],
     positioning: {
       title: "Three disciplines, one profile",
@@ -241,12 +241,12 @@ export const en: Content = {
   },
   experience: {
     title: "Experience",
-    intro: "Three industrial environments, one way in: find what is stuck, leave with something that holds.",
+    intro: "Three complementary experiences in industry and consulting, connecting technical, operational, and financial perspectives.",
     inputLabel: "Input · problem identified",
     outputLabel: "Output · delivered",
     missionsLabel: "Assignments",
     toolsLabel: "Tools",
-    immersionLabel: "Output · gained",
+    immersionLabel: "Immersion",
     detailsLabel: "Show detail",
     hideLabel: "Hide detail",
     expandAllLabel: "Expand all",
@@ -257,7 +257,7 @@ export const en: Content = {
         short: "Safran",
         company: "Safran",
         fullName: "Safran",
-        role: "Methods engineer",
+        role: "Methods Engineering Intern",
         period: "1 June to 24 July 2026",
         location: "Dhari",
         input: "The old entity is still printed across thousands of manufacturing documents, with manual rework out of the question. In parallel, torque tool compliance is tracked with no dedicated system.",
@@ -303,7 +303,7 @@ export const en: Content = {
         short: "AFC",
         company: "AFC",
         fullName: "Arab Financial Consultants",
-        role: "Trainee consultant",
+        role: "Consulting Intern",
         period: "August to September 2025",
         location: "Les Berges du Lac, Tunisia",
         input: "A purely technical reading of industrial projects, without the vocabulary or the criteria of the financial decision-maker.",
@@ -316,7 +316,9 @@ export const en: Content = {
           "Consulting",
           "Financial analysis"
         ],
-        hasDeliverable: false
+        hasDeliverable: false,
+        inputLabel: "Internship objective",
+        outputLabel: "Skills gained"
       }
     ]
   },
@@ -634,14 +636,14 @@ export const en: Content = {
         statusTone: "done",
         tracks: ["industrial", "data"],
         capsule: {
-          problem: "The proof that a tightening had been checked lived in paper logs and spreadsheets: unsearchable, unauditable, and impossible to trust years later.",
+          problem: "Checks were recorded on paper and in spreadsheets, making historical records difficult to retrieve and audit conditions difficult to reconstruct.",
           solution: "A web application where each check is an immutable record carrying its calculation, and where an out-of-bounds measurement opens a tracked file.",
           role: "Sole developer: business rules, backend, frontend, data model.",
           stack: "Angular 13 · Spring Boot 2.7 · Java 8 · Hibernate · SQL Server · JWT",
           result: "8 business rules enforced server-side · 11 entities · 1 append-only event log"
         },
         highlights: [
-          "Eight business rules, all enforced server-side: the frontend mirrors them for input comfort, it never enforces them",
+          "Eight business rules, all enforced server-side: the interface guides data entry, the server validates every business rule",
           "The operator's identity is read from the JWT on every request, never from the request body; recording a check under a colleague's name is not possible",
           "A check taken with an expired calibration is refused with a 400 rather than stored: a check with no probative value is more dangerous than no check, because it looks like conformity",
           "Tolerance, its source and both bounds are frozen into the record, and the tool and torquemeter references are copied as plain strings rather than linked, so an auditor can replay the calculation years later even if the manufacturing range has been revised since",
@@ -717,7 +719,7 @@ export const en: Content = {
           {
             step: "03",
             title: "Approach",
-            body: "Put every decision in one layer, and leave it no way around. The verdict is recomputed server-side from the target and the measurement; the operator's id is read from the token, never from the body; the timestamp comes from the database. The frontend mirrors the rules so entry stays comfortable, and enforces none of them."
+            body: "Put every decision in one layer, and leave it no way around. The verdict is recomputed server-side from the target and the measurement; the operator's id is read from the token, never from the body; the timestamp comes from the database. The interface guides data entry; the server validates all business rules."
           },
           {
             step: "04",
@@ -842,7 +844,7 @@ export const en: Content = {
         ],
         metric: {
           value: "8",
-          label: "Rules held server-side"
+          label: "Business rules enforced server-side"
         }
       },
       {
@@ -856,8 +858,8 @@ export const en: Content = {
         statusTone: "pilot",
         tracks: ["business"],
         capsule: {
-          problem: "Pharmacy software stops at the sale. Preparations, callbacks and quality checks run on sticky notes and WhatsApp, patient names included.",
-          solution: "An internal workspace for the pharmacy: eleven modules, built mobile-first because the job is done standing at the counter.",
+          problem: "Around the pharmacy software, preparations, callbacks and quality checks run on sticky notes and WhatsApp, patient names included.",
+          solution: "PharmacoWork complements existing pharmacy software by bringing these tasks into a shared workspace: eleven mobile-first modules designed for day-to-day work at the pharmacy counter.",
           role: "Co-founder: product framing, architecture, development.",
           stack: "NestJS 11 · Next.js 16 · React 19 · Prisma · PostgreSQL 18 · Railway",
           result: "11 modules in pilot · 41 models isolated per pharmacy · identities encrypted at rest"
@@ -866,15 +868,15 @@ export const en: Content = {
           "Eleven modules end to end: ~80 screens, ~180 API routes, 41 data models",
           "Strict tenancy: every row carries its officineId, every query is filtered on it",
           "Passwordless sign-in by magic link, with a mandatory second factor for pharmacy owners",
-          "Patient identities encrypted at rest, search preserved by HMAC index: no plaintext name server-side",
+          "Patient identities encrypted at rest, search preserved by HMAC index: no plaintext name stored in the database",
           "Data purge that can be dry-run before activation, with a log of what it would have deleted",
           "Prescription access traced, and readable by the pharmacy owner"
         ],
         steps: [
           {
             step: "01",
-            title: "Bound the gap",
-            body: "Pharmacy software stops at the sale. Preparations, callbacks, stock-outs and quality checks have no tool, so they have WhatsApp. The first job was to bound that gap without encroaching on what already works: not the till, not the legal register."
+            title: "Define the product scope",
+            body: "Around the pharmacy software, preparations, callbacks, stock-outs and quality checks have no dedicated tool, so they go through WhatsApp. The first job was to frame that need without encroaching on what already works: not the till, not the legal register."
           },
           {
             step: "02",
@@ -883,8 +885,8 @@ export const en: Content = {
           },
           {
             step: "03",
-            title: "Hold the patient data",
-            body: "A patient's name must never be readable server-side, and yet the team has to be able to search. Identities are encrypted at rest and indexed by HMAC: search works, the plaintext name exists nowhere. Prescription access is traced, and the pharmacy owner can read the trail back."
+            title: "Protect patient data",
+            body: "A patient's name must not be kept in plaintext, and yet the team has to be able to search. Patient names are stored encrypted. An HMAC index supports search without storing plaintext names in the database. Prescription access is traced, and the pharmacy owner can read the trail back."
           },
           {
             step: "04",
@@ -1036,7 +1038,7 @@ export const en: Content = {
         id: "lunar-lander",
         name: "Lunar Lander: reward shaping and reward hacking",
         short: "Lunar Lander",
-        tagline: "Making an AI cheat on purpose, then proving the fix",
+        tagline: "Reproduce reward hacking and evaluate a correction",
         period: "2026",
         status: "Delivered",
         statusTone: "done",
@@ -1046,7 +1048,7 @@ export const en: Content = {
           solution: "Reproduce the cheat under a strict protocol, then rewrite the same idea as potential-based shaping (Ng, Harada and Russell, 1999), and prove through an ablation that this term is what fixes it.",
           role: "Specification, experimental protocol, hypotheses and validation. Code written with Claude Code, checked by 51 tests.",
           stack: "Python 3.12 · Gymnasium · Box2D · Stable-Baselines3 (PPO) · PyTorch · pytest",
-          result: "Truncation 77 % → 0 % on every seed · true score 36.8 → 263.4 · 15 training runs of 1 M steps"
+          result: "Episodes reaching the time limit: reduced from 77 % to 0 % under the tested protocol · true score 36.8 → 263.4 · 15 training runs of 1 M steps"
         },
         highlights: [
           "Five reward functions, each a Gymnasium wrapper that adds to the native reward without ever replacing it or touching terminated, truncated and info",
@@ -1059,7 +1061,7 @@ export const en: Content = {
           {
             step: "01",
             title: "Context",
-            body: "A tutorial teaches an AI to land a lunar module. That is not the point here. The point is what happens when you add a reward rule that looks reasonable: a bonus that pays for a state rather than for progress. That is reward hacking, and it is the most common failure of applied reinforcement learning."
+            body: "A tutorial teaches an AI to land a lunar module. That is not the point here. The point is what happens when you add a reward rule that looks reasonable: a bonus that pays for a state rather than for progress. That is reward hacking, which illustrates a key risk: optimising the reward without achieving the intended objective."
           },
           {
             step: "02",
@@ -1209,10 +1211,10 @@ export const en: Content = {
         tracks: ["data", "industrial"],
         capsule: {
           problem: "A 1.85 t car leaves a loop upside down at 10 m. It must roll 180° in mid-air with 10 compressed-air thrusters, brake, and land on its four wheels without emptying its tank or exceeding 3 g. A demo proves it works once; the real question is robustness.",
-          solution: "A 6-degree-of-freedom MuJoCo simulator built from a config file, a PPO agent trained through a curriculum, and a classical SO(3) controller as an honest opponent.",
+          solution: "A 6-degree-of-freedom MuJoCo simulator built from a config file, a PPO agent trained through a curriculum, and a classical SO(3) controller used as a comparison baseline.",
           role: "Specification, modelling decisions, review of every milestone, QA and security audit. Code written with Claude Code and validated by tests.",
           stack: "Python · MuJoCo · Gymnasium · Stable-Baselines3 (PPO, SAC) · PyTorch · Railway",
-          result: "Classical controller: 83.1 % success over 1,000 episodes · PPO still training, no figure published before 5 seeds"
+          result: "Classical controller: 83.1 % success over 1,000 episodes · PPO: preliminary results, validation across five seeds still in progress"
         },
         highlights: [
           "Physics written test-first: free fall, energy conservation, thruster impulse, air mass (194.6 kg) and tank blowdown each have their own test",
@@ -1368,7 +1370,7 @@ export const en: Content = {
   },
   skills: {
     title: "Skills",
-    intro: "Rather than a percentage I would award myself, here is where each skill was actually used. Under each line, the deployments that prove it.",
+    intro: "Each skill is illustrated by the projects and assignments where I have applied it.",
     matrix: {
       deploymentsLabel: "Deployments",
       legend: "Lit cell = skill applied on that ground",
@@ -1553,7 +1555,7 @@ export const en: Content = {
   },
   contact: {
     title: "Contact",
-    intro: "Final-year internship (PFE), six months, starting February 2027. Open to opportunities in industrial engineering, AI, data and process automation.",
+    intro: "I am seeking a six-month final-year engineering internship starting in February 2027, in industrial engineering, artificial intelligence, or process automation.",
     email: "tahaghadhab@gmail.com",
     phone: "+216 54 347 150",
     linkedin: "https://www.linkedin.com/in/taha-ghadhab",

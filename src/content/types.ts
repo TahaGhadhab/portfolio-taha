@@ -31,6 +31,9 @@ export interface Experience {
    * chaîne de montage s'applique sélectivement, jamais de force.
    */
   hasDeliverable: boolean;
+  /** Remplace les libellés d'entrée / de sortie communs, pour un poste sans livrable outillé. */
+  inputLabel?: string;
+  outputLabel?: string;
 }
 
 /**
