@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUpRight, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { Content, Locale } from "@/content";
 import type { CvTarget } from "@/lib/cv";
+import { OVERTURE_END } from "./Overture";
 import { SplitWords } from "./SplitWords";
 
 const rank = (i: number) => ({ "--i": i }) as CSSProperties;
@@ -42,13 +43,19 @@ export function Flight({ lang, hero, cv, cvLabel, primaryHref, secondaryHref }: 
     syncVisibility();
     media.addEventListener("change", syncMotion);
     document.addEventListener("visibilitychange", syncVisibility);
-    const frame = requestAnimationFrame(() => setOpen(true));
+    /* Si l'ouverture joue, le titre attend que le rideau soit levé : il
+       s'écrirait sinon dans le noir, sans personne pour le voir. */
+    let frame = 0;
+    const reveal = () => { frame = requestAnimationFrame(() => setOpen(true)); };
+    if (document.querySelector('.overture[data-state="play"]')) addEventListener(OVERTURE_END, reveal, { once: true });
+    else reveal();
     const observer = "IntersectionObserver" in window
       ? new IntersectionObserver(([entry]) => setInView(entry.isIntersecting))
       : null;
     if (sceneRef.current) observer?.observe(sceneRef.current);
     return () => {
       cancelAnimationFrame(frame);
+      removeEventListener(OVERTURE_END, reveal);
       observer?.disconnect();
       media.removeEventListener("change", syncMotion);
       document.removeEventListener("visibilitychange", syncVisibility);

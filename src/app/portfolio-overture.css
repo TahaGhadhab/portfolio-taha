@@ -1,0 +1,189 @@
+/* ── L'ouverture ─────────────────────────────────────────────
+   Six temps, un peu moins de six secondes :
+   0.0 s  noir complet, bandes de cinéma fermées
+   0.6 s  les yeux s'allument — une étincelle, une hésitation, puis la lueur
+   2.0 s  un battement de paupières
+   2.6 s  le hibou entier sort du noir
+   4.1 s  le hibou glisse jusqu'à sa place dans l'accueil, le noir se retire
+   5.2 s  la copie s'efface sur l'original : le rideau est levé
+
+   Les yeux sont des fenêtres dans un masque : trois dégradés radiaux, deux
+   pour les yeux, un pour l'image entière. Leurs rayons sont des propriétés
+   enregistrées, donc animables ; sans `@property`, elles basculent d'un coup
+   au lieu de glisser, et la séquence reste lisible.
+
+   La destination du glissement (`--to-x`, `--to-y`, `--to-s`) est mesurée
+   par le composant sur l'image du vol. Sans elle, l'image grandit et
+   s'efface sur place. */
+@property --eye { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --lid { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --reveal { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+.overture {
+  --t: 5.8s;
+  --to-x: 0px;
+  --to-y: 0px;
+  --to-s: 1.06;
+  display: none;
+}
+.overture[data-state="play"],
+.overture[data-state="leaving"] {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  cursor: pointer;
+  animation:
+    overture-night var(--t) cubic-bezier(0.5, 0, 0.3, 1) both,
+    overture-out var(--t) linear both;
+}
+/* Rien ne défile sous le rideau. */
+html:has(.overture[data-state="play"]) { overflow: hidden; }
+
+/* L'image garde ses proportions (3:2) et couvre l'écran : les positions des
+   yeux, données en pourcentage de l'image, restent justes à toute taille. */
+.overture-art {
+  --w: max(100vw, 150vh);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--w);
+  height: calc(var(--w) * 2 / 3);
+  translate: -50% -50%;
+  transform-origin: 50% 50%;
+  animation: overture-flight var(--t) cubic-bezier(0.65, 0, 0.25, 1) both;
+}
+/* En portrait, couvrir la hauteur rognerait les yeux : l'image est cadrée
+   sur le regard, et le noir tient le reste de l'écran. */
+@media (orientation: portrait) {
+  .overture-art { --w: 190vw; }
+}
+
+.overture-frame {
+  position: absolute;
+  inset: 0;
+  --eye-r: calc(var(--w) * 0.052 * var(--eye));
+  mask-image:
+    radial-gradient(ellipse var(--eye-r) calc(var(--eye-r) * var(--lid)) at 41.2% 37.4%, #000 45%, transparent 100%),
+    radial-gradient(ellipse var(--eye-r) calc(var(--eye-r) * var(--lid)) at 57.2% 37.4%, #000 45%, transparent 100%),
+    radial-gradient(circle calc(var(--w) * var(--reveal)) at 49% 42%, #000 55%, transparent 100%);
+  animation:
+    overture-eyes var(--t) linear both,
+    overture-lid var(--t) linear both,
+    overture-reveal var(--t) cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+.overture-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: overture-push var(--t) cubic-bezier(0.3, 0, 0.2, 1) both;
+}
+
+/* Le halo : la lumière qui déborde des yeux à l'allumage. Il vit hors du
+   masque, sinon il serait découpé à la forme de l'œil. */
+.overture-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle calc(var(--w) * 0.11) at 41.2% 37.4%, #ffb44c59, transparent 70%),
+    radial-gradient(circle calc(var(--w) * 0.11) at 57.2% 37.4%, #ffb44c59, transparent 70%);
+  animation: overture-glow var(--t) linear both;
+}
+
+/* Les bandes de cinéma : invisibles sur le noir, elles cadrent le hibou
+   quand il apparaît, puis s'ouvrent sur la page. */
+.overture-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 9vh;
+  background: #000;
+  animation: overture-bars var(--t) cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+.overture-bar.top { top: 0; transform-origin: top; }
+.overture-bar.bottom { bottom: 0; transform-origin: bottom; }
+
+.overture-skip {
+  position: absolute;
+  right: var(--edge, 1.5rem);
+  bottom: calc(9vh + 1rem);
+  padding: 0.75rem 0.25rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff73;
+  animation: overture-hint var(--t) linear both;
+}
+
+/* Allumage : rien, une étincelle, une hésitation, puis la pleine lueur. */
+@keyframes overture-eyes {
+  0%, 10% { --eye: 0; }
+  15% { --eye: 0.45; }
+  17% { --eye: 0.2; }
+  19% { --eye: 0.6; }
+  26%, 100% { --eye: 1; }
+}
+/* Les paupières se ferment vite et se rouvrent un peu plus lentement. */
+@keyframes overture-lid {
+  0%, 34% { --lid: 1; }
+  36.5% { --lid: 0.05; }
+  38% { --lid: 0.05; }
+  42%, 100% { --lid: 1; }
+}
+@keyframes overture-reveal {
+  0%, 45% { --reveal: 0; }
+  67%, 100% { --reveal: 1.4; }
+}
+/* L'image avance lentement vers le lecteur pendant qu'elle se dévoile ; la
+   surexposition de l'allumage retombe aussitôt. */
+@keyframes overture-push {
+  0% { scale: 1.14; filter: brightness(1); }
+  15% { filter: brightness(1.9); }
+  26% { filter: brightness(1.15); }
+  45% { filter: brightness(1); }
+  70%, 100% { scale: 1; filter: brightness(1); }
+}
+@keyframes overture-glow {
+  0%, 12% { opacity: 0; }
+  16% { opacity: 1; }
+  18% { opacity: 0.35; }
+  26% { opacity: 1; }
+  34% { opacity: 0.75; }
+  37% { opacity: 0.1; }
+  42% { opacity: 0.8; }
+  50% { opacity: 0.55; }
+  64%, 100% { opacity: 0; }
+}
+/* Le glissement vers la place qu'occupe le hibou dans l'accueil. */
+@keyframes overture-flight {
+  0%, 70% { transform: none; }
+  90%, 100% { transform: translate(var(--to-x), var(--to-y)) scale(var(--to-s)); }
+}
+@keyframes overture-bars {
+  0%, 68% { scale: 1 1; }
+  84%, 100% { scale: 1 0; }
+}
+/* Le noir se retire pendant le glissement : l'accueil apparaît autour. */
+@keyframes overture-night {
+  0%, 70% { background-color: #000; }
+  88%, 100% { background-color: #0000; }
+}
+/* La copie s'efface sur l'original, déjà à la même place. */
+@keyframes overture-out {
+  0%, 88% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes overture-hint {
+  0%, 14% { opacity: 0; }
+  24%, 64% { opacity: 1; }
+  72%, 100% { opacity: 0; }
+}
+
+/* Le lecteur a passé : le rideau tombe tout de suite. */
+.overture[data-state="leaving"] { animation: overture-leave 450ms ease-out both; }
+.overture[data-state="leaving"] * { animation-play-state: paused; }
+@keyframes overture-leave { to { opacity: 0; visibility: hidden; } }

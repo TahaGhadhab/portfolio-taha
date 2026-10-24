@@ -7,6 +7,7 @@ import { FoldAll } from "@/components/FoldAll";
 import { MethodLoop } from "@/components/Figures";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Optics } from "@/components/Optics";
+import { Overture } from "@/components/Overture";
 import { PageMotion } from "@/components/PageMotion";
 import { PrincipleSection } from "@/components/PrincipleSection";
 import { SectionIndex } from "@/components/SectionIndex";
@@ -55,6 +56,8 @@ export default async function FlightPage({ params }: PageProps<"/[lang]">) {
 
   return (
     <div className="portfolio">
+      {/* Le noir et les deux yeux, avant tout le reste. */}
+      <Overture lang={lang} />
       <Optics />
       <SectionIndex sections={c.nav.sections} label={c.nav.sectionsNavLabel} />
 
